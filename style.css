@@ -1,0 +1,1062 @@
+/* 撲克牌排序遊戲樣式 */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Noto Sans TC', 'Microsoft JhengHei', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    background:
+        radial-gradient(circle at 0 0, rgba(255, 255, 255, 0.18), transparent 55%),
+        radial-gradient(circle at 100% 0, rgba(255, 255, 255, 0.12), transparent 55%),
+        radial-gradient(circle at 50% 120%, rgba(0, 0, 0, 0.9), transparent 60%),
+        linear-gradient(135deg, #050816 0%, #0b1220 45%, #111827 100%);
+    min-height: 100vh;
+    padding: 20px;
+    color: #e5e7eb;
+}
+
+.page-frame {
+    max-width: 1360px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.table-glow {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    max-width: 1100px;
+    max-height: 1100px;
+    background:
+        radial-gradient(circle at 50% 0, rgba(251, 191, 36, 0.22), transparent 55%),
+        radial-gradient(circle at 10% 100%, rgba(16, 185, 129, 0.26), transparent 60%),
+        radial-gradient(circle at 90% 100%, rgba(37, 99, 235, 0.3), transparent 60%);
+    opacity: 0.6;
+    filter: blur(40px);
+    z-index: 0;
+    pointer-events: none;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background:
+        radial-gradient(circle at 15% 0, rgba(251, 191, 36, 0.12), transparent 55%),
+        radial-gradient(circle at 85% 0, rgba(56, 189, 248, 0.14), transparent 55%),
+        radial-gradient(circle at 50% 120%, rgba(16, 185, 129, 0.16), transparent 65%),
+        #020617;
+    border-radius: 24px;
+    box-shadow:
+        0 32px 120px rgba(0, 0, 0, 0.75),
+        0 0 0 1px rgba(148, 163, 184, 0.28),
+        0 0 0 1px inset rgba(15, 23, 42, 0.9);
+    padding: 32px 32px 28px;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 26px;
+}
+
+h1 {
+    font-family: 'Playfair Display', 'Times New Roman', serif;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-size: 2.3rem;
+    color: #fbbf24;
+    margin-bottom: 4px;
+    text-shadow:
+        0 0 25px rgba(250, 204, 21, 0.3),
+        0 0 3px rgba(0, 0, 0, 0.8);
+}
+
+.subtitle {
+    color: #9ca3af;
+    font-size: 0.98rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.logo-lockup {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    padding: 10px 18px 10px 12px;
+    border-radius: 999px;
+    background: radial-gradient(circle at 15% 10%, rgba(248, 250, 252, 0.16), transparent 60%);
+    border: 1px solid rgba(148, 163, 184, 0.45);
+    box-shadow:
+        0 18px 45px rgba(15, 23, 42, 0.9),
+        0 0 0 1px inset rgba(15, 23, 42, 0.9);
+}
+
+.logo-badge {
+    width: 40px;
+    height: 40px;
+    border-radius: 999px;
+    background: radial-gradient(circle at 30% 20%, #fef9c3 0%, #fbbf24 35%, #854d0e 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow:
+        0 0 0 1px rgba(15, 23, 42, 0.85),
+        0 14px 30px rgba(250, 204, 21, 0.6);
+}
+
+.logo-icon {
+    font-size: 1.5rem;
+    text-shadow: 0 0 6px rgba(0, 0, 0, 0.9);
+}
+
+.logo-texts {
+    text-align: left;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.info-toggle,
+.lang-button,
+.settings-toggle {
+    width: 34px;
+    height: 34px;
+    border-radius: 999px;
+    border: 1px solid rgba(148, 163, 184, 0.8);
+    background: radial-gradient(circle at 30% 0, rgba(248, 250, 252, 0.15), rgba(15, 23, 42, 0.98));
+    color: #e5e7eb;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow:
+        0 10px 24px rgba(15, 23, 42, 0.9),
+        0 0 0 1px rgba(15, 23, 42, 0.9);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.info-toggle:hover {
+    transform: translateY(-1px) scale(1.03);
+    background: radial-gradient(circle at 30% 0, rgba(248, 250, 252, 0.25), rgba(15, 23, 42, 0.98));
+    box-shadow:
+        0 14px 32px rgba(15, 23, 42, 0.95),
+        0 0 0 1px rgba(59, 130, 246, 0.7);
+}
+
+.info-toggle:focus-visible {
+    outline: 2px solid #60a5fa;
+    outline-offset: 2px;
+}
+
+.lang-switcher {
+    display: flex;
+    align-items: center;
+}
+
+.lang-button {
+    text-transform: uppercase;
+}
+
+.lang-button:hover {
+    background: rgba(30, 64, 175, 0.9);
+    border-color: rgba(129, 140, 248, 0.9);
+}
+
+.lang-select-hidden {
+    display: none;
+}
+
+.lang-switcher select {
+    padding: 4px 10px;
+    border-radius: 999px;
+    border: 1px solid rgba(148, 163, 184, 0.7);
+    background: rgba(15, 23, 42, 0.9);
+    color: #e5e7eb;
+    font-size: 0.82rem;
+}
+
+/* 教學設定卡片觸發按鈕 */
+.settings-toggle {
+    position: absolute;
+    top: 22px;
+    right: 26px;
+    width: 36px;
+    height: 36px;
+    border-radius: 999px;
+    border: 1px solid rgba(148, 163, 184, 0.8);
+    background: radial-gradient(circle at 30% 0, rgba(248, 250, 252, 0.15), rgba(15, 23, 42, 0.98));
+    color: #e5e7eb;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow:
+        0 10px 24px rgba(15, 23, 42, 0.9),
+        0 0 0 1px rgba(15, 23, 42, 0.9);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    z-index: 5;
+}
+
+.settings-toggle:hover {
+    transform: translateY(-1px) scale(1.03);
+    background: radial-gradient(circle at 30% 0, rgba(248, 250, 252, 0.25), rgba(15, 23, 42, 0.98));
+    box-shadow:
+        0 14px 32px rgba(15, 23, 42, 0.95),
+        0 0 0 1px rgba(250, 204, 21, 0.6);
+}
+
+.settings-toggle:focus-visible {
+    outline: 2px solid #facc15;
+    outline-offset: 2px;
+}
+
+/* 控制區 */
+.controls {
+    background: radial-gradient(circle at 10% 0, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.96));
+    border-radius: 18px;
+    padding: 18px 20px;
+    margin-bottom: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.control-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.control-group label {
+    font-weight: 600;
+    color: #e5e7eb;
+}
+
+select,
+input[type="range"] {
+    padding: 8px 12px;
+    border: 1px solid rgba(148, 163, 184, 0.6);
+    border-radius: 999px;
+    font-size: 0.95rem;
+    background: radial-gradient(circle at 0 0, rgba(148, 163, 184, 0.25), rgba(15, 23, 42, 0.96));
+    color: #525252;
+    box-shadow: 0 0 0 1px inset rgba(15, 23, 42, 0.9);
+}
+
+select:focus {
+    border-color: #fbbf24;
+    outline: none;
+    box-shadow:
+        0 0 0 1px #fbbf24,
+        0 0 25px rgba(225, 223, 217, 0.9);
+}
+
+.btn {
+    padding: 10px 22px;
+    border: none;
+    border-radius: 999px;
+    font-size: 0.98rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.28s ease;
+    margin: 5px;
+    position: relative;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.btn.primary {
+    background: radial-gradient(circle at 15% 0, #fefce8 0%, #facc15 38%, #a16207 100%);
+    color: #111827;
+    box-shadow:
+        0 16px 40px rgba(250, 204, 21, 0.5),
+        0 0 0 1px rgba(161, 98, 7, 0.7);
+}
+
+.btn.primary:hover {
+    transform: translateY(-2px) translateZ(0) scale(1.02);
+    box-shadow:
+        0 24px 55px rgba(250, 204, 21, 0.7),
+        0 0 0 1px rgba(161, 98, 7, 0.9);
+}
+
+.btn.success {
+    background: radial-gradient(circle at 15% 0, #bbf7d0 0%, #16a34a 40%, #052e16 100%);
+    color: white;
+}
+
+.btn.success:hover {
+    transform: translateY(-2px) scale(1.02);
+}
+
+.btn.warning {
+    background: radial-gradient(circle at 15% 0, #fef9c3 0%, #eab308 45%, #78350f 100%);
+    color: #111827;
+}
+
+.btn.warning:hover {
+    transform: translateY(-2px) scale(1.02);
+}
+
+.btn.danger {
+    background: radial-gradient(circle at 15% 0, #fecaca 0%, #dc2626 40%, #450a0a 100%);
+    color: white;
+}
+
+.btn.danger:hover {
+    transform: translateY(-2px) scale(1.02);
+}
+
+.btn:disabled {
+    background: rgba(55, 65, 81, 0.85);
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* 遊戲區域 */
+.game-area {
+    margin-bottom: 30px;
+}
+
+/* 統計欄 */
+.stats-bar {
+    display: flex;
+    justify-content: space-around;
+    background:
+        radial-gradient(circle at 15% 0, rgba(6, 78, 59, 0.9), rgba(15, 118, 110, 0.96)),
+        linear-gradient(120deg, #064e3b, #083344);
+    padding: 14px 18px;
+    border-radius: 16px;
+    margin-bottom: 20px;
+    font-weight: 600;
+    border: 1px solid rgba(16, 185, 129, 0.6);
+    box-shadow:
+        0 18px 45px rgba(4, 47, 46, 0.95),
+        0 0 0 1px inset rgba(6, 95, 70, 0.9);
+}
+
+.stat-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.stat-label {
+    color: #d1fae5;
+    font-size: 0.96rem;
+}
+
+.stat-value {
+    color: #facc15;
+    font-size: 1.4rem;
+    min-width: 56px;
+    text-align: center;
+}
+
+/* 單一卡片區域 */
+.card-area {
+    background:
+        radial-gradient(circle at 20% 0, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 0.99)),
+        radial-gradient(circle at 50% 120%, rgba(22, 163, 74, 0.8), rgba(6, 95, 70, 0.96));
+    border: 2px solid rgba(55, 65, 81, 0.9);
+    border-radius: 20px;
+    padding: 26px 20px 22px;
+    min-height: 150px;
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: thin;
+}
+
+.card-area .instruction {
+    color: #e5e7eb;
+    font-size: 1.2rem;
+    width: 100%;
+    text-align: center;
+}
+
+/* 操作提示覆層 */
+.instruction-hint {
+    background: radial-gradient(circle at 0 0, rgba(248, 250, 252, 0.12), rgba(15, 23, 42, 0.9));
+    border: 1px solid rgba(250, 204, 21, 0.7);
+    border-radius: 8px;
+    padding: 12px 40px 12px 15px;
+    margin-bottom: 15px;
+    position: relative;
+    color: #facc15;
+    line-height: 1.6;
+}
+
+.instruction-hint .close-hint {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #856404;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 0 5px;
+}
+
+.close-hint:hover {
+    color: #664d03;
+}
+
+/* 撲克牌樣式（原地排序版） */
+.card {
+    width: 96px;
+    height: 136px;
+    background:
+        radial-gradient(circle at 15% 0, #f9fafb 0%, #e5e7eb 40%, #d1d5db 100%);
+    border: 2px solid rgba(15, 23, 42, 0.9);
+    border-radius: 14px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 8px 8px 12px;
+    cursor: pointer;
+    user-select: none;
+    box-shadow:
+        0 10px 18px rgba(15, 23, 42, 0.9),
+        0 0 0 1px rgba(15, 23, 42, 0.9);
+    transition: transform 0.32s cubic-bezier(0.22, 0.61, 0.36, 1),
+        box-shadow 0.32s ease,
+        background 0.32s ease,
+        border-color 0.32s ease;
+    position: relative;
+}
+
+.card:hover {
+    transform: translateY(-10px) scale(1.05) rotate3d(1, 0, 0, 6deg);
+    box-shadow:
+        0 20px 35px rgba(0, 0, 0, 0.85),
+        0 0 0 1px rgba(30, 64, 175, 0.75);
+}
+
+.card.selected {
+    border-color: #fbbf24;
+    border-width: 2px;
+    box-shadow:
+        0 0 35px rgba(250, 204, 21, 0.9),
+        0 0 0 1px rgba(161, 98, 7, 0.9);
+    transform: translateY(-14px) scale(1.08) rotate3d(1, 0, 0, 10deg);
+    background: radial-gradient(circle at 15% 0, #fefce8 0%, #facc15 45%, #f97316 100%);
+}
+
+.card.card-correct::after {
+    content: '✔';
+    position: absolute;
+    top: 6px;
+    right: 8px;
+    font-size: 1.4rem;
+    color: #ef4444;
+    text-shadow: 0 0 6px rgba(0, 0, 0, 0.75);
+}
+
+.card.swapping {
+    animation: swapPulse 0.6s ease;
+}
+
+@keyframes swapPulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(0.9) rotate(-5deg);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.card.ace {
+    color: #c0392b;
+}
+
+.card.king {
+    color: #2c3e50;
+}
+
+.card.queen {
+    color: #2c3e50;
+}
+
+.card.jack {
+    color: #2c3e50;
+}
+
+.card.red {
+    color: #c0392b;
+}
+
+.card.black {
+    color: #111827;
+}
+
+.card .rank {
+    font-size: 1.4rem;
+    font-weight: bold;
+    line-height: 1;
+}
+
+.card .suit {
+    font-size: 2rem;
+    text-align: center;
+    margin: 6px 0;
+}
+
+.card .rank-bottom {
+    font-size: 1.4rem;
+    font-weight: bold;
+    transform: rotate(180deg);
+    line-height: 1;
+    margin-bottom: 2px;
+}
+
+/* 反饋區 */
+.feedback {
+    margin: 22px 0 12px;
+    padding: 12px 0;
+    border-radius: 8px;
+    text-align: center;
+}
+
+/* 教學設定卡片本體 */
+.settings-card {
+    position: fixed;
+    inset: auto 50% 32px auto;
+    transform: translateX(50%) translateY(12px);
+    width: min(420px, 90vw);
+    max-height: 70vh;
+    background:
+        radial-gradient(circle at 0 0, rgba(248, 250, 252, 0.1), rgba(15, 23, 42, 0.96)),
+        #020617;
+    border-radius: 18px;
+    border: 1px solid rgba(148, 163, 184, 0.6);
+    box-shadow:
+        0 28px 80px rgba(0, 0, 0, 0.95),
+        0 0 0 1px rgba(15, 23, 42, 0.9);
+    padding: 14px 16px 14px;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease;
+    z-index: 10;
+}
+
+.settings-card.open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateX(50%) translateY(0);
+}
+
+.settings-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(55, 65, 81, 0.8);
+    margin-bottom: 8px;
+}
+
+.settings-title {
+    font-size: 1rem;
+    color: #e5e7eb;
+    margin: 0;
+}
+
+.settings-subtitle {
+    font-size: 0.78rem;
+    color: #9ca3af;
+    margin-top: 2px;
+}
+
+.settings-close {
+    border: none;
+    background: transparent;
+    color: #9ca3af;
+    cursor: pointer;
+    font-size: 1.1rem;
+    padding: 4px 6px;
+    border-radius: 999px;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.settings-close:hover {
+    background: rgba(148, 163, 184, 0.16);
+    color: #e5e7eb;
+}
+
+.settings-card-body {
+    max-height: 52vh;
+    overflow-y: auto;
+    padding-right: 4px;
+}
+
+.info-card {
+    position: fixed;
+    left: 50%;
+    bottom: 32px;
+    transform: translateX(-50%) translateY(12px);
+    width: min(520px, 95vw);
+    max-height: 75vh;
+    background:
+        radial-gradient(circle at 0 0, rgba(248, 250, 252, 0.1), rgba(15, 23, 42, 0.96)),
+        #020617;
+    border-radius: 18px;
+    border: 1px solid rgba(148, 163, 184, 0.6);
+    box-shadow:
+        0 28px 80px rgba(0, 0, 0, 0.95),
+        0 0 0 1px rgba(15, 23, 42, 0.9);
+    padding: 14px 16px 14px;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease;
+    z-index: 11;
+}
+
+.info-card.open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateX(-50%) translateY(0);
+}
+
+.settings-tabs {
+    display: flex;
+    gap: 4px;
+    margin: 6px 0 4px;
+    padding: 0 2px;
+}
+
+.settings-tab {
+    flex: 1;
+    border-radius: 999px;
+    border: 1px solid transparent;
+    background: transparent;
+    color: #9ca3af;
+    font-size: 0.8rem;
+    padding: 4px 8px;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.settings-tab:hover {
+    background: rgba(31, 41, 55, 0.9);
+    color: #e5e7eb;
+}
+
+.settings-tab.active {
+    background: radial-gradient(circle at 0 0, rgba(248, 250, 252, 0.18), rgba(31, 41, 55, 0.98));
+    color: #fbbf24;
+    border-color: rgba(250, 204, 21, 0.8);
+}
+
+.settings-pane {
+    display: none;
+}
+
+.settings-pane.active {
+    display: block;
+}
+
+.settings-section {
+    margin-top: 14px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(55, 65, 81, 0.8);
+}
+
+.settings-section-title {
+    font-size: 0.9rem;
+    color: #e5e7eb;
+    margin-bottom: 8px;
+}
+
+.settings-section .control-group {
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.settings-section .control-group span {
+    font-size: 0.85rem;
+    color: #d1d5db;
+}
+
+.status {
+    font-size: 1.02rem;
+    font-weight: 600;
+    padding: 10px 18px;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 100%;
+}
+
+.status.success {
+    background: linear-gradient(135deg, rgba(21, 128, 61, 0.95), rgba(22, 163, 74, 0.98));
+    color: #dcfce7;
+    border: 1px solid rgba(34, 197, 94, 0.95);
+    box-shadow: 0 12px 28px rgba(5, 46, 22, 0.8);
+}
+
+.status.error {
+    background: linear-gradient(135deg, rgba(153, 27, 27, 0.96), rgba(220, 38, 38, 0.98));
+    color: #fee2e2;
+    border: 1px solid rgba(252, 165, 165, 0.98);
+    box-shadow: 0 12px 28px rgba(69, 10, 10, 0.9);
+}
+
+.status.info {
+    background: linear-gradient(135deg, rgba(30, 64, 175, 0.95), rgba(37, 99, 235, 0.98));
+    color: #dbeafe;
+    border: 1px solid rgba(59, 130, 246, 0.98);
+    box-shadow: 0 12px 28px rgba(15, 23, 42, 0.95);
+}
+
+.hint {
+    margin-top: 10px;
+    padding: 10px;
+    background: rgba(252, 211, 77, 0.12);
+    color: #facc15;
+    border-radius: 8px;
+}
+
+/* 說明區 */
+.instructions {
+    background: radial-gradient(circle at 10% 0, #111827 0%, #020617 65%);
+    border-radius: 16px;
+    padding: 22px 22px 18px;
+    margin: 30px 0;
+    border: 1px solid rgba(148, 163, 184, 0.55);
+    box-shadow: 0 18px 38px rgba(15, 23, 42, 0.9);
+}
+
+.instructions h2 {
+    color: #000000;
+    margin-bottom: 12px;
+}
+
+.instructions ul {
+    list-style: none;
+    color: #bd0d5f;
+}
+
+.instructions li {
+    padding: 9px 0;
+    border-bottom: 1px solid rgba(55, 65, 81, 0.85);
+    line-height: 1.6;
+    font-size: 0.97rem;
+}
+
+.instructions li:last-child {
+    border-bottom: none;
+}
+
+.instructions li strong {
+    color: #082a55;
+    font-weight: 700;
+}
+
+/* 演算法資訊 */
+.algorithm-info {
+    background:
+        radial-gradient(circle at 10% 0, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.96)),
+        linear-gradient(135deg, #020617, #020617);
+    border-radius: 12px;
+    padding: 20px;
+    margin-top: 30px;
+    border: 1px solid rgba(148, 163, 184, 0.55);
+}
+
+.algorithm-info h3 {
+    color: #e5e7eb;
+    margin-bottom: 10px;
+}
+
+.algorithm-info p {
+    color: #9ca3af;
+    line-height: 1.6;
+}
+
+.algorithm-teaching {
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px dashed rgba(74, 85, 104, 0.3);
+}
+
+.algorithm-mode {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #2b6cb0;
+    background: rgba(66, 153, 225, 0.12);
+    border-radius: 999px;
+    display: inline-block;
+    padding: 6px 14px;
+    margin-bottom: 10px;
+}
+
+.algorithm-steps {
+    margin-left: 20px;
+    color: #4a5568;
+    line-height: 1.6;
+}
+
+.algorithm-steps li {
+    margin-bottom: 4px;
+}
+
+/* 響應式 */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    .card {
+        width: 60px;
+        height: 84px;
+        padding: 5px;
+    }
+
+    .card .rank,
+    .card .rank-bottom {
+        font-size: 1rem;
+    }
+
+    .card .suit {
+        font-size: 1.5rem;
+    }
+
+    .controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .control-group {
+        flex-direction: column;
+    }
+
+    .stats-bar {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+
+/* 撲克牌樣式 */
+.card {
+    width: 80px;
+    height: 112px;
+    background: white;
+    border: 2px solid #333;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 8px;
+    cursor: grab;
+    user-select: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.card.dragging {
+    opacity: 0.5;
+    cursor: grabbing;
+}
+
+.card.ace {
+    color: #c0392b;
+}
+
+.card.king {
+    color: #2c3e50;
+}
+
+.card.queen {
+    color: #2c3e50;
+}
+
+.card.jack {
+    color: #2c3e50;
+}
+
+.card.red {
+    color: #c0392b;
+}
+
+.card.black {
+    color: #2c3e50;
+}
+
+.card .rank {
+    font-size: 1.4rem;
+    font-weight: bold;
+}
+
+.card .suit {
+    font-size: 2rem;
+    text-align: center;
+    margin: 5px 0;
+}
+
+.card .rank-bottom {
+    font-size: 1.4rem;
+    font-weight: bold;
+    transform: rotate(180deg);
+}
+
+/* 反馈區 */
+.feedback {
+    margin: 20px 0;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.status {
+    font-size: 1.2rem;
+    font-weight: 600;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.status.success {
+    background: #d4edda;
+    color: #155724;
+}
+
+.status.error {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+.status.info {
+    background: #d1ecf1;
+    color: #0c5460;
+}
+
+.hint {
+    margin-top: 10px;
+    padding: 10px;
+    background: #fff3cd;
+    color: #856404;
+    border-radius: 8px;
+}
+
+/* 說明區 */
+.instructions {
+    background: #f8f9fa;
+    border-radius: 12px;
+    padding: 25px;
+    margin: 30px 0;
+}
+
+.instructions h2 {
+    color: #495057;
+    margin-bottom: 15px;
+}
+
+.instructions ul {
+    list-style: none;
+}
+
+.instructions li {
+    padding: 10px 0;
+    border-bottom: 1px solid #dee2e6;
+    line-height: 1.6;
+}
+
+.instructions li:last-child {
+    border-bottom: none;
+}
+
+/* 演算法資訊 */
+.algorithm-info {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    border-radius: 12px;
+    padding: 20px;
+    margin-top: 30px;
+}
+
+.algorithm-info h3 {
+    color: #2d3748;
+    margin-bottom: 10px;
+}
+
+.algorithm-info p {
+    color: #4a5568;
+    line-height: 1.6;
+}
+
+/* 響應式 */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    .card {
+        width: 60px;
+        height: 84px;
+        padding: 5px;
+    }
+
+    .card .rank,
+    .card .rank-bottom {
+        font-size: 1rem;
+    }
+
+    .card .suit {
+        font-size: 1.5rem;
+    }
+
+    .controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .control-group {
+        flex-direction: column;
+    }
+}

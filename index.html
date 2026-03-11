@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>撲克牌排序遊戲 - 學習排序原理</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Noto+Sans+TC:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="page-frame">
+        <div class="table-glow"></div>
+        <div class="container">
+            <header>
+                <div class="logo-lockup">
+                    <div class="logo-badge">
+                        <span class="logo-icon">♠</span>
+                    </div>
+                    <div class="logo-texts">
+                        <h1 data-i18n-key="app.title">撲克牌排序學院</h1>
+                        <p class="subtitle" data-i18n-key="app.subtitle">原地排序 · 演算法思維 · 互動教學桌</p>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <button id="info-toggle" class="info-toggle" aria-label="教學說明">
+                        i
+                    </button>
+                    <button id="lang-button" class="lang-button" type="button">TW</button>
+                    <button id="settings-toggle" class="settings-toggle" aria-label="教學與設定">
+                        ⚙
+                    </button>
+                    <select id="lang-select" class="lang-select-hidden">
+                        <option value="zh-TW">繁體中文</option>
+                        <option value="zh-CN">简体中文</option>
+                        <option value="en">English</option>
+                        <option value="ja">日本語</option>
+                    </select>
+                </div>
+            </header>
+
+            <div class="controls">
+                <div class="control-group">
+                    <label for="sort-method" data-i18n-key="controls.sortLabel">排序方式：</label>
+                    <select id="sort-method">
+                        <option value="none" data-i18n-key="controls.sortNone">❓ 請選擇排序目標</option>
+                        <option value="number" selected data-i18n-key="controls.sortNumber">🔢 依數字大小 (A→K)</option>
+                        <option value="suit-symbol" data-i18n-key="controls.sortSuitSymbol">🃄 依花色符號 (♠♥♣♦)</option>
+                        <option value="suit-color" data-i18n-key="controls.sortSuitColor">🎨 依花色顏色 (黑→紅)</option>
+                        <option value="number-asc" data-i18n-key="controls.sortNumberAsc">📈 數字遞增 (2→A)</option>
+                        <option value="number-desc" data-i18n-key="controls.sortNumberDesc">📉 數字遞減 (K→2)</option>
+                    </select>
+                    <button id="shuffle-btn" class="btn primary" data-i18n-key="controls.shuffle">🔀 重新發牌</button>
+                </div>
+            </div>
+
+            <div class="stats-bar">
+                <div class="stat-item">
+                    <span class="stat-label" data-i18n-key="stats.comparisons">比較次數：</span>
+                    <span class="stat-value" id="comparisons">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label" data-i18n-key="stats.swaps">交換次數：</span>
+                    <span class="stat-value" id="swaps">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label" data-i18n-key="stats.progress">完成度：</span>
+                    <span class="stat-value" id="progress">0%</span>
+                </div>
+            </div>
+
+            <div class="game-area">
+                <div class="instruction-hint" id="instruction-hint">
+                    <p data-i18n-key="banner.hint">🎯 <strong>操作方式：</strong>點擊選擇一張卡片，再點擊另一張進行交換</p>
+                    <button class="close-hint" id="close-hint">✕</button>
+                </div>
+
+                <div class="card-area" id="card-area">
+                    <p class="instruction" data-i18n-key="banner.instruction">請選擇排序方式後，點擊「重新發牌」開始遊戲</p>
+                </div>
+            </div>
+
+            <div class="feedback">
+                <div class="status" id="status"></div>
+                <div class="hint" id="hint"></div>
+            </div>
+
+            <div class="actions">
+                <button id="check-btn" class="btn success" disabled data-i18n-key="actions.check">✅ 檢查答案</button>
+                <button id="hint-btn" class="btn warning" disabled data-i18n-key="actions.hint">💡 顯示提示</button>
+                <button id="reset-btn" class="btn danger" disabled data-i18n-key="actions.reset">🔄 重置遊戲</button>
+            </div>
+
+            <div class="settings-card" id="settings-card">
+                <div class="settings-card-header">
+                    <div>
+                        <h2 class="settings-title" data-i18n-key="advanced.title">進階設定</h2>
+                        <p class="settings-subtitle" data-i18n-key="settings.subtitle">需要時再打開，讓牌桌保持乾淨。</p>
+                    </div>
+                    <button class="settings-close" id="settings-close" aria-label="關閉教學卡片">✕</button>
+                </div>
+                <div class="settings-card-body">
+                    <div class="settings-section">
+                        <h3 class="settings-section-title" data-i18n-key="advanced.title">進階設定</h3>
+                        <div class="control-group">
+                            <label for="card-count" data-i18n-key="advanced.cardCount">牌數：</label>
+                            <input type="range" id="card-count" min="5" max="13" value="6">
+                            <span id="card-count-display">6 張</span>
+                        </div>
+                        <div class="control-group">
+                            <label for="unique-rank-toggle" data-i18n-key="advanced.uniqueRanks">不重複數字：</label>
+                            <input type="checkbox" id="unique-rank-toggle" checked>
+                            <span data-i18n-key="advanced.uniqueRanksDesc">啟用時，每一局不會出現同數字不同花色（最多 13 張），適合初學者。</span>
+                        </div>
+                        <div class="control-group">
+                            <label for="show-correct-toggle" data-i18n-key="advanced.showCorrect">完成提示：</label>
+                            <input type="checkbox" id="show-correct-toggle" checked>
+                            <span data-i18n-key="advanced.showCorrectDesc">在已排對的位置顯示紅色勾勾</span>
+                        </div>
+                        <div class="control-group">
+                            <label for="allow-same-rank-toggle" data-i18n-key="advanced.considerSuit">花色是否要看：</label>
+                            <input type="checkbox" id="allow-same-rank-toggle" checked>
+                            <span data-i18n-key="advanced.considerSuitDesc">勾選時，同數字不同花色也算正確（適合初學，只看數字）</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-card" id="info-card">
+                <div class="settings-card-header">
+                    <div>
+                        <h2 class="settings-title" data-i18n-key="settings.title">教學說明與小知識</h2>
+                        <p class="settings-subtitle" data-i18n-key="settings.subtitle">需要時再打開，讓牌桌保持乾淨。</p>
+                    </div>
+                    <button class="settings-close" id="info-close" aria-label="關閉說明卡片">✕</button>
+                </div>
+                <div class="settings-tabs" id="info-tabs">
+                    <button class="settings-tab active" data-pane="pane-guide" data-i18n-key="tabs.guide">操作說明</button>
+                    <button class="settings-tab" data-pane="pane-algorithm" data-i18n-key="tabs.algorithm">小知識</button>
+                </div>
+                <div class="settings-card-body">
+                    <div class="settings-pane active" id="pane-guide">
+                        <div class="instructions">
+                            <h2 data-i18n-key="guide.title">📚 遊戲說明</h2>
+                            <ul>
+                                <li data-i18n-key="guide.step1"><strong>選擇排序方式：</strong>從下拉選單選擇想要排序的規則（數字、花色、顏色等）。</li>
+                                <li data-i18n-key="guide.step2"><strong>發牌：</strong>點擊「重新發牌」後，系統會隨機產生卡片排列。</li>
+                                <li data-i18n-key="guide.step3"><strong>排序：</strong>點擊兩張卡片即可交換位置（點擊第一張會標記為選擇狀態）。</li>
+                                <li data-i18n-key="guide.step4"><strong>檢查：</strong>完成後點擊「檢查答案」看是否正確。</li>
+                                <li data-i18n-key="guide.step5"><strong>提示：</strong>如果卡住，可以點擊「顯示提示」或打開完成提示勾勾協助思考。</li>
+                                <li data-i18n-key="guide.step6"><strong>統計：</strong>上方統計欄會記錄你的比較次數與交換次數。</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="settings-pane" id="pane-algorithm">
+                        <div class="algorithm-info" id="algorithm-info">
+                            <h3 data-i18n-key="algo.title">💡 排序演算法小知識</h3>
+                            <p id="algorithm-desc">選擇排序方式後，這裡會顯示相關的排序演算法概念。</p>
+                            <div class="algorithm-teaching">
+                                <div class="algorithm-mode" id="algorithm-mode">提示：先從少量牌開始，感受「比較 → 交換」的節奏。</div>
+                                <ol class="algorithm-steps" id="algorithm-steps">
+                                    <li>在上方選擇一種排序目標（例如：數字大小）。</li>
+                                    <li>觀察目前牌的排列，想像「理想順序」應該長什麼樣子。</li>
+                                    <li>點擊一張牌，再點擊另一張牌，完成一次交換。</li>
+                                    <li>重複比較與交換，直到你覺得已經排好為止，再按「檢查答案」。</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
