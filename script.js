@@ -32,7 +32,9 @@ const i18n = {
         'banner.instruction': '請選擇排序方式後，點擊「重新發牌」開始遊戲',
         'actions.check': '✅ 檢查答案',
         'actions.hint': '💡 顯示提示',
-        'actions.reset': '🔄 重置遊戲',
+        'actions.reset': '🔄 重置本局',
+        'actions.resetDesc': '恢復此次發牌狀態，可重複練習同一組牌',
+        'status.resetDone': '已恢復此次發牌狀態，可重複練習！',
         'settings.title': '教學說明與小知識',
         'settings.subtitle': '需要時再打開，讓牌桌保持乾淨。',
         'tabs.guide': '操作說明',
@@ -45,6 +47,7 @@ const i18n = {
         'guide.step4': '檢查：完成後點擊「檢查答案」看是否正確。',
         'guide.step5': '提示：如果卡住，可以點擊「顯示提示」或打開完成提示勾勾協助思考。',
         'guide.step6': '統計：上方統計欄會記錄你的比較次數與交換次數。',
+        'guide.step7': '重新發牌 vs 重置本局：「重新發牌」會取得新的一組牌；「重置本局」則恢復此次發牌的原有模樣，可重複練習同一組牌。',
         'algo.title': '💡 排序演算法小知識',
         'advanced.title': '進階設定',
         'advanced.cardCount': '牌數：',
@@ -54,6 +57,16 @@ const i18n = {
         'advanced.showCorrectDesc': '在已排對的位置顯示紅色勾勾',
         'advanced.considerSuit': '花色是否要看：',
         'advanced.considerSuitDesc': '勾選時，同數字不同花色也算正確（適合初學，只看數字）',
+        'advanced.spaceMode': '排序空間模式：',
+        'advanced.spaceInplace': '原地排序（單一區域）',
+        'advanced.spaceExtraspace': '額外空間（上未排序／下已排序）',
+        'advanced.spaceModeDesc': '額外空間時，從上方選牌移到下方完成排序，適合練習選擇排序、插入排序等。',
+        'zone.unsorted': '未排序',
+        'zone.sorted': '已排序',
+        'banner.hintExtraspace': '🎯 <strong>操作方式：</strong>點擊上方選一張牌，再點下方虛線格決定插入位置（可示範選擇排序或插入排序）',
+        'status.selectInsertPos': '已選「{card}」，請點擊下方虛線格插入',
+        'status.insertHere': '插入這裡',
+        'status.cancelInsert': '已取消選擇，請從上方再選一張牌',
         'status.needSortMethod': '請選擇排序方式開始遊戲',
         'status.needSortBeforeShuffle': '請先選擇排序方式！',
         'status.dealt': '拿到 {count} 張牌，請依 {method} 排序！',
@@ -90,7 +103,9 @@ const i18n = {
         'banner.instruction': '请选择排序方式后，点击「重新发牌」开始游戏',
         'actions.check': '✅ 检查答案',
         'actions.hint': '💡 显示提示',
-        'actions.reset': '🔄 重置游戏',
+        'actions.reset': '🔄 重置本局',
+        'actions.resetDesc': '恢复此次发牌状态，可重复练习同一组牌',
+        'status.resetDone': '已恢复此次发牌状态，可重复练习！',
         'settings.title': '教学说明与小知识',
         'settings.subtitle': '需要时再打开，让牌桌保持干净。',
         'tabs.guide': '操作说明',
@@ -103,6 +118,7 @@ const i18n = {
         'guide.step4': '检查：完成后点击「检查答案」看是否正确。',
         'guide.step5': '提示：如果卡住，可以点击「显示提示」或打开完成提示勾勾协助思考。',
         'guide.step6': '统计：上方统计栏会记录你的比较次数与交换次数。',
+        'guide.step7': '重新发牌 vs 重置本局：「重新发牌」会取得新的一组牌；「重置本局」则恢复此次发牌的原有模样，可重复练习同一组牌。',
         'algo.title': '💡 排序算法小知识',
         'advanced.title': '进阶设定',
         'advanced.cardCount': '牌数：',
@@ -112,6 +128,16 @@ const i18n = {
         'advanced.showCorrectDesc': '在已排对的位置显示红色勾勾',
         'advanced.considerSuit': '是否看花色：',
         'advanced.considerSuitDesc': '勾选时，同数字不同花色也算正确（适合初学，只看数字）',
+        'advanced.spaceMode': '排序空间模式：',
+        'advanced.spaceInplace': '原地排序（单一区域）',
+        'advanced.spaceExtraspace': '额外空间（上未排序／下已排序）',
+        'advanced.spaceModeDesc': '额外空间时，从上方选牌移到下方完成排序，适合练习选择排序、插入排序等。',
+        'zone.unsorted': '未排序',
+        'zone.sorted': '已排序',
+        'banner.hintExtraspace': '🎯 <strong>操作方式：</strong>点击上方选一张牌，再点下方虚线格决定插入位置（可示范选择排序或插入排序）',
+        'status.selectInsertPos': '已选「{card}」，请点击下方虚线格插入',
+        'status.insertHere': '插入这里',
+        'status.cancelInsert': '已取消选择，请从上方再选一张牌',
         'status.needSortMethod': '请选择排序方式开始游戏',
         'status.needSortBeforeShuffle': '请先选择排序方式！',
         'status.dealt': '拿到 {count} 张牌，请依 {method} 排序！',
@@ -148,7 +174,9 @@ const i18n = {
         'banner.instruction': 'Choose a sort target, then click “Deal again” to start.',
         'actions.check': '✅ Check answer',
         'actions.hint': '💡 Show hint',
-        'actions.reset': '🔄 Reset game',
+        'actions.reset': '🔄 Reset round',
+        'actions.resetDesc': 'Restore this deal so you can practice the same cards again',
+        'status.resetDone': 'Round restored. Practice the same cards again!',
         'settings.title': 'Guide & Algorithm notes',
         'settings.subtitle': 'Open when needed to keep the table clean.',
         'tabs.guide': 'Guide',
@@ -161,6 +189,7 @@ const i18n = {
         'guide.step4': 'Check: when you think it is sorted, click “Check answer”.',
         'guide.step5': 'Hint: use “Show hint” or enable check marks when you get stuck.',
         'guide.step6': 'Stats: the bar above tracks comparisons and swaps.',
+        'guide.step7': 'Deal again vs Reset round: “Deal again” gets a new set of cards; “Reset round” restores this deal so you can practice the same cards again.',
         'algo.title': '💡 Sorting algorithm notes',
         'advanced.title': 'Advanced settings',
         'advanced.cardCount': 'Number of cards:',
@@ -170,6 +199,16 @@ const i18n = {
         'advanced.showCorrectDesc': 'Show a red checkmark on positions that are already correct.',
         'advanced.considerSuit': 'Consider suit:',
         'advanced.considerSuitDesc': 'When enabled, both rank and suit must match (turn off for “numbers only” mode).',
+        'advanced.spaceMode': 'Space mode:',
+        'advanced.spaceInplace': 'In-place (single area)',
+        'advanced.spaceExtraspace': 'Extra space (unsorted above / sorted below)',
+        'advanced.spaceModeDesc': 'In extra-space mode, click a card in the unsorted area to move it to the sorted area. Good for selection sort, insertion sort practice.',
+        'zone.unsorted': 'Unsorted',
+        'zone.sorted': 'Sorted',
+        'banner.hintExtraspace': '🎯 <strong>How to play:</strong> click a card above, then click a dashed slot below to insert (selection sort or insertion sort).',
+        'status.selectInsertPos': 'Selected "{card}". Click a dashed slot below to insert.',
+        'status.insertHere': 'Insert here',
+        'status.cancelInsert': 'Selection cleared. Click a card above to choose one.',
         'status.needSortMethod': 'Please choose a sort target to start.',
         'status.needSortBeforeShuffle': 'Please choose a sort target first!',
         'status.dealt': 'You got {count} cards. Sort them by {method}.',
@@ -206,7 +245,9 @@ const i18n = {
         'banner.instruction': '並べ替え基準を選んでから、「カードを配り直す」をクリックしてください。',
         'actions.check': '✅ 答えをチェック',
         'actions.hint': '💡 ヒントを表示',
-        'actions.reset': '🔄 ゲームをリセット',
+        'actions.reset': '🔄 この局をリセット',
+        'actions.resetDesc': '今回配った状態に戻し、同じカードで繰り返し練習',
+        'status.resetDone': '配り直しの状態に戻しました。同じ並びで練習できます。',
         'settings.title': '遊び方とアルゴリズムメモ',
         'settings.subtitle': '必要なときだけ開いて、テーブルをすっきり保ちます。',
         'tabs.guide': '遊び方',
@@ -219,6 +260,7 @@ const i18n = {
         'guide.step4': 'チェック：並べ終わったと思ったら「答えをチェック」を押します。',
         'guide.step5': 'ヒント：行き詰まったら「ヒントを表示」や完了マーク機能を使ってください。',
         'guide.step6': '統計：上部バーで比較回数と交換回数を確認できます。',
+        'guide.step7': '配り直し vs この局をリセット：「配り直す」は新しいカード、「この局をリセット」は今回の配り状態に戻して同じ並びで練習できます。',
         'algo.title': '💡 ソートアルゴリズムの豆知識',
         'advanced.title': '詳細設定',
         'advanced.cardCount': 'カード枚数：',
@@ -228,6 +270,16 @@ const i18n = {
         'advanced.showCorrectDesc': '正しい位置にあるカードに赤いチェックマークを表示します。',
         'advanced.considerSuit': '絵柄も判定：',
         'advanced.considerSuitDesc': 'オンにすると数字だけでなく絵柄も一致している必要があります（オフで「数字だけ」モード）。',
+        'advanced.spaceMode': '並べ替え空間モード：',
+        'advanced.spaceInplace': 'インプレース（1つの領域）',
+        'advanced.spaceExtraspace': '追加領域（上：未ソート／下：ソート済み）',
+        'advanced.spaceModeDesc': '追加領域では、上の未ソートのカードをクリックすると下のソート済み領域に移動します。選択ソート・挿入ソートの練習に最適です。',
+        'zone.unsorted': '未ソート',
+        'zone.sorted': 'ソート済み',
+        'banner.hintExtraspace': '🎯 <strong>操作方法：</strong>上のカードを1枚選び、下の点線の枠をクリックして挿入位置を決めます（選択ソート・挿入ソート）。',
+        'status.selectInsertPos': '「{card}」を選択しました。下の点線枠をクリックして挿入してください。',
+        'status.insertHere': 'ここに挿入',
+        'status.cancelInsert': '選択をキャンセルしました。上のカードをクリックして選んでください。',
         'status.needSortMethod': '並べ替え基準を選んでからゲームを開始してください。',
         'status.needSortBeforeShuffle': '先に並べ替え基準を選んでください！',
         'status.dealt': '{count} 枚のカードを配りました。「{method}」の順になるように並べてください。',
@@ -262,6 +314,56 @@ function applyTranslations() {
             node.textContent = text;
         }
     });
+    // 操作方式小提示（依模式與語言更新）
+    if (elements.instructionHint) {
+        const hintP = elements.instructionHint.querySelector('p');
+        if (hintP) {
+            const key = gameState.spaceMode === 'extraspace' ? 'banner.hintExtraspace' : 'banner.hint';
+            hintP.innerHTML = dict[key] || i18n['zh-TW'][key] || '';
+        }
+    }
+    // 重置本局按鈕的 title 說明
+    if (elements.resetBtn) elements.resetBtn.title = dict['actions.resetDesc'] || i18n['zh-TW']['actions.resetDesc'] || '';
+    // 切換語言後，依目前遊戲狀態用新語言重設狀態列與小提示
+    refreshStatusForCurrentLang();
+    if (gameState.isGameActive && gameState.cards.length > 0) renderCards();
+}
+
+// 依目前遊戲狀態，用當前語言更新狀態列（切換語言時呼叫）
+function refreshStatusForCurrentLang() {
+    const dict = i18n[currentLang] || i18n['zh-TW'];
+    if (!elements.status) return;
+    if (!gameState.isGameActive || gameState.currentSortMethod === 'none') {
+        elements.status.textContent = dict['status.needSortMethod'] || i18n['zh-TW']['status.needSortMethod'];
+        elements.status.className = 'status info';
+        return;
+    }
+    if (gameState.cards.length === 0) {
+        elements.status.textContent = dict['status.needSortMethod'] || i18n['zh-TW']['status.needSortMethod'];
+        elements.status.className = 'status info';
+        return;
+    }
+    if (gameState.spaceMode === 'extraspace' && gameState.selectedUnsortedIndex >= 0) {
+        const card = gameState.unsortedOrder[gameState.selectedUnsortedIndex];
+        const tmpl = dict['status.selectInsertPos'] || i18n['zh-TW']['status.selectInsertPos'];
+        elements.status.textContent = card ? tmpl.replace('{card}', `${card.rank}${card.suit}`) : tmpl;
+        elements.status.className = 'status info';
+        return;
+    }
+    if (gameState.spaceMode === 'inplace' && gameState.selectedIndex >= 0) {
+        const tmpl = dict['status.selectCard'] || i18n['zh-TW']['status.selectCard'];
+        const msg = tmpl
+            .replace('{index}', String(gameState.selectedIndex + 1))
+            .replace('{card}', getCardNameInplace(gameState.selectedIndex));
+        elements.status.textContent = msg;
+        elements.status.className = 'status info';
+        return;
+    }
+    const tmpl = dict['status.dealt'] || i18n['zh-TW']['status.dealt'];
+    elements.status.textContent = tmpl
+        .replace('{count}', String(gameState.cardCount))
+        .replace('{method}', getSortMethodName());
+    elements.status.className = 'status info';
 }
 
 function updateLangButtonLabel() {
@@ -278,13 +380,17 @@ function updateLangButtonLabel() {
 // 遊戲狀態
 let gameState = {
     cards: [],           // 原始牌組（順序不變）
-    currentOrder: [],    // 目前排列順序（卡片物件陣列）
+    currentOrder: [],    // 目前排列順序（卡片物件陣列）- 原地模式用
+    unsortedOrder: [],   // 額外空間模式：未排序區的牌
+    sortedOrder: [],     // 額外空間模式：已排序區的牌
+    selectedUnsortedIndex: -1, // 額外空間：已選定要插入的未排序牌 index（-1 表示未選）
     selectedIndex: -1,   // 當前選中的卡片index（-1表示無）
+    spaceMode: 'inplace', // 'inplace' | 'extraspace'
     currentSortMethod: 'number',
     cardCount: 6,
     isGameActive: false,
     comparisons: 0,      // 比較次數
-    swaps: 0,            // 交換次數
+    swaps: 0,            // 交換次數（額外空間時表示「移動」次數）
     allowSameRankAnySuit: true, // 是否允許同數字不同花色視為正確
     uniqueRanksOnly: true       // 是否發牌時避免數字重複（最多 13 張）
 };
@@ -295,7 +401,12 @@ const elements = {
     shuffleBtn: document.getElementById('shuffle-btn'),
     cardCount: document.getElementById('card-count'),
     cardCountDisplay: document.getElementById('card-count-display'),
+    spaceMode: document.getElementById('space-mode'),
+    cardAreaInplace: document.getElementById('card-area-inplace'),
+    cardZonesExtraspace: document.getElementById('card-zones-extraspace'),
     cardArea: document.getElementById('card-area'),
+    cardAreaUnsorted: document.getElementById('card-area-unsorted'),
+    cardAreaSorted: document.getElementById('card-area-sorted'),
     status: document.getElementById('status'),
     hint: document.getElementById('hint'),
     checkBtn: document.getElementById('check-btn'),
@@ -330,6 +441,8 @@ function init() {
     // 預設使用「依數字大小」並直接發牌
     elements.sortMethod.value = 'number';
     gameState.currentSortMethod = 'number';
+    gameState.spaceMode = elements.spaceMode ? elements.spaceMode.value : 'inplace';
+    switchSpaceModeUI(gameState.spaceMode);
     updateAlgorithmInfo('number');
     if (elements.allowSameRankToggle) {
         elements.allowSameRankToggle.checked = true;
@@ -381,6 +494,17 @@ function bindEvents() {
             gameState.uniqueRanksOnly = e.target.checked;
             // 變更規則後，建議重新發牌以套用設定
             if (gameState.isGameActive) {
+                shuffleAndDeal();
+            }
+        });
+    }
+
+    if (elements.spaceMode) {
+        elements.spaceMode.addEventListener('change', (e) => {
+            gameState.spaceMode = e.target.value;
+            switchSpaceModeUI(gameState.spaceMode);
+            if (gameState.isGameActive && gameState.cards.length > 0) {
+                // 切換模式時重新發牌以套用新佈局
                 shuffleAndDeal();
             }
         });
@@ -472,6 +596,27 @@ function onCardCountChange(e) {
     elements.cardCountDisplay.textContent = `${count} 張`;
 }
 
+// 切換空間模式 UI（顯示／隱藏單一區 vs 上下分區）
+function switchSpaceModeUI(mode) {
+    const isExtraspace = mode === 'extraspace';
+    if (elements.cardAreaInplace) {
+        elements.cardAreaInplace.style.display = isExtraspace ? 'none' : 'block';
+        elements.cardAreaInplace.setAttribute('aria-hidden', isExtraspace ? 'true' : 'false');
+    }
+    if (elements.cardZonesExtraspace) {
+        // 必須明確設為 block，否則 CSS 的 display:none 會讓額外空間區永遠不顯示
+        elements.cardZonesExtraspace.style.display = isExtraspace ? 'block' : 'none';
+        elements.cardZonesExtraspace.setAttribute('aria-hidden', isExtraspace ? 'false' : 'true');
+    }
+    // 更新操作提示
+    const hintP = elements.instructionHint ? elements.instructionHint.querySelector('p') : null;
+    if (hintP) {
+        const dict = i18n[currentLang] || i18n['zh-TW'];
+        const key = isExtraspace ? 'banner.hintExtraspace' : 'banner.hint';
+        hintP.innerHTML = dict[key] || i18n['zh-TW'][key] || '';
+    }
+}
+
 function setGameActive(active) {
     gameState.isGameActive = active;
     elements.checkBtn.disabled = !active;
@@ -555,7 +700,13 @@ function shuffleAndDeal() {
     }
 
     gameState.cards = cardsToUse;
-    gameState.currentOrder = [...gameState.cards];  // 目前排列順序
+    if (gameState.spaceMode === 'extraspace') {
+        gameState.unsortedOrder = [...gameState.cards];
+        gameState.sortedOrder = [];
+        gameState.selectedUnsortedIndex = -1;
+    } else {
+        gameState.currentOrder = [...gameState.cards];  // 目前排列順序
+    }
 
     renderCards();
     const dict = i18n[currentLang] || i18n['zh-TW'];
@@ -568,20 +719,60 @@ function shuffleAndDeal() {
 
 // 渲染卡片
 function renderCards() {
-    elements.cardArea.innerHTML = '';
-    gameState.currentOrder.forEach((card, index) => {
-        const cardEl = createCardElement(card, index);
-        elements.cardArea.appendChild(cardEl);
-    });
+    if (gameState.spaceMode === 'extraspace') {
+        if (elements.cardAreaUnsorted) {
+            elements.cardAreaUnsorted.innerHTML = '';
+            if (gameState.unsortedOrder.length === 0 && gameState.sortedOrder.length === 0) {
+                const p = document.createElement('p');
+                p.className = 'instruction';
+                p.setAttribute('data-i18n-key', 'banner.instruction');
+                p.textContent = (i18n[currentLang] || i18n['zh-TW'])['banner.instruction'] || '請選擇排序方式後，點擊「重新發牌」開始遊戲';
+                elements.cardAreaUnsorted.appendChild(p);
+            } else {
+                gameState.unsortedOrder.forEach((card, index) => {
+                    const cardEl = createCardElement(card, index, 'unsorted');
+                    if (index === gameState.selectedUnsortedIndex) cardEl.classList.add('selected');
+                    elements.cardAreaUnsorted.appendChild(cardEl);
+                });
+            }
+        }
+        if (elements.cardAreaSorted) {
+            elements.cardAreaSorted.innerHTML = '';
+            const showInsertSlots = gameState.selectedUnsortedIndex >= 0;
+            if (showInsertSlots) {
+                // 插入排序：虛線格 + 已排好的牌交錯 [格0][牌0][格1][牌1]…[格n]
+                for (let i = 0; i <= gameState.sortedOrder.length; i++) {
+                    elements.cardAreaSorted.appendChild(createInsertSlotElement(i));
+                    if (i < gameState.sortedOrder.length) {
+                        const cardEl = createCardElement(gameState.sortedOrder[i], i, 'sorted');
+                        elements.cardAreaSorted.appendChild(cardEl);
+                    }
+                }
+            } else {
+                gameState.sortedOrder.forEach((card, index) => {
+                    const cardEl = createCardElement(card, index, 'sorted');
+                    elements.cardAreaSorted.appendChild(cardEl);
+                });
+            }
+        }
+    } else {
+        elements.cardArea.innerHTML = '';
+        gameState.currentOrder.forEach((card, index) => {
+            const cardEl = createCardElement(card, index, 'inplace');
+            elements.cardArea.appendChild(cardEl);
+        });
+    }
     updateCorrectIndicators();
 }
 
-// 創建卡片DOM
-function createCardElement(card, index) {
+// 創建卡片DOM（zone: 'inplace' | 'unsorted' | 'sorted'）
+function createCardElement(card, index, zone) {
+    zone = zone || 'inplace';
     const cardEl = document.createElement('div');
     cardEl.className = `card ${card.color} ${isFaceCard(card.rank) ? card.rank.toLowerCase() : ''}`;
-    cardEl.dataset.index = index;
-    cardEl.id = `card-${index}`;
+    cardEl.dataset.index = String(index);
+    cardEl.dataset.zone = zone;
+    cardEl.id = zone === 'inplace' ? `card-${index}` : `card-${zone}-${index}`;
 
     cardEl.innerHTML = `
         <div class="rank">${card.rank}</div>
@@ -589,37 +780,84 @@ function createCardElement(card, index) {
         <div class="rank-bottom">${card.rank}</div>
     `;
 
-    cardEl.addEventListener('click', () => onCardClick(index));
+    cardEl.addEventListener('click', () => onCardClick(zone, index));
 
     return cardEl;
+}
+
+// 建立「插入位置」虛線格（額外空間模式）
+function createInsertSlotElement(insertIndex) {
+    const slotEl = document.createElement('div');
+    slotEl.className = 'insert-slot';
+    slotEl.dataset.zone = 'insert-slot';
+    slotEl.dataset.index = String(insertIndex);
+    slotEl.id = `insert-slot-${insertIndex}`;
+    const dict = i18n[currentLang] || i18n['zh-TW'];
+    const label = dict['status.insertHere'] || i18n['zh-TW']['status.insertHere'] || '插入這裡';
+    slotEl.innerHTML = `<span class="insert-slot-label">${label}</span>`;
+    slotEl.addEventListener('click', () => onCardClick('insert-slot', insertIndex));
+    return slotEl;
 }
 
 function isFaceCard(rank) {
     return ['J', 'Q', 'K'].includes(rank);
 }
 
-// 卡片點擊事件（選擇 & 交換）
-function onCardClick(clickedIndex) {
+// 卡片點擊事件（zone, index）- 原地模式為選擇與交換，額外空間模式為點擊未排序牌移到已排序
+function onCardClick(zone, index) {
     if (!gameState.isGameActive) return;
 
-    // 增加比較次數（每次點擊都算一次比較操作）
-    gameState.comparisons++;
+    if (gameState.spaceMode === 'extraspace') {
+        const dict = i18n[currentLang] || i18n['zh-TW'];
+        // 點擊「插入格」：將已選的未排序牌插入該位置
+        if (zone === 'insert-slot') {
+            if (gameState.selectedUnsortedIndex < 0) return;
+            const pos = Math.max(0, Math.min(index, gameState.sortedOrder.length));
+            const card = gameState.unsortedOrder.splice(gameState.selectedUnsortedIndex, 1)[0];
+            gameState.sortedOrder.splice(pos, 0, card);
+            gameState.selectedUnsortedIndex = -1;
+            gameState.comparisons++;
+            gameState.swaps++;
+            updateStats();
+            renderCards();
+            setTimeout(checkAnswer, 200);
+            return;
+        }
+        // 點擊「未排序」區的牌：選定要插入的牌（再點下方虛線格插入）
+        if (zone === 'unsorted') {
+            if (index < 0 || index >= gameState.unsortedOrder.length) return;
+            if (gameState.selectedUnsortedIndex === index) {
+                gameState.selectedUnsortedIndex = -1;
+                setStatus(dict['status.cancelInsert'] || i18n['zh-TW']['status.cancelInsert'], 'info');
+            } else {
+                gameState.selectedUnsortedIndex = index;
+                const card = gameState.unsortedOrder[index];
+                const tmpl = dict['status.selectInsertPos'] || i18n['zh-TW']['status.selectInsertPos'];
+                setStatus(tmpl.replace('{card}', `${card.rank}${card.suit}`), 'info');
+            }
+            renderCards();
+            return;
+        }
+        return;
+    }
 
-    const clickedCardEl = document.getElementById(`card-${clickedIndex}`);
+    // 原地排序模式
+    gameState.comparisons++;
+    const clickedCardEl = document.getElementById(`card-${index}`);
 
     if (gameState.selectedIndex === -1) {
         // 第一次點擊：選擇卡片
-        gameState.selectedIndex = clickedIndex;
-        clickedCardEl.classList.add('selected');
+        gameState.selectedIndex = index;
+        if (clickedCardEl) clickedCardEl.classList.add('selected');
         const dict = i18n[currentLang] || i18n['zh-TW'];
         const tmpl = dict['status.selectCard'] || i18n['zh-TW']['status.selectCard'];
         const msg = tmpl
-            .replace('{index}', String(clickedIndex + 1))
-            .replace('{card}', getCardName(clickedIndex));
+            .replace('{index}', String(index + 1))
+            .replace('{card}', getCardNameInplace(index));
         setStatus(msg, 'info');
-    } else if (gameState.selectedIndex === clickedIndex) {
+    } else if (gameState.selectedIndex === index) {
         // 點選同一張：取消選擇
-        clickedCardEl.classList.remove('selected');
+        if (clickedCardEl) clickedCardEl.classList.remove('selected');
         gameState.selectedIndex = -1;
         const dict = i18n[currentLang] || i18n['zh-TW'];
         setStatus(dict['status.cancelSelect'] || i18n['zh-TW']['status.cancelSelect'], 'info');
@@ -628,18 +866,12 @@ function onCardClick(clickedIndex) {
         const selectedIndex = gameState.selectedIndex;
         const selectedCardEl = document.getElementById(`card-${selectedIndex}`);
 
-        // 執行交換
-        swapCards(selectedIndex, clickedIndex);
+        swapCards(selectedIndex, index);
 
-        // 清除選擇狀態
-        selectedCardEl.classList.remove('selected');
+        if (selectedCardEl) selectedCardEl.classList.remove('selected');
         gameState.selectedIndex = -1;
-
-        // 更新統計
         gameState.swaps++;
         updateStats();
-
-        // 檢查是否完成
         setTimeout(checkAnswer, 300);
     }
 }
@@ -666,11 +898,15 @@ function swapCards(index1, index2) {
     }, 300);
 }
 
-// 取得卡片名稱（用於提示）
-function getCardName(index) {
+// 取得卡片名稱（用於提示）- 原地模式用 currentOrder
+function getCardNameInplace(index) {
     const card = gameState.currentOrder[index];
     if (!card) return '';
     return `${card.rank}${card.suit}`;
+}
+
+function getCardName(index) {
+    return getCardNameInplace(index);
 }
 
 // 檢查答案
@@ -678,14 +914,27 @@ function checkAnswer() {
     if (!gameState.isGameActive) return;
 
     const expectedOrder = getExpectedOrder(gameState.currentSortMethod, gameState.cards);
-
     let isCorrect = true;
-    for (let i = 0; i < gameState.currentOrder.length; i++) {
-        const cur = gameState.currentOrder[i];
-        const exp = expectedOrder[i];
-        if (!cardsMatchAtPosition(cur, exp)) {
+
+    if (gameState.spaceMode === 'extraspace') {
+        if (gameState.unsortedOrder.length > 0 || gameState.sortedOrder.length !== expectedOrder.length) {
             isCorrect = false;
-            break;
+        } else {
+            for (let i = 0; i < gameState.sortedOrder.length; i++) {
+                if (!cardsMatchAtPosition(gameState.sortedOrder[i], expectedOrder[i])) {
+                    isCorrect = false;
+                    break;
+                }
+            }
+        }
+    } else {
+        for (let i = 0; i < gameState.currentOrder.length; i++) {
+            const cur = gameState.currentOrder[i];
+            const exp = expectedOrder[i];
+            if (!cardsMatchAtPosition(cur, exp)) {
+                isCorrect = false;
+                break;
+            }
         }
     }
 
@@ -729,21 +978,30 @@ function calculateEfficiency() {
 function updateProgress() {
     const expectedOrder = getExpectedOrder(gameState.currentSortMethod, gameState.cards);
     let correctCount = 0;
-    for (let i = 0; i < gameState.currentOrder.length; i++) {
-        if (cardsMatchAtPosition(gameState.currentOrder[i], expectedOrder[i])) {
-            correctCount++;
+    const total = gameState.cardCount;
+
+    if (gameState.spaceMode === 'extraspace') {
+        for (let i = 0; i < gameState.sortedOrder.length && i < expectedOrder.length; i++) {
+            if (cardsMatchAtPosition(gameState.sortedOrder[i], expectedOrder[i])) correctCount++;
+        }
+    } else {
+        for (let i = 0; i < gameState.currentOrder.length; i++) {
+            if (cardsMatchAtPosition(gameState.currentOrder[i], expectedOrder[i])) correctCount++;
         }
     }
 
-    const progress = Math.round((correctCount / gameState.cardCount) * 100);
+    const progress = total ? Math.round((correctCount / total) * 100) : 0;
     elements.progressDisplay.textContent = `${progress}%`;
 }
 
 // 依照目前排序與正解，標出已完成位置
 function updateCorrectIndicators() {
-    // 先清除全部標記
-    const allCards = elements.cardArea.querySelectorAll('.card');
-    allCards.forEach(cardEl => cardEl.classList.remove('card-correct'));
+    const clearAll = (container) => {
+        if (!container) return;
+        container.querySelectorAll('.card').forEach(cardEl => cardEl.classList.remove('card-correct'));
+    };
+    clearAll(elements.cardArea);
+    clearAll(elements.cardAreaSorted);
 
     if (!elements.showCorrectToggle || !elements.showCorrectToggle.checked) {
         return;
@@ -754,11 +1012,18 @@ function updateCorrectIndicators() {
 
     const expectedOrder = getExpectedOrder(gameState.currentSortMethod, gameState.cards);
 
-    for (let i = 0; i < gameState.currentOrder.length; i++) {
-        if (cardsMatchAtPosition(gameState.currentOrder[i], expectedOrder[i])) {
-            const cardEl = document.getElementById(`card-${i}`);
-            if (cardEl) {
-                cardEl.classList.add('card-correct');
+    if (gameState.spaceMode === 'extraspace') {
+        for (let i = 0; i < gameState.sortedOrder.length && i < expectedOrder.length; i++) {
+            if (cardsMatchAtPosition(gameState.sortedOrder[i], expectedOrder[i])) {
+                const cardEl = document.getElementById(`card-sorted-${i}`);
+                if (cardEl) cardEl.classList.add('card-correct');
+            }
+        }
+    } else {
+        for (let i = 0; i < gameState.currentOrder.length; i++) {
+            if (cardsMatchAtPosition(gameState.currentOrder[i], expectedOrder[i])) {
+                const cardEl = document.getElementById(`card-${i}`);
+                if (cardEl) cardEl.classList.add('card-correct');
             }
         }
     }
@@ -830,6 +1095,25 @@ function showHint() {
     }
 
     const dict = i18n[currentLang] || i18n['zh-TW'];
+
+    if (gameState.spaceMode === 'extraspace') {
+        const expectedOrder = getExpectedOrder(gameState.currentSortMethod, gameState.cards);
+        const nextPos = gameState.sortedOrder.length;
+        if (nextPos >= expectedOrder.length) {
+            setStatus(dict['status.hintPrefix'] + '已排序區已滿，請檢查答案。', 'info');
+            return;
+        }
+        const nextExpected = expectedOrder[nextPos];
+        const idx = gameState.unsortedOrder.findIndex(c => cardsMatchAtPosition(c, nextExpected));
+        if (idx >= 0) {
+            const card = gameState.unsortedOrder[idx];
+            setStatus((dict['status.hintPrefix'] || '💡 ') + `建議點擊上方的「${card.rank}${card.suit}」移到已排序區。`, 'info');
+        } else {
+            setStatus((dict['status.hintPrefix'] || '💡 ') + '從上方未排序區依序選牌，放到下方已排序區。', 'info');
+        }
+        return;
+    }
+
     const baseHintKeys = {
         'number': 'hint.number',
         'number-asc': 'hint.numberAsc',
@@ -875,18 +1159,38 @@ function showHint() {
     setStatus(prefix + combined, 'info');
 }
 
-// 重置遊戲
+// 重置本局：恢復此次發牌的原有模樣，不重新洗牌，讓學生重複練習同一組牌
 function resetGame() {
-    if (gameState.isGameActive) {
-        shuffleAndDeal();
+    if (!gameState.isGameActive || gameState.cards.length === 0) return;
+
+    gameState.comparisons = 0;
+    gameState.swaps = 0;
+    gameState.selectedIndex = -1;
+    gameState.selectedUnsortedIndex = -1;
+
+    if (gameState.spaceMode === 'extraspace') {
+        gameState.unsortedOrder = [...gameState.cards];
+        gameState.sortedOrder = [];
+    } else {
+        gameState.currentOrder = [...gameState.cards];
     }
+
+    updateStats();
+    renderCards();
+    const dict = i18n[currentLang] || i18n['zh-TW'];
+    setStatus(dict['status.resetDone'] || i18n['zh-TW']['status.resetDone'], 'info');
 }
 
 // 清除所有卡片
 function clearCards() {
     elements.cardArea.innerHTML = '';
+    if (elements.cardAreaUnsorted) elements.cardAreaUnsorted.innerHTML = '';
+    if (elements.cardAreaSorted) elements.cardAreaSorted.innerHTML = '';
     gameState.cards = [];
     gameState.currentOrder = [];
+    gameState.unsortedOrder = [];
+    gameState.sortedOrder = [];
+    gameState.selectedUnsortedIndex = -1;
     gameState.selectedIndex = -1;
     gameState.comparisons = 0;
     gameState.swaps = 0;

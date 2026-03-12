@@ -80,8 +80,23 @@
                     <button class="close-hint" id="close-hint">✕</button>
                 </div>
 
-                <div class="card-area" id="card-area">
-                    <p class="instruction" data-i18n-key="banner.instruction">請選擇排序方式後，點擊「重新發牌」開始遊戲</p>
+                <!-- 原地排序：單一牌區 -->
+                <div class="card-area-wrapper card-area-inplace" id="card-area-inplace">
+                    <div class="card-area" id="card-area">
+                        <p class="instruction" data-i18n-key="banner.instruction">請選擇排序方式後，點擊「重新發牌」開始遊戲</p>
+                    </div>
+                </div>
+
+                <!-- 額外空間：上方未排序、下方已排序 -->
+                <div class="card-zones-extraspace" id="card-zones-extraspace" aria-hidden="true">
+                    <div class="zone-block">
+                        <div class="zone-label zone-unsorted-label" data-i18n-key="zone.unsorted">未排序</div>
+                        <div class="card-area card-area-unsorted" id="card-area-unsorted"></div>
+                    </div>
+                    <div class="zone-block">
+                        <div class="zone-label zone-sorted-label" data-i18n-key="zone.sorted">已排序</div>
+                        <div class="card-area card-area-sorted" id="card-area-sorted"></div>
+                    </div>
                 </div>
             </div>
 
@@ -127,6 +142,14 @@
                             <input type="checkbox" id="allow-same-rank-toggle" checked>
                             <span data-i18n-key="advanced.considerSuitDesc">勾選時，同數字不同花色也算正確（適合初學，只看數字）</span>
                         </div>
+                        <div class="control-group">
+                            <label for="space-mode" data-i18n-key="advanced.spaceMode">排序空間模式：</label>
+                            <select id="space-mode">
+                                <option value="inplace" selected data-i18n-key="advanced.spaceInplace">原地排序（單一區域）</option>
+                                <option value="extraspace" data-i18n-key="advanced.spaceExtraspace">額外空間（上未排序／下已排序）</option>
+                            </select>
+                            <span data-i18n-key="advanced.spaceModeDesc">額外空間時，從上方選牌移到下方完成排序，適合練習選擇排序、插入排序等。</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -154,6 +177,7 @@
                                 <li data-i18n-key="guide.step4"><strong>檢查：</strong>完成後點擊「檢查答案」看是否正確。</li>
                                 <li data-i18n-key="guide.step5"><strong>提示：</strong>如果卡住，可以點擊「顯示提示」或打開完成提示勾勾協助思考。</li>
                                 <li data-i18n-key="guide.step6"><strong>統計：</strong>上方統計欄會記錄你的比較次數與交換次數。</li>
+                                <li data-i18n-key="guide.step7"><strong>重新發牌 vs 重置本局：</strong>「重新發牌」會取得新的一組牌；「重置本局」則恢復此次發牌的原有模樣，可重複練習同一組牌。</li>
                             </ul>
                         </div>
                     </div>

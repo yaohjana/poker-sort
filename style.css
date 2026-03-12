@@ -333,6 +333,98 @@ select:focus {
     margin-bottom: 30px;
 }
 
+/* 額外空間模式：上下分區（上未排序、下已排序） */
+.card-zones-extraspace {
+    display: none;
+}
+
+.card-zones-extraspace .zone-block {
+    margin-bottom: 20px;
+}
+
+.card-zones-extraspace .zone-block:last-child {
+    margin-bottom: 0;
+}
+
+.zone-label {
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #94a3b8;
+    margin-bottom: 10px;
+    padding-left: 4px;
+}
+
+.zone-unsorted-label {
+    color: #f59e0b;
+    text-shadow: 0 0 12px rgba(245, 158, 11, 0.35);
+}
+
+.zone-sorted-label {
+    color: #10b981;
+    text-shadow: 0 0 12px rgba(16, 185, 129, 0.35);
+}
+
+.card-zones-extraspace .card-area {
+    min-height: 120px;
+}
+
+.card-area-unsorted {
+    border-color: rgba(245, 158, 11, 0.5);
+    background:
+        radial-gradient(circle at 20% 0, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 0.99)),
+        radial-gradient(circle at 50% 120%, rgba(245, 158, 11, 0.15), rgba(6, 95, 70, 0.5));
+}
+
+.card-area-sorted {
+    border-color: rgba(16, 185, 129, 0.5);
+    background:
+        radial-gradient(circle at 20% 0, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 0.99)),
+        radial-gradient(circle at 50% 120%, rgba(16, 185, 129, 0.35), rgba(6, 95, 70, 0.96));
+}
+
+/* 插入排序：已排序區的虛線插入格 */
+.insert-slot {
+    width: 96px;
+    height: 136px;
+    min-width: 96px;
+    min-height: 136px;
+    border: 2px dashed rgba(16, 185, 129, 0.7);
+    border-radius: 14px;
+    background: rgba(16, 185, 129, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.insert-slot:hover {
+    background: rgba(16, 185, 129, 0.2);
+    border-color: rgba(16, 185, 129, 0.95);
+    transform: scale(1.02);
+}
+
+.insert-slot-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: rgba(16, 185, 129, 0.9);
+    text-align: center;
+    padding: 8px;
+}
+
+/* 進階設定：空間模式說明換行 */
+.control-group:has(#space-mode) {
+    flex-wrap: wrap;
+}
+
+#space-mode + span {
+    flex-basis: 100%;
+    margin-top: 6px;
+    margin-left: 0;
+}
+
 /* 統計欄 */
 .stats-bar {
     display: flex;
@@ -847,6 +939,17 @@ select:focus {
         width: 60px;
         height: 84px;
         padding: 5px;
+    }
+
+    .insert-slot {
+        width: 60px;
+        height: 84px;
+        min-width: 60px;
+        min-height: 84px;
+    }
+
+    .insert-slot-label {
+        font-size: 0.7rem;
     }
 
     .card .rank,
