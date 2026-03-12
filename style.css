@@ -328,6 +328,36 @@ select:focus {
     box-shadow: none;
 }
 
+/* 快速切換排序法（與重新發牌同一列） */
+.control-group-preset {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+}
+
+.preset-btn {
+    padding: 8px 16px;
+    font-size: 0.88rem;
+    background: rgba(51, 65, 85, 0.9);
+    border: 1px solid rgba(148, 163, 184, 0.5);
+    color: #e2e8f0;
+    border-radius: 999px;
+    transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.preset-btn:hover {
+    background: rgba(71, 85, 105, 0.95);
+    border-color: rgba(148, 163, 184, 0.8);
+    transform: translateY(-1px);
+}
+
+.preset-btn.preset-btn-active {
+    background: linear-gradient(135deg, rgba(251, 191, 36, 0.35), rgba(245, 158, 11, 0.4));
+    border-color: rgba(251, 191, 36, 0.8);
+    color: #fef3c7;
+}
+
 /* 遊戲區域 */
 .game-area {
     margin-bottom: 30px;
@@ -382,6 +412,336 @@ select:focus {
     background:
         radial-gradient(circle at 20% 0, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 0.99)),
         radial-gradient(circle at 50% 120%, rgba(16, 185, 129, 0.35), rgba(6, 95, 70, 0.96));
+}
+
+/* 快速排序專區 */
+.card-zones-quickspace {
+    display: none;
+}
+
+.zone-quick-unpartitioned {
+    color: #f59e0b;
+}
+
+.zone-quick-left {
+    color: #3b82f6;
+}
+
+.zone-quick-pivot {
+    color: #a855f7;
+}
+
+.zone-quick-right {
+    color: #ef4444;
+}
+
+.quicksort-partition-row-wrap {
+    margin-top: 16px;
+}
+
+.quicksort-partition-baseline-label {
+    font-size: 0.85rem;
+    color: #64748b;
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+.quicksort-partition-row {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 12px;
+    align-items: stretch;
+    justify-content: center;
+}
+
+/* 左、右以 pivot 為基準對稱：左右等寬，pivot 固定置中 */
+.zone-block-quick-left {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.zone-block-quick-left .card-area {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 6px;
+}
+
+.zone-block-pivot {
+    flex: 0 0 auto;
+    min-width: 110px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.zone-block-pivot .zone-label {
+    text-align: center;
+}
+
+.zone-block-pivot .card-area {
+    border-width: 2px;
+    box-shadow: 0 0 0 1px rgba(168, 85, 247, 0.15);
+}
+
+.zone-block-quick-right {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.zone-block-quick-right .card-area {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 6px;
+}
+
+.zone-block-quick .card-area,
+.zone-block-pivot .card-area {
+    min-height: 100px;
+}
+
+.card-area-quick-left,
+.card-area-quick-right {
+    border: 2px dashed rgba(148, 163, 184, 0.5);
+    border-radius: 14px;
+    cursor: pointer;
+    transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.card-area-quick-left:hover,
+.card-area-quick-right:hover {
+    background: rgba(148, 163, 184, 0.08);
+    border-color: rgba(148, 163, 184, 0.8);
+}
+
+.card-area-quick-pivot {
+    border-color: rgba(168, 85, 247, 0.5);
+    background: rgba(168, 85, 247, 0.06);
+}
+
+/* 已完成的分區歷程（樹狀呈現） */
+.quicksort-partition-history {
+    margin-bottom: 14px;
+}
+
+.quicksort-essence-tip {
+    font-size: 0.85rem;
+    color: #64748b;
+    margin-bottom: 8px;
+    padding: 6px 0;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+}
+
+.quicksort-current-path {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #0ea5e9;
+    margin-bottom: 10px;
+}
+
+.quicksort-tree-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 12px;
+    opacity: 0.92;
+    transition: margin-left 0.15s ease;
+}
+
+.quicksort-tree-branch {
+    flex-shrink: 0;
+    min-width: 22px;
+    height: 22px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+    border-radius: 6px;
+    margin-top: 2px;
+}
+
+.quicksort-branch-left {
+    background: rgba(14, 165, 233, 0.2);
+    color: #0284c7;
+}
+
+.quicksort-branch-right {
+    background: rgba(168, 85, 247, 0.2);
+    color: #7c3aed;
+}
+
+.quicksort-branch-root {
+    background: rgba(100, 116, 139, 0.2);
+    color: #475569;
+}
+
+.quicksort-branch-split {
+    background: rgba(245, 158, 11, 0.25);
+    color: #b45309;
+}
+
+.quicksort-split-btn {
+    border-color: rgba(245, 158, 11, 0.6);
+    background: rgba(245, 158, 11, 0.12);
+}
+
+.quicksort-split-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+}
+
+.quicksort-split-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.quicksort-split-col {
+    flex: 1;
+    min-width: 260px;
+    padding: 12px;
+    border-radius: 12px;
+    border: 1px solid rgba(148, 163, 184, 0.3);
+    background: rgba(248, 250, 252, 0.6);
+}
+
+.quicksort-split-col-title {
+    font-weight: 700;
+    font-size: 0.95rem;
+    margin-bottom: 10px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.25);
+}
+
+.quicksort-split-col[data-branch="left"] .quicksort-split-col-title { color: #0284c7; }
+.quicksort-split-col[data-branch="right"] .quicksort-split-col-title { color: #7c3aed; }
+
+.quicksort-split-partition-row {
+    margin-top: 10px;
+}
+
+.quicksort-split-partition-row .card-area {
+    min-height: 72px;
+}
+
+.quicksort-split-buttons {
+    margin-top: 12px;
+    padding-top: 8px;
+    border-top: 1px dashed rgba(148, 163, 184, 0.3);
+}
+
+.quicksort-col-done {
+    font-weight: 600;
+    color: #10b981;
+}
+
+.quicksort-split-all-done {
+    width: 100%;
+    padding: 12px 0;
+}
+
+.quicksort-history-row-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: flex-start;
+    flex: 1;
+    min-width: 0;
+}
+
+.quicksort-tree-row .quicksort-history-block {
+    flex: 0 1 auto;
+}
+
+.quicksort-history-row {
+    margin-bottom: 12px;
+    opacity: 0.88;
+}
+
+.quicksort-history-row .zone-label {
+    font-size: 0.8rem;
+    color: #94a3b8;
+}
+
+.quicksort-history-block .card-area {
+    min-height: 80px;
+    border-style: dashed;
+}
+
+.quicksort-history-row .card {
+    transform: scale(0.92);
+}
+
+.quicksort-recurse-actions {
+    margin-top: 16px;
+    padding-top: 12px;
+    border-top: 1px dashed rgba(148, 163, 184, 0.4);
+    display: none;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+}
+
+.quicksort-recurse-btn {
+    padding: 6px 14px;
+    font-size: 0.82rem;
+}
+
+.quicksort-all-done {
+    font-weight: 700;
+    color: #10b981;
+}
+
+.quicksort-all-done-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+}
+
+.quicksort-final-order {
+    margin-top: 8px;
+    padding: 12px;
+    background: rgba(16, 185, 129, 0.08);
+    border: 1px solid rgba(16, 185, 129, 0.35);
+    border-radius: 12px;
+}
+
+.quicksort-final-order-label {
+    font-weight: 600;
+    color: #059669;
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+}
+
+.quicksort-final-order-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    align-items: center;
+}
+
+.quicksort-final-order-cards .card {
+    transform: scale(0.92);
+}
+
+.quicksort-final-order-local {
+    margin-top: 10px;
 }
 
 /* 插入排序：已排序區的虛線插入格 */
@@ -565,6 +925,28 @@ select:focus {
     font-size: 1.4rem;
     color: #ef4444;
     text-shadow: 0 0 6px rgba(0, 0, 0, 0.75);
+}
+
+.card.card-correct,
+.card.card-final-correct {
+    box-shadow:
+        0 0 18px rgba(250, 204, 21, 0.9),
+        0 0 0 2px rgba(234, 179, 8, 0.9);
+    border-color: #facc15;
+}
+
+.card-order-label {
+    position: absolute;
+    left: 50%;
+    bottom: -10px;
+    transform: translateX(-50%);
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #b45309;
+    padding: 0 6px;
+    border-radius: 999px;
+    background: rgba(254, 249, 195, 0.95);
+    box-shadow: 0 0 4px rgba(250, 204, 21, 0.8);
 }
 
 .card.swapping {
@@ -923,6 +1305,70 @@ select:focus {
 
 .algorithm-steps li {
     margin-bottom: 4px;
+}
+
+/* 排序法對照（使用情境與複雜度） */
+.sort-ref-title {
+    font-size: 1rem;
+    color: #e5e7eb;
+    margin-bottom: 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.4);
+}
+
+.sort-ref-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.sort-ref-card {
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid rgba(148, 163, 184, 0.35);
+    border-radius: 12px;
+    padding: 14px 16px;
+}
+
+.sort-ref-name {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #fbbf24;
+    margin-bottom: 8px;
+}
+
+.sort-ref-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-top: 10px;
+    margin-bottom: 4px;
+}
+
+.sort-ref-card .sort-ref-label:first-of-type {
+    margin-top: 0;
+}
+
+.sort-ref-scenario {
+    font-size: 0.9rem;
+    color: #cbd5e1;
+    line-height: 1.55;
+    margin: 0;
+}
+
+.sort-ref-complexity {
+    margin: 0 0 0 18px;
+    padding: 0;
+    color: #94a3b8;
+    font-size: 0.88rem;
+    line-height: 1.5;
+}
+
+.sort-ref-space {
+    font-size: 0.9rem;
+    color: #10b981;
+    margin: 0;
 }
 
 /* 響應式 */

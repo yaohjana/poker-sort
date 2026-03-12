@@ -45,16 +45,11 @@
             </header>
 
             <div class="controls">
-                <div class="control-group">
-                    <label for="sort-method" data-i18n-key="controls.sortLabel">排序方式：</label>
-                    <select id="sort-method">
-                        <option value="none" data-i18n-key="controls.sortNone">❓ 請選擇排序目標</option>
-                        <option value="number" selected data-i18n-key="controls.sortNumber">🔢 依數字大小 (A→K)</option>
-                        <option value="suit-symbol" data-i18n-key="controls.sortSuitSymbol">🃄 依花色符號 (♠♥♣♦)</option>
-                        <option value="suit-color" data-i18n-key="controls.sortSuitColor">🎨 依花色顏色 (黑→紅)</option>
-                        <option value="number-asc" data-i18n-key="controls.sortNumberAsc">📈 數字遞增 (2→A)</option>
-                        <option value="number-desc" data-i18n-key="controls.sortNumberDesc">📉 數字遞減 (K→2)</option>
-                    </select>
+                <div class="control-group control-group-preset">
+                    <button type="button" class="btn preset-btn" data-preset="selection" data-i18n-key="preset.selection">選擇排序</button>
+                    <button type="button" class="btn preset-btn" data-preset="insertion" data-i18n-key="preset.insertion">插入排序</button>
+                    <button type="button" class="btn preset-btn" data-preset="bubble" data-i18n-key="preset.bubble">氣泡排序</button>
+                    <button type="button" class="btn preset-btn" data-preset="quick" data-i18n-key="preset.quick">快速排序</button>
                     <button id="shuffle-btn" class="btn primary" data-i18n-key="controls.shuffle">🔀 重新發牌</button>
                 </div>
             </div>
@@ -98,6 +93,36 @@
                         <div class="card-area card-area-sorted" id="card-area-sorted"></div>
                     </div>
                 </div>
+
+                <!-- 快速排序：未分區 → 選 pivot → 分區為 ＜ pivot | pivot | ＞ pivot -->
+                <div class="card-zones-quickspace" id="card-zones-quickspace" aria-hidden="true">
+                    <div class="quicksort-partition-history" id="quicksort-partition-history" aria-label="已完成的分區"></div>
+                    <div class="quicksort-single-view" id="quicksort-single-view">
+                        <div class="zone-block">
+                            <div class="zone-label zone-quick-unpartitioned" data-i18n-key="zone.quickUnpartitioned">未分區（點一張當 pivot）</div>
+                            <div class="card-area card-area-quick-unpartitioned" id="card-area-quick-unpartitioned"></div>
+                        </div>
+                        <div class="quicksort-partition-row-wrap">
+                            <div class="quicksort-partition-baseline-label" data-i18n-key="quick.pivotBaseline">以 pivot 為基準：左小右大</div>
+                            <div class="quicksort-partition-row">
+                                <div class="zone-block zone-block-quick zone-block-quick-left">
+                                    <div class="zone-label zone-quick-left" data-i18n-key="zone.quickLeft">＜ pivot</div>
+                                    <div class="card-area card-area-quick-left" id="card-area-quick-left"></div>
+                                </div>
+                                <div class="zone-block zone-block-pivot">
+                                    <div class="zone-label zone-quick-pivot" data-i18n-key="zone.quickPivot">pivot</div>
+                                    <div class="card-area card-area-quick-pivot" id="card-area-quick-pivot"></div>
+                                </div>
+                                <div class="zone-block zone-block-quick zone-block-quick-right">
+                                    <div class="zone-label zone-quick-right" data-i18n-key="zone.quickRight">＞ pivot</div>
+                                    <div class="card-area card-area-quick-right" id="card-area-quick-right"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="quicksort-recurse-actions" id="quicksort-recurse-buttons" aria-live="polite"></div>
+                    </div>
+                    <div class="quicksort-split-container" id="quicksort-split-container" aria-label="左半部與右半部同時追蹤" style="display: none;"></div>
+                </div>
             </div>
 
             <div class="feedback">
@@ -122,6 +147,17 @@
                 <div class="settings-card-body">
                     <div class="settings-section">
                         <h3 class="settings-section-title" data-i18n-key="advanced.title">進階設定</h3>
+                        <div class="control-group">
+                            <label for="sort-method" data-i18n-key="controls.sortLabel">排序方式：</label>
+                            <select id="sort-method">
+                                <option value="none" data-i18n-key="controls.sortNone">❓ 請選擇排序目標</option>
+                                <option value="number" selected data-i18n-key="controls.sortNumber">🔢 依數字大小 (A→K)</option>
+                                <option value="suit-symbol" data-i18n-key="controls.sortSuitSymbol">🃄 依花色符號 (♠♥♣♦)</option>
+                                <option value="suit-color" data-i18n-key="controls.sortSuitColor">🎨 依花色顏色 (黑→紅)</option>
+                                <option value="number-asc" data-i18n-key="controls.sortNumberAsc">📈 數字遞增 (2→A)</option>
+                                <option value="number-desc" data-i18n-key="controls.sortNumberDesc">📉 數字遞減 (K→2)</option>
+                            </select>
+                        </div>
                         <div class="control-group">
                             <label for="card-count" data-i18n-key="advanced.cardCount">牌數：</label>
                             <input type="range" id="card-count" min="5" max="13" value="6">
@@ -165,6 +201,7 @@
                 <div class="settings-tabs" id="info-tabs">
                     <button class="settings-tab active" data-pane="pane-guide" data-i18n-key="tabs.guide">操作說明</button>
                     <button class="settings-tab" data-pane="pane-algorithm" data-i18n-key="tabs.algorithm">小知識</button>
+                    <button class="settings-tab" data-pane="pane-sort-ref" data-i18n-key="tabs.sortRef">排序法對照</button>
                 </div>
                 <div class="settings-card-body">
                     <div class="settings-pane active" id="pane-guide">
@@ -195,6 +232,64 @@
                                     <li>重複比較與交換，直到你覺得已經排好為止，再按「檢查答案」。</li>
                                 </ol>
                             </div>
+                        </div>
+                    </div>
+
+                    <div class="settings-pane" id="pane-sort-ref">
+                        <h3 class="sort-ref-title" data-i18n-key="algoRef.title">📋 常見排序法：使用情境與複雜度</h3>
+                        <div class="sort-ref-list">
+                            <article class="sort-ref-card" id="sort-ref-selection">
+                                <h4 class="sort-ref-name" data-i18n-key="algoRef.selection.name">選擇排序（找極值）</h4>
+                                <p class="sort-ref-label" data-i18n-key="algoRef.useCase">使用情境</p>
+                                <p class="sort-ref-scenario" data-i18n-key="algoRef.selection.scenario">每輪從未排序區找最小（或最大），與當前位置交換。本程式：原地模式可「選一張與目標位置交換」；額外空間模式可從上方取一張放到下方最後一格。</p>
+                                <p class="sort-ref-label" data-i18n-key="algoRef.timeComplexity">時間複雜度</p>
+                                <ul class="sort-ref-complexity">
+                                    <li data-i18n-key="algoRef.selection.timeBest">最好 O(n)</li>
+                                    <li data-i18n-key="algoRef.selection.timeAvg">平均 O(n²)</li>
+                                    <li data-i18n-key="algoRef.selection.timeWorst">最壞 O(n²)</li>
+                                </ul>
+                                <p class="sort-ref-label" data-i18n-key="algoRef.spaceComplexity">空間複雜度</p>
+                                <p class="sort-ref-space" data-i18n-key="algoRef.selection.space">O(1) 原地</p>
+                            </article>
+                            <article class="sort-ref-card" id="sort-ref-insertion">
+                                <h4 class="sort-ref-name" data-i18n-key="algoRef.insertion.name">插入排序（插對位置）</h4>
+                                <p class="sort-ref-label" data-i18n-key="algoRef.useCase">使用情境</p>
+                                <p class="sort-ref-scenario" data-i18n-key="algoRef.insertion.scenario">每輪取未排序區一筆，插入已排序區的「正確位置」。本程式：額外空間模式，選上方一張牌，再點下方虛線格插入正確位置。</p>
+                                <p class="sort-ref-label" data-i18n-key="algoRef.timeComplexity">時間複雜度</p>
+                                <ul class="sort-ref-complexity">
+                                    <li data-i18n-key="algoRef.insertion.timeBest">最好 O(n)</li>
+                                    <li data-i18n-key="algoRef.insertion.timeAvg">平均 O(n²)</li>
+                                    <li data-i18n-key="algoRef.insertion.timeWorst">最壞 O(n²)</li>
+                                </ul>
+                                <p class="sort-ref-label" data-i18n-key="algoRef.spaceComplexity">空間複雜度</p>
+                                <p class="sort-ref-space" data-i18n-key="algoRef.insertion.space">O(1) 原地</p>
+                            </article>
+                            <article class="sort-ref-card" id="sort-ref-bubble">
+                                <h4 class="sort-ref-name" data-i18n-key="algoRef.bubble.name">氣泡排序（相鄰交換）</h4>
+                                <p class="sort-ref-label" data-i18n-key="algoRef.useCase">使用情境</p>
+                                <p class="sort-ref-scenario" data-i18n-key="algoRef.bubble.scenario">重複掃描，比較「相鄰」兩筆，順序錯就交換。本程式：原地模式，只交換相鄰的兩張牌，一輪輪把較大者往右推。</p>
+                                <p class="sort-ref-label" data-i18n-key="algoRef.timeComplexity">時間複雜度</p>
+                                <ul class="sort-ref-complexity">
+                                    <li data-i18n-key="algoRef.bubble.timeBest">最好 O(n)</li>
+                                    <li data-i18n-key="algoRef.bubble.timeAvg">平均 O(n²)</li>
+                                    <li data-i18n-key="algoRef.bubble.timeWorst">最壞 O(n²)</li>
+                                </ul>
+                                <p class="sort-ref-label" data-i18n-key="algoRef.spaceComplexity">空間複雜度</p>
+                                <p class="sort-ref-space" data-i18n-key="algoRef.bubble.space">O(1) 原地</p>
+                            </article>
+                            <article class="sort-ref-card" id="sort-ref-quick">
+                                <h4 class="sort-ref-name" data-i18n-key="algoRef.quick.name">快速排序（分治法）</h4>
+                                <p class="sort-ref-label" data-i18n-key="algoRef.useCase">使用情境</p>
+                                <p class="sort-ref-scenario" data-i18n-key="algoRef.quick.scenario">選一筆當 pivot，小於的放左、大於的放右，再對左右兩邊遞迴。本程式：可先理解分治概念；實際分區操作較複雜，以說明與複雜度認識為主。</p>
+                                <p class="sort-ref-label" data-i18n-key="algoRef.timeComplexity">時間複雜度</p>
+                                <ul class="sort-ref-complexity">
+                                    <li data-i18n-key="algoRef.quick.timeBest">最好 O(n log n)</li>
+                                    <li data-i18n-key="algoRef.quick.timeAvg">平均 O(n log n)</li>
+                                    <li data-i18n-key="algoRef.quick.timeWorst">最壞 O(n²)</li>
+                                </ul>
+                                <p class="sort-ref-label" data-i18n-key="algoRef.spaceComplexity">空間複雜度</p>
+                                <p class="sort-ref-space" data-i18n-key="algoRef.quick.space">O(log n) 遞迴堆疊</p>
+                            </article>
                         </div>
                     </div>
                 </div>
