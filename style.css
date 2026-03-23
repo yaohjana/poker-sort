@@ -358,6 +358,87 @@ select:focus {
     color: #fef3c7;
 }
 
+/* 演算法重點區（醒目獨立） */
+.algo-spotlight {
+    margin: 0 0 20px;
+    padding: 16px 16px 14px;
+    border-radius: 16px;
+    border: 1px solid rgba(250, 204, 21, 0.45);
+    background:
+        radial-gradient(circle at 0 0, rgba(250, 204, 21, 0.12), rgba(15, 23, 42, 0.92)),
+        rgba(2, 6, 23, 0.9);
+}
+
+.algo-spotlight h2 {
+    margin: 0 0 8px;
+    color: #fcd34d;
+    font-size: 1.15rem;
+}
+
+.algo-spotlight-intro {
+    color: #e5e7eb;
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
+
+.algo-pill-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.algo-pill {
+    background: rgba(30, 64, 175, 0.3);
+    border: 1px solid rgba(96, 165, 250, 0.5);
+    color: #dbeafe;
+    border-radius: 999px;
+    padding: 6px 10px;
+    font-size: 0.86rem;
+    font-weight: 700;
+}
+
+.life-flow-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(240px, 1fr));
+    gap: 10px;
+}
+
+.life-flow-card {
+    border-radius: 12px;
+    border: 1px solid rgba(148, 163, 184, 0.35);
+    background: rgba(2, 6, 23, 0.45);
+    padding: 10px 10px 8px;
+}
+
+.life-flow-card h3 {
+    margin: 0 0 8px;
+    color: #f8fafc;
+    font-size: 0.98rem;
+}
+
+.flow-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.flow-node {
+    background: rgba(16, 185, 129, 0.15);
+    border: 1px solid rgba(16, 185, 129, 0.45);
+    border-radius: 10px;
+    color: #d1fae5;
+    padding: 4px 8px;
+    font-size: 0.82rem;
+    font-weight: 600;
+}
+
+.flow-arrow {
+    color: #94a3b8;
+    font-weight: 900;
+}
+
 /* 遊戲區域 */
 .game-area {
     margin-bottom: 30px;
@@ -1410,6 +1491,10 @@ select:focus {
     .controls {
         flex-direction: column;
         align-items: stretch;
+    }
+
+    .life-flow-grid {
+        grid-template-columns: 1fr;
     }
 
     .control-group {

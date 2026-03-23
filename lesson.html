@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>撲克牌排序學院 - 教案與設計理念</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .lesson-wrap { max-width: 1080px; margin: 0 auto; }
+        .lesson-card {
+            background: rgba(2, 6, 23, 0.55);
+            border: 1px solid rgba(148, 163, 184, 0.35);
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 12px;
+        }
+        .lesson-card h2 { color: #fbbf24; margin: 0 0 8px; }
+        .lesson-card p, .lesson-card li { color: #e5e7eb; line-height: 1.65; }
+        .lesson-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+        .lesson-badge {
+            padding: 6px 10px; border-radius: 999px;
+            border: 1px solid rgba(96, 165, 250, 0.5); color: #dbeafe;
+            background: rgba(30, 64, 175, 0.25); font-weight: 700; font-size: 0.86rem;
+        }
+        .phase-grid {
+            display: grid; grid-template-columns: repeat(2, minmax(260px, 1fr)); gap: 10px;
+        }
+        @media (max-width: 768px) { .phase-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+<div class="page-frame">
+    <div class="table-glow"></div>
+    <div class="container lesson-wrap">
+        <div class="lesson-card">
+            <h2>📘 教案頁：教學方法與設計理念</h2>
+            <p>本頁是教師說明用版本，整理課程設計理念、階段目標、評量方式與 108 課綱對應。</p>
+            <div class="lesson-badges">
+                <span class="lesson-badge">遊戲融入</span>
+                <span class="lesson-badge">演算法素養</span>
+                <span class="lesson-badge">循序漸進</span>
+                <span class="lesson-badge">形成性評量</span>
+            </div>
+            <p style="margin-top:10px;">
+                <a class="btn preset-btn" href="index.html" style="text-decoration:none;">回到遊戲</a>
+                <a class="btn preset-btn" href="exam.html" style="text-decoration:none;">前往分階段測驗</a>
+            </p>
+        </div>
+
+        <div class="lesson-card">
+            <h2>🎯 設計理念</h2>
+            <ul>
+                <li>以學生可理解的語言先建立「演算法 = 輸入 → 步驟 → 輸出」。</li>
+                <li>用遊戲操作承接抽象概念：比較、交換、插入與檢查。</li>
+                <li>不是只求通關，而是要求學生說明「每一步為什麼這樣做」。</li>
+                <li>讓學生透過反覆測驗與提示修正錯誤，達到螺旋式學習。</li>
+            </ul>
+        </div>
+
+        <div class="lesson-card">
+            <h2>🧭 三到四階段螺旋式學習</h2>
+            <div class="phase-grid">
+                <div>
+                    <h3 style="color:#fcd34d; margin:0 0 6px;">初探</h3>
+                    <ul>
+                        <li>認識演算法三要素與停止條件。</li>
+                        <li>熟悉遊戲操作與排序目標。</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 style="color:#fcd34d; margin:0 0 6px;">基礎</h3>
+                    <ul>
+                        <li>掌握選擇排序、插入排序基本步驟。</li>
+                        <li>能做出一輪一輪的正確判斷。</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 style="color:#fcd34d; margin:0 0 6px;">應用</h3>
+                    <ul>
+                        <li>能說明不變量：每輪後已排序區仍有序。</li>
+                        <li>能比較不同策略的思考方式。</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 style="color:#fcd34d; margin:0 0 6px;">挑戰</h3>
+                    <ul>
+                        <li>完整寫出多輪步驟並自我檢核。</li>
+                        <li>能用口語或書面說明自己的演算法流程。</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="lesson-card">
+            <h2>🧪 評量規劃</h2>
+            <ul>
+                <li>形成性：課堂提問、口語說明、同儕互評。</li>
+                <li>實作性：`exam.html` 分階段題組（含流程步驟題）。</li>
+                <li>成就化：每階段顯示進度與成就，鼓勵反覆練習直到精熟。</li>
+            </ul>
+        </div>
+
+        <div class="lesson-card">
+            <h2>📚 108 課綱對應（資訊科技領域）</h2>
+            <ul>
+                <li><strong>運算思維：</strong>問題分解、步驟化描述、條件判斷與流程規劃。</li>
+                <li><strong>資訊科技應用：</strong>利用數位工具（遊戲＋測驗）進行自我檢核與修正。</li>
+                <li><strong>學習表現導向：</strong>重視「能說明、能操作、能修正」而非只背術語。</li>
+                <li><strong>素養導向：</strong>將演算法連結生活情境，強化遷移與問題解決能力。</li>
+            </ul>
+            <p style="color:#93c5fd; margin-top:8px;">
+                建議在校內使用時，依學校版本課程地圖再細化對應代碼（年級、學期與校本課程彈性）。
+            </p>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+

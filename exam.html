@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>撲克牌排序學院 - 自我測驗</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .exam-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .exam-title {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .exam-title h1 {
+            font-size: 1.7rem;
+            margin: 0;
+            color: #fbbf24;
+            text-shadow: 0 0 25px rgba(250, 204, 21, 0.25);
+            letter-spacing: 0.08em;
+        }
+
+        .exam-title p {
+            margin: 0;
+            color: #9ca3af;
+            line-height: 1.5;
+        }
+
+        .exam-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: flex-end;
+        }
+
+        .progress-wrap {
+            margin: 18px 0 10px;
+            background: rgba(15, 23, 42, 0.65);
+            border: 1px solid rgba(148, 163, 184, 0.35);
+            border-radius: 14px;
+            padding: 14px 16px;
+        }
+
+        .progress-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .progress-row .progress-text {
+            font-weight: 700;
+            color: #e5e7eb;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 12px;
+            border-radius: 999px;
+            background: rgba(148, 163, 184, 0.18);
+            overflow: hidden;
+        }
+
+        .progress-bar > div {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, rgba(34, 197, 94, 0.95), rgba(250, 204, 21, 0.95));
+            transition: width 0.25s ease;
+        }
+
+        .stage-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 14px 0 10px;
+        }
+
+        .stage-tab-btn {
+            border: 1px solid rgba(148, 163, 184, 0.45);
+            background: rgba(2, 6, 23, 0.45);
+            color: #cbd5e1;
+            border-radius: 999px;
+            padding: 8px 14px;
+            cursor: pointer;
+            font-weight: 700;
+        }
+
+        .stage-tab-btn.active {
+            border-color: rgba(250, 204, 21, 0.85);
+            color: #fef3c7;
+            background: linear-gradient(135deg, rgba(250, 204, 21, 0.22), rgba(180, 83, 9, 0.22));
+        }
+
+        .stage-achievement {
+            margin: 6px 0 12px;
+            padding: 10px 12px;
+            border-radius: 14px;
+            border: 1px solid rgba(148, 163, 184, 0.35);
+            background: rgba(2, 6, 23, 0.35);
+            color: #e5e7eb;
+            line-height: 1.55;
+        }
+
+        .achievement-badge {
+            display: inline-flex;
+            align-items: center;
+            border-radius: 999px;
+            padding: 4px 10px;
+            margin-right: 8px;
+            font-weight: 800;
+            letter-spacing: 0.02em;
+        }
+
+        .achievement-badge.bronze {
+            background: rgba(180, 83, 9, 0.2);
+            border: 1px solid rgba(217, 119, 6, 0.65);
+            color: #fcd34d;
+        }
+
+        .achievement-badge.silver {
+            background: rgba(71, 85, 105, 0.35);
+            border: 1px solid rgba(148, 163, 184, 0.75);
+            color: #e2e8f0;
+        }
+
+        .achievement-badge.gold {
+            background: rgba(250, 204, 21, 0.16);
+            border: 1px solid rgba(250, 204, 21, 0.85);
+            color: #fde68a;
+        }
+
+        .exam-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+
+        .q-card {
+            background: rgba(15, 23, 42, 0.45);
+            border: 1px solid rgba(148, 163, 184, 0.35);
+            border-radius: 16px;
+            padding: 14px 14px 12px;
+        }
+
+        .q-head {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .q-num {
+            font-weight: 900;
+            color: #fbbf24;
+            letter-spacing: 0.02em;
+        }
+
+        .q-diff {
+            font-weight: 700;
+            color: #94a3b8;
+        }
+
+        .q-stage {
+            font-weight: 800;
+            color: #facc15;
+            background: rgba(250, 204, 21, 0.12);
+            border: 1px solid rgba(250, 204, 21, 0.35);
+            border-radius: 999px;
+            padding: 4px 10px;
+            font-size: 0.82rem;
+        }
+
+        .stage-heading {
+            margin: 18px 0 10px;
+            padding: 12px 14px;
+            border-radius: 16px;
+            border: 1px solid rgba(148, 163, 184, 0.35);
+            background: rgba(2, 6, 23, 0.25);
+        }
+
+        .stage-title {
+            font-weight: 950;
+            color: #fbbf24;
+            letter-spacing: 0.02em;
+            margin-bottom: 6px;
+        }
+
+        .stage-desc {
+            color: #9ca3af;
+            line-height: 1.55;
+            font-size: 0.95rem;
+        }
+
+        .q-prompt {
+            color: #e5e7eb;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .choices {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+
+        .choice {
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+            padding: 10px 12px;
+            border-radius: 12px;
+            border: 1px solid rgba(148, 163, 184, 0.18);
+            background: rgba(2, 6, 23, 0.35);
+        }
+
+        .choice:hover {
+            border-color: rgba(251, 191, 36, 0.5);
+        }
+
+        .choice input[type="radio"] {
+            margin-top: 3px;
+            accent-color: #fbbf24;
+        }
+
+        .array-input {
+            width: 100%;
+            padding: 10px 12px;
+            border-radius: 12px;
+            border: 1px solid rgba(148, 163, 184, 0.6);
+            background: rgba(2, 6, 23, 0.55);
+            color: #e5e7eb;
+            outline: none;
+            font-size: 1rem;
+        }
+
+        .array-help {
+            color: #9ca3af;
+            font-size: 0.9rem;
+            margin-top: 6px;
+            line-height: 1.5;
+        }
+
+        .q-bottom {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+
+        .q-status {
+            color: #9ca3af;
+            font-weight: 700;
+            min-height: 1.2em;
+        }
+
+        .feedback-inline {
+            margin-top: 10px;
+            padding: 10px 12px;
+            border-radius: 12px;
+            border: 1px solid rgba(148, 163, 184, 0.35);
+            background: rgba(2, 6, 23, 0.4);
+            color: #e5e7eb;
+            line-height: 1.6;
+        }
+
+        .feedback-inline.success {
+            border-color: rgba(34, 197, 94, 0.7);
+            background: rgba(34, 197, 94, 0.08);
+        }
+
+        .feedback-inline.error {
+            border-color: rgba(220, 38, 38, 0.7);
+            background: rgba(220, 38, 38, 0.08);
+        }
+
+        .feedback-inline .learn-title {
+            font-weight: 900;
+            color: #fbbf24;
+            margin-bottom: 6px;
+        }
+
+        .footer-note {
+            margin: 20px 0 6px;
+            color: #9ca3af;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+    </style>
+</head>
+<body>
+<div class="page-frame">
+    <div class="table-glow"></div>
+    <div class="container">
+        <div class="exam-header">
+            <div class="exam-title">
+                <h1>自我測驗：選擇排序 & 插入排序</h1>
+                <p>做題後按「檢查此題」。答對會記錄進度；可以反覆練習直到滿分 28/28。</p>
+            </div>
+            <div class="exam-actions">
+                <a class="btn preset-btn" href="index.html" style="text-decoration:none;">回到遊戲</a>
+                <button id="reset-progress-btn" class="btn danger" type="button">重置進度</button>
+            </div>
+        </div>
+
+        <div class="progress-wrap" aria-live="polite">
+            <div class="progress-row">
+                <div class="progress-text" id="overall-progress">已答對：0/28</div>
+                <div class="progress-text" id="overall-status">正在練習中</div>
+            </div>
+            <div class="progress-bar" aria-hidden="true">
+                <div id="overall-progress-bar"></div>
+            </div>
+        </div>
+
+        <div id="stage-tabs" class="stage-tabs"></div>
+        <div id="stage-achievement" class="stage-achievement"></div>
+        <div id="exam-grid" class="exam-grid"></div>
+
+        <div class="footer-note">
+            小提醒：這份測驗主要練習「選擇排序（找極值放尾端）」與「插入排序（找到插入格）」的思考。
+            若答錯，別急著一直猜：先看提示，再做一次。
+        </div>
+    </div>
+</div>
+
+<script>
+    const STORAGE_KEY = 'pokerSortExamProgress_v1';
+    const stageOrder = ['初探', '基礎', '應用', '挑戰'];
+    const stageDescMap = {
+        '初探': '先掌握演算法最基本概念：輸入、步驟、輸出與可停止。',
+        '基礎': '建立排序基本功：會判斷選擇排序與插入排序每一步該做什麼。',
+        '應用': '把規則用在題目中：加入推理與部分實作，練習正確性檢查。',
+        '挑戰': '完整流程與綜合判斷：寫出步驟、驗證不變量、整合概念。'
+    };
+
+    const questions = [
+        {
+            id: 1,
+            difficulty: '容易',
+            type: 'mcq',
+            prompt: '選擇排序每一輪主要做什麼？',
+            choices: [
+                { id: 'a', text: '從未排序區找最小（或最大），再放到已排序區' },
+                { id: 'b', text: '反覆比較相鄰兩個元素，順序不對就交換' },
+                { id: 'c', text: '每次先切成兩半，再遞迴處理左、右半區' },
+                { id: 'd', text: '把資料完全隨機打亂，直到有序' }
+            ],
+            correct: 'a',
+            hint: '想想「找極值」那件事每輪只做一次。',
+            learn: '選擇排序：每輪在未排序區找最小/最大（極值），再把它放到正確位置。'
+        },
+        {
+            id: 2,
+            difficulty: '容易',
+            type: 'mcq',
+            prompt: '在這個「額外空間模式」中，若選擇排序，你每輪應該怎麼操作？',
+            choices: [
+                { id: 'a', text: '從上方任意挑一張，放到下方任何位置' },
+                { id: 'b', text: '從上方未排序區找最小（或最大）那張，放到下方「最後一格」' },
+                { id: 'c', text: '只交換相鄰的兩張牌' },
+                { id: 'd', text: '先選 pivot，再把牌分到左半/右半' }
+            ],
+            correct: 'b',
+            hint: '下方的「最後一格」就是已排序區的尾端。',
+            learn: '額外空間的選擇排序：找出未排序區的極值，移入已排序區尾端。'
+        },
+        {
+            id: 3,
+            difficulty: '容易',
+            type: 'mcq',
+            prompt: '插入排序的核心概念是什麼？',
+            choices: [
+                { id: 'a', text: '每輪找極值（最小/最大）' },
+                { id: 'b', text: '把下一個元素插入到已排序區的正確位置' },
+                { id: 'c', text: '先分區再遞迴（分治）' },
+                { id: 'd', text: '只做相鄰交換（像氣泡排序那樣）' }
+            ],
+            correct: 'b',
+            hint: '插入排序像「把牌插進正確的卡槽」。',
+            learn: '插入排序：維持一段已排序區；每輪取 key，並插入到正確位置。'
+        },
+        {
+            id: 4,
+            difficulty: '容易',
+            type: 'mcq',
+            prompt: '插入排序中，正在要插入的那個元素通常稱作什麼？',
+            choices: [
+                { id: 'a', text: 'pivot' },
+                { id: 'b', text: 'key（關鍵元素）' },
+                { id: 'c', text: 'bubble' },
+                { id: 'd', text: 'swap' }
+            ],
+            correct: 'b',
+            hint: '教材常說「key 插入」。',
+            learn: 'key 就是目前要插入的那一張/那個元素。'
+        },
+        {
+            id: 5,
+            difficulty: '容易',
+            type: 'mcq',
+            prompt: '插入排序插入完成後，已排序區應該滿足哪個性質（遞增排序）？',
+            choices: [
+                { id: 'a', text: 'key 左邊都 <= key，key 右邊都 >= key（對應插入點的左右關係）' },
+                { id: 'b', text: '已排序區內每個元素都必須相等' },
+                { id: 'c', text: '已排序區全部元素都比未排序區小（不一定）' },
+                { id: 'd', text: '已排序區順序可以亂，最後再一次修正' }
+            ],
+            correct: 'a',
+            hint: '想像已排序區像一條有序的隊伍，你要把 key 插進隊伍的「該站的位置」。',
+            learn: '插入點正是讓左右關係仍然有序：左邊不大於 key，右邊不小於 key。'
+        },
+        {
+            id: 6,
+            difficulty: '容易',
+            type: 'mcq',
+            prompt: '選擇排序做完第 k 輪（k 從 1 開始）後，已排序區至少有幾個元素？',
+            choices: [
+                { id: 'a', text: 'k-1' },
+                { id: 'b', text: 'k' },
+                { id: 'c', text: 'k+1' },
+                { id: 'd', text: 'n（永遠全排序）' }
+            ],
+            correct: 'b',
+            hint: '每一輪都會把一個極值「放進正確位置」。',
+            learn: '選擇排序：每輪確定 1 個位置，做完 k 輪，至少有 k 個已確定且有序。'
+        },
+        {
+            id: 7,
+            difficulty: '容易',
+            type: 'arrayInput',
+            prompt: '實作題：使用選擇排序（遞增，原地做法、不使用額外陣列；只透過「交換兩個位置」），對陣列 [5, 2, 4, 1, 3] 做完「第 1 輪」後，陣列會變成？（填整個陣列）',
+            expectedArray: [1, 2, 4, 5, 3],
+            hint: '第 1 輪先找整個未排序區的最小值（1），然後用交換把它放到第 1 個位置（索引 0）。',
+            learn: '選擇排序第 1 輪（原地交換）：找 min=1，交換到第 1 個位置。'
+        },
+        {
+            id: 8,
+            difficulty: '簡單',
+            type: 'mcq',
+            prompt: '為什麼插入排序在「資料接近有序」時常常比較快？',
+            choices: [
+                { id: 'a', text: '因為它每輪不用比較就能直接插到正確位置' },
+                { id: 'b', text: '因為 key 通常會插入到比較靠近正確位置的位置，移動/比較較少' },
+                { id: 'c', text: '因為它會改用分治法' },
+                { id: 'd', text: '因為它只做一次交換' }
+            ],
+            correct: 'b',
+            hint: '想像你桌上的牌本來就差不多排好了，你只要「插進去」而不是重排。',
+            learn: '插入排序：key 找到插入點後，移動的元素會變少，所以接近有序時更省。'
+        },
+        {
+            id: 9,
+            difficulty: '簡單',
+            type: 'mcq',
+            prompt: '什麼是「穩定排序」的意思？',
+            choices: [
+                { id: 'a', text: '排序後一定是最省力的（不一定）' },
+                { id: 'b', text: '鍵值相同的元素，排序後仍保持原本的相對順序' },
+                { id: 'c', text: '排序後一定是反向排列' },
+                { id: 'd', text: '穩定排序只出現在某一種演算法（不一定）' }
+            ],
+            correct: 'b',
+            hint: '關鍵在「相同鍵值」的相對順序是否被打亂。',
+            learn: '穩定排序：相同鍵值的元素先後順序不改變。'
+        },
+        {
+            id: 10,
+            difficulty: '簡單',
+            type: 'mcq',
+            prompt: '插入排序：已排序區是 [2, 4, 6]，現在 key=7。key 插入後會變成哪個結果？（遞增）',
+            choices: [
+                { id: 'a', text: '[2, 4, 6, 7]' },
+                { id: 'b', text: '[2, 4, 7, 6]' },
+                { id: 'c', text: '[7, 2, 4, 6]' },
+                { id: 'd', text: '[2, 7, 4, 6]' }
+            ],
+            correct: 'a',
+            hint: '7 比已排序區的每一個元素都大，所以要插在最右邊。',
+            learn: '插入排序：key 大於所有已排序元素時，就插在已排序區最後。'
+        },
+        {
+            id: 11,
+            difficulty: '簡單',
+            type: 'arrayInput',
+            prompt: '實作題：使用插入排序（遞增），對陣列 [3, 1, 2] 做到「第 1 次插入」（key=1 插入完後）結果是？',
+            expectedArray: [1, 3, 2],
+            hint: '已排序區開始只有 [3]，key=1 要插到 3 的左邊。',
+            learn: '插入排序：key=1 插入到已排序區的最前面。'
+        },
+        {
+            id: 12,
+            difficulty: '簡單',
+            type: 'mcq',
+            prompt: '已排序區是 [2, 4, 6]，現在 key=5。key 插入後會落在？',
+            choices: [
+                { id: 'a', text: '最左邊' },
+                { id: 'b', text: '2 和 4 之間' },
+                { id: 'c', text: '4 和 6 之間' },
+                { id: 'd', text: '最右邊' }
+            ],
+            correct: 'c',
+            hint: '5 介於 4 和 6 之間。',
+            learn: '插入排序：key 插入在讓左右關係仍有序的位置。'
+        },
+        {
+            id: 13,
+            difficulty: '簡單',
+            type: 'mcq',
+            prompt: '已排序區是 [2, 4, 6]，現在 key=1。key 插入後前段會變成？',
+            choices: [
+                { id: 'a', text: '[1, 2, 4, 6]' },
+                { id: 'b', text: '[2, 1, 4, 6]' },
+                { id: 'c', text: '[2, 4, 1, 6]' },
+                { id: 'd', text: '[2, 4, 6, 1]' }
+            ],
+            correct: 'a',
+            hint: '1 比已排序區所有元素都小。',
+            learn: 'key 小於所有已排序元素時，就插到最前面。'
+        },
+        {
+            id: 14,
+            difficulty: '簡單',
+            type: 'arrayInput',
+            prompt: '實作題：使用插入排序（遞增）對陣列 [4, 1, 3, 2] 做完「前兩輪插入」（i=1 與 i=2）後的結果是？',
+            expectedArray: [1, 3, 4, 2],
+            hint: '先把 1 插到前面得到 [1, 4, 3, 2]，再把 3 插到 1 和 4 之間。',
+            learn: '插入排序：維持已排序區有序；每輪插入 key 到正確位置。'
+        },
+        {
+            id: 15,
+            difficulty: '簡單',
+            type: 'mcq',
+            prompt: '選擇排序每輪完成後，未排序區通常會怎麼變？',
+            choices: [
+                { id: 'a', text: '變短：左邊確定好的一個元素被移出，剩下的繼續當未排序區' },
+                { id: 'b', text: '變長：越來越多元素進入未排序區' },
+                { id: 'c', text: '不變：每輪都還是同一個範圍' },
+                { id: 'd', text: '改成反向排列' }
+            ],
+            correct: 'a',
+            hint: '每輪都會固定「一個位置」。',
+            learn: '選擇排序：已排序區逐漸擴大，未排序區範圍逐漸縮小。'
+        },
+        {
+            id: 16,
+            difficulty: '簡單',
+            type: 'mcq',
+            prompt: '在原地選擇排序（遞增）中，除了比較之外，每一輪主要會做什麼移動？',
+            choices: [
+                { id: 'a', text: '把未排序區找到的最小值（極值）交換到目前要放的位置（每輪最多一次交換）' },
+                { id: 'b', text: '只交換相鄰兩個元素，直到完全有序' },
+                { id: 'c', text: '把資料分成左右兩半後再合併' },
+                { id: 'd', text: '先把資料洗牌再慢慢挑出' }
+            ],
+            correct: 'a',
+            hint: '選擇排序的特色是「先找極值，再放到目標位置」。',
+            learn: '選擇排序：每輪做完後，會把找到的極值放進正確位置；原地版本通常等同於最多一次交換。'
+        },
+        {
+            id: 17,
+            difficulty: '困難',
+            type: 'mcq',
+            prompt: '困難實作（流程排序）：把插入排序的核心步驟選出正確順序。',
+            choices: [
+                { id: 'a', text: 'key 取出 → 從已排序區右端向左比較 → 找到插入點 → 向右移動並插入 key' },
+                { id: 'b', text: '切半分區 → 選 pivot → 遞迴處理 → 合併' },
+                { id: 'c', text: '先隨機交換 → 再找 key → 最後才比較' },
+                { id: 'd', text: '只比較相鄰兩張 → 每次交換直到完全有序' }
+            ],
+            correct: 'a',
+            hint: '插入排序最像「把 key 插進有序隊伍」。',
+            learn: '插入排序：核心是「找插入點 + 右移騰位置 + 插入」。'
+        },
+        {
+            id: 18,
+            difficulty: '困難',
+            type: 'mcq',
+            prompt: '困難觀念：插入排序的迴圈不變量（invariant）最接近哪個？（遞增排序）',
+            choices: [
+                { id: 'a', text: '每輪開始時，已排序區已經是正確且有序的；未排序區尚未處理' },
+                { id: 'b', text: '每輪開始時，未排序區已經全部有序' },
+                { id: 'c', text: '每輪都會把陣列切成兩半並遞迴' },
+                { id: 'd', text: '直到最後一輪，已排序區才有內容' }
+            ],
+            correct: 'a',
+            hint: '不變量要回答：「每一輪開始時，肯定正確的一件事是什麼？」',
+            learn: '不變量：已排序區在每輪開始時都維持有序；這讓我們只需插入 key，而不必重排全部。'
+        },
+        {
+            id: 19,
+            difficulty: '困難',
+            type: 'mcq',
+            prompt: '困難觀念：選擇排序（遞增）的「迴圈不變量」最接近哪個敘述？',
+            choices: [
+                { id: 'a', text: '每輪結束後，已排序區的元素都不大於未排序區的元素（對遞增而言）' },
+                { id: 'b', text: '每輪結束後，未排序區也會變得完全有序' },
+                { id: 'c', text: '每輪結束後，已排序區中的元素順序會被刻意打亂' },
+                { id: 'd', text: '每輪結束後，必須把整個陣列重新複製到新陣列' }
+            ],
+            correct: 'a',
+            hint: '想像已排序區像「已經放好的一段」，它們應該都落在整體較小的一側。',
+            learn: '選擇排序不變量（遞增）：每輪把極值放到正確位置，因此已排序區的元素都不大於未排序區的元素。'
+        },
+        {
+            id: 20,
+            difficulty: '困難',
+            type: 'arrayInput',
+            prompt: '實作題（困難）：使用選擇排序（遞增），對陣列 [6, 3, 5, 1, 4, 2] 做完「前兩輪」後結果是？（填整個陣列）',
+            expectedArray: [1, 2, 5, 6, 4, 3],
+            hint: '第 1 輪把最小值 1 放到第 1 個位置；第 2 輪再在剩下未排序區找最小 2 放到第 2 個位置。',
+            learn: '選擇排序：每輪確定 1 個位置；做兩輪就確定前兩個位置。'
+        },
+        {
+            id: 21,
+            difficulty: '簡單',
+            type: 'arrayStepsInput',
+            prompt: '實作題（寫出所有步驟）：使用選擇排序（遞增，原地、只透過交換兩個位置）。對陣列 [5, 2, 4, 1, 3] 做完「全部 4 輪」後，請把每一輪結束後的「完整陣列」都寫出來。（共 4 行，每行填一個陣列，用逗號分隔）',
+            expectedSteps: [
+                [1, 2, 4, 5, 3],
+                [1, 2, 4, 5, 3],
+                [1, 2, 3, 5, 4],
+                [1, 2, 3, 4, 5]
+            ],
+            hint: '你每一輪都要「找未排序區的最小值」並交換到目前要放的位置 i。',
+            learn: '選擇排序（原地）：第 i 輪找最小值並交換到第 i 個位置，所以已確定的位置會越來越多。'
+        },
+        {
+            id: 22,
+            difficulty: '困難',
+            type: 'arrayStepsInput',
+            prompt: '實作題（寫出所有步驟）：使用插入排序（遞增）。對陣列 [4, 1, 3, 2] 進行插入排序時，請把「每次插入 key 完成後」的完整陣列都寫出來。（共 3 行：插入 i=2、i=3、i=4；每行用逗號分隔數字）',
+            expectedSteps: [
+                [1, 4, 3, 2],
+                [1, 3, 4, 2],
+                [1, 2, 3, 4]
+            ],
+            hint: '先把第一個元素當作已排序區；key 逐次往左插入，直到找到正確位置。',
+            learn: '插入排序：每輪只把 key 插到「左右關係仍有序」的位置，並維持已排序區一直有序。'
+        },
+        {
+            id: 23,
+            difficulty: '容易',
+            stage: '挑戰',
+            type: 'mcq',
+            prompt: '演算法最基本需要包含哪一組內容？',
+            choices: [
+                { id: 'a', text: '只有輸出（最後結果）' },
+                { id: 'b', text: '輸入 → 步驟 → 輸出' },
+                { id: 'c', text: '只有步驟，沒有輸入與輸出' },
+                { id: 'd', text: '沒有步驟，只憑直覺猜' }
+            ],
+            correct: 'b',
+            hint: '想像做菜：食材（輸入）、作法（步驟）、成品（輸出）。',
+            learn: '演算法：把要處理的東西先定義成輸入，接著依步驟處理，最後得到輸出。'
+        },
+        {
+            id: 24,
+            difficulty: '容易',
+            stage: '挑戰',
+            type: 'mcq',
+            prompt: '哪一個說明最符合「演算法」？',
+            choices: [
+                { id: 'a', text: '每次做都不一樣，覺得對就好' },
+                { id: 'b', text: '步驟清楚、照做會得到結果，並且能停止' },
+                { id: 'c', text: '想不到就一直做下去' },
+                { id: 'd', text: '步驟可以很模糊，例如「隨便排一排」' }
+            ],
+            correct: 'b',
+            hint: '演算法要「清楚」和「可停止」。',
+            learn: '好的演算法：步驟不含曖昧、能達成目標，而且終究會走到停止條件。'
+        },
+        {
+            id: 25,
+            difficulty: '容易',
+            stage: '挑戰',
+            type: 'mcq',
+            prompt: '「步驟清楚」的意思最接近哪個？',
+            choices: [
+                { id: 'a', text: '只要最後對就行，過程可以不管' },
+                { id: 'b', text: '每一步都有可照做的動作與判斷條件' },
+                { id: 'c', text: '步驟可以用感覺描述，例如「差不多就好」' },
+                { id: 'd', text: '步驟不需要先規定輸入是什麼' }
+            ],
+            correct: 'b',
+            hint: '你要能把它講給別人聽，別人也照做。',
+            learn: '步驟清楚：別人照著做，也能走出同樣的結果。'
+        },
+        {
+            id: 26,
+            difficulty: '簡單',
+            stage: '挑戰',
+            type: 'mcq',
+            prompt: '在排序演算法中，「不變量」最像哪個想法？（遞增）',
+            choices: [
+                { id: 'a', text: '每一輪結束都讓已排序區保持有序' },
+                { id: 'b', text: '每一輪都把已排序區打亂' },
+                { id: 'c', text: '不需要任何條件也能保證有序' },
+                { id: 'd', text: '只要最後一次檢查正確就好' }
+            ],
+            correct: 'a',
+            hint: '不變量 = 「一直維持的性質」。',
+            learn: '不變量（遞增排序）：每輪完成後，已排序區仍保持有序，因此後續插入/交換才有依靠。'
+        },
+        {
+            id: 27,
+            difficulty: '簡單',
+            stage: '挑戰',
+            type: 'mcq',
+            prompt: '把問題「分解成幾個步驟」最能幫助什麼？',
+            choices: [
+                { id: 'a', text: '讓你更容易判斷下一步要做什麼' },
+                { id: 'b', text: '讓問題變得永遠做不完' },
+                { id: 'c', text: '讓輸入不需要定義' },
+                { id: 'd', text: '讓輸出變得隨機' }
+            ],
+            correct: 'a',
+            hint: '分解的目的，是把「大問題」變成你能做的小動作。',
+            learn: '分解：把複雜問題拆成可執行的小步驟，讓流程更容易推理與檢查。'
+        },
+        {
+            id: 28,
+            difficulty: '困難',
+            stage: '挑戰',
+            type: 'mcq',
+            prompt: '突破題：哪一段描述最符合「演算法可重現」？',
+            choices: [
+                { id: 'a', text: '看心情交換幾次就好' },
+                { id: 'b', text: '比較兩張牌：左邊若比右邊大就交換；否則不交換，重複直到整體符合目標' },
+                { id: 'c', text: '隨便把牌換一換直到看起來差不多' },
+                { id: 'd', text: '先不定義輸入，想到再做' }
+            ],
+            correct: 'b',
+            hint: '可重現：同樣輸入、同樣規則，會得到同樣輸出。',
+            learn: '可重現的演算法：步驟清楚、規則可檢查、並有停止條件，因此每次都能照流程做出結果。'
+        }
+    ];
+
+    function $(id) { return document.getElementById(id); }
+
+    function safeParseJSON(x) {
+        try { return JSON.parse(x); } catch { return null; }
+    }
+
+    function normalizeText(s) {
+        return (s ?? '').toString().trim();
+    }
+
+    function parseNumberArray(input) {
+        const raw = normalizeText(input);
+        if (!raw) return null;
+
+        // 允許學生在同一行輸入額外文字/括號，例如：
+        // 第1輪：[1,2,3] 或 1, 2, 3
+        // 解析策略：直接抓出所有「數字」。
+        const matches = raw.match(/-?\d+(\.\d+)?/g);
+        if (!matches || matches.length === 0) return null;
+        return matches.map(x => Number(x));
+    }
+
+    function arraysEqual(a, b) {
+        if (!Array.isArray(a) || !Array.isArray(b)) return false;
+        if (a.length !== b.length) return false;
+        for (let i = 0; i < a.length; i++) {
+            if (a[i] !== b[i]) return false;
+        }
+        return true;
+    }
+
+    function defaultProgress() {
+        const statusById = {};
+        for (const q of questions) {
+            statusById[q.id] = {
+                correct: false,
+                attempts: 0,
+                lastCheckedAt: null,
+                latestAnswer: null
+            };
+        }
+        return {
+            statusById,
+            updatedAt: null
+        };
+    }
+
+    function loadProgress() {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return defaultProgress();
+        const parsed = safeParseJSON(raw);
+        if (!parsed || !parsed.statusById) return defaultProgress();
+        // 確保缺漏題目也補齊
+        const prog = defaultProgress();
+        for (const q of questions) {
+            if (parsed.statusById[q.id]) prog.statusById[q.id] = { ...prog.statusById[q.id], ...parsed.statusById[q.id] };
+        }
+        return prog;
+    }
+
+    function saveProgress() {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
+    }
+
+    let progress = loadProgress();
+
+    function diffColor(diff) {
+        if (diff === '容易') return 'color:#fbbf24';
+        if (diff === '簡單') return 'color:#38bdf8';
+        return 'color:#f472b6';
+    }
+
+    function getStageForQuestion(q) {
+        if (q.stage) return q.stage;
+        const id = q.id;
+        if (id >= 1 && id <= 7) return '初探';
+        if (id >= 8 && id <= 14) return '基礎';
+        if (id >= 15 && id <= 21) return '應用';
+        return '挑戰';
+    }
+
+    let currentStage = stageOrder[0];
+
+    function getOverallScore() {
+        let correctCount = 0;
+        for (const q of questions) if (progress.statusById[q.id].correct) correctCount++;
+        return correctCount;
+    }
+
+    function updateOverallUI() {
+        const correctCount = getOverallScore();
+        const total = questions.length;
+        $('overall-progress').textContent = `已答對：${correctCount}/${total}`;
+        const ratio = total ? Math.round((correctCount / total) * 100) : 0;
+        $('overall-progress-bar').style.width = ratio + '%';
+
+        let status = '正在練習中';
+        if (correctCount === total) status = '滿分完成！可以再重挑戰。';
+        else if (correctCount >= Math.ceil(total * 0.7)) status = '進步很快！再加油就滿分！';
+        else if (correctCount >= Math.ceil(total * 0.4)) status = '你有抓到重點了，繼續補齊！';
+        $('overall-status').textContent = status;
+
+        updateStageUI();
+    }
+
+    function updateStageUI() {
+        for (const stage of stageOrder) {
+            const stageTitleEl = document.querySelector(`.stage-heading[data-stage="${stage}"] .stage-title`);
+            if (!stageTitleEl) continue;
+
+            const stageQs = questions.filter(q => getStageForQuestion(q) === stage);
+            let stageCorrect = 0;
+            for (const q of stageQs) if (progress.statusById[q.id]?.correct) stageCorrect++;
+
+            stageTitleEl.textContent = `${stage}：已答對 ${stageCorrect}/${stageQs.length}`;
+        }
+        renderStageTabs();
+        renderStageAchievement();
+    }
+
+    function renderQuestionCard(q) {
+        const card = document.createElement('div');
+        card.className = 'q-card';
+        card.id = `q-card-${q.id}`;
+
+        const qStatus = progress.statusById[q.id]?.correct ? '已答對（已記錄進度）' : '尚未答對';
+
+        const diffLabel = q.difficulty;
+        const diffStyle = diffColor(diffLabel);
+        const stageLabel = getStageForQuestion(q);
+
+        card.innerHTML = `
+            <div class="q-head">
+                <div class="q-num">第 ${q.id} 題</div>
+                <div class="q-diff" style="${diffStyle}">難度：${q.difficulty}</div>
+                <div class="q-stage">階段：${stageLabel}</div>
+            </div>
+            <div class="q-prompt">${q.prompt}</div>
+            <div class="q-body"></div>
+            <div class="q-bottom">
+                <div class="q-status" id="q-status-${q.id}">${qStatus}</div>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end;">
+                    <button class="btn success" type="button" id="q-check-${q.id}">檢查此題</button>
+                    <button class="btn preset-btn" type="button" id="q-showhint-${q.id}">提示</button>
+                </div>
+            </div>
+            <div class="feedback-inline" id="q-feedback-${q.id}" style="display:none;"></div>
+        `;
+
+        const body = card.querySelector('.q-body');
+
+        if (q.type === 'mcq') {
+            const groupName = `q-${q.id}`;
+            const choicesHtml = q.choices.map(c => {
+                return `
+                    <label class="choice">
+                        <input type="radio" name="${groupName}" value="${c.id}">
+                        <span>${c.text}</span>
+                    </label>
+                `;
+            }).join('');
+            body.innerHTML = `<div class="choices">${choicesHtml}</div>`;
+            // 預填最新答案（若有）
+            const latest = progress.statusById[q.id].latestAnswer;
+            if (latest && q.choices.some(c => c.id === latest)) {
+                const el = card.querySelector(`input[name="${groupName}"][value="${latest}"]`);
+                if (el) el.checked = true;
+            }
+        } else if (q.type === 'arrayInput') {
+            const latest = progress.statusById[q.id].latestAnswer;
+            body.innerHTML = `
+                <input class="array-input" type="text" id="q-input-${q.id}" placeholder="例如：1,2,3,4" value="${latest ? String(latest) : ''}">
+                <div class="array-help">請用「逗號」分隔（例如：1, 2, 3）。多餘空白沒關係。</div>
+            `;
+        } else if (q.type === 'arrayStepsInput') {
+            const latest = progress.statusById[q.id].latestAnswer;
+            body.innerHTML = `
+                <textarea class="array-input" id="q-input-${q.id}" rows="5" placeholder="例如：
+1, 2, 3
+1, 2, 4
+...">${latest ? String(latest) : ''}</textarea>
+                <div class="array-help">請用「每一輪一行」輸入；每行只要輸入該輪的陣列數字（用逗號分隔）。</div>
+            `;
+        }
+
+        // 綁事件
+        const checkBtn = card.querySelector(`#q-check-${q.id}`);
+        const hintBtn = card.querySelector(`#q-showhint-${q.id}`);
+        const feedbackEl = card.querySelector(`#q-feedback-${q.id}`);
+        const statusEl = card.querySelector(`#q-status-${q.id}`);
+
+        checkBtn.addEventListener('click', () => {
+            const result = gradeQuestion(q);
+            progress.statusById[q.id].attempts += 1;
+            progress.statusById[q.id].correct = result.correct;
+            progress.statusById[q.id].lastCheckedAt = new Date().toISOString();
+            progress.statusById[q.id].latestAnswer = result.latestAnswer;
+            progress.updatedAt = new Date().toISOString();
+            saveProgress();
+
+            statusEl.textContent = result.correct ? '已答對（已記錄進度）' : '尚未答對（可再重試）';
+            feedbackEl.style.display = 'block';
+            feedbackEl.className = 'feedback-inline ' + (result.correct ? 'success' : 'error');
+
+            const msgTitle = result.correct ? '太棒了！' : '再試一次吧';
+            const learnTitle = result.correct ? '為什麼答對？' : '學習提示';
+            const learnText = result.correct ? q.learn : `${q.hint} ${q.learn}`;
+
+            feedbackEl.innerHTML = `
+                <div class="learn-title">${msgTitle}</div>
+                <div><strong>${learnTitle}：</strong>${learnText}</div>
+                <div style="margin-top:8px; color:rgba(229,231,235,0.95); font-size:0.95rem;">
+                    ${result.correct ? '你已經把關鍵觀念抓到了！' : '你可以先看提示，再依照步驟重新判斷一次。'}
+                </div>
+            `;
+
+            // overall
+            updateOverallUI();
+
+            // 額外提醒滿分
+            if (getOverallScore() === questions.length) {
+                $('overall-status').textContent = '滿分完成！可以再重挑戰。';
+            }
+        });
+
+        hintBtn.addEventListener('click', () => {
+            feedbackEl.style.display = 'block';
+            feedbackEl.className = 'feedback-inline';
+            feedbackEl.innerHTML = `
+                <div class="learn-title">提示</div>
+                <div>${q.hint}</div>
+                <div style="margin-top:10px; color:#9ca3af;">如果仍不確定，再搭配「${q.difficulty}」題的學習重點一起想。</div>
+            `;
+        });
+
+        return card;
+    }
+
+    function gradeQuestion(q) {
+        if (q.type === 'mcq') {
+            const groupName = `q-${q.id}`;
+            const chosen = document.querySelector(`input[name="${groupName}"]:checked`);
+            const latestAnswer = chosen ? chosen.value : null;
+            if (!latestAnswer) return { correct: false, latestAnswer: null };
+            return { correct: latestAnswer === q.correct, latestAnswer };
+        }
+
+        if (q.type === 'arrayInput') {
+            const inputEl = $(`q-input-${q.id}`);
+            const latestAnswer = inputEl ? inputEl.value : '';
+            const parsed = parseNumberArray(latestAnswer);
+            if (!parsed) return { correct: false, latestAnswer };
+            return { correct: arraysEqual(parsed, q.expectedArray), latestAnswer };
+        }
+
+        if (q.type === 'arrayStepsInput') {
+            const inputEl = $(`q-input-${q.id}`);
+            const latestAnswer = inputEl ? inputEl.value : '';
+            const stepArrays = parseStepsArrayInput(latestAnswer);
+            if (!stepArrays) return { correct: false, latestAnswer };
+            if (stepArrays.length !== q.expectedSteps.length) return { correct: false, latestAnswer };
+            for (let i = 0; i < q.expectedSteps.length; i++) {
+                if (!arraysEqual(stepArrays[i], q.expectedSteps[i])) {
+                    return { correct: false, latestAnswer };
+                }
+            }
+            return { correct: true, latestAnswer };
+        }
+
+        return { correct: false, latestAnswer: null };
+    }
+
+    function parseStepsArrayInput(text) {
+        const raw = normalizeText(text);
+        if (!raw) return null;
+
+        // 以「換行」或「分號」切成多行步驟；每行允許附帶文字（例如：第1輪：[1,2,3]）
+        const chunks = text
+            .split(/\n|;/g)
+            .map(s => s.trim())
+            .filter(Boolean);
+
+        if (chunks.length === 0) return null;
+
+        const extractArrayNumsFromChunk = (chunk) => {
+            const trimmed = (chunk ?? '').toString().trim();
+            if (!trimmed) return null;
+
+            // 優先：抓出第一組 [ ... ] 內的數字，避免把「第1輪」的 1 當成元素
+            const bracketMatch = trimmed.match(/\[([^\]]+)\]/);
+            const toParse = bracketMatch ? bracketMatch[1] : trimmed
+                // 去掉常見前綴：第 1 輪： / 1) / 1.
+                .replace(/^\s*第\s*\d+\s*(輪|步|次|回)\s*[:：-]?\s*/,'')
+                .replace(/^\s*\d+\s*[\)\.]\s*[:：-]?\s*/,'');
+
+            const matches = toParse.match(/-?\d+(\.\d+)?/g);
+            if (!matches || matches.length === 0) return null;
+            return matches.map(x => Number(x));
+        };
+
+        const stepArrays = [];
+        for (const ch of chunks) {
+            const nums = extractArrayNumsFromChunk(ch);
+            if (!nums) return null;
+            stepArrays.push(nums);
+        }
+
+        return stepArrays;
+    }
+
+    function getStageStats(stage) {
+        const stageQs = questions.filter(q => getStageForQuestion(q) === stage);
+        let stageCorrect = 0;
+        for (const q of stageQs) if (progress.statusById[q.id]?.correct) stageCorrect++;
+        const total = stageQs.length;
+        const ratio = total ? stageCorrect / total : 0;
+        return { stageQs, stageCorrect, total, ratio };
+    }
+
+    function getAchievementTier(ratio) {
+        if (ratio >= 1) return { key: 'gold', text: '金牌成就：完全精熟' };
+        if (ratio >= 0.85) return { key: 'silver', text: '銀牌成就：穩定掌握' };
+        if (ratio >= 0.6) return { key: 'bronze', text: '銅牌成就：持續進步' };
+        return { key: 'bronze', text: '挑戰中：再答對幾題就能拿到成就' };
+    }
+
+    function renderStageTabs() {
+        const tabs = $('stage-tabs');
+        if (!tabs) return;
+        tabs.innerHTML = '';
+
+        for (const stage of stageOrder) {
+            const { stageCorrect, total } = getStageStats(stage);
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'stage-tab-btn' + (stage === currentStage ? ' active' : '');
+            btn.textContent = `${stage} ${stageCorrect}/${total}`;
+            btn.addEventListener('click', () => {
+                currentStage = stage;
+                renderAll();
+            });
+            tabs.appendChild(btn);
+        }
+    }
+
+    function renderStageAchievement() {
+        const box = $('stage-achievement');
+        if (!box) return;
+        const { stageCorrect, total, ratio } = getStageStats(currentStage);
+        const tier = getAchievementTier(ratio);
+        box.innerHTML = `
+            <span class="achievement-badge ${tier.key}">${tier.text}</span>
+            <strong>${currentStage}</strong>：已答對 ${stageCorrect}/${total}。${stageDescMap[currentStage] || ''}
+        `;
+    }
+
+    function renderAll() {
+        const grid = $('exam-grid');
+        grid.innerHTML = '';
+        renderStageTabs();
+
+        const { stageQs, stageCorrect } = getStageStats(currentStage);
+        const heading = document.createElement('div');
+        heading.className = 'stage-heading';
+        heading.setAttribute('data-stage', currentStage);
+        heading.innerHTML = `
+            <div class="stage-title">${currentStage}：已答對 ${stageCorrect}/${stageQs.length}</div>
+            <div class="stage-desc">${stageDescMap[currentStage] || ''}</div>
+        `;
+        grid.appendChild(heading);
+
+        for (const q of stageQs) grid.appendChild(renderQuestionCard(q));
+        renderStageAchievement();
+
+        updateOverallUI();
+    }
+
+    function resetProgress() {
+        const ok = confirm(`確定要重置自我測驗進度嗎？重置後會從 0/${questions.length} 重新開始。`);
+        if (!ok) return;
+        progress = defaultProgress();
+        saveProgress();
+        renderAll();
+    }
+
+    $('reset-progress-btn').addEventListener('click', resetProgress);
+
+    renderAll();
+</script>
+</body>
+</html>
+

@@ -58,7 +58,7 @@ const i18n = {
         'guide.step5': '提示：如果卡住，可以點擊「顯示提示」或打開完成提示勾勾協助思考。',
         'guide.step6': '統計：上方統計欄會記錄你的比較次數與交換次數。',
         'guide.step7': '重新發牌 vs 重置本局：「重新發牌」會取得新的一組牌；「重置本局」則恢復此次發牌的原有模樣，可重複練習同一組牌。',
-        'algo.title': '💡 排序演算法小知識',
+        'algo.title': '💡 演算法小學堂（用最簡單方式）',
         'algoRef.title': '📋 常見排序法：使用情境與複雜度',
         'algoRef.useCase': '使用情境',
         'algoRef.timeComplexity': '時間複雜度',
@@ -192,7 +192,7 @@ const i18n = {
         'guide.step5': '提示：如果卡住，可以点击「显示提示」或打开完成提示勾勾协助思考。',
         'guide.step6': '统计：上方统计栏会记录你的比较次数与交换次数。',
         'guide.step7': '重新发牌 vs 重置本局：「重新发牌」会取得新的一组牌；「重置本局」则恢复此次发牌的原有模样，可重复练习同一组牌。',
-        'algo.title': '💡 排序算法小知识',
+        'algo.title': '💡 演算法小课堂（用最简单方式）',
         'algoRef.title': '📋 常见排序法：使用情境与复杂度',
         'algoRef.useCase': '使用情境',
         'algoRef.timeComplexity': '时间复杂度',
@@ -326,7 +326,7 @@ const i18n = {
         'guide.step5': 'Hint: use “Show hint” or enable check marks when you get stuck.',
         'guide.step6': 'Stats: the bar above tracks comparisons and swaps.',
         'guide.step7': 'Deal again vs Reset round: “Deal again” gets a new set of cards; “Reset round” restores this deal so you can practice the same cards again.',
-        'algo.title': '💡 Sorting algorithm notes',
+        'algo.title': '💡 Algorithm basics (simple)',
         'algoRef.title': '📋 Common sort methods: use cases & complexity',
         'algoRef.useCase': 'Use case',
         'algoRef.timeComplexity': 'Time complexity',
@@ -460,7 +460,7 @@ const i18n = {
         'guide.step5': 'ヒント：行き詰まったら「ヒントを表示」や完了マーク機能を使ってください。',
         'guide.step6': '統計：上部バーで比較回数と交換回数を確認できます。',
         'guide.step7': '配り直し vs この局をリセット：「配り直す」は新しいカード、「この局をリセット」は今回の配り状態に戻して同じ並びで練習できます。',
-        'algo.title': '💡 ソートアルゴリズムの豆知識',
+        'algo.title': '💡 アルゴリズムの基礎（やさしく）',
         'algoRef.title': '📋 主な並べ替え法：使用場面と計算量',
         'algoRef.useCase': '使用情境',
         'algoRef.timeComplexity': '時間計算量',
@@ -2252,12 +2252,12 @@ function getSortMethodName() {
 // 更新演算法資訊
 function updateAlgorithmInfo(method) {
     const descMap = {
-        'none': '選擇排序方式後，這裡會顯示相關的排序演算法概念。',
-        'number': '數字的排序是比較排序的基礎。透過「比較 → 交換」步驟，將陣列由小到大排列。常見演算法：氣泡排序（相鄰交換）、選擇排序（找最小換到前面）。',
-        'number-asc': '遞增排序列是最常見的排序目標。可以把這個過程想像成排隊：每次找出最小的數字，放到隊伍最前面，這就是「選擇排序」的想法。',
-        'number-desc': '遞減排序只是方向相反，從大到小排。你可以從最左邊開始，不斷把目前看到最大的數字換到最左邊。',
-        'suit-symbol': '花色排序使用預先約定好的順序（映射）。台灣常見習慣：黑桃(♠) > 紅心(♥) > 方塊(♦) > 梅花(♣)。可以想成每種花色都有一個「權重」。',
-        'suit-color': '顏色分組是多重關鍵字排序的例子。先按顏色分兩大組（黑 → 紅），再在每組內按數字排序，這時「穩定排序」就很重要。'
+        'none': '提示：演算法=輸入 → 步驟 → 輸出。先把規則想清楚，再用可照做的步驟完成任務。',
+        'number': '演算法=輸入 → 步驟 → 輸出。本遊戲：輸入是牌的排列；步驟是依規則做「比較」與「交換/插入」；輸出是把牌排成遞增（A→K）。',
+        'number-asc': '演算法=輸入 → 步驟 → 輸出。本遊戲：輸入是牌的排列；步驟是依規則比較並移動；輸出是遞增排列。',
+        'number-desc': '演算法=輸入 → 步驟 → 輸出。本遊戲：輸入是牌的排列；步驟是依規則比較並移動；輸出是遞減排列。',
+        'suit-symbol': '演算法=輸入 → 步驟 → 輸出。本遊戲：輸入是牌的排列；步驟是依花色符號順序做比較與移動；輸出是依指定花色順序排好。',
+        'suit-color': '演算法=輸入 → 步驟 → 輸出。本遊戲：輸入是牌的排列；步驟是依花色顏色分組比較與移動；輸出是依指定顏色順序排好。'
     };
 
     const modeMap = {

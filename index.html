@@ -51,6 +51,10 @@
                     <button type="button" class="btn preset-btn" data-preset="bubble" data-i18n-key="preset.bubble">氣泡排序</button>
                     <button type="button" class="btn preset-btn" data-preset="quick" data-i18n-key="preset.quick">快速排序</button>
                     <button id="shuffle-btn" class="btn primary" data-i18n-key="controls.shuffle">🔀 重新發牌</button>
+                    <a href="exam.html" class="btn preset-btn" style="text-decoration:none;">📝 分階段測驗</a>
+                    <a href="lesson.html" class="btn preset-btn" style="text-decoration:none;">📘 教案網頁</a>
+                    <a href="algorithm-lab.html" class="btn preset-btn" style="text-decoration:none;">🧠 演算法生活實驗室</a>
+                    <a href="algorithm-concepts.html" class="btn preset-btn" style="text-decoration:none;">📐 循序·迴圈·判斷</a>
                 </div>
             </div>
 
@@ -221,15 +225,24 @@
 
                     <div class="settings-pane" id="pane-algorithm">
                         <div class="algorithm-info" id="algorithm-info">
-                            <h3 data-i18n-key="algo.title">💡 排序演算法小知識</h3>
-                            <p id="algorithm-desc">選擇排序方式後，這裡會顯示相關的排序演算法概念。</p>
+                            <h3 data-i18n-key="algo.title">💡 演算法小學堂（用最簡單方式）</h3>
+                            <p id="algorithm-desc">選擇排序方式後，這裡會把「排序」連到「演算法」的核心想法：一步一步、可照做、能停止、最後輸出正確結果。</p>
+
                             <div class="algorithm-teaching">
-                                <div class="algorithm-mode" id="algorithm-mode">提示：先從少量牌開始，感受「比較 → 交換」的節奏。</div>
-                                <ol class="algorithm-steps" id="algorithm-steps">
-                                    <li>在上方選擇一種排序目標（例如：數字大小）。</li>
-                                    <li>觀察目前牌的排列，想像「理想順序」應該長什麼樣子。</li>
-                                    <li>點擊一張牌，再點擊另一張牌，完成一次交換。</li>
-                                    <li>重複比較與交換，直到你覺得已經排好為止，再按「檢查答案」。</li>
+                                <div class="algorithm-mode">演算法 = 輸入 → 步驟 → 輸出（照規則做就能完成）</div>
+                                <ol class="algorithm-steps">
+                                    <li><strong>輸入：</strong>你手上的牌（目前的排列）。</li>
+                                    <li><strong>步驟：</strong>依規則做事（本遊戲包含「比較」以及「交換 / 插入」）。</li>
+                                    <li><strong>輸出：</strong>把牌排到正確順序。</li>
+                                    <li><strong>三個重點：</strong>每一步說清楚、照做能得到結果、做到某個條件就停止。</li>
+                                </ol>
+
+                                <div class="algorithm-mode" style="margin-top:10px;">你在遊戲裡正在練的，就是演算法步驟</div>
+                                <ol class="algorithm-steps">
+                                    <li>選擇排序目標（例如：數字大小、遞增/遞減）。</li>
+                                    <li>觀察目前牌的排列，想像「下一步要怎麼做」。</li>
+                                    <li>執行一輪規則：選牌並進行「交換」或在正確位置「插入」。</li>
+                                    <li>按「檢查答案」把結果驗證：你做的步驟有沒有讓輸出正確？</li>
                                 </ol>
                             </div>
                         </div>

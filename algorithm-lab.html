@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>演算法生活實驗室 - 互動課程</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .lab-wrap { max-width: 1140px; margin: 0 auto; }
+        .lab-card {
+            background: rgba(2, 6, 23, 0.58);
+            border: 1px solid rgba(148, 163, 184, 0.35);
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 12px;
+        }
+        .lab-card h2 { margin: 0 0 10px; color: #fbbf24; }
+        .lab-card p, .lab-card li { color: #e5e7eb; line-height: 1.65; }
+        .pill-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+        .pill {
+            border-radius: 999px;
+            padding: 6px 10px;
+            font-size: 0.86rem;
+            font-weight: 700;
+            color: #dbeafe;
+            background: rgba(30, 64, 175, 0.24);
+            border: 1px solid rgba(96, 165, 250, 0.5);
+        }
+        .example-grid { display: grid; grid-template-columns: repeat(2, minmax(260px, 1fr)); gap: 10px; }
+        .example {
+            border: 1px solid rgba(148, 163, 184, 0.3);
+            border-radius: 12px;
+            background: rgba(2, 6, 23, 0.45);
+            padding: 12px;
+        }
+        .example h3 { color: #f8fafc; margin: 0 0 8px; font-size: 1rem; }
+        .flow-row { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+        .flow-node {
+            color: #d1fae5;
+            border: 1px solid rgba(16, 185, 129, 0.45);
+            background: rgba(16, 185, 129, 0.14);
+            border-radius: 10px;
+            padding: 4px 8px;
+            font-size: 0.82rem;
+            font-weight: 600;
+        }
+        .flow-arrow { color: #94a3b8; font-weight: 900; }
+
+        .lab-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+        .lab-tab-btn {
+            border: 1px solid rgba(148, 163, 184, 0.45);
+            background: rgba(2, 6, 23, 0.4);
+            color: #cbd5e1;
+            border-radius: 999px;
+            padding: 7px 12px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+        .lab-tab-btn.active {
+            border-color: rgba(250, 204, 21, 0.8);
+            color: #fde68a;
+            background: linear-gradient(135deg, rgba(250, 204, 21, 0.2), rgba(180, 83, 9, 0.25));
+        }
+        .tab-pane { display: none; }
+        .tab-pane.active { display: block; }
+
+        .exercise {
+            border: 1px solid rgba(148, 163, 184, 0.3);
+            border-radius: 12px;
+            padding: 12px;
+            margin-bottom: 10px;
+            background: rgba(2, 6, 23, 0.4);
+        }
+        .exercise h4 { margin: 0 0 6px; color: #fcd34d; }
+        .drag-pool, .drop-zone {
+            min-height: 52px;
+            padding: 8px;
+            border-radius: 10px;
+            border: 1px dashed rgba(148, 163, 184, 0.55);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            align-items: flex-start;
+            background: rgba(15, 23, 42, 0.5);
+        }
+        .drop-zone { margin-top: 8px; }
+        .draggable-step {
+            user-select: none;
+            cursor: grab;
+            color: #e5e7eb;
+            border: 1px solid rgba(59, 130, 246, 0.45);
+            background: rgba(30, 64, 175, 0.22);
+            border-radius: 8px;
+            padding: 6px 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        .draggable-step.dragging { opacity: 0.55; }
+        .exercise-actions { margin-top: 8px; display: flex; gap: 8px; flex-wrap: wrap; }
+        .result {
+            margin-top: 8px;
+            padding: 8px 10px;
+            border-radius: 10px;
+            font-weight: 700;
+            display: inline-flex;
+        }
+        .result.ok { color: #d1fae5; border: 1px solid rgba(16,185,129,0.8); background: rgba(16,185,129,0.15); }
+        .result.fail { color: #fee2e2; border: 1px solid rgba(239,68,68,0.8); background: rgba(239,68,68,0.15); }
+        .hint {
+            margin-top: 8px;
+            color: #93c5fd;
+            background: rgba(30, 64, 175, 0.2);
+            border: 1px solid rgba(96, 165, 250, 0.45);
+            border-radius: 10px;
+            padding: 8px 10px;
+        }
+
+        .logic-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(260px, 1fr));
+            gap: 10px;
+            margin-top: 8px;
+        }
+        .logic-box {
+            border: 1px solid rgba(148, 163, 184, 0.35);
+            border-radius: 12px;
+            padding: 10px;
+            background: rgba(2, 6, 23, 0.45);
+        }
+        .logic-box h3 { margin: 0 0 6px; color: #fcd34d; font-size: 0.98rem; }
+        .logic-rule { color: #bfdbfe; font-weight: 700; margin-bottom: 4px; }
+        .logic-trainer {
+            margin-top: 8px;
+            border: 1px solid rgba(148, 163, 184, 0.35);
+            border-radius: 12px;
+            padding: 10px;
+            background: rgba(2, 6, 23, 0.45);
+        }
+        .logic-options { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0; }
+        .branch-flow {
+            margin-top: 8px;
+            border: 1px dashed rgba(148, 163, 184, 0.45);
+            border-radius: 12px;
+            padding: 10px;
+            background: rgba(15, 23, 42, 0.35);
+        }
+        .branch-line { color: #cbd5e1; margin: 4px 0; font-size: 0.93rem; }
+        .branch-key { color: #fcd34d; font-weight: 800; }
+        .axis-block { margin-top: 8px; }
+        .axis-label { color: #bfdbfe; font-weight: 700; margin-bottom: 4px; display: block; }
+
+        @media (max-width: 768px) {
+            .example-grid { grid-template-columns: 1fr; }
+            .logic-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+<div class="page-frame">
+    <div class="table-glow"></div>
+    <div class="container lab-wrap">
+        <div class="lab-card">
+            <h2>🧠 演算法生活實驗室（獨立課程）</h2>
+            <p>這一頁可當作「認識演算法」獨立課程。學生先看生活中的流程，再做拖曳配對練習，從操作中體驗演算法的奧秘。</p>
+            <div class="pill-row">
+                <span class="pill">輸入 Input</span>
+                <span class="pill">步驟 Process</span>
+                <span class="pill">輸出 Output</span>
+                <span class="pill">可重現</span>
+                <span class="pill">可停止</span>
+            </div>
+            <p style="margin-top:10px;">
+                <a class="btn preset-btn" href="index.html" style="text-decoration:none;">回到遊戲</a>
+                <a class="btn preset-btn" href="exam.html" style="text-decoration:none;">前往分階段測驗</a>
+                <a class="btn preset-btn" href="lesson.html" style="text-decoration:none;">教案頁</a>
+                <a class="btn preset-btn" href="algorithm-concepts.html" style="text-decoration:none;">循序·迴圈·判斷</a>
+            </p>
+        </div>
+
+        <section class="algo-spotlight" aria-label="認識演算法">
+            <h2>🌟 認識演算法（獨立重點）</h2>
+            <p class="algo-spotlight-intro">
+                演算法就是：把一個問題，拆成「可照做」的步驟。<br>
+                最基本結構是 <strong>輸入 → 步驟 → 輸出</strong>，而且要有停止條件。
+            </p>
+
+            <div class="algo-pill-row">
+                <span class="algo-pill">輸入 Input：現在有哪些資料</span>
+                <span class="algo-pill">步驟 Process：每一步怎麼做</span>
+                <span class="algo-pill">輸出 Output：最後得到什麼</span>
+            </div>
+
+            <div class="life-flow-grid">
+                <article class="life-flow-card">
+                    <h3>☔ 生活例 1：出門要不要帶傘</h3>
+                    <div class="flow-row">
+                        <span class="flow-node">查看天氣預報</span><span class="flow-arrow">→</span>
+                        <span class="flow-node">判斷降雨機率</span><span class="flow-arrow">→</span>
+                        <span class="flow-node">高於 50% 帶傘</span><span class="flow-arrow">→</span>
+                        <span class="flow-node">完成出門準備</span>
+                    </div>
+                </article>
+
+                <article class="life-flow-card">
+                    <h3>🍱 生活例 2：便當店點餐流程</h3>
+                    <div class="flow-row">
+                        <span class="flow-node">看菜單</span><span class="flow-arrow">→</span>
+                        <span class="flow-node">選主菜與配菜</span><span class="flow-arrow">→</span>
+                        <span class="flow-node">確認金額</span><span class="flow-arrow">→</span>
+                        <span class="flow-node">付款取餐</span>
+                    </div>
+                </article>
+
+                <article class="life-flow-card">
+                    <h3>📚 生活例 3：圖書館借書</h3>
+                    <div class="flow-row">
+                        <span class="flow-node">查詢書籍</span><span class="flow-arrow">→</span>
+                        <span class="flow-node">找到書架位置</span><span class="flow-arrow">→</span>
+                        <span class="flow-node">借書機掃描</span><span class="flow-arrow">→</span>
+                        <span class="flow-node">完成借閱</span>
+                    </div>
+                </article>
+
+                <article class="life-flow-card">
+                    <h3>🃏 本遊戲對應：牌的排序演算法</h3>
+                    <div class="flow-row">
+                        <span class="flow-node">輸入：一排亂序牌</span><span class="flow-arrow">→</span>
+                        <span class="flow-node">比較大小</span><span class="flow-arrow">→</span>
+                        <span class="flow-node">交換或插入</span><span class="flow-arrow">→</span>
+                        <span class="flow-node">輸出：有序牌列</span>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <div class="lab-card">
+            <h2>🌍 生活中的演算法範例</h2>
+            <div class="example-grid">
+                <article class="example">
+                    <h3>☔ 出門帶傘</h3>
+                    <div class="flow-row">
+                        <span class="flow-node">輸入：天氣預報</span><span class="flow-arrow">→</span>
+                        <span class="flow-node">判斷降雨機率</span><span class="flow-arrow">→</span>
+                        <span class="flow-node">&gt;50% 帶傘</span><span class="flow-arrow">→</span>
+                        <span class="flow-node">輸出：完成出門準備</span>
+                    </div>
+                </article>
+                <article class="example">
+                    <h3>🍱 點餐流程</h3>
+                    <div class="flow-row">
+                        <span class="flow-node">輸入：菜單</span><span class="flow-arrow">→</span>
+                        <span class="flow-node">選主餐/配菜</span><span class="flow-arrow">→</span>
+                        <span class="flow-node">確認金額</span><span class="flow-arrow">→</span>
+                        <span class="flow-node">輸出：完成點餐</span>
+                    </div>
+                </article>
+                <article class="example">
+                    <h3>🚌 公車轉乘</h3>
+                    <div class="flow-row">
+                        <span class="flow-node">輸入：目的地</span><span class="flow-arrow">→</span>
+                        <span class="flow-node">查詢路線</span><span class="flow-arrow">→</span>
+                        <span class="flow-node">比較時間/班次</span><span class="flow-arrow">→</span>
+                        <span class="flow-node">輸出：最佳路線</span>
+                    </div>
+                </article>
+                <article class="example">
+                    <h3>🔬 生物實驗：顯微鏡觀察微生物</h3>
+                    <div class="flow-row">
+                        <span class="flow-node">輸入：樣本與載玻片</span><span class="flow-arrow">→</span>
+                        <span class="flow-node">低倍鏡對焦</span><span class="flow-arrow">→</span>
+                        <span class="flow-node">高倍鏡微調</span><span class="flow-arrow">→</span>
+                        <span class="flow-node">輸出：觀察與記錄結果</span>
+                    </div>
+                </article>
+                <article class="example">
+                    <h3>🍕 家政課：製作披薩</h3>
+                    <div class="flow-row">
+                        <span class="flow-node">輸入：食材與烤箱</span><span class="flow-arrow">→</span>
+                        <span class="flow-node">備料與鋪料</span><span class="flow-arrow">→</span>
+                        <span class="flow-node">設定溫度與烘烤</span><span class="flow-arrow">→</span>
+                        <span class="flow-node">輸出：完成披薩</span>
+                    </div>
+                </article>
+                <article class="example">
+                    <h3>🃏 撲克牌排序（本遊戲）</h3>
+                    <div class="flow-row">
+                        <span class="flow-node">輸入：亂序牌列</span><span class="flow-arrow">→</span>
+                        <span class="flow-node">比較大小</span><span class="flow-arrow">→</span>
+                        <span class="flow-node">交換/插入</span><span class="flow-arrow">→</span>
+                        <span class="flow-node">輸出：有序牌列</span>
+                    </div>
+                </article>
+            </div>
+        </div>
+
+        <div class="lab-card">
+            <h2>🎮 拖曳配對練習（可重做）</h2>
+            <div id="lab-tabs" class="lab-tabs"></div>
+            <div id="tab-content"></div>
+        </div>
+
+        <div class="lab-card">
+            <h2>🔍 邏輯判斷演算法：顯微鏡定位</h2>
+            <p>重點：<strong>判斷（if / else）也是演算法流程的一部分</strong>。大問題（把影像移回中央）先拆成小問題，再用條件判斷決定流程方向。</p>
+            <div class="logic-grid">
+                <div class="logic-box">
+                    <h3>Step 1：左右判斷</h3>
+                    <div class="logic-rule">影像在右邊 → 玻片往右移</div>
+                    <div class="logic-rule">影像在左邊 → 玻片往左移</div>
+                    <div class="logic-rule">影像在中線 → 左右不移動</div>
+                </div>
+                <div class="logic-box">
+                    <h3>Step 2：上下判斷</h3>
+                    <div class="logic-rule">影像在上方 → 玻片往上移</div>
+                    <div class="logic-rule">影像在下方 → 玻片往下移</div>
+                    <div class="logic-rule">影像在中線 → 上下不移動</div>
+                </div>
+            </div>
+
+            <div class="branch-flow">
+                <div class="branch-line"><span class="branch-key">開始</span>：影像位置（輸入）</div>
+                <div class="branch-line">if 影像在右邊 then 玻片往右；else if 在左邊 then 玻片往左；else 不移動</div>
+                <div class="branch-line">if 影像在上方 then 玻片往上；else if 在下方 then 玻片往下；else 不移動</div>
+                <div class="branch-line"><span class="branch-key">輸出</span>：合併後的移動方向（例如右上方）</div>
+            </div>
+
+            <div class="logic-trainer">
+                <h3 style="margin:0; color:#f8fafc;">互動演練（判斷分支決策）</h3>
+                <p id="logic-question" style="margin:6px 0 0;">影像出現在「右上方」，請先做左右判斷，再做上下判斷。</p>
+
+                <div class="axis-block">
+                    <span class="axis-label">A. 左右判斷（if / else）</span>
+                    <div id="logic-options-lr" class="logic-options"></div>
+                </div>
+                <div class="axis-block">
+                    <span class="axis-label">B. 上下判斷（if / else）</span>
+                    <div id="logic-options-ud" class="logic-options"></div>
+                </div>
+
+                <div class="exercise-actions">
+                    <button class="btn success" id="logic-check" type="button">檢查</button>
+                    <button class="btn warning" id="logic-next" type="button">下一題</button>
+                    <button class="btn preset-btn" id="logic-show-rule" type="button">顯示判斷規則</button>
+                </div>
+                <div id="logic-result"></div>
+                <div id="logic-rule-box" class="hint" style="display:none;">
+                    先用 if/else 完成左右，再用 if/else 完成上下；最後合併方向。<br>
+                    例：影像在右上方 →（左右=右）+（上下=上）→ 玻片往右上方移動。
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const tabs = [
+        { id: 'easy', title: '第一關：認識流程' },
+        { id: 'middle', title: '第二關：排序思考' },
+        { id: 'hard', title: '第三關：演算法挑戰' }
+    ];
+
+    const exercisesByTab = {
+        easy: [
+            {
+                id: 'rain',
+                title: '出門帶傘流程排序',
+                instruction: '請拖曳以下步驟到下方，排成合理流程。',
+                steps: ['查看天氣預報', '判斷降雨機率', '決定是否帶傘', '出門'],
+                answer: ['查看天氣預報', '判斷降雨機率', '決定是否帶傘', '出門'],
+                hint: '先有資料，再判斷，再做決定，最後行動。'
+            },
+            {
+                id: 'library',
+                title: '圖書館借書流程排序',
+                instruction: '把借書步驟拖曳排序。',
+                steps: ['找到想借的書', '查詢書籍位置', '借書機掃描', '完成借閱'],
+                answer: ['查詢書籍位置', '找到想借的書', '借書機掃描', '完成借閱'],
+                hint: '先查，再找，再掃描。'
+            },
+            {
+                id: 'pizza-basic',
+                title: '家政課做披薩流程排序',
+                instruction: '把製作披薩的步驟排成合理順序。',
+                steps: ['把披薩放入烤箱', '準備麵團與食材', '在麵團上鋪醬與配料', '出爐切片'],
+                answer: ['準備麵團與食材', '在麵團上鋪醬與配料', '把披薩放入烤箱', '出爐切片'],
+                hint: '先備料，再鋪料，再烤。'
+            }
+        ],
+        middle: [
+            {
+                id: 'selection-idea',
+                title: '選擇排序核心流程',
+                instruction: '把選擇排序每輪的核心步驟排序。',
+                steps: ['把找到的最小值放到目前位置', '找出未排序區最小值', '已排序區往右擴大一格', '進入下一輪'],
+                answer: ['找出未排序區最小值', '把找到的最小值放到目前位置', '已排序區往右擴大一格', '進入下一輪'],
+                hint: '先「找」，再「放」，才會擴大已排序區。'
+            },
+            {
+                id: 'insertion-idea',
+                title: '插入排序核心流程',
+                instruction: '把插入排序每輪步驟排序。',
+                steps: ['取出下一張 key', '比較並找到插入位置', '把 key 插入正確位置', '維持已排序區有序'],
+                answer: ['取出下一張 key', '比較並找到插入位置', '把 key 插入正確位置', '維持已排序區有序'],
+                hint: 'key 是每輪主角。'
+            },
+            {
+                id: 'microbe-middle',
+                title: '顯微鏡觀察微生物（實驗流程）',
+                instruction: '拖曳排出觀察流程。',
+                steps: ['切換高倍鏡並微調', '放置樣本玻片', '低倍鏡先找到影像', '記錄觀察結果'],
+                answer: ['放置樣本玻片', '低倍鏡先找到影像', '切換高倍鏡並微調', '記錄觀察結果'],
+                hint: '顯微鏡通常先低倍，再高倍。'
+            }
+        ],
+        hard: [
+            {
+                id: 'algo-structure',
+                title: '演算法三要素配對',
+                instruction: '請把步驟拖曳排序，組成「輸入→步驟→輸出→檢查」',
+                steps: ['檢查結果是否符合目標', '輸入資料（目前牌列）', '依規則做比較與交換/插入', '輸出排序後牌列'],
+                answer: ['輸入資料（目前牌列）', '依規則做比較與交換/插入', '輸出排序後牌列', '檢查結果是否符合目標'],
+                hint: '先有輸入，最後才是檢查。'
+            },
+            {
+                id: 'debug',
+                title: '偵錯思考順序',
+                instruction: '學生做錯排序時，教師引導流程應該怎麼走？',
+                steps: ['指出錯誤發生的輪次', '回看該輪比較依據', '修正該輪步驟', '重新檢查結果'],
+                answer: ['指出錯誤發生的輪次', '回看該輪比較依據', '修正該輪步驟', '重新檢查結果'],
+                hint: '先定位錯誤，再修正。'
+            },
+            {
+                id: 'microbe-safe',
+                title: '生物實驗安全流程（挑戰）',
+                instruction: '把顯微鏡觀察實驗中「安全又完整」的流程排出來。',
+                steps: ['清理桌面與器材', '戴手套並準備器材', '依步驟觀察並記錄', '廢棄物分類處理'],
+                answer: ['戴手套並準備器材', '依步驟觀察並記錄', '廢棄物分類處理', '清理桌面與器材'],
+                hint: '先防護，再實驗，最後善後。'
+            }
+        ]
+    };
+
+    let currentTab = tabs[0].id;
+    let currentLogicIndex = 0;
+    let selectedLR = '';
+    let selectedUD = '';
+
+    const logicCases = [
+        { pos: '右上方', answerLR: '右移', answerUD: '上移', final: '右上方' },
+        { pos: '左上方', answerLR: '左移', answerUD: '上移', final: '左上方' },
+        { pos: '右下方', answerLR: '右移', answerUD: '下移', final: '右下方' },
+        { pos: '左下方', answerLR: '左移', answerUD: '下移', final: '左下方' },
+        { pos: '正上方', answerLR: '不移動', answerUD: '上移', final: '上方' },
+        { pos: '正右方', answerLR: '右移', answerUD: '不移動', final: '右方' }
+    ];
+    const lrOptions = ['左移', '右移', '不移動'];
+    const udOptions = ['上移', '下移', '不移動'];
+
+    function getEl(id) { return document.getElementById(id); }
+
+    function shuffle(arr) {
+        const a = [...arr];
+        for (let i = a.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [a[i], a[j]] = [a[j], a[i]];
+        }
+        return a;
+    }
+
+    function renderTabs() {
+        const tabWrap = getEl('lab-tabs');
+        tabWrap.innerHTML = '';
+        tabs.forEach(t => {
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'lab-tab-btn' + (t.id === currentTab ? ' active' : '');
+            btn.textContent = t.title;
+            btn.addEventListener('click', () => {
+                currentTab = t.id;
+                renderTabs();
+                renderTabContent();
+            });
+            tabWrap.appendChild(btn);
+        });
+    }
+
+    function createStepNode(text) {
+        const div = document.createElement('div');
+        div.className = 'draggable-step';
+        div.draggable = true;
+        div.textContent = text;
+        div.addEventListener('dragstart', () => div.classList.add('dragging'));
+        div.addEventListener('dragend', () => div.classList.remove('dragging'));
+        return div;
+    }
+
+    function makeDroppable(container) {
+        container.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            const dragging = document.querySelector('.draggable-step.dragging');
+            if (dragging) container.appendChild(dragging);
+        });
+    }
+
+    function renderExercise(ex) {
+        const wrap = document.createElement('div');
+        wrap.className = 'exercise';
+        wrap.innerHTML = `
+            <h4>${ex.title}</h4>
+            <p>${ex.instruction}</p>
+            <div class="drag-pool" id="pool-${ex.id}"></div>
+            <div class="drop-zone" id="drop-${ex.id}" aria-label="請拖曳到這裡排序"></div>
+            <div class="exercise-actions">
+                <button class="btn success" type="button" id="check-${ex.id}">檢查答案</button>
+                <button class="btn warning" type="button" id="reset-${ex.id}">重來一次</button>
+                <button class="btn preset-btn" type="button" id="hint-${ex.id}">提示</button>
+            </div>
+            <div id="result-${ex.id}"></div>
+            <div id="hintbox-${ex.id}" style="display:none;" class="hint">${ex.hint}</div>
+        `;
+
+        setTimeout(() => {
+            const pool = getEl(`pool-${ex.id}`);
+            const drop = getEl(`drop-${ex.id}`);
+            makeDroppable(pool);
+            makeDroppable(drop);
+
+            const fillPool = () => {
+                pool.innerHTML = '';
+                drop.innerHTML = '';
+                shuffle(ex.steps).forEach(s => pool.appendChild(createStepNode(s)));
+                getEl(`result-${ex.id}`).innerHTML = '';
+                getEl(`hintbox-${ex.id}`).style.display = 'none';
+            };
+
+            fillPool();
+
+            getEl(`check-${ex.id}`).addEventListener('click', () => {
+                const current = [...drop.querySelectorAll('.draggable-step')].map(n => n.textContent);
+                const ok = current.length === ex.answer.length && current.every((v, i) => v === ex.answer[i]);
+                const result = getEl(`result-${ex.id}`);
+                result.innerHTML = ok
+                    ? '<div class="result ok">✅ 正確！你已經掌握這個演算法流程。</div>'
+                    : '<div class="result fail">❌ 還差一點，請再調整順序後重試。</div>';
+            });
+
+            getEl(`reset-${ex.id}`).addEventListener('click', fillPool);
+            getEl(`hint-${ex.id}`).addEventListener('click', () => {
+                const hb = getEl(`hintbox-${ex.id}`);
+                hb.style.display = hb.style.display === 'none' ? 'block' : 'none';
+            });
+        }, 0);
+
+        return wrap;
+    }
+
+    function renderTabContent() {
+        const area = getEl('tab-content');
+        area.innerHTML = '';
+        const pane = document.createElement('div');
+        pane.className = 'tab-pane active';
+        const exs = exercisesByTab[currentTab] || [];
+        exs.forEach(ex => pane.appendChild(renderExercise(ex)));
+        area.appendChild(pane);
+    }
+
+    function renderLogicCase() {
+        const c = logicCases[currentLogicIndex % logicCases.length];
+        getEl('logic-question').textContent = `影像出現在「${c.pos}」，請先做左右判斷，再做上下判斷。`;
+        const boxLR = getEl('logic-options-lr');
+        const boxUD = getEl('logic-options-ud');
+        boxLR.innerHTML = '';
+        boxUD.innerHTML = '';
+        selectedLR = '';
+        selectedUD = '';
+        getEl('logic-result').innerHTML = '';
+        getEl('logic-rule-box').style.display = 'none';
+
+        lrOptions.forEach(opt => {
+            const b = document.createElement('button');
+            b.type = 'button';
+            b.className = 'btn preset-btn';
+            b.textContent = opt;
+            b.addEventListener('click', () => {
+                selectedLR = opt;
+                [...boxLR.querySelectorAll('button')].forEach(x => x.classList.remove('preset-btn-active'));
+                b.classList.add('preset-btn-active');
+            });
+            boxLR.appendChild(b);
+        });
+
+        udOptions.forEach(opt => {
+            const b = document.createElement('button');
+            b.type = 'button';
+            b.className = 'btn preset-btn';
+            b.textContent = opt;
+            b.addEventListener('click', () => {
+                selectedUD = opt;
+                [...boxUD.querySelectorAll('button')].forEach(x => x.classList.remove('preset-btn-active'));
+                b.classList.add('preset-btn-active');
+            });
+            boxUD.appendChild(b);
+        });
+    }
+
+    function bindLogicTrainer() {
+        getEl('logic-check').addEventListener('click', () => {
+            const c = logicCases[currentLogicIndex % logicCases.length];
+            const ok = selectedLR === c.answerLR && selectedUD === c.answerUD;
+            getEl('logic-result').innerHTML = ok
+                ? `<div class="result ok">✅ 判斷正確！左右=${c.answerLR}，上下=${c.answerUD}，合併後是「${c.final}」。</div>`
+                : `<div class="result fail">❌ 還差一步：流程要先判斷左右（你選 ${selectedLR || '未選'}），再判斷上下（你選 ${selectedUD || '未選'}）。</div>`;
+        });
+        getEl('logic-next').addEventListener('click', () => {
+            currentLogicIndex++;
+            renderLogicCase();
+        });
+        getEl('logic-show-rule').addEventListener('click', () => {
+            const rb = getEl('logic-rule-box');
+            rb.style.display = rb.style.display === 'none' ? 'block' : 'none';
+        });
+    }
+
+    renderTabs();
+    renderTabContent();
+    bindLogicTrainer();
+    renderLogicCase();
+</script>
+</body>
+</html>
+
