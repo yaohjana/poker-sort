@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>撲克牌排序學院 - 教師手冊（備課與操作說明）</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Noto+Sans+TC:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="subpage-ui.js" defer></script>
+    <style>
+        .guide-wrap {
+            max-width: 920px;
+            margin: 0 auto;
+        }
+
+        .guide-page-title {
+            font-family: 'Playfair Display', 'Times New Roman', serif;
+            color: #fbbf24;
+            letter-spacing: 0.06em;
+            font-size: 1.85rem;
+            margin: 0 0 6px;
+        }
+
+        .guide-lead {
+            color: #9ca3af;
+            margin: 0 0 14px;
+            line-height: 1.55;
+        }
+
+        .guide-nav {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 10px 12px;
+            margin-bottom: 18px;
+            padding: 12px 14px;
+            position: sticky;
+            top: 12px;
+            z-index: 4;
+            background: rgba(2, 6, 23, 0.92);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-radius: 14px;
+            border: 1px solid rgba(148, 163, 184, 0.35);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
+        }
+
+        .guide-nav-label {
+            font-size: 0.72rem;
+            font-weight: 800;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: #64748b;
+            width: 100%;
+        }
+
+        .guide-nav-label--spaced {
+            margin-top: 8px;
+            padding-top: 10px;
+            border-top: 1px solid rgba(148, 163, 184, 0.2);
+        }
+
+        .guide-nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            width: 100%;
+            margin-bottom: 2px;
+        }
+
+        .guide-nav a {
+            text-decoration: none;
+            padding: 8px 14px;
+            border-radius: 999px;
+            font-weight: 700;
+            font-size: 0.88rem;
+            color: #cbd5e1;
+            border: 1px solid rgba(148, 163, 184, 0.45);
+            background: rgba(2, 6, 23, 0.5);
+            transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+        }
+
+        .guide-nav a[href="#handbook-prep"] {
+            border-color: rgba(52, 211, 153, 0.45);
+            color: #a7f3d0;
+            background: rgba(16, 185, 129, 0.1);
+        }
+
+        .guide-nav a:hover {
+            border-color: rgba(250, 204, 21, 0.75);
+            color: #fef3c7;
+            background: rgba(250, 204, 21, 0.12);
+        }
+
+        .guide-section {
+            scroll-margin-top: 88px;
+        }
+
+        .guide-section h2 {
+            color: #fbbf24;
+            margin: 0 0 10px;
+            font-size: 1.2rem;
+        }
+
+        .guide-section h3 {
+            color: #fcd34d;
+            margin: 18px 0 8px;
+            font-size: 1.05rem;
+        }
+
+        .algo-method-block {
+            margin-top: 14px;
+            padding-top: 12px;
+            border-top: 1px dashed rgba(148, 163, 184, 0.35);
+        }
+
+        .algo-method-block:first-of-type {
+            border-top: none;
+            padding-top: 0;
+            margin-top: 8px;
+        }
+
+        /* 備課專區（由原教案移入） */
+        .guide-handbook-intro {
+            color: #cbd5e1;
+            line-height: 1.65;
+            margin: 0 0 16px;
+            padding: 12px 14px;
+            border-radius: 12px;
+            background: rgba(16, 185, 129, 0.08);
+            border: 1px solid rgba(52, 211, 153, 0.22);
+        }
+
+        .guide-handbook-intro a {
+            color: #6ee7b7;
+            font-weight: 700;
+        }
+
+        .guide-subblock {
+            margin-top: 20px;
+            padding-top: 18px;
+            border-top: 1px solid rgba(148, 163, 184, 0.28);
+        }
+
+        .guide-subblock:first-of-type {
+            margin-top: 6px;
+            padding-top: 0;
+            border-top: none;
+        }
+
+        .guide-subblock h3 {
+            margin: 0 0 10px;
+            font-size: 1.08rem;
+            color: #fde68a;
+        }
+
+        .guide-handbook-list {
+            margin: 0;
+            padding-left: 1.25em;
+            color: #e5e7eb;
+            line-height: 1.65;
+        }
+
+        .guide-handbook-list li {
+            margin-bottom: 8px;
+        }
+
+        .guide-handbook-list li:last-child {
+            margin-bottom: 0;
+        }
+
+        .guide-muted {
+            color: #9ca3af;
+            line-height: 1.65;
+            margin: 0 0 12px;
+        }
+
+        .guide-phase-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(240px, 1fr));
+            gap: 12px;
+            margin-top: 4px;
+        }
+
+        @media (max-width: 700px) {
+            .guide-phase-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .guide-phase-card {
+            background: rgba(15, 23, 42, 0.5);
+            border: 1px solid rgba(148, 163, 184, 0.28);
+            border-radius: 12px;
+            padding: 12px 14px;
+        }
+
+        .guide-phase-card h4 {
+            margin: 0 0 8px;
+            font-size: 1rem;
+            color: #fcd34d;
+        }
+
+        .guide-phase-card ul {
+            margin: 0;
+            padding-left: 1.2em;
+            color: #e5e7eb;
+            font-size: 0.92rem;
+            line-height: 1.55;
+        }
+
+        .guide-phase-card li {
+            margin-bottom: 4px;
+        }
+
+        .guide-callout {
+            margin-top: 12px;
+            padding: 10px 14px;
+            border-radius: 10px;
+            background: rgba(30, 58, 138, 0.25);
+            border: 1px solid rgba(147, 197, 253, 0.35);
+            color: #bfdbfe;
+            font-size: 0.9rem;
+            line-height: 1.55;
+        }
+
+        .guide-seven-steps {
+            margin: 4px 0 0;
+            padding-left: 1.35em;
+            color: #e5e7eb;
+            line-height: 1.65;
+        }
+
+        .guide-seven-steps > li {
+            margin-bottom: 12px;
+        }
+
+        .guide-seven-steps > li:last-child {
+            margin-bottom: 0;
+        }
+
+        .guide-seven-steps a {
+            color: #93c5fd;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="site-nav" aria-label="網站導覽">
+        <div class="site-nav-inner">
+            <div class="site-nav-group" role="group" aria-labelledby="site-nav-flow-label">
+                <div id="site-nav-flow-label" class="site-nav-group-label">教學流程</div>
+                <div class="site-nav-group-links">
+                    <a href="algorithm-lab.html" class="site-nav-link site-nav-flow-link"><span class="site-nav-step" aria-hidden="true">1</span>認識演算法</a>
+                    <a href="index.html" class="site-nav-link site-nav-flow-link"><span class="site-nav-step" aria-hidden="true">2</span>排序演算法實驗室</a>
+                    <a href="exam.html" class="site-nav-link site-nav-flow-link"><span class="site-nav-step" aria-hidden="true">3</span>學習評量</a>
+                    <a href="algorithm-concepts.html" class="site-nav-link site-nav-flow-link"><span class="site-nav-step" aria-hidden="true">4</span>演算法中的結構</a>
+                    <a href="algorithm-concepts-quiz.html" class="site-nav-link site-nav-flow-link"><span class="site-nav-step" aria-hidden="true">5</span>結構小測驗</a>
+                </div>
+            </div>
+            <div class="site-nav-group site-nav-group--extra" role="group" aria-label="教師手冊與教案">
+                <div class="site-nav-group-links">
+                    <a href="guide.html" class="site-nav-link site-nav-extra-link site-nav-link-current" aria-current="page">教師手冊</a>
+                    <a href="lesson.html" class="site-nav-link site-nav-extra-link">教案</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="page-frame">
+        <div class="table-glow"></div>
+        <div class="container guide-wrap">
+            <header style="margin-bottom: 18px;">
+                <h1 class="guide-page-title">教師手冊</h1>
+                <p class="guide-lead">上半部為<strong style="color:#e5e7eb;">備課專區</strong>（建議教學順序七步驟、設計理念、測驗階段、評量與課綱實施）；下半部為<strong style="color:#e5e7eb;">主遊戲操作說明</strong>與演算法參考，授課投影或學生自學皆可使用。完整教案、兩節活動表與課綱對照表請見
+                    <a href="lesson.html" style="color:#93c5fd;">lesson.html</a>。</p>
+            </header>
+
+            <nav class="guide-nav" aria-label="本頁章節">
+                <span class="guide-nav-label">教師備課</span>
+                <div class="guide-nav-links">
+                    <a href="#handbook-prep">備課專區（總覽）</a>
+                    <a href="#prep-seven-steps">七步驟</a>
+                    <a href="#prep-philosophy">設計理念</a>
+                    <a href="#prep-exam-phases">測驗四階段</a>
+                    <a href="#prep-padlet">評量與 Padlet</a>
+                    <a href="#prep-curriculum">課綱實施補充</a>
+                </div>
+                <span class="guide-nav-label guide-nav-label--spaced">遊戲與教材參考</span>
+                <div class="guide-nav-links">
+                    <a href="#howto">操作說明</a>
+                    <a href="#algorithm">演算法小知識</a>
+                    <a href="#sort-ref">排序法對照</a>
+                </div>
+            </nav>
+
+            <article class="lesson-card guide-section" id="handbook-prep">
+                <h2>📗 備課專區</h2>
+                <p class="guide-handbook-intro">本區含<strong>建議授課流程（七步驟）</strong>與理念、測驗、評量、課綱實施說明，與教案中的表格化內容分開，方便備課時查閱。兩節課之<strong>時間與活動細目</strong>請對照教案
+                    <a href="lesson.html">（五）教學活動（lesson.html）</a>。</p>
+
+                <section class="guide-subblock" id="prep-seven-steps">
+                    <h3>🗺️ 建議教學順序（七步驟）</h3>
+                    <p class="guide-muted">以下為建議授課流程，可與教案「（五）教學活動」兩節表格併用；鐘點與班級狀況請自行調整。</p>
+                    <ol class="guide-seven-steps">
+                        <li><strong>演算法生活實驗室（教師引導）</strong>：由教師先介紹「輸入 → 步驟 → 輸出」與生活流程例子，再帶領學生進入
+                            <a href="algorithm-lab.html">algorithm-lab.html</a>。</li>
+                        <li><strong>拖曳配對通關</strong>：學生完成三關拖曳排序／配對練習；<strong>全部通關時頁面會跳出通關證明</strong>，請學生輸入姓名、<strong>截圖</strong>後依教師指示上傳至課程
+                            <strong>Padlet</strong>（教師請自行建立看板並公布連結）。</li>
+                        <li><strong>遊戲示範（選擇排序與插入排序）</strong>：教師於 <a href="index.html">主遊戲</a>示範兩種演算法各至少一輪：如何選牌、交換或插入、如何檢查；可搭配本頁
+                            <a href="#howto">操作說明</a>與 <a href="#algorithm">演算法小知識</a>。</li>
+                        <li><strong>學生實作</strong>：學生自行操作遊戲（可限制排序法為選擇排序、插入排序），鼓勵口頭說出「這一步為什麼這樣做」。</li>
+                        <li><strong>分階段測驗</strong>：進入 <a href="exam.html">exam.html</a>。「初探」「基礎」階段題型已偏向觀念與選擇，協助程度較弱的學生也能通過前兩階段；後兩階段再拉高綜合與步驟題比例。可依班級狀況調整課堂配時與是否開放提示。</li>
+                        <li><strong>測驗評量證明</strong>：測驗頁提供「評量證明」視窗，可顯示姓名、日期與各階段答對題數；請學生<strong>截圖</strong>後上傳至 Padlet，作為成績與學習歷程紀錄。</li>
+                        <li><strong>延伸課程</strong>：選修或第二節可進行 <a href="algorithm-concepts.html">循序、迴圈與判斷</a>，銜接程式結構與課綱運算思維。</li>
+                    </ol>
+                </section>
+
+                <section class="guide-subblock" id="prep-philosophy">
+                    <h3>🎯 設計理念</h3>
+                    <ul class="guide-handbook-list">
+                        <li>先以生活實驗室建立「演算法 = 輸入 → 步驟 → 輸出」，再進入撲克牌具象操作，降低抽象門檻。</li>
+                        <li>遊戲承接比較、交換、插入與檢查，與測驗的觀念題互相驗證。</li>
+                        <li>重視能說明「每一步為什麼這樣做」，而不只是點到正確答案。</li>
+                        <li>透過 Padlet 留存截圖，兼顧形成性評量與學習歷程。</li>
+                    </ul>
+                </section>
+
+                <section class="guide-subblock" id="prep-exam-phases">
+                    <h3>🧭 測驗四階段（與網頁對應）</h3>
+                    <p class="guide-muted">分階段測驗中「初探、基礎、應用、挑戰」與題組分類一致；前兩階段已優先採用選擇題與直觀題，方便學生建立信心。</p>
+                    <div class="guide-phase-grid">
+                        <div class="guide-phase-card">
+                            <h4>初探</h4>
+                            <ul>
+                                <li>演算法基本語彙、選擇／插入排序在做什麼。</li>
+                                <li>以觀念釐清為主，題幹與選項較直白。</li>
+                            </ul>
+                        </div>
+                        <div class="guide-phase-card">
+                            <h4>基礎</h4>
+                            <ul>
+                                <li>插入位置、穩定排序、小規模結果辨識（選擇題形式）。</li>
+                                <li>銜接遊戲中「每一輪」的判斷。</li>
+                            </ul>
+                        </div>
+                        <div class="guide-phase-card">
+                            <h4>應用</h4>
+                            <ul>
+                                <li>多輪推理、陣列操作與流程整合。</li>
+                                <li>能對照遊戲中的「檢查答案」與統計欄。</li>
+                            </ul>
+                        </div>
+                        <div class="guide-phase-card">
+                            <h4>挑戰</h4>
+                            <ul>
+                                <li>不變量、可重現性、長步驟書寫（依題目）。</li>
+                                <li>適合程度較佳或第二輪複習。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="guide-subblock" id="prep-padlet">
+                    <h3>🧪 評量與 Padlet 建議</h3>
+                    <ul class="guide-handbook-list">
+                        <li><strong style="color:#fde68a;">實驗室通關截圖：</strong>證明完成拖曳三關；建議 Padlet 開一欄「演算法實驗室通關」。</li>
+                        <li><strong style="color:#fde68a;">測驗證明截圖：</strong>證明分階段答對狀況；建議 Padlet 開一欄「分階段測驗」並註明截止日。</li>
+                        <li><strong style="color:#fde68a;">形成性：</strong>課堂提問、口語說明、同儕互評可與遊戲操作併行。</li>
+                        <li><strong style="color:#fde68a;">隱私提醒：</strong>若 Padlet 公開，請依校規決定是否僅顯示座號或暱稱。</li>
+                    </ul>
+                </section>
+
+                <section class="guide-subblock" id="prep-curriculum">
+                    <h3>📚 教學實施補充（對照課綱之後）</h3>
+                    <p class="guide-muted">正式條目與編號已於教案<strong>（二）與課程綱要的對應</strong>；以下為課堂實務可再強調的重點。</p>
+                    <ul class="guide-handbook-list">
+                        <li><strong style="color:#fde68a;">運算思維：</strong>問題分解、步驟化描述、條件判斷與流程規劃。</li>
+                        <li><strong style="color:#fde68a;">資訊科技應用：</strong>利用數位工具（遊戲＋測驗）進行自我檢核與修正。</li>
+                        <li><strong style="color:#fde68a;">學習表現導向：</strong>重視「能說明、能操作、能修正」而非只背術語。</li>
+                        <li><strong style="color:#fde68a;">素養導向：</strong>將演算法連結生活情境，強化遷移與問題解決能力。</li>
+                    </ul>
+                    <p class="guide-callout">建議依學校課程地圖、年級／學期與校本彈性，將課綱代碼納入課程計畫或公開授課說明。</p>
+                </section>
+            </article>
+
+            <article class="lesson-card guide-section" id="howto">
+                <h2>🎮 主遊戲操作說明</h2>
+                <p class="guide-muted" style="margin-top:0;">對應 <a href="index.html" style="color:#93c5fd;">index.html</a> 主遊戲介面；投影講解時可與實機操作同步。</p>
+                <ul style="list-style:none; margin:0; padding:0;">
+                    <li
+                        style="padding:9px 0; border-bottom:1px solid rgba(55,65,81,0.85); color:#e2e8f0; line-height:1.6;">
+                        <strong style="color:#fcd34d;">選擇排序方式：</strong>從進階設定選擇排序規則（數字、花色、顏色等）。</li>
+                    <li
+                        style="padding:9px 0; border-bottom:1px solid rgba(55,65,81,0.85); color:#e2e8f0; line-height:1.6;">
+                        <strong style="color:#fcd34d;">發牌：</strong>點擊「重新發牌」後，系統會隨機產生卡片排列。</li>
+                    <li
+                        style="padding:9px 0; border-bottom:1px solid rgba(55,65,81,0.85); color:#e2e8f0; line-height:1.6;">
+                        <strong style="color:#fcd34d;">排序：</strong>點擊兩張卡片即可交換位置（點擊第一張會標記為選擇狀態）。額外空間模式則依畫面提示選牌與插入。</li>
+                    <li
+                        style="padding:9px 0; border-bottom:1px solid rgba(55,65,81,0.85); color:#e2e8f0; line-height:1.6;">
+                        <strong style="color:#fcd34d;">檢查：</strong>完成後點擊「檢查答案」看是否正確。</li>
+                    <li
+                        style="padding:9px 0; border-bottom:1px solid rgba(55,65,81,0.85); color:#e2e8f0; line-height:1.6;">
+                        <strong style="color:#fcd34d;">提示：</strong>如果卡住，可以點擊「顯示提示」或打開完成提示勾勾協助思考。</li>
+                    <li
+                        style="padding:9px 0; border-bottom:1px solid rgba(55,65,81,0.85); color:#e2e8f0; line-height:1.6;">
+                        <strong style="color:#fcd34d;">統計：</strong>上方統計欄會記錄你的比較次數與交換次數。</li>
+                    <li style="padding:9px 0; color:#e2e8f0; line-height:1.6;"><strong style="color:#fcd34d;">重新發牌 vs
+                            重置本局：</strong>「重新發牌」會取得新的一組牌；「重置本局」則恢復此次發牌的原有模樣，可重複練習同一組牌。</li>
+                </ul>
+            </article>
+
+            <article class="lesson-card guide-section" id="algorithm">
+                <h2>💡 演算法小學堂（用最簡單方式）</h2>
+                <p style="color:#9ca3af; line-height:1.65; margin-bottom:14px;">以下依「排序目標」整理說明；與主遊戲內依你選的規則變化的提示一致。</p>
+
+                <div class="algorithm-teaching" style="margin-top:8px;">
+                    <div class="algorithm-mode">演算法 = 輸入 → 步驟 → 輸出（照規則做就能完成）</div>
+                    <ol class="algorithm-steps">
+                        <li><strong>輸入：</strong>你手上的牌（目前的排列）。</li>
+                        <li><strong>步驟：</strong>依規則做事（本遊戲包含「比較」以及「交換 / 插入」）。</li>
+                        <li><strong>輸出：</strong>把牌排到正確順序。</li>
+                        <li><strong>三個重點：</strong>每一步說清楚、照做能得到結果、做到某個條件就停止。</li>
+                    </ol>
+                    <div class="algorithm-mode" style="margin-top:10px;">你在遊戲裡正在練的，就是演算法步驟</div>
+                    <ol class="algorithm-steps">
+                        <li>選擇排序目標（例如：數字大小、遞增/遞減）。</li>
+                        <li>觀察目前牌的排列，想像「下一步要怎麼做」。</li>
+                        <li>執行一輪規則：選牌並進行「交換」或在正確位置「插入」。</li>
+                        <li>按「檢查答案」把結果驗證：你做的步驟有沒有讓輸出正確？</li>
+                    </ol>
+                </div>
+
+                <div class="algo-method-block">
+                    <h3>尚未選擇／一般提示</h3>
+                    <p style="color:#e5e7eb; line-height:1.6;">提示：演算法=輸入 → 步驟 → 輸出。先把規則想清楚，再用可照做的步驟完成任務。</p>
+                    <p style="color:#93c5fd; margin-top:8px; font-weight:600;">建議：先從少量牌開始，感受「比較 → 交換」的節奏。</p>
+                    <ol class="algorithm-steps" style="margin-top:10px;">
+                        <li>在進階設定選擇一種排序目標（例如：數字大小）。</li>
+                        <li>觀察目前牌的排列，想像「理想順序」應該長什麼樣子。</li>
+                        <li>點擊一張牌，再點擊另一張牌，完成一次交換。</li>
+                        <li>重複比較與交換，直到你覺得已經排好為止，再按「檢查答案」。</li>
+                    </ol>
+                </div>
+
+                <div class="algo-method-block">
+                    <h3>依數字大小（A→K）</h3>
+                    <p style="color:#e5e7eb; line-height:1.6;">演算法=輸入 → 步驟 →
+                        輸出。本遊戲：輸入是牌的排列；步驟是依規則做「比較」與「交換/插入」；輸出是把牌排成遞增（A→K）。</p>
+                    <p style="color:#93c5fd; margin-top:8px; font-weight:600;">建議練習模式：氣泡排序思維 —— 一直檢查相鄰兩張是否要交換。</p>
+                    <ol class="algorithm-steps" style="margin-top:10px;">
+                        <li>從最左邊開始，依序看「一對相鄰的兩張牌」。</li>
+                        <li>如果左邊比右邊大，就交換它們的位置。</li>
+                        <li>走到最右邊時，最大的一張會被「氣泡」到最後面。</li>
+                        <li>重複上述步驟，多走幾輪，直到全部都排好。</li>
+                    </ol>
+                </div>
+
+                <div class="algo-method-block">
+                    <h3>數字遞增（2→A）</h3>
+                    <p style="color:#e5e7eb; line-height:1.6;">演算法=輸入 → 步驟 → 輸出。本遊戲：輸入是牌的排列；步驟是依規則比較並移動；輸出是遞增排列。</p>
+                    <p style="color:#93c5fd; margin-top:8px; font-weight:600;">建議練習模式：選擇排序 —— 每回合幫「目前最小」找到正確位置。</p>
+                    <ol class="algorithm-steps" style="margin-top:10px;">
+                        <li>從全部牌中找出目前最小的數字。</li>
+                        <li>把它換到最左邊的位置。</li>
+                        <li>接著在剩下的牌中，找出最小的數字，換到第二格。</li>
+                        <li>持續重複，直到所有位置都被正確的數字填滿。</li>
+                    </ol>
+                </div>
+
+                <div class="algo-method-block">
+                    <h3>數字遞減（K→2）</h3>
+                    <p style="color:#e5e7eb; line-height:1.6;">演算法=輸入 → 步驟 → 輸出。本遊戲：輸入是牌的排列；步驟是依規則比較並移動；輸出是遞減排列。</p>
+                    <p style="color:#93c5fd; margin-top:8px; font-weight:600;">建議練習模式：選擇排序（反向）—— 每回合把「目前最大」換到最前面。</p>
+                    <ol class="algorithm-steps" style="margin-top:10px;">
+                        <li>從全部牌中找出目前最大的數字。</li>
+                        <li>把它換到最左邊的位置。</li>
+                        <li>在剩下的牌中繼續找最大值，依序往右排。</li>
+                        <li>完成後，整排牌會從大到小排列。</li>
+                    </ol>
+                </div>
+
+                <div class="algo-method-block">
+                    <h3>依花色符號（♠♥♣♦）</h3>
+                    <p style="color:#e5e7eb; line-height:1.6;">演算法=輸入 → 步驟 →
+                        輸出。本遊戲：輸入是牌的排列；步驟是依花色符號順序做比較與移動；輸出是依指定花色順序排好。</p>
+                    <p style="color:#93c5fd; margin-top:8px; font-weight:600;">思考：如果每種花色被指定一個數字（權重），排序就跟數字排序一樣了。</p>
+                    <ol class="algorithm-steps" style="margin-top:10px;">
+                        <li>先記住花色順序：♠ &gt; ♥ &gt; ♦ &gt; ♣（黑桃最大、梅花最小）。</li>
+                        <li>可以把每張牌換算成一個整數權重來想像。</li>
+                        <li>比較兩張牌時，就只是比較它們的權重大小。</li>
+                        <li>用跟數字排序一樣的方式完成整體排序。</li>
+                    </ol>
+                </div>
+
+                <div class="algo-method-block">
+                    <h3>依花色顏色（黑→紅）</h3>
+                    <p style="color:#e5e7eb; line-height:1.6;">演算法=輸入 → 步驟 →
+                        輸出。本遊戲：輸入是牌的排列；步驟是依花色顏色分組比較與移動；輸出是依指定顏色順序排好。</p>
+                    <p style="color:#93c5fd; margin-top:8px; font-weight:600;">思考：先按顏色分組，再按數字排序，這就是「兩階段排序」。</p>
+                    <ol class="algorithm-steps" style="margin-top:10px;">
+                        <li>先把所有「黑色」牌（♠,♣）集中到左邊。</li>
+                        <li>再把所有「紅色」牌（♥,♦）集中到右邊。</li>
+                        <li>如果想更進階，可以在每一組內再按照數字排序。</li>
+                    </ol>
+                </div>
+            </article>
+
+            <article class="lesson-card guide-section" id="sort-ref">
+                <h2>📋 常見排序法：使用情境與複雜度</h2>
+                <div class="sort-ref-list" style="display:flex; flex-direction:column; gap:16px; margin-top:12px;">
+                    <article class="sort-ref-card">
+                        <h4 class="sort-ref-name">選擇排序（找極值）</h4>
+                        <p class="sort-ref-label">使用情境</p>
+                        <p class="sort-ref-scenario">
+                            每輪從未排序區找最小（或最大），與當前位置交換。本程式：原地模式可「選一張與目標位置交換」；額外空間模式可從上方取一張放到下方最後一格。</p>
+                        <p class="sort-ref-label">時間複雜度</p>
+                        <ul class="sort-ref-complexity">
+                            <li>最好 O(n)</li>
+                            <li>平均 O(n²)</li>
+                            <li>最壞 O(n²)</li>
+                        </ul>
+                        <p class="sort-ref-label">空間複雜度</p>
+                        <p class="sort-ref-space">O(1) 原地</p>
+                    </article>
+                    <article class="sort-ref-card">
+                        <h4 class="sort-ref-name">插入排序（插對位置）</h4>
+                        <p class="sort-ref-label">使用情境</p>
+                        <p class="sort-ref-scenario">每輪取未排序區一筆，插入已排序區的「正確位置」。本程式：額外空間模式，選上方一張牌，再點下方虛線格插入正確位置。</p>
+                        <p class="sort-ref-label">時間複雜度</p>
+                        <ul class="sort-ref-complexity">
+                            <li>最好 O(n)</li>
+                            <li>平均 O(n²)</li>
+                            <li>最壞 O(n²)</li>
+                        </ul>
+                        <p class="sort-ref-label">空間複雜度</p>
+                        <p class="sort-ref-space">O(1) 原地</p>
+                    </article>
+                    <article class="sort-ref-card">
+                        <h4 class="sort-ref-name">氣泡排序（相鄰交換）</h4>
+                        <p class="sort-ref-label">使用情境</p>
+                        <p class="sort-ref-scenario">重複掃描，比較「相鄰」兩筆，順序錯就交換。本程式：原地模式，只交換相鄰的兩張牌，一輪輪把較大者往右推。</p>
+                        <p class="sort-ref-label">時間複雜度</p>
+                        <ul class="sort-ref-complexity">
+                            <li>最好 O(n)</li>
+                            <li>平均 O(n²)</li>
+                            <li>最壞 O(n²)</li>
+                        </ul>
+                        <p class="sort-ref-label">空間複雜度</p>
+                        <p class="sort-ref-space">O(1) 原地</p>
+                    </article>
+                    <article class="sort-ref-card">
+                        <h4 class="sort-ref-name">快速排序（分治法）</h4>
+                        <p class="sort-ref-label">使用情境</p>
+                        <p class="sort-ref-scenario">選一筆當 pivot，小於的放左、大於的放右，再對左右兩邊遞迴。本程式：可先理解分治概念；實際分區操作較複雜，以說明與複雜度認識為主。
+                        </p>
+                        <p class="sort-ref-label">時間複雜度</p>
+                        <ul class="sort-ref-complexity">
+                            <li>最好 O(n log n)</li>
+                            <li>平均 O(n log n)</li>
+                            <li>最壞 O(n²)</li>
+                        </ul>
+                        <p class="sort-ref-label">空間複雜度</p>
+                        <p class="sort-ref-space">O(log n) 遞迴堆疊</p>
+                    </article>
+                </div>
+            </article>
+        </div>
+    </div>
+</body>
+
+</html>

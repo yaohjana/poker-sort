@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>撲克牌排序遊戲 - 學習排序原理</title>
+    <title>排序演算法實驗室 - 學習排序原理</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -14,6 +14,27 @@
 </head>
 
 <body>
+    <button type="button" class="overlay-backdrop" id="overlay-backdrop" aria-hidden="true" tabindex="-1"></button>
+    <nav class="site-nav" id="site-nav" aria-label="網站導覽">
+        <div class="site-nav-inner">
+            <div class="site-nav-group" role="group" aria-labelledby="site-nav-flow-label">
+                <div id="site-nav-flow-label" class="site-nav-group-label" data-i18n-key="nav.groupFlow">教學流程</div>
+                <div class="site-nav-group-links">
+                    <a href="algorithm-lab.html" class="site-nav-link site-nav-flow-link"><span class="site-nav-step" aria-hidden="true">1</span><span data-i18n-key="nav.flowLab">認識演算法</span></a>
+                    <a href="index.html" class="site-nav-link site-nav-flow-link site-nav-link-current" aria-current="page"><span class="site-nav-step" aria-hidden="true">2</span><span data-i18n-key="nav.flowGame">排序演算法實驗室</span></a>
+                    <a href="exam.html" class="site-nav-link site-nav-flow-link"><span class="site-nav-step" aria-hidden="true">3</span><span data-i18n-key="nav.flowExam">學習評量</span></a>
+                    <a href="algorithm-concepts.html" class="site-nav-link site-nav-flow-link"><span class="site-nav-step" aria-hidden="true">4</span><span data-i18n-key="nav.flowConcepts">演算法中的結構</span></a>
+                    <a href="algorithm-concepts-quiz.html" class="site-nav-link site-nav-flow-link"><span class="site-nav-step" aria-hidden="true">5</span><span data-i18n-key="nav.flowConceptsQuiz">結構小測驗</span></a>
+                </div>
+            </div>
+            <div class="site-nav-group site-nav-group--extra" role="group" id="site-nav-extra-group" aria-label="教師手冊與教案">
+                <div class="site-nav-group-links">
+                    <a href="guide.html" class="site-nav-link site-nav-extra-link"><span data-i18n-key="nav.guideCenter">教師手冊</span></a>
+                    <a href="lesson.html" class="site-nav-link site-nav-extra-link"><span data-i18n-key="nav.lesson">教案</span></a>
+                </div>
+            </div>
+        </div>
+    </nav>
     <div class="page-frame">
         <div class="table-glow"></div>
         <div class="container">
@@ -23,14 +44,11 @@
                         <span class="logo-icon">♠</span>
                     </div>
                     <div class="logo-texts">
-                        <h1 data-i18n-key="app.title">撲克牌排序學院</h1>
+                        <h1 data-i18n-key="app.title">排序演算法實驗室</h1>
                         <p class="subtitle" data-i18n-key="app.subtitle">原地排序 · 演算法思維 · 互動教學桌</p>
                     </div>
                 </div>
                 <div class="header-right">
-                    <button id="info-toggle" class="info-toggle" aria-label="教學說明">
-                        i
-                    </button>
                     <button id="lang-button" class="lang-button" type="button">TW</button>
                     <button id="settings-toggle" class="settings-toggle" aria-label="教學與設定">
                         ⚙
@@ -51,10 +69,6 @@
                     <button type="button" class="btn preset-btn" data-preset="bubble" data-i18n-key="preset.bubble">氣泡排序</button>
                     <button type="button" class="btn preset-btn" data-preset="quick" data-i18n-key="preset.quick">快速排序</button>
                     <button id="shuffle-btn" class="btn primary" data-i18n-key="controls.shuffle">🔀 重新發牌</button>
-                    <a href="exam.html" class="btn preset-btn" style="text-decoration:none;">📝 分階段測驗</a>
-                    <a href="lesson.html" class="btn preset-btn" style="text-decoration:none;">📘 教案網頁</a>
-                    <a href="algorithm-lab.html" class="btn preset-btn" style="text-decoration:none;">🧠 演算法生活實驗室</a>
-                    <a href="algorithm-concepts.html" class="btn preset-btn" style="text-decoration:none;">📐 循序·迴圈·判斷</a>
                 </div>
             </div>
 
@@ -67,13 +81,19 @@
                     <span class="stat-label" data-i18n-key="stats.swaps">交換次數：</span>
                     <span class="stat-value" id="swaps">0</span>
                 </div>
-                <div class="stat-item">
-                    <span class="stat-label" data-i18n-key="stats.progress">完成度：</span>
-                    <span class="stat-value" id="progress">0%</span>
+                <div class="stat-item stat-item-progress">
+                    <div class="stat-progress-head">
+                        <span class="stat-label" id="progress-label" data-i18n-key="stats.progress">完成度：</span>
+                        <span class="stat-value" id="progress">0%</span>
+                    </div>
+                    <div class="stats-progress-track" id="progress-track" role="progressbar" aria-valuemin="0"
+                        aria-valuemax="100" aria-valuenow="0" aria-labelledby="progress-label progress">
+                        <div class="stats-progress-fill" id="progress-fill"></div>
+                    </div>
                 </div>
             </div>
 
-            <div class="game-area">
+            <div class="game-area workspace-panel">
                 <div class="instruction-hint" id="instruction-hint">
                     <p data-i18n-key="banner.hint">🎯 <strong>操作方式：</strong>點擊選擇一張卡片，再點擊另一張進行交換</p>
                     <button class="close-hint" id="close-hint">✕</button>
@@ -130,15 +150,16 @@
             </div>
 
             <div class="feedback">
-                <div class="status" id="status"></div>
+                <div class="status" id="status" role="status" aria-live="polite" aria-atomic="true"></div>
                 <div class="hint" id="hint"></div>
             </div>
 
-            <div class="actions">
+            <div class="actions action-bar">
                 <button id="check-btn" class="btn success" disabled data-i18n-key="actions.check">✅ 檢查答案</button>
                 <button id="hint-btn" class="btn warning" disabled data-i18n-key="actions.hint">💡 顯示提示</button>
                 <button id="reset-btn" class="btn danger" disabled data-i18n-key="actions.reset">🔄 重置遊戲</button>
             </div>
+        </div>
 
             <div class="settings-card" id="settings-card">
                 <div class="settings-card-header">
@@ -193,121 +214,6 @@
                     </div>
                 </div>
             </div>
-
-            <div class="info-card" id="info-card">
-                <div class="settings-card-header">
-                    <div>
-                        <h2 class="settings-title" data-i18n-key="settings.title">教學說明與小知識</h2>
-                        <p class="settings-subtitle" data-i18n-key="settings.subtitle">需要時再打開，讓牌桌保持乾淨。</p>
-                    </div>
-                    <button class="settings-close" id="info-close" aria-label="關閉說明卡片">✕</button>
-                </div>
-                <div class="settings-tabs" id="info-tabs">
-                    <button class="settings-tab active" data-pane="pane-guide" data-i18n-key="tabs.guide">操作說明</button>
-                    <button class="settings-tab" data-pane="pane-algorithm" data-i18n-key="tabs.algorithm">小知識</button>
-                    <button class="settings-tab" data-pane="pane-sort-ref" data-i18n-key="tabs.sortRef">排序法對照</button>
-                </div>
-                <div class="settings-card-body">
-                    <div class="settings-pane active" id="pane-guide">
-                        <div class="instructions">
-                            <h2 data-i18n-key="guide.title">📚 遊戲說明</h2>
-                            <ul>
-                                <li data-i18n-key="guide.step1"><strong>選擇排序方式：</strong>從下拉選單選擇想要排序的規則（數字、花色、顏色等）。</li>
-                                <li data-i18n-key="guide.step2"><strong>發牌：</strong>點擊「重新發牌」後，系統會隨機產生卡片排列。</li>
-                                <li data-i18n-key="guide.step3"><strong>排序：</strong>點擊兩張卡片即可交換位置（點擊第一張會標記為選擇狀態）。</li>
-                                <li data-i18n-key="guide.step4"><strong>檢查：</strong>完成後點擊「檢查答案」看是否正確。</li>
-                                <li data-i18n-key="guide.step5"><strong>提示：</strong>如果卡住，可以點擊「顯示提示」或打開完成提示勾勾協助思考。</li>
-                                <li data-i18n-key="guide.step6"><strong>統計：</strong>上方統計欄會記錄你的比較次數與交換次數。</li>
-                                <li data-i18n-key="guide.step7"><strong>重新發牌 vs 重置本局：</strong>「重新發牌」會取得新的一組牌；「重置本局」則恢復此次發牌的原有模樣，可重複練習同一組牌。</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="settings-pane" id="pane-algorithm">
-                        <div class="algorithm-info" id="algorithm-info">
-                            <h3 data-i18n-key="algo.title">💡 演算法小學堂（用最簡單方式）</h3>
-                            <p id="algorithm-desc">選擇排序方式後，這裡會把「排序」連到「演算法」的核心想法：一步一步、可照做、能停止、最後輸出正確結果。</p>
-
-                            <div class="algorithm-teaching">
-                                <div class="algorithm-mode">演算法 = 輸入 → 步驟 → 輸出（照規則做就能完成）</div>
-                                <ol class="algorithm-steps">
-                                    <li><strong>輸入：</strong>你手上的牌（目前的排列）。</li>
-                                    <li><strong>步驟：</strong>依規則做事（本遊戲包含「比較」以及「交換 / 插入」）。</li>
-                                    <li><strong>輸出：</strong>把牌排到正確順序。</li>
-                                    <li><strong>三個重點：</strong>每一步說清楚、照做能得到結果、做到某個條件就停止。</li>
-                                </ol>
-
-                                <div class="algorithm-mode" style="margin-top:10px;">你在遊戲裡正在練的，就是演算法步驟</div>
-                                <ol class="algorithm-steps">
-                                    <li>選擇排序目標（例如：數字大小、遞增/遞減）。</li>
-                                    <li>觀察目前牌的排列，想像「下一步要怎麼做」。</li>
-                                    <li>執行一輪規則：選牌並進行「交換」或在正確位置「插入」。</li>
-                                    <li>按「檢查答案」把結果驗證：你做的步驟有沒有讓輸出正確？</li>
-                                </ol>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="settings-pane" id="pane-sort-ref">
-                        <h3 class="sort-ref-title" data-i18n-key="algoRef.title">📋 常見排序法：使用情境與複雜度</h3>
-                        <div class="sort-ref-list">
-                            <article class="sort-ref-card" id="sort-ref-selection">
-                                <h4 class="sort-ref-name" data-i18n-key="algoRef.selection.name">選擇排序（找極值）</h4>
-                                <p class="sort-ref-label" data-i18n-key="algoRef.useCase">使用情境</p>
-                                <p class="sort-ref-scenario" data-i18n-key="algoRef.selection.scenario">每輪從未排序區找最小（或最大），與當前位置交換。本程式：原地模式可「選一張與目標位置交換」；額外空間模式可從上方取一張放到下方最後一格。</p>
-                                <p class="sort-ref-label" data-i18n-key="algoRef.timeComplexity">時間複雜度</p>
-                                <ul class="sort-ref-complexity">
-                                    <li data-i18n-key="algoRef.selection.timeBest">最好 O(n)</li>
-                                    <li data-i18n-key="algoRef.selection.timeAvg">平均 O(n²)</li>
-                                    <li data-i18n-key="algoRef.selection.timeWorst">最壞 O(n²)</li>
-                                </ul>
-                                <p class="sort-ref-label" data-i18n-key="algoRef.spaceComplexity">空間複雜度</p>
-                                <p class="sort-ref-space" data-i18n-key="algoRef.selection.space">O(1) 原地</p>
-                            </article>
-                            <article class="sort-ref-card" id="sort-ref-insertion">
-                                <h4 class="sort-ref-name" data-i18n-key="algoRef.insertion.name">插入排序（插對位置）</h4>
-                                <p class="sort-ref-label" data-i18n-key="algoRef.useCase">使用情境</p>
-                                <p class="sort-ref-scenario" data-i18n-key="algoRef.insertion.scenario">每輪取未排序區一筆，插入已排序區的「正確位置」。本程式：額外空間模式，選上方一張牌，再點下方虛線格插入正確位置。</p>
-                                <p class="sort-ref-label" data-i18n-key="algoRef.timeComplexity">時間複雜度</p>
-                                <ul class="sort-ref-complexity">
-                                    <li data-i18n-key="algoRef.insertion.timeBest">最好 O(n)</li>
-                                    <li data-i18n-key="algoRef.insertion.timeAvg">平均 O(n²)</li>
-                                    <li data-i18n-key="algoRef.insertion.timeWorst">最壞 O(n²)</li>
-                                </ul>
-                                <p class="sort-ref-label" data-i18n-key="algoRef.spaceComplexity">空間複雜度</p>
-                                <p class="sort-ref-space" data-i18n-key="algoRef.insertion.space">O(1) 原地</p>
-                            </article>
-                            <article class="sort-ref-card" id="sort-ref-bubble">
-                                <h4 class="sort-ref-name" data-i18n-key="algoRef.bubble.name">氣泡排序（相鄰交換）</h4>
-                                <p class="sort-ref-label" data-i18n-key="algoRef.useCase">使用情境</p>
-                                <p class="sort-ref-scenario" data-i18n-key="algoRef.bubble.scenario">重複掃描，比較「相鄰」兩筆，順序錯就交換。本程式：原地模式，只交換相鄰的兩張牌，一輪輪把較大者往右推。</p>
-                                <p class="sort-ref-label" data-i18n-key="algoRef.timeComplexity">時間複雜度</p>
-                                <ul class="sort-ref-complexity">
-                                    <li data-i18n-key="algoRef.bubble.timeBest">最好 O(n)</li>
-                                    <li data-i18n-key="algoRef.bubble.timeAvg">平均 O(n²)</li>
-                                    <li data-i18n-key="algoRef.bubble.timeWorst">最壞 O(n²)</li>
-                                </ul>
-                                <p class="sort-ref-label" data-i18n-key="algoRef.spaceComplexity">空間複雜度</p>
-                                <p class="sort-ref-space" data-i18n-key="algoRef.bubble.space">O(1) 原地</p>
-                            </article>
-                            <article class="sort-ref-card" id="sort-ref-quick">
-                                <h4 class="sort-ref-name" data-i18n-key="algoRef.quick.name">快速排序（分治法）</h4>
-                                <p class="sort-ref-label" data-i18n-key="algoRef.useCase">使用情境</p>
-                                <p class="sort-ref-scenario" data-i18n-key="algoRef.quick.scenario">選一筆當 pivot，小於的放左、大於的放右，再對左右兩邊遞迴。本程式：可先理解分治概念；實際分區操作較複雜，以說明與複雜度認識為主。</p>
-                                <p class="sort-ref-label" data-i18n-key="algoRef.timeComplexity">時間複雜度</p>
-                                <ul class="sort-ref-complexity">
-                                    <li data-i18n-key="algoRef.quick.timeBest">最好 O(n log n)</li>
-                                    <li data-i18n-key="algoRef.quick.timeAvg">平均 O(n log n)</li>
-                                    <li data-i18n-key="algoRef.quick.timeWorst">最壞 O(n²)</li>
-                                </ul>
-                                <p class="sort-ref-label" data-i18n-key="algoRef.spaceComplexity">空間複雜度</p>
-                                <p class="sort-ref-space" data-i18n-key="algoRef.quick.space">O(log n) 遞迴堆疊</p>
-                            </article>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 
     <script src="script.js"></script>

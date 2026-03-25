@@ -6,6 +6,261 @@
     box-sizing: border-box;
 }
 
+/* 全站頂部導覽（主遊戲內文由 script 套用 i18n） */
+.site-nav {
+    position: sticky;
+    top: 0;
+    z-index: 8;
+    width: 100%;
+    overflow: visible;
+    background: linear-gradient(180deg, rgba(15, 23, 42, 0.97) 0%, rgba(2, 6, 23, 0.94) 100%);
+    border-bottom: 1px solid rgba(148, 163, 184, 0.28);
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35);
+}
+
+.site-nav-inner {
+    max-width: 1360px;
+    margin: 0 auto;
+    padding: 6px 10px 14px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 6px 10px;
+}
+
+.site-nav-group {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 5px 8px;
+}
+
+.site-nav-group-label {
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    color: #94a3b8;
+    text-transform: none;
+    white-space: nowrap;
+    line-height: 1.2;
+}
+
+.site-nav-group-label--extra {
+    color: #7dd3fc;
+    letter-spacing: 0.05em;
+}
+
+.site-nav-group-links {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 4px 5px;
+}
+
+.site-nav-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3px 8px;
+    min-height: 26px;
+    border-radius: 999px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+    white-space: nowrap;
+}
+
+.site-nav-link:focus-visible {
+    outline: 2px solid #38bdf8;
+    outline-offset: 2px;
+}
+
+/* 教學流程 1–4：金／琥珀主色 */
+.site-nav-flow-link {
+    color: #fde68a;
+    border: 1px solid rgba(250, 204, 21, 0.5);
+    background: rgba(120, 53, 15, 0.22);
+}
+
+.site-nav-flow-link:hover {
+    color: #fffbeb;
+    border-color: rgba(253, 224, 71, 0.75);
+    background: rgba(180, 83, 9, 0.28);
+    box-shadow: 0 0 0 1px rgba(250, 204, 21, 0.2);
+}
+
+.site-nav-flow-link.site-nav-link-current {
+    position: relative;
+    z-index: 2;
+    color: #fffbeb;
+    border-color: rgba(250, 204, 21, 0.9);
+    background: linear-gradient(135deg, rgba(250, 204, 21, 0.28), rgba(154, 52, 18, 0.35));
+    box-shadow: 0 0 12px rgba(250, 204, 21, 0.16);
+    border-radius: 999px 999px 10px 10px;
+}
+
+/* 教學流程：泡泡嘴外框（::before）＋內填（::after），邊框與主卡片邊線同調、對比明顯 */
+.site-nav-flow-link.site-nav-link-current::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -14px;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 13px solid transparent;
+    border-right: 13px solid transparent;
+    border-top: 14px solid rgba(251, 191, 36, 0.92);
+    z-index: 2;
+    pointer-events: none;
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.45));
+}
+
+.site-nav-flow-link.site-nav-link-current::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -12px;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 11px solid #020617;
+    z-index: 3;
+    pointer-events: none;
+}
+
+.site-nav-step {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 1.2em;
+    height: 1.2em;
+    margin-right: 4px;
+    padding: 0 3px;
+    border-radius: 999px;
+    font-size: 0.65em;
+    font-weight: 900;
+    line-height: 1;
+    color: #422006;
+    background: linear-gradient(180deg, #fde68a, #fbbf24);
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
+}
+
+/* 參考與教案：青藍主色（與教學流程區隔） */
+.site-nav-extra-link {
+    color: #bae6fd;
+    border: 1px solid rgba(56, 189, 248, 0.45);
+    background: rgba(12, 74, 110, 0.35);
+}
+
+.site-nav-extra-link:hover {
+    color: #f0f9ff;
+    border-color: rgba(125, 211, 252, 0.65);
+    background: rgba(14, 116, 144, 0.4);
+    box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.2);
+}
+
+.site-nav-extra-link.site-nav-link-current {
+    position: relative;
+    z-index: 2;
+    color: #f0f9ff;
+    border-color: rgba(56, 189, 248, 0.85);
+    background: linear-gradient(135deg, rgba(14, 165, 233, 0.35), rgba(30, 58, 138, 0.45));
+    box-shadow: 0 0 12px rgba(56, 189, 248, 0.14);
+    border-radius: 999px 999px 10px 10px;
+}
+
+.site-nav-extra-link.site-nav-link-current::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -14px;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 13px solid transparent;
+    border-right: 13px solid transparent;
+    border-top: 14px solid rgba(125, 211, 252, 0.88);
+    z-index: 2;
+    pointer-events: none;
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.45));
+}
+
+.site-nav-extra-link.site-nav-link-current::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -12px;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 11px solid #020617;
+    z-index: 3;
+    pointer-events: none;
+}
+
+.site-nav-group--extra {
+    padding: 0 0 0 10px;
+    margin: 0 0 0 2px;
+    border-top: none;
+    border-left: 1px solid rgba(148, 163, 184, 0.35);
+}
+
+/* 主畫面與導覽泡泡嘴視覺接合（略上移，讓三角尖端搭到卡片頂緣） */
+.site-nav + .page-frame {
+    margin-top: -10px;
+    padding-top: 4px;
+}
+
+.site-nav + .page-frame > .container {
+    position: relative;
+    z-index: 1;
+}
+
+/* 首頁若有頂導，教學中心內的章節列 sticky 需避開頂欄高度 */
+.site-nav ~ .page-frame .guide-nav {
+    top: 58px;
+}
+
+@media (max-width: 520px) {
+    .site-nav-inner {
+        padding: 5px 8px 14px;
+        gap: 6px 8px;
+    }
+
+    .site-nav-group--extra {
+        border-left: none;
+        border-top: 1px solid rgba(148, 163, 184, 0.28);
+        padding: 6px 0 0;
+        margin: 2px 0 0;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .site-nav-group--extra .site-nav-group-label {
+        width: 100%;
+        text-align: center;
+    }
+
+    .site-nav-group--extra .site-nav-group-links {
+        width: 100%;
+    }
+
+    .site-nav ~ .page-frame .guide-nav {
+        top: 104px;
+    }
+}
+
 body {
     font-family: 'Noto Sans TC', 'Microsoft JhengHei', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
     background:
@@ -40,6 +295,30 @@ body {
     pointer-events: none;
 }
 
+/* 全螢幕遮罩：點擊關閉設定／說明面板 */
+.overlay-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 9;
+    background: rgba(2, 6, 23, 0.58);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    pointer-events: none;
+}
+
+.overlay-backdrop.is-visible {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -57,6 +336,15 @@ body {
     position: relative;
     z-index: 1;
     overflow: hidden;
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.55s cubic-bezier(0.22, 0.61, 0.36, 1),
+        transform 0.55s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.container.app-loaded {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 header {
@@ -64,6 +352,8 @@ header {
     align-items: center;
     justify-content: space-between;
     margin-bottom: 26px;
+    position: relative;
+    z-index: 2;
 }
 
 h1 {
@@ -126,7 +416,6 @@ h1 {
     gap: 8px;
 }
 
-.info-toggle,
 .lang-button,
 .settings-toggle {
     width: 34px;
@@ -144,19 +433,6 @@ h1 {
         0 10px 24px rgba(15, 23, 42, 0.9),
         0 0 0 1px rgba(15, 23, 42, 0.9);
     transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
-}
-
-.info-toggle:hover {
-    transform: translateY(-1px) scale(1.03);
-    background: radial-gradient(circle at 30% 0, rgba(248, 250, 252, 0.25), rgba(15, 23, 42, 0.98));
-    box-shadow:
-        0 14px 32px rgba(15, 23, 42, 0.95),
-        0 0 0 1px rgba(59, 130, 246, 0.7);
-}
-
-.info-toggle:focus-visible {
-    outline: 2px solid #60a5fa;
-    outline-offset: 2px;
 }
 
 .lang-switcher {
@@ -186,27 +462,11 @@ h1 {
     font-size: 0.82rem;
 }
 
-/* 教學設定卡片觸發按鈕 */
+/* 齒輪與 i、語言鈕同一列，勿用 absolute 以免遮擋鄰近按鈕 */
 .settings-toggle {
-    position: absolute;
-    top: 22px;
-    right: 26px;
     width: 36px;
     height: 36px;
-    border-radius: 999px;
-    border: 1px solid rgba(148, 163, 184, 0.8);
-    background: radial-gradient(circle at 30% 0, rgba(248, 250, 252, 0.15), rgba(15, 23, 42, 0.98));
-    color: #e5e7eb;
     font-size: 1.2rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    box-shadow:
-        0 10px 24px rgba(15, 23, 42, 0.9),
-        0 0 0 1px rgba(15, 23, 42, 0.9);
-    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
-    z-index: 5;
 }
 
 .settings-toggle:hover {
@@ -253,7 +513,7 @@ input[type="range"] {
     border-radius: 999px;
     font-size: 0.95rem;
     background: radial-gradient(circle at 0 0, rgba(148, 163, 184, 0.25), rgba(15, 23, 42, 0.96));
-    color: #525252;
+    color: #e5e7eb;
     box-shadow: 0 0 0 1px inset rgba(15, 23, 42, 0.9);
 }
 
@@ -328,6 +588,15 @@ select:focus {
     box-shadow: none;
 }
 
+.btn:active:not(:disabled) {
+    transform: translateY(0) scale(0.98);
+}
+
+.btn:focus-visible {
+    outline: 2px solid #fbbf24;
+    outline-offset: 3px;
+}
+
 /* 快速切換排序法（與重新發牌同一列） */
 .control-group-preset {
     display: flex;
@@ -356,6 +625,11 @@ select:focus {
     background: linear-gradient(135deg, rgba(251, 191, 36, 0.35), rgba(245, 158, 11, 0.4));
     border-color: rgba(251, 191, 36, 0.8);
     color: #fef3c7;
+}
+
+.preset-btn:focus-visible {
+    outline: 2px solid #38bdf8;
+    outline-offset: 2px;
 }
 
 /* 演算法重點區（醒目獨立） */
@@ -396,6 +670,20 @@ select:focus {
     padding: 6px 10px;
     font-size: 0.86rem;
     font-weight: 700;
+}
+
+.algo-spotlight .life-examples-heading {
+    margin: 14px 0 8px;
+    font-size: 1.05rem;
+    color: #fde68a;
+    letter-spacing: 0.04em;
+}
+
+.algo-spotlight .life-examples-lead {
+    margin: 0 0 12px;
+    color: #94a3b8;
+    font-size: 0.9rem;
+    line-height: 1.55;
 }
 
 .life-flow-grid {
@@ -442,6 +730,16 @@ select:focus {
 /* 遊戲區域 */
 .game-area {
     margin-bottom: 30px;
+}
+
+.workspace-panel {
+    position: relative;
+    border-radius: 20px;
+    padding: 12px 10px 14px;
+    background: linear-gradient(145deg, rgba(251, 191, 36, 0.08), rgba(15, 23, 42, 0.35) 45%, rgba(16, 185, 129, 0.08));
+    box-shadow:
+        0 0 0 1px rgba(148, 163, 184, 0.18),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
 /* 額外空間模式：上下分區（上未排序、下已排序） */
@@ -899,6 +1197,64 @@ select:focus {
     font-size: 1.4rem;
     min-width: 56px;
     text-align: center;
+    font-variant-numeric: tabular-nums;
+    transition: color 0.2s ease, text-shadow 0.2s ease;
+}
+
+.stat-value.stat-tick {
+    animation: statValueTick 0.45s ease;
+}
+
+@keyframes statValueTick {
+    0% {
+        color: #facc15;
+        text-shadow: none;
+    }
+
+    45% {
+        color: #fef08a;
+        text-shadow: 0 0 14px rgba(250, 204, 21, 0.85);
+    }
+
+    100% {
+        color: #facc15;
+        text-shadow: none;
+    }
+}
+
+.stat-item.stat-item-progress {
+    flex: 1;
+    min-width: 160px;
+    max-width: 320px;
+    flex-direction: column;
+    align-items: stretch;
+    align-self: stretch;
+    gap: 8px;
+}
+
+.stat-progress-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.stats-progress-track {
+    height: 8px;
+    border-radius: 999px;
+    background: rgba(15, 23, 42, 0.85);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.45);
+    overflow: hidden;
+    border: 1px solid rgba(16, 185, 129, 0.35);
+}
+
+.stats-progress-fill {
+    height: 100%;
+    width: 0%;
+    border-radius: inherit;
+    background: linear-gradient(90deg, #059669, #34d399, #fbbf24);
+    box-shadow: 0 0 12px rgba(52, 211, 153, 0.5);
+    transition: width 0.45s cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
 /* 單一卡片區域 */
@@ -1048,6 +1404,50 @@ select:focus {
     }
 }
 
+@keyframes cardDealIn {
+    from {
+        opacity: 0;
+        transform: translateY(22px) scale(0.88) rotate3d(1, 0, 0, 8deg);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1) rotate3d(0, 0, 0, 0deg);
+    }
+}
+
+.card.card-deal-in {
+    animation: cardDealIn 0.5s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+    animation-delay: calc(var(--deal-i, 0) * 42ms);
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .container,
+    .stats-progress-fill,
+    .card,
+    .btn {
+        transition-duration: 0.01ms !important;
+    }
+
+    .card.card-deal-in {
+        animation: none;
+    }
+
+    .stat-value.stat-tick {
+        animation: none;
+    }
+
+    .container {
+        opacity: 1;
+        transform: none;
+    }
+
+    .status.status-pulse {
+        animation: none;
+    }
+}
+
 .card.ace {
     color: #c0392b;
 }
@@ -1098,6 +1498,19 @@ select:focus {
     padding: 12px 0;
     border-radius: 8px;
     text-align: center;
+}
+
+.action-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    padding: 16px 12px;
+    border-radius: 16px;
+    background: rgba(15, 23, 42, 0.55);
+    border: 1px solid rgba(148, 163, 184, 0.22);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
 }
 
 /* 教學設定卡片本體 */
@@ -1172,36 +1585,6 @@ select:focus {
     max-height: 52vh;
     overflow-y: auto;
     padding-right: 4px;
-}
-
-.info-card {
-    position: fixed;
-    left: 50%;
-    bottom: 32px;
-    transform: translateX(-50%) translateY(12px);
-    width: min(520px, 95vw);
-    max-height: 75vh;
-    background:
-        radial-gradient(circle at 0 0, rgba(248, 250, 252, 0.1), rgba(15, 23, 42, 0.96)),
-        #020617;
-    border-radius: 18px;
-    border: 1px solid rgba(148, 163, 184, 0.6);
-    box-shadow:
-        0 28px 80px rgba(0, 0, 0, 0.95),
-        0 0 0 1px rgba(15, 23, 42, 0.9);
-    padding: 14px 16px 14px;
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease;
-    z-index: 11;
-}
-
-.info-card.open {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-    transform: translateX(-50%) translateY(0);
 }
 
 .settings-tabs {
@@ -1296,6 +1679,24 @@ select:focus {
     box-shadow: 0 12px 28px rgba(15, 23, 42, 0.95);
 }
 
+@keyframes statusPulse {
+    0% {
+        transform: scale(1);
+    }
+
+    35% {
+        transform: scale(1.015);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.status.status-pulse {
+    animation: statusPulse 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
 .hint {
     margin-top: 10px;
     padding: 10px;
@@ -1315,13 +1716,13 @@ select:focus {
 }
 
 .instructions h2 {
-    color: #000000;
+    color: #f8fafc;
     margin-bottom: 12px;
 }
 
 .instructions ul {
     list-style: none;
-    color: #bd0d5f;
+    color: #e2e8f0;
 }
 
 .instructions li {
@@ -1336,7 +1737,7 @@ select:focus {
 }
 
 .instructions li strong {
-    color: #082a55;
+    color: #fcd34d;
     font-weight: 700;
 }
 
@@ -1380,7 +1781,7 @@ select:focus {
 
 .algorithm-steps {
     margin-left: 20px;
-    color: #4a5568;
+    color: #cbd5e1;
     line-height: 1.6;
 }
 
@@ -1505,192 +1906,140 @@ select:focus {
         flex-direction: column;
         gap: 10px;
     }
+
+    .stat-item.stat-item-progress {
+        max-width: none;
+    }
 }
 
+/* ========== 子頁面（教案、測驗、實驗室、概念）共用 ========== */
 
-/* 撲克牌樣式 */
-.card {
-    width: 80px;
-    height: 112px;
-    background: white;
-    border: 2px solid #333;
-    border-radius: 8px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 8px;
-    cursor: grab;
-    user-select: none;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-    transition: all 0.3s ease;
-    position: relative;
+.exam-title h1 {
+    font-family: 'Playfair Display', 'Times New Roman', serif;
+    letter-spacing: 0.06em;
 }
 
-.card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+.lesson-card,
+.con-card,
+.lab-card,
+.q-card,
+.summary-cell,
+.example,
+.life-flow-card,
+.logic-box,
+.logic-trainer,
+.stage-heading,
+.progress-wrap {
+    transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease;
 }
 
-.card.dragging {
-    opacity: 0.5;
-    cursor: grabbing;
+.lesson-card:hover,
+.con-card:hover,
+.lab-card:hover,
+.q-card:hover,
+.summary-cell:hover,
+.example:hover,
+.life-flow-card:hover,
+.logic-box:hover,
+.logic-trainer:hover,
+.stage-heading:hover,
+.progress-wrap:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 18px 42px rgba(0, 0, 0, 0.4);
+    border-color: rgba(148, 163, 184, 0.48);
 }
 
-.card.ace {
-    color: #c0392b;
+.stage-tab-btn:focus-visible,
+.lab-tab-btn:focus-visible {
+    outline: 2px solid #38bdf8;
+    outline-offset: 2px;
 }
 
-.card.king {
-    color: #2c3e50;
+.choice:has(input:focus-visible) {
+    border-color: rgba(251, 191, 36, 0.65);
+    box-shadow: 0 0 0 1px rgba(251, 191, 36, 0.25);
 }
 
-.card.queen {
-    color: #2c3e50;
+.array-input:focus-visible {
+    outline: none;
+    border-color: #fbbf24;
+    box-shadow: 0 0 0 2px rgba(251, 191, 36, 0.35);
 }
 
-.card.jack {
-    color: #2c3e50;
+.progress-wrap .progress-bar > div {
+    transition: width 0.45s cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
-.card.red {
-    color: #c0392b;
-}
-
-.card.black {
-    color: #2c3e50;
-}
-
-.card .rank {
-    font-size: 1.4rem;
-    font-weight: bold;
-}
-
-.card .suit {
-    font-size: 2rem;
-    text-align: center;
-    margin: 5px 0;
-}
-
-.card .rank-bottom {
-    font-size: 1.4rem;
-    font-weight: bold;
-    transform: rotate(180deg);
-}
-
-/* 反馈區 */
-.feedback {
-    margin: 20px 0;
-    padding: 15px;
-    border-radius: 8px;
-    text-align: center;
-}
-
-.status {
-    font-size: 1.2rem;
-    font-weight: 600;
-    padding: 10px;
-    border-radius: 8px;
-}
-
-.status.success {
-    background: #d4edda;
-    color: #155724;
-}
-
-.status.error {
-    background: #f8d7da;
-    color: #721c24;
-}
-
-.status.info {
-    background: #d1ecf1;
-    color: #0c5460;
-}
-
-.hint {
-    margin-top: 10px;
-    padding: 10px;
-    background: #fff3cd;
-    color: #856404;
-    border-radius: 8px;
-}
-
-/* 說明區 */
-.instructions {
-    background: #f8f9fa;
-    border-radius: 12px;
-    padding: 25px;
-    margin: 30px 0;
-}
-
-.instructions h2 {
-    color: #495057;
-    margin-bottom: 15px;
-}
-
-.instructions ul {
-    list-style: none;
-}
-
-.instructions li {
-    padding: 10px 0;
-    border-bottom: 1px solid #dee2e6;
-    line-height: 1.6;
-}
-
-.instructions li:last-child {
-    border-bottom: none;
-}
-
-/* 演算法資訊 */
-.algorithm-info {
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-    border-radius: 12px;
-    padding: 20px;
-    margin-top: 30px;
-}
-
-.algorithm-info h3 {
-    color: #2d3748;
-    margin-bottom: 10px;
-}
-
-.algorithm-info p {
-    color: #4a5568;
-    line-height: 1.6;
-}
-
-/* 響應式 */
-@media (max-width: 768px) {
-    .container {
-        padding: 15px;
+@keyframes subpageSectionIn {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
     }
 
-    h1 {
-        font-size: 1.8rem;
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.container.app-loaded .lesson-card,
+.container.app-loaded .con-card,
+.container.app-loaded .lab-card {
+    animation: subpageSectionIn 0.48s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+    animation-delay: calc(0.045s * var(--sub-stagger, 0));
+}
+
+.container.app-loaded .algo-spotlight {
+    animation: subpageSectionIn 0.5s cubic-bezier(0.22, 0.61, 0.36, 1) 0.05s both;
+}
+
+.container.app-loaded .summary-grid {
+    animation: subpageSectionIn 0.48s cubic-bezier(0.22, 0.61, 0.36, 1) 0.04s both;
+}
+
+.container.app-loaded .exam-header {
+    animation: subpageSectionIn 0.45s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .lesson-card,
+    .con-card,
+    .lab-card,
+    .q-card,
+    .summary-cell,
+    .example,
+    .life-flow-card,
+    .logic-box,
+    .logic-trainer,
+    .stage-heading,
+    .progress-wrap {
+        transition: none;
     }
 
-    .card {
-        width: 60px;
-        height: 84px;
-        padding: 5px;
+    .lesson-card:hover,
+    .con-card:hover,
+    .lab-card:hover,
+    .q-card:hover,
+    .summary-cell:hover,
+    .example:hover,
+    .life-flow-card:hover,
+    .logic-box:hover,
+    .logic-trainer:hover,
+    .stage-heading:hover,
+    .progress-wrap:hover {
+        transform: none;
     }
 
-    .card .rank,
-    .card .rank-bottom {
-        font-size: 1rem;
+    .container.app-loaded .lesson-card,
+    .container.app-loaded .con-card,
+    .container.app-loaded .lab-card,
+    .container.app-loaded .algo-spotlight,
+    .container.app-loaded .summary-grid,
+    .container.app-loaded .exam-header {
+        animation: none;
     }
 
-    .card .suit {
-        font-size: 1.5rem;
-    }
-
-    .controls {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    .control-group {
-        flex-direction: column;
+    .progress-wrap .progress-bar > div {
+        transition: none;
     }
 }

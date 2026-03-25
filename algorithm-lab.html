@@ -1,12 +1,23 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>演算法生活實驗室 - 互動課程</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Noto+Sans+TC:wght@400;500;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <script src="subpage-ui.js" defer></script>
     <style>
-        .lab-wrap { max-width: 1140px; margin: 0 auto; }
+        .lab-wrap {
+            max-width: 1140px;
+            margin: 0 auto;
+        }
+
         .lab-card {
             background: rgba(2, 6, 23, 0.58);
             border: 1px solid rgba(148, 163, 184, 0.35);
@@ -14,9 +25,25 @@
             padding: 16px;
             margin-bottom: 12px;
         }
-        .lab-card h2 { margin: 0 0 10px; color: #fbbf24; }
-        .lab-card p, .lab-card li { color: #e5e7eb; line-height: 1.65; }
-        .pill-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+
+        .lab-card h2 {
+            margin: 0 0 10px;
+            color: #fbbf24;
+        }
+
+        .lab-card p,
+        .lab-card li {
+            color: #e5e7eb;
+            line-height: 1.65;
+        }
+
+        .pill-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 8px;
+        }
+
         .pill {
             border-radius: 999px;
             padding: 6px 10px;
@@ -26,15 +53,33 @@
             background: rgba(30, 64, 175, 0.24);
             border: 1px solid rgba(96, 165, 250, 0.5);
         }
-        .example-grid { display: grid; grid-template-columns: repeat(2, minmax(260px, 1fr)); gap: 10px; }
+
+        .example-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(260px, 1fr));
+            gap: 10px;
+        }
+
         .example {
             border: 1px solid rgba(148, 163, 184, 0.3);
             border-radius: 12px;
             background: rgba(2, 6, 23, 0.45);
             padding: 12px;
         }
-        .example h3 { color: #f8fafc; margin: 0 0 8px; font-size: 1rem; }
-        .flow-row { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+
+        .example h3 {
+            color: #f8fafc;
+            margin: 0 0 8px;
+            font-size: 1rem;
+        }
+
+        .flow-row {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 6px;
+        }
+
         .flow-node {
             color: #d1fae5;
             border: 1px solid rgba(16, 185, 129, 0.45);
@@ -44,9 +89,19 @@
             font-size: 0.82rem;
             font-weight: 600;
         }
-        .flow-arrow { color: #94a3b8; font-weight: 900; }
 
-        .lab-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+        .flow-arrow {
+            color: #94a3b8;
+            font-weight: 900;
+        }
+
+        .lab-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+
         .lab-tab-btn {
             border: 1px solid rgba(148, 163, 184, 0.45);
             background: rgba(2, 6, 23, 0.4);
@@ -56,13 +111,20 @@
             font-weight: 700;
             cursor: pointer;
         }
+
         .lab-tab-btn.active {
             border-color: rgba(250, 204, 21, 0.8);
             color: #fde68a;
             background: linear-gradient(135deg, rgba(250, 204, 21, 0.2), rgba(180, 83, 9, 0.25));
         }
-        .tab-pane { display: none; }
-        .tab-pane.active { display: block; }
+
+        .tab-pane {
+            display: none;
+        }
+
+        .tab-pane.active {
+            display: block;
+        }
 
         .exercise {
             border: 1px solid rgba(148, 163, 184, 0.3);
@@ -71,8 +133,14 @@
             margin-bottom: 10px;
             background: rgba(2, 6, 23, 0.4);
         }
-        .exercise h4 { margin: 0 0 6px; color: #fcd34d; }
-        .drag-pool, .drop-zone {
+
+        .exercise h4 {
+            margin: 0 0 6px;
+            color: #fcd34d;
+        }
+
+        .drag-pool,
+        .drop-zone {
             min-height: 52px;
             padding: 8px;
             border-radius: 10px;
@@ -83,7 +151,11 @@
             align-items: flex-start;
             background: rgba(15, 23, 42, 0.5);
         }
-        .drop-zone { margin-top: 8px; }
+
+        .drop-zone {
+            margin-top: 8px;
+        }
+
         .draggable-step {
             user-select: none;
             cursor: grab;
@@ -95,8 +167,18 @@
             font-size: 0.9rem;
             font-weight: 600;
         }
-        .draggable-step.dragging { opacity: 0.55; }
-        .exercise-actions { margin-top: 8px; display: flex; gap: 8px; flex-wrap: wrap; }
+
+        .draggable-step.dragging {
+            opacity: 0.55;
+        }
+
+        .exercise-actions {
+            margin-top: 8px;
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
         .result {
             margin-top: 8px;
             padding: 8px 10px;
@@ -104,8 +186,19 @@
             font-weight: 700;
             display: inline-flex;
         }
-        .result.ok { color: #d1fae5; border: 1px solid rgba(16,185,129,0.8); background: rgba(16,185,129,0.15); }
-        .result.fail { color: #fee2e2; border: 1px solid rgba(239,68,68,0.8); background: rgba(239,68,68,0.15); }
+
+        .result.ok {
+            color: #d1fae5;
+            border: 1px solid rgba(16, 185, 129, 0.8);
+            background: rgba(16, 185, 129, 0.15);
+        }
+
+        .result.fail {
+            color: #fee2e2;
+            border: 1px solid rgba(239, 68, 68, 0.8);
+            background: rgba(239, 68, 68, 0.15);
+        }
+
         .hint {
             margin-top: 8px;
             color: #93c5fd;
@@ -121,14 +214,26 @@
             gap: 10px;
             margin-top: 8px;
         }
+
         .logic-box {
             border: 1px solid rgba(148, 163, 184, 0.35);
             border-radius: 12px;
             padding: 10px;
             background: rgba(2, 6, 23, 0.45);
         }
-        .logic-box h3 { margin: 0 0 6px; color: #fcd34d; font-size: 0.98rem; }
-        .logic-rule { color: #bfdbfe; font-weight: 700; margin-bottom: 4px; }
+
+        .logic-box h3 {
+            margin: 0 0 6px;
+            color: #fcd34d;
+            font-size: 0.98rem;
+        }
+
+        .logic-rule {
+            color: #bfdbfe;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
         .logic-trainer {
             margin-top: 8px;
             border: 1px solid rgba(148, 163, 184, 0.35);
@@ -136,7 +241,14 @@
             padding: 10px;
             background: rgba(2, 6, 23, 0.45);
         }
-        .logic-options { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0; }
+
+        .logic-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 8px 0;
+        }
+
         .branch-flow {
             margin-top: 8px;
             border: 1px dashed rgba(148, 163, 184, 0.45);
@@ -144,368 +256,724 @@
             padding: 10px;
             background: rgba(15, 23, 42, 0.35);
         }
-        .branch-line { color: #cbd5e1; margin: 4px 0; font-size: 0.93rem; }
-        .branch-key { color: #fcd34d; font-weight: 800; }
-        .axis-block { margin-top: 8px; }
-        .axis-label { color: #bfdbfe; font-weight: 700; margin-bottom: 4px; display: block; }
+
+        .branch-line {
+            color: #cbd5e1;
+            margin: 4px 0;
+            font-size: 0.93rem;
+        }
+
+        .branch-key {
+            color: #fcd34d;
+            font-weight: 800;
+        }
+
+        .axis-block {
+            margin-top: 8px;
+        }
+
+        .axis-label {
+            color: #bfdbfe;
+            font-weight: 700;
+            margin-bottom: 4px;
+            display: block;
+        }
 
         @media (max-width: 768px) {
-            .example-grid { grid-template-columns: 1fr; }
-            .logic-grid { grid-template-columns: 1fr; }
+            .example-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .logic-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .lab-drag-head {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .lab-drag-head h2 {
+            margin: 0;
+        }
+
+        #lab-cert-banner {
+            margin: 0 0 10px;
+        }
+
+        .lab-cert-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 100;
+            background: rgba(2, 6, 23, 0.82);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+        }
+
+        .lab-cert-overlay[hidden] {
+            display: none !important;
+        }
+
+        .lab-cert-dialog {
+            width: min(440px, 100%);
+            max-height: min(92vh, 640px);
+            overflow: auto;
+            background: linear-gradient(160deg, rgba(30, 27, 15, 0.98), rgba(15, 23, 42, 0.98));
+            border: 1px solid rgba(250, 204, 21, 0.45);
+            border-radius: 18px;
+            padding: 18px 18px 16px;
+            box-shadow: 0 28px 80px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(250, 204, 21, 0.12);
+        }
+
+        .lab-cert-dialog h3 {
+            margin: 0 0 10px;
+            color: #fde68a;
+            font-size: 1.15rem;
+            letter-spacing: 0.06em;
+        }
+
+        .lab-cert-field {
+            margin-bottom: 12px;
+        }
+
+        .lab-cert-field label {
+            display: block;
+            color: #cbd5e1;
+            font-size: 0.88rem;
+            margin-bottom: 6px;
+            font-weight: 600;
+        }
+
+        .lab-cert-name-input {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 10px 12px;
+            border-radius: 10px;
+            border: 1px solid rgba(148, 163, 184, 0.5);
+            background: rgba(2, 6, 23, 0.65);
+            color: #f8fafc;
+            font-size: 1rem;
+        }
+
+        .lab-cert-preview {
+            margin-top: 12px;
+            padding: 16px 14px;
+            border-radius: 14px;
+            border: 2px solid rgba(250, 204, 21, 0.55);
+            background: radial-gradient(circle at 50% 0%, rgba(250, 204, 21, 0.12), rgba(2, 6, 23, 0.92));
+            text-align: center;
+        }
+
+        .lab-cert-preview .cert-title {
+            font-family: 'Playfair Display', 'Times New Roman', serif;
+            color: #fef3c7;
+            font-size: 1.25rem;
+            margin: 0 0 8px;
+            letter-spacing: 0.08em;
+        }
+
+        .lab-cert-preview .cert-name {
+            color: #e2e8f0;
+            font-size: 1.1rem;
+            font-weight: 800;
+            margin: 10px 0;
+        }
+
+        .lab-cert-preview .cert-meta {
+            color: #94a3b8;
+            font-size: 0.88rem;
+            line-height: 1.55;
+            margin: 0;
+        }
+
+        .lab-cert-padlet {
+            margin-top: 14px;
+            padding: 10px 12px;
+            border-radius: 12px;
+            background: rgba(30, 64, 175, 0.2);
+            border: 1px solid rgba(96, 165, 250, 0.45);
+            color: #bfdbfe;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .lab-cert-actions {
+            margin-top: 14px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: flex-end;
+        }
+
+        /* 生活範例插圖（assets/lab-life/，支援 jpg／png） */
+        .life-flow-media {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 0 0 10px;
+            border: 1px solid rgba(148, 163, 184, 0.35);
+            background: rgba(15, 23, 42, 0.65);
+        }
+
+        .life-flow-img {
+            display: block;
+            width: 100%;
+            height: auto;
+            aspect-ratio: 16 / 10;
+            object-fit: cover;
         }
     </style>
 </head>
+
 <body>
-<div class="page-frame">
-    <div class="table-glow"></div>
-    <div class="container lab-wrap">
-        <div class="lab-card">
-            <h2>🧠 演算法生活實驗室（獨立課程）</h2>
-            <p>這一頁可當作「認識演算法」獨立課程。學生先看生活中的流程，再做拖曳配對練習，從操作中體驗演算法的奧秘。</p>
-            <div class="pill-row">
-                <span class="pill">輸入 Input</span>
-                <span class="pill">步驟 Process</span>
-                <span class="pill">輸出 Output</span>
-                <span class="pill">可重現</span>
-                <span class="pill">可停止</span>
+    <nav class="site-nav" aria-label="網站導覽">
+        <div class="site-nav-inner">
+            <div class="site-nav-group" role="group" aria-labelledby="site-nav-flow-label">
+                <div id="site-nav-flow-label" class="site-nav-group-label">教學流程</div>
+                <div class="site-nav-group-links">
+                    <a href="algorithm-lab.html" class="site-nav-link site-nav-flow-link site-nav-link-current"
+                        aria-current="page"><span class="site-nav-step" aria-hidden="true">1</span>認識演算法</a>
+                    <a href="index.html" class="site-nav-link site-nav-flow-link"><span class="site-nav-step"
+                            aria-hidden="true">2</span>排序演算法實驗室</a>
+                    <a href="exam.html" class="site-nav-link site-nav-flow-link"><span class="site-nav-step"
+                            aria-hidden="true">3</span>學習評量</a>
+                    <a href="algorithm-concepts.html" class="site-nav-link site-nav-flow-link"><span
+                            class="site-nav-step" aria-hidden="true">4</span>演算法中的結構</a>
+                    <a href="algorithm-concepts-quiz.html" class="site-nav-link site-nav-flow-link"><span
+                            class="site-nav-step" aria-hidden="true">5</span>結構小測驗</a>
+                </div>
             </div>
-            <p style="margin-top:10px;">
-                <a class="btn preset-btn" href="index.html" style="text-decoration:none;">回到遊戲</a>
-                <a class="btn preset-btn" href="exam.html" style="text-decoration:none;">前往分階段測驗</a>
-                <a class="btn preset-btn" href="lesson.html" style="text-decoration:none;">教案頁</a>
-                <a class="btn preset-btn" href="algorithm-concepts.html" style="text-decoration:none;">循序·迴圈·判斷</a>
-            </p>
-        </div>
-
-        <section class="algo-spotlight" aria-label="認識演算法">
-            <h2>🌟 認識演算法（獨立重點）</h2>
-            <p class="algo-spotlight-intro">
-                演算法就是：把一個問題，拆成「可照做」的步驟。<br>
-                最基本結構是 <strong>輸入 → 步驟 → 輸出</strong>，而且要有停止條件。
-            </p>
-
-            <div class="algo-pill-row">
-                <span class="algo-pill">輸入 Input：現在有哪些資料</span>
-                <span class="algo-pill">步驟 Process：每一步怎麼做</span>
-                <span class="algo-pill">輸出 Output：最後得到什麼</span>
-            </div>
-
-            <div class="life-flow-grid">
-                <article class="life-flow-card">
-                    <h3>☔ 生活例 1：出門要不要帶傘</h3>
-                    <div class="flow-row">
-                        <span class="flow-node">查看天氣預報</span><span class="flow-arrow">→</span>
-                        <span class="flow-node">判斷降雨機率</span><span class="flow-arrow">→</span>
-                        <span class="flow-node">高於 50% 帶傘</span><span class="flow-arrow">→</span>
-                        <span class="flow-node">完成出門準備</span>
-                    </div>
-                </article>
-
-                <article class="life-flow-card">
-                    <h3>🍱 生活例 2：便當店點餐流程</h3>
-                    <div class="flow-row">
-                        <span class="flow-node">看菜單</span><span class="flow-arrow">→</span>
-                        <span class="flow-node">選主菜與配菜</span><span class="flow-arrow">→</span>
-                        <span class="flow-node">確認金額</span><span class="flow-arrow">→</span>
-                        <span class="flow-node">付款取餐</span>
-                    </div>
-                </article>
-
-                <article class="life-flow-card">
-                    <h3>📚 生活例 3：圖書館借書</h3>
-                    <div class="flow-row">
-                        <span class="flow-node">查詢書籍</span><span class="flow-arrow">→</span>
-                        <span class="flow-node">找到書架位置</span><span class="flow-arrow">→</span>
-                        <span class="flow-node">借書機掃描</span><span class="flow-arrow">→</span>
-                        <span class="flow-node">完成借閱</span>
-                    </div>
-                </article>
-
-                <article class="life-flow-card">
-                    <h3>🃏 本遊戲對應：牌的排序演算法</h3>
-                    <div class="flow-row">
-                        <span class="flow-node">輸入：一排亂序牌</span><span class="flow-arrow">→</span>
-                        <span class="flow-node">比較大小</span><span class="flow-arrow">→</span>
-                        <span class="flow-node">交換或插入</span><span class="flow-arrow">→</span>
-                        <span class="flow-node">輸出：有序牌列</span>
-                    </div>
-                </article>
-            </div>
-        </section>
-
-        <div class="lab-card">
-            <h2>🌍 生活中的演算法範例</h2>
-            <div class="example-grid">
-                <article class="example">
-                    <h3>☔ 出門帶傘</h3>
-                    <div class="flow-row">
-                        <span class="flow-node">輸入：天氣預報</span><span class="flow-arrow">→</span>
-                        <span class="flow-node">判斷降雨機率</span><span class="flow-arrow">→</span>
-                        <span class="flow-node">&gt;50% 帶傘</span><span class="flow-arrow">→</span>
-                        <span class="flow-node">輸出：完成出門準備</span>
-                    </div>
-                </article>
-                <article class="example">
-                    <h3>🍱 點餐流程</h3>
-                    <div class="flow-row">
-                        <span class="flow-node">輸入：菜單</span><span class="flow-arrow">→</span>
-                        <span class="flow-node">選主餐/配菜</span><span class="flow-arrow">→</span>
-                        <span class="flow-node">確認金額</span><span class="flow-arrow">→</span>
-                        <span class="flow-node">輸出：完成點餐</span>
-                    </div>
-                </article>
-                <article class="example">
-                    <h3>🚌 公車轉乘</h3>
-                    <div class="flow-row">
-                        <span class="flow-node">輸入：目的地</span><span class="flow-arrow">→</span>
-                        <span class="flow-node">查詢路線</span><span class="flow-arrow">→</span>
-                        <span class="flow-node">比較時間/班次</span><span class="flow-arrow">→</span>
-                        <span class="flow-node">輸出：最佳路線</span>
-                    </div>
-                </article>
-                <article class="example">
-                    <h3>🔬 生物實驗：顯微鏡觀察微生物</h3>
-                    <div class="flow-row">
-                        <span class="flow-node">輸入：樣本與載玻片</span><span class="flow-arrow">→</span>
-                        <span class="flow-node">低倍鏡對焦</span><span class="flow-arrow">→</span>
-                        <span class="flow-node">高倍鏡微調</span><span class="flow-arrow">→</span>
-                        <span class="flow-node">輸出：觀察與記錄結果</span>
-                    </div>
-                </article>
-                <article class="example">
-                    <h3>🍕 家政課：製作披薩</h3>
-                    <div class="flow-row">
-                        <span class="flow-node">輸入：食材與烤箱</span><span class="flow-arrow">→</span>
-                        <span class="flow-node">備料與鋪料</span><span class="flow-arrow">→</span>
-                        <span class="flow-node">設定溫度與烘烤</span><span class="flow-arrow">→</span>
-                        <span class="flow-node">輸出：完成披薩</span>
-                    </div>
-                </article>
-                <article class="example">
-                    <h3>🃏 撲克牌排序（本遊戲）</h3>
-                    <div class="flow-row">
-                        <span class="flow-node">輸入：亂序牌列</span><span class="flow-arrow">→</span>
-                        <span class="flow-node">比較大小</span><span class="flow-arrow">→</span>
-                        <span class="flow-node">交換/插入</span><span class="flow-arrow">→</span>
-                        <span class="flow-node">輸出：有序牌列</span>
-                    </div>
-                </article>
+            <div class="site-nav-group site-nav-group--extra" role="group" aria-label="教師手冊與教案">
+                <div class="site-nav-group-links">
+                    <a href="guide.html" class="site-nav-link site-nav-extra-link">教師手冊</a>
+                    <a href="lesson.html" class="site-nav-link site-nav-extra-link">教案</a>
+                </div>
             </div>
         </div>
-
-        <div class="lab-card">
-            <h2>🎮 拖曳配對練習（可重做）</h2>
-            <div id="lab-tabs" class="lab-tabs"></div>
-            <div id="tab-content"></div>
-        </div>
-
-        <div class="lab-card">
-            <h2>🔍 邏輯判斷演算法：顯微鏡定位</h2>
-            <p>重點：<strong>判斷（if / else）也是演算法流程的一部分</strong>。大問題（把影像移回中央）先拆成小問題，再用條件判斷決定流程方向。</p>
-            <div class="logic-grid">
-                <div class="logic-box">
-                    <h3>Step 1：左右判斷</h3>
-                    <div class="logic-rule">影像在右邊 → 玻片往右移</div>
-                    <div class="logic-rule">影像在左邊 → 玻片往左移</div>
-                    <div class="logic-rule">影像在中線 → 左右不移動</div>
-                </div>
-                <div class="logic-box">
-                    <h3>Step 2：上下判斷</h3>
-                    <div class="logic-rule">影像在上方 → 玻片往上移</div>
-                    <div class="logic-rule">影像在下方 → 玻片往下移</div>
-                    <div class="logic-rule">影像在中線 → 上下不移動</div>
+    </nav>
+    <div class="page-frame">
+        <div class="table-glow"></div>
+        <div class="container lab-wrap">
+            <div class="lab-card">
+                <h2>🧠 演算法生活實驗室</h2>
+                <p>請先閱讀<a href="#life-examples" style="color:#fde68a; font-weight:700;">認識演算法的生活範例</a>，再想生活中的流程，接著做拖曳配對練習，從操作中體驗演算法。關鍵字：</p>
+                <div class="pill-row">
+                    <span class="pill">輸入 Input</span>
+                    <span class="pill">步驟 Process</span>
+                    <span class="pill">輸出 Output</span>
+                    <span class="pill">可重現</span>
+                    <span class="pill">可停止</span>
                 </div>
             </div>
 
-            <div class="branch-flow">
-                <div class="branch-line"><span class="branch-key">開始</span>：影像位置（輸入）</div>
-                <div class="branch-line">if 影像在右邊 then 玻片往右；else if 在左邊 then 玻片往左；else 不移動</div>
-                <div class="branch-line">if 影像在上方 then 玻片往上；else if 在下方 then 玻片往下；else 不移動</div>
-                <div class="branch-line"><span class="branch-key">輸出</span>：合併後的移動方向（例如右上方）</div>
+            <section class="algo-spotlight" aria-label="認識演算法">
+                <h2>🌟 認識演算法</h2>
+                <p class="algo-spotlight-intro">
+                    演算法就是：把一個問題，拆成「可照做」的步驟。<br>
+                    最基本結構是 <strong>輸入 → 步驟 → 輸出</strong>，而且要有停止條件。
+                </p>
+
+                <div class="algo-pill-row">
+                    <span class="algo-pill">輸入 Input：現在有哪些資料</span>
+                    <span class="algo-pill">步驟 Process：每一步怎麼做</span>
+                    <span class="algo-pill">輸出 Output：最後得到什麼</span>
+                </div>
+
+                <h3 class="life-examples-heading" id="life-examples">認識演算法的生活範例</h3>
+                <p class="life-examples-lead">先從你每天會遇到的事想「先做什麼、再做什麼」；下面每一張卡片都是一條簡單流程，最後一則對應本單元的撲克牌排序。</p>
+
+                <div class="life-flow-grid">
+                    <article class="life-flow-card">
+                        <div class="life-flow-media">
+                            <img class="life-flow-img" src="assets/lab-life/algo-life-01-umbrella.jpg"
+                                alt="漫畫：學生看手機天氣預報，依降雨機率決定是否帶傘出門的流程示意"
+                                width="640" height="400" loading="lazy" decoding="async">
+                        </div>
+                        <h3>☔ 生活例 1：出門要不要帶傘</h3>
+                        <div class="flow-row">
+                            <span class="flow-node">查看天氣預報</span><span class="flow-arrow">→</span>
+                            <span class="flow-node">判斷降雨機率</span><span class="flow-arrow">→</span>
+                            <span class="flow-node">高於 50% 帶傘</span><span class="flow-arrow">→</span>
+                            <span class="flow-node">完成出門準備</span>
+                        </div>
+                    </article>
+
+                    <article class="life-flow-card">
+                        <div class="life-flow-media">
+                            <img class="life-flow-img" src="assets/lab-life/algo-life-02-bento.png"
+                                alt="插圖：便當店看菜單、選餐、付錢取餐的步驟流程"
+                                width="640" height="400" loading="lazy" decoding="async">
+                        </div>
+                        <h3>🍱 生活例 2：便當店點餐流程</h3>
+                        <div class="flow-row">
+                            <span class="flow-node">看菜單</span><span class="flow-arrow">→</span>
+                            <span class="flow-node">選主菜與配菜</span><span class="flow-arrow">→</span>
+                            <span class="flow-node">確認金額</span><span class="flow-arrow">→</span>
+                            <span class="flow-node">付款取餐</span>
+                        </div>
+                    </article>
+
+                    <article class="life-flow-card">
+                        <div class="life-flow-media">
+                            <img class="life-flow-img" src="assets/lab-life/algo-life-03-library.png"
+                                alt="插圖：圖書館查書、找書架、掃描借書的步驟流程"
+                                width="640" height="400" loading="lazy" decoding="async">
+                        </div>
+                        <h3>📚 生活例 3：圖書館借書</h3>
+                        <div class="flow-row">
+                            <span class="flow-node">查詢書籍</span><span class="flow-arrow">→</span>
+                            <span class="flow-node">找到書架位置</span><span class="flow-arrow">→</span>
+                            <span class="flow-node">借書機掃描</span><span class="flow-arrow">→</span>
+                            <span class="flow-node">完成借閱</span>
+                        </div>
+                    </article>
+
+                    <article class="life-flow-card">
+                        <div class="life-flow-media">
+                            <img class="life-flow-img" src="assets/lab-life/algo-life-04-cards.png"
+                                alt="插圖：將亂序撲克牌透過比較與交換排成有序牌列，對應排序演算法"
+                                width="640" height="400" loading="lazy" decoding="async">
+                        </div>
+                        <h3>🃏 本遊戲對應：牌的排序演算法</h3>
+                        <div class="flow-row">
+                            <span class="flow-node">輸入：一排亂序牌</span><span class="flow-arrow">→</span>
+                            <span class="flow-node">比較大小</span><span class="flow-arrow">→</span>
+                            <span class="flow-node">交換或插入</span><span class="flow-arrow">→</span>
+                            <span class="flow-node">輸出：有序牌列</span>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <div class="lab-card">
+                <h2>🌍 生活中的演算法範例</h2>
+                <div class="example-grid">
+                    <article class="example">
+                        <h3>☔ 出門帶傘</h3>
+                        <div class="flow-row">
+                            <span class="flow-node">輸入：天氣預報</span><span class="flow-arrow">→</span>
+                            <span class="flow-node">判斷降雨機率</span><span class="flow-arrow">→</span>
+                            <span class="flow-node">&gt;50% 帶傘</span><span class="flow-arrow">→</span>
+                            <span class="flow-node">輸出：完成出門準備</span>
+                        </div>
+                    </article>
+                    <article class="example">
+                        <h3>🍱 點餐流程</h3>
+                        <div class="flow-row">
+                            <span class="flow-node">輸入：菜單</span><span class="flow-arrow">→</span>
+                            <span class="flow-node">選主餐/配菜</span><span class="flow-arrow">→</span>
+                            <span class="flow-node">確認金額</span><span class="flow-arrow">→</span>
+                            <span class="flow-node">輸出：完成點餐</span>
+                        </div>
+                    </article>
+                    <article class="example">
+                        <h3>🚌 公車轉乘</h3>
+                        <div class="flow-row">
+                            <span class="flow-node">輸入：目的地</span><span class="flow-arrow">→</span>
+                            <span class="flow-node">查詢路線</span><span class="flow-arrow">→</span>
+                            <span class="flow-node">比較時間/班次</span><span class="flow-arrow">→</span>
+                            <span class="flow-node">輸出：最佳路線</span>
+                        </div>
+                    </article>
+                    <article class="example">
+                        <h3>🔬 生物實驗：顯微鏡觀察微生物</h3>
+                        <div class="flow-row">
+                            <span class="flow-node">輸入：樣本與載玻片</span><span class="flow-arrow">→</span>
+                            <span class="flow-node">低倍鏡對焦</span><span class="flow-arrow">→</span>
+                            <span class="flow-node">高倍鏡微調</span><span class="flow-arrow">→</span>
+                            <span class="flow-node">輸出：觀察與記錄結果</span>
+                        </div>
+                    </article>
+                    <article class="example">
+                        <h3>🍕 家政課：製作披薩</h3>
+                        <div class="flow-row">
+                            <span class="flow-node">輸入：食材與烤箱</span><span class="flow-arrow">→</span>
+                            <span class="flow-node">備料與鋪料</span><span class="flow-arrow">→</span>
+                            <span class="flow-node">設定溫度與烘烤</span><span class="flow-arrow">→</span>
+                            <span class="flow-node">輸出：完成披薩</span>
+                        </div>
+                    </article>
+                    <article class="example">
+                        <h3>🃏 撲克牌排序（本遊戲）</h3>
+                        <div class="flow-row">
+                            <span class="flow-node">輸入：亂序牌列</span><span class="flow-arrow">→</span>
+                            <span class="flow-node">比較大小</span><span class="flow-arrow">→</span>
+                            <span class="flow-node">交換/插入</span><span class="flow-arrow">→</span>
+                            <span class="flow-node">輸出：有序牌列</span>
+                        </div>
+                    </article>
+                </div>
             </div>
 
-            <div class="logic-trainer">
-                <h3 style="margin:0; color:#f8fafc;">互動演練（判斷分支決策）</h3>
-                <p id="logic-question" style="margin:6px 0 0;">影像出現在「右上方」，請先做左右判斷，再做上下判斷。</p>
+            <div class="lab-card">
+                <div class="lab-drag-head">
+                    <h2>🎮 拖曳配對練習（可重做）</h2>
+                    <button type="button" class="btn success" id="lab-cert-open-btn"
+                        style="display:none;">開啟通關證明（截圖／Padlet）</button>
+                </div>
+                <p id="lab-cert-banner" class="hint" style="display:none;">你已通過三關全部拖曳題（共 9
+                    題）。請使用上方按鈕開啟證明、輸入姓名後截圖，上傳至教師指定的 Padlet。</p>
+                <div id="lab-tabs" class="lab-tabs"></div>
+                <div id="tab-content"></div>
+            </div>
 
-                <div class="axis-block">
-                    <span class="axis-label">A. 左右判斷（if / else）</span>
-                    <div id="logic-options-lr" class="logic-options"></div>
-                </div>
-                <div class="axis-block">
-                    <span class="axis-label">B. 上下判斷（if / else）</span>
-                    <div id="logic-options-ud" class="logic-options"></div>
+            <div class="lab-card">
+                <h2>🔍 邏輯判斷演算法：顯微鏡定位</h2>
+                <p>重點：<strong>判斷（if / else）也是演算法流程的一部分</strong>。大問題（把影像移回中央）先拆成小問題，再用條件判斷決定流程方向。</p>
+                <div class="logic-grid">
+                    <div class="logic-box">
+                        <h3>Step 1：左右判斷</h3>
+                        <div class="logic-rule">影像在右邊 → 玻片往右移</div>
+                        <div class="logic-rule">影像在左邊 → 玻片往左移</div>
+                        <div class="logic-rule">影像在中線 → 左右不移動</div>
+                    </div>
+                    <div class="logic-box">
+                        <h3>Step 2：上下判斷</h3>
+                        <div class="logic-rule">影像在上方 → 玻片往上移</div>
+                        <div class="logic-rule">影像在下方 → 玻片往下移</div>
+                        <div class="logic-rule">影像在中線 → 上下不移動</div>
+                    </div>
                 </div>
 
-                <div class="exercise-actions">
-                    <button class="btn success" id="logic-check" type="button">檢查</button>
-                    <button class="btn warning" id="logic-next" type="button">下一題</button>
-                    <button class="btn preset-btn" id="logic-show-rule" type="button">顯示判斷規則</button>
+                <div class="branch-flow">
+                    <div class="branch-line"><span class="branch-key">開始</span>：影像位置（輸入）</div>
+                    <div class="branch-line">if 影像在右邊 then 玻片往右；else if 在左邊 then 玻片往左；else 不移動</div>
+                    <div class="branch-line">if 影像在上方 then 玻片往上；else if 在下方 then 玻片往下；else 不移動</div>
+                    <div class="branch-line"><span class="branch-key">輸出</span>：合併後的移動方向（例如右上方）</div>
                 </div>
-                <div id="logic-result"></div>
-                <div id="logic-rule-box" class="hint" style="display:none;">
-                    先用 if/else 完成左右，再用 if/else 完成上下；最後合併方向。<br>
-                    例：影像在右上方 →（左右=右）+（上下=上）→ 玻片往右上方移動。
+
+                <div class="logic-trainer">
+                    <h3 style="margin:0; color:#f8fafc;">互動演練（判斷分支決策）</h3>
+                    <p id="logic-question" style="margin:6px 0 0;">影像出現在「右上方」，請先做左右判斷，再做上下判斷。</p>
+
+                    <div class="axis-block">
+                        <span class="axis-label">A. 左右判斷（if / else）</span>
+                        <div id="logic-options-lr" class="logic-options"></div>
+                    </div>
+                    <div class="axis-block">
+                        <span class="axis-label">B. 上下判斷（if / else）</span>
+                        <div id="logic-options-ud" class="logic-options"></div>
+                    </div>
+
+                    <div class="exercise-actions">
+                        <button class="btn success" id="logic-check" type="button">檢查</button>
+                        <button class="btn warning" id="logic-next" type="button">下一題</button>
+                        <button class="btn preset-btn" id="logic-show-rule" type="button">顯示判斷規則</button>
+                    </div>
+                    <div id="logic-result"></div>
+                    <div id="logic-rule-box" class="hint" style="display:none;">
+                        先用 if/else 完成左右，再用 if/else 完成上下；最後合併方向。<br>
+                        例：影像在右上方 →（左右=右）+（上下=上）→ 玻片往右上方移動。
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-<script>
-    const tabs = [
-        { id: 'easy', title: '第一關：認識流程' },
-        { id: 'middle', title: '第二關：排序思考' },
-        { id: 'hard', title: '第三關：演算法挑戰' }
-    ];
+    <div id="lab-cert-overlay" class="lab-cert-overlay" hidden aria-hidden="true">
+        <div class="lab-cert-dialog" role="dialog" aria-modal="true" aria-labelledby="lab-cert-title">
+            <h3 id="lab-cert-title">🎉 通關證明</h3>
+            <p style="color:#cbd5e1; margin:0 0 12px; font-size:0.92rem; line-height:1.55;">
+                恭喜你完成三關拖曳配對。請輸入姓名後截圖本視窗（或僅截圖下方金色證明區），再依教師指示上傳至 Padlet。</p>
+            <div class="lab-cert-field">
+                <label for="lab-cert-name">姓名（會顯示在證明上）</label>
+                <input type="text" id="lab-cert-name" class="lab-cert-name-input" maxlength="40" placeholder="請輸入姓名或座號"
+                    autocomplete="name">
+            </div>
+            <div class="lab-cert-actions" style="margin-top:0; margin-bottom:8px;">
+                <button type="button" class="btn preset-btn" id="lab-cert-apply-name">更新證明上的姓名</button>
+            </div>
+            <div class="lab-cert-preview" id="lab-cert-preview-block">
+                <div class="cert-title">撲克牌排序學院</div>
+                <div style="color:#fbbf24; font-weight:800; letter-spacing:0.12em; font-size:0.82rem;">演算法生活實驗室 · 拖曳配對通關
+                </div>
+                <div class="cert-name" id="lab-cert-display-name">（請輸入姓名）</div>
+                <p class="cert-meta" id="lab-cert-display-meta">已完成：第一關、第二關、第三關（共 9 題）<br><span
+                        id="lab-cert-display-date"></span></p>
+            </div>
+            <div class="lab-cert-padlet">
+                <strong>上傳 Padlet 小提醒：</strong>向教師索取看板連結 → 新增一則貼文 → 上傳截圖（或拖曳圖片）→ 可簡短寫一句學習心得。
+            </div>
+            <div class="lab-cert-actions">
+                <button type="button" class="btn primary" id="lab-cert-close-btn">關閉</button>
+            </div>
+        </div>
+    </div>
 
-    const exercisesByTab = {
-        easy: [
-            {
-                id: 'rain',
-                title: '出門帶傘流程排序',
-                instruction: '請拖曳以下步驟到下方，排成合理流程。',
-                steps: ['查看天氣預報', '判斷降雨機率', '決定是否帶傘', '出門'],
-                answer: ['查看天氣預報', '判斷降雨機率', '決定是否帶傘', '出門'],
-                hint: '先有資料，再判斷，再做決定，最後行動。'
-            },
-            {
-                id: 'library',
-                title: '圖書館借書流程排序',
-                instruction: '把借書步驟拖曳排序。',
-                steps: ['找到想借的書', '查詢書籍位置', '借書機掃描', '完成借閱'],
-                answer: ['查詢書籍位置', '找到想借的書', '借書機掃描', '完成借閱'],
-                hint: '先查，再找，再掃描。'
-            },
-            {
-                id: 'pizza-basic',
-                title: '家政課做披薩流程排序',
-                instruction: '把製作披薩的步驟排成合理順序。',
-                steps: ['把披薩放入烤箱', '準備麵團與食材', '在麵團上鋪醬與配料', '出爐切片'],
-                answer: ['準備麵團與食材', '在麵團上鋪醬與配料', '把披薩放入烤箱', '出爐切片'],
-                hint: '先備料，再鋪料，再烤。'
-            }
-        ],
-        middle: [
-            {
-                id: 'selection-idea',
-                title: '選擇排序核心流程',
-                instruction: '把選擇排序每輪的核心步驟排序。',
-                steps: ['把找到的最小值放到目前位置', '找出未排序區最小值', '已排序區往右擴大一格', '進入下一輪'],
-                answer: ['找出未排序區最小值', '把找到的最小值放到目前位置', '已排序區往右擴大一格', '進入下一輪'],
-                hint: '先「找」，再「放」，才會擴大已排序區。'
-            },
-            {
-                id: 'insertion-idea',
-                title: '插入排序核心流程',
-                instruction: '把插入排序每輪步驟排序。',
-                steps: ['取出下一張 key', '比較並找到插入位置', '把 key 插入正確位置', '維持已排序區有序'],
-                answer: ['取出下一張 key', '比較並找到插入位置', '把 key 插入正確位置', '維持已排序區有序'],
-                hint: 'key 是每輪主角。'
-            },
-            {
-                id: 'microbe-middle',
-                title: '顯微鏡觀察微生物（實驗流程）',
-                instruction: '拖曳排出觀察流程。',
-                steps: ['切換高倍鏡並微調', '放置樣本玻片', '低倍鏡先找到影像', '記錄觀察結果'],
-                answer: ['放置樣本玻片', '低倍鏡先找到影像', '切換高倍鏡並微調', '記錄觀察結果'],
-                hint: '顯微鏡通常先低倍，再高倍。'
-            }
-        ],
-        hard: [
-            {
-                id: 'algo-structure',
-                title: '演算法三要素配對',
-                instruction: '請把步驟拖曳排序，組成「輸入→步驟→輸出→檢查」',
-                steps: ['檢查結果是否符合目標', '輸入資料（目前牌列）', '依規則做比較與交換/插入', '輸出排序後牌列'],
-                answer: ['輸入資料（目前牌列）', '依規則做比較與交換/插入', '輸出排序後牌列', '檢查結果是否符合目標'],
-                hint: '先有輸入，最後才是檢查。'
-            },
-            {
-                id: 'debug',
-                title: '偵錯思考順序',
-                instruction: '學生做錯排序時，教師引導流程應該怎麼走？',
-                steps: ['指出錯誤發生的輪次', '回看該輪比較依據', '修正該輪步驟', '重新檢查結果'],
-                answer: ['指出錯誤發生的輪次', '回看該輪比較依據', '修正該輪步驟', '重新檢查結果'],
-                hint: '先定位錯誤，再修正。'
-            },
-            {
-                id: 'microbe-safe',
-                title: '生物實驗安全流程（挑戰）',
-                instruction: '把顯微鏡觀察實驗中「安全又完整」的流程排出來。',
-                steps: ['清理桌面與器材', '戴手套並準備器材', '依步驟觀察並記錄', '廢棄物分類處理'],
-                answer: ['戴手套並準備器材', '依步驟觀察並記錄', '廢棄物分類處理', '清理桌面與器材'],
-                hint: '先防護，再實驗，最後善後。'
-            }
-        ]
-    };
+    <script>
+        const LAB_PASS_STORAGE_KEY = 'pokerSortLabDragPasses_v1';
+        const LAB_NAME_STORAGE_KEY = 'pokerSortLabCertName_v1';
 
-    let currentTab = tabs[0].id;
-    let currentLogicIndex = 0;
-    let selectedLR = '';
-    let selectedUD = '';
-
-    const logicCases = [
-        { pos: '右上方', answerLR: '右移', answerUD: '上移', final: '右上方' },
-        { pos: '左上方', answerLR: '左移', answerUD: '上移', final: '左上方' },
-        { pos: '右下方', answerLR: '右移', answerUD: '下移', final: '右下方' },
-        { pos: '左下方', answerLR: '左移', answerUD: '下移', final: '左下方' },
-        { pos: '正上方', answerLR: '不移動', answerUD: '上移', final: '上方' },
-        { pos: '正右方', answerLR: '右移', answerUD: '不移動', final: '右方' }
-    ];
-    const lrOptions = ['左移', '右移', '不移動'];
-    const udOptions = ['上移', '下移', '不移動'];
-
-    function getEl(id) { return document.getElementById(id); }
-
-    function shuffle(arr) {
-        const a = [...arr];
-        for (let i = a.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [a[i], a[j]] = [a[j], a[i]];
+        function getAllDragExerciseIds() {
+            return [...exercisesByTab.easy, ...exercisesByTab.middle, ...exercisesByTab.hard].map(ex => ex.id);
         }
-        return a;
-    }
 
-    function renderTabs() {
-        const tabWrap = getEl('lab-tabs');
-        tabWrap.innerHTML = '';
-        tabs.forEach(t => {
-            const btn = document.createElement('button');
-            btn.type = 'button';
-            btn.className = 'lab-tab-btn' + (t.id === currentTab ? ' active' : '');
-            btn.textContent = t.title;
-            btn.addEventListener('click', () => {
-                currentTab = t.id;
-                renderTabs();
-                renderTabContent();
+        function loadLabPasses() {
+            try {
+                const raw = localStorage.getItem(LAB_PASS_STORAGE_KEY);
+                const arr = raw ? JSON.parse(raw) : [];
+                return Array.isArray(arr) ? arr.filter(Boolean) : [];
+            } catch {
+                return [];
+            }
+        }
+
+        function saveLabPasses(ids) {
+            localStorage.setItem(LAB_PASS_STORAGE_KEY, JSON.stringify([...new Set(ids)]));
+        }
+
+        function labPassesAll(ids) {
+            const passed = new Set(loadLabPasses());
+            return ids.every(id => passed.has(id));
+        }
+
+        function recordLabExercisePass(exId) {
+            const allIds = getAllDragExerciseIds();
+            const wasAll = labPassesAll(allIds);
+            const set = new Set(loadLabPasses());
+            set.add(exId);
+            saveLabPasses([...set]);
+            syncLabCertUi();
+            if (labPassesAll(allIds) && !wasAll) {
+                openLabCertOverlay();
+            }
+        }
+
+        function syncLabCertUi() {
+            const allIds = getAllDragExerciseIds();
+            const done = labPassesAll(allIds);
+            const btn = getEl('lab-cert-open-btn');
+            const banner = getEl('lab-cert-banner');
+            if (btn) btn.style.display = done ? 'inline-flex' : 'none';
+            if (banner) banner.style.display = done ? 'block' : 'none';
+        }
+
+        function setLabCertDate() {
+            const el = getEl('lab-cert-display-date');
+            if (el) {
+                el.textContent = '通過日期：' + new Date().toLocaleString('zh-TW', { dateStyle: 'medium', timeStyle: 'short' });
+            }
+        }
+
+        function updateLabCertDisplayName() {
+            const input = getEl('lab-cert-name');
+            const display = getEl('lab-cert-display-name');
+            let name = (input && input.value.trim()) || '';
+            if (!name) {
+                try {
+                    name = localStorage.getItem(LAB_NAME_STORAGE_KEY) || '';
+                } catch {
+                    name = '';
+                }
+            }
+            if (display) display.textContent = name ? name : '（請輸入姓名）';
+        }
+
+        function openLabCertOverlay() {
+            const ov = getEl('lab-cert-overlay');
+            if (!ov) return;
+            try {
+                const saved = localStorage.getItem(LAB_NAME_STORAGE_KEY) || '';
+                const input = getEl('lab-cert-name');
+                if (input && !input.value.trim() && saved) input.value = saved;
+            } catch { /* ignore */ }
+            setLabCertDate();
+            updateLabCertDisplayName();
+            ov.hidden = false;
+            ov.setAttribute('aria-hidden', 'false');
+        }
+
+        function closeLabCertOverlay() {
+            const ov = getEl('lab-cert-overlay');
+            if (!ov) return;
+            ov.hidden = true;
+            ov.setAttribute('aria-hidden', 'true');
+        }
+
+        function bindLabCertOverlay() {
+            const ov = getEl('lab-cert-overlay');
+            const closeBtn = getEl('lab-cert-close-btn');
+            const openBtn = getEl('lab-cert-open-btn');
+            const applyBtn = getEl('lab-cert-apply-name');
+            const input = getEl('lab-cert-name');
+
+            if (openBtn) openBtn.addEventListener('click', () => openLabCertOverlay());
+            if (closeBtn) closeBtn.addEventListener('click', () => closeLabCertOverlay());
+            if (ov) ov.addEventListener('click', (e) => { if (e.target === ov) closeLabCertOverlay(); });
+            if (applyBtn) applyBtn.addEventListener('click', () => {
+                const v = input ? input.value.trim() : '';
+                if (v) {
+                    try { localStorage.setItem(LAB_NAME_STORAGE_KEY, v); } catch { /* ignore */ }
+                }
+                updateLabCertDisplayName();
             });
-            tabWrap.appendChild(btn);
-        });
-    }
+            if (input) input.addEventListener('input', () => updateLabCertDisplayName());
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && ov && !ov.hidden) closeLabCertOverlay();
+            });
+        }
 
-    function createStepNode(text) {
-        const div = document.createElement('div');
-        div.className = 'draggable-step';
-        div.draggable = true;
-        div.textContent = text;
-        div.addEventListener('dragstart', () => div.classList.add('dragging'));
-        div.addEventListener('dragend', () => div.classList.remove('dragging'));
-        return div;
-    }
+        const tabs = [
+            { id: 'easy', title: '第一關：認識流程' },
+            { id: 'middle', title: '第二關：排序思考' },
+            { id: 'hard', title: '第三關：演算法挑戰' }
+        ];
 
-    function makeDroppable(container) {
-        container.addEventListener('dragover', (e) => {
-            e.preventDefault();
-            const dragging = document.querySelector('.draggable-step.dragging');
-            if (dragging) container.appendChild(dragging);
-        });
-    }
+        const exercisesByTab = {
+            easy: [
+                {
+                    id: 'rain',
+                    title: '出門帶傘流程排序',
+                    instruction: '請拖曳以下步驟到下方，排成合理流程。',
+                    steps: ['查看天氣預報', '判斷降雨機率', '決定是否帶傘', '出門'],
+                    answer: ['查看天氣預報', '判斷降雨機率', '決定是否帶傘', '出門'],
+                    hint: '先有資料，再判斷，再做決定，最後行動。'
+                },
+                {
+                    id: 'library',
+                    title: '圖書館借書流程排序',
+                    instruction: '把借書步驟拖曳排序。',
+                    steps: ['找到想借的書', '查詢書籍位置', '借書機掃描', '完成借閱'],
+                    answer: ['查詢書籍位置', '找到想借的書', '借書機掃描', '完成借閱'],
+                    hint: '先查，再找，再掃描。'
+                },
+                {
+                    id: 'pizza-basic',
+                    title: '家政課做披薩流程排序',
+                    instruction: '把製作披薩的步驟排成合理順序。',
+                    steps: ['把披薩放入烤箱', '準備麵團與食材', '在麵團上鋪醬與配料', '出爐切片'],
+                    answer: ['準備麵團與食材', '在麵團上鋪醬與配料', '把披薩放入烤箱', '出爐切片'],
+                    hint: '先備料，再鋪料，再烤。'
+                }
+            ],
+            middle: [
+                {
+                    id: 'selection-idea',
+                    title: '選擇排序核心流程',
+                    instruction: '把選擇排序每輪的核心步驟排序。',
+                    steps: ['把找到的最小值放到目前位置', '找出未排序區最小值', '已排序區往右擴大一格', '進入下一輪'],
+                    answer: ['找出未排序區最小值', '把找到的最小值放到目前位置', '已排序區往右擴大一格', '進入下一輪'],
+                    hint: '先「找」，再「放」，才會擴大已排序區。'
+                },
+                {
+                    id: 'insertion-idea',
+                    title: '插入排序核心流程',
+                    instruction: '把插入排序每輪步驟排序。',
+                    steps: ['取出下一張 key', '比較並找到插入位置', '把 key 插入正確位置', '維持已排序區有序'],
+                    answer: ['取出下一張 key', '比較並找到插入位置', '把 key 插入正確位置', '維持已排序區有序'],
+                    hint: 'key 是每輪主角。'
+                },
+                {
+                    id: 'microbe-middle',
+                    title: '顯微鏡觀察微生物（實驗流程）',
+                    instruction: '拖曳排出觀察流程。',
+                    steps: ['切換高倍鏡並微調', '放置樣本玻片', '低倍鏡先找到影像', '記錄觀察結果'],
+                    answer: ['放置樣本玻片', '低倍鏡先找到影像', '切換高倍鏡並微調', '記錄觀察結果'],
+                    hint: '顯微鏡通常先低倍，再高倍。'
+                }
+            ],
+            hard: [
+                {
+                    id: 'algo-structure',
+                    title: '演算法三要素配對',
+                    instruction: '請把步驟拖曳排序，組成「輸入→步驟→輸出→檢查」',
+                    steps: ['檢查結果是否符合目標', '輸入資料（目前牌列）', '依規則做比較與交換/插入', '輸出排序後牌列'],
+                    answer: ['輸入資料（目前牌列）', '依規則做比較與交換/插入', '輸出排序後牌列', '檢查結果是否符合目標'],
+                    hint: '先有輸入，最後才是檢查。'
+                },
+                {
+                    id: 'debug',
+                    title: '偵錯思考順序',
+                    instruction: '學生做錯排序時，教師引導流程應該怎麼走？',
+                    steps: ['指出錯誤發生的輪次', '回看該輪比較依據', '修正該輪步驟', '重新檢查結果'],
+                    answer: ['指出錯誤發生的輪次', '回看該輪比較依據', '修正該輪步驟', '重新檢查結果'],
+                    hint: '先定位錯誤，再修正。'
+                },
+                {
+                    id: 'microbe-safe',
+                    title: '生物實驗安全流程（挑戰）',
+                    instruction: '把顯微鏡觀察實驗中「安全又完整」的流程排出來。',
+                    steps: ['清理桌面與器材', '戴手套並準備器材', '依步驟觀察並記錄', '廢棄物分類處理'],
+                    answer: ['戴手套並準備器材', '依步驟觀察並記錄', '廢棄物分類處理', '清理桌面與器材'],
+                    hint: '先防護，再實驗，最後善後。'
+                }
+            ]
+        };
 
-    function renderExercise(ex) {
-        const wrap = document.createElement('div');
-        wrap.className = 'exercise';
-        wrap.innerHTML = `
+        let currentTab = tabs[0].id;
+        let currentLogicIndex = 0;
+        let selectedLR = '';
+        let selectedUD = '';
+
+        const logicCases = [
+            { pos: '右上方', answerLR: '右移', answerUD: '上移', final: '右上方' },
+            { pos: '左上方', answerLR: '左移', answerUD: '上移', final: '左上方' },
+            { pos: '右下方', answerLR: '右移', answerUD: '下移', final: '右下方' },
+            { pos: '左下方', answerLR: '左移', answerUD: '下移', final: '左下方' },
+            { pos: '正上方', answerLR: '不移動', answerUD: '上移', final: '上方' },
+            { pos: '正右方', answerLR: '右移', answerUD: '不移動', final: '右方' }
+        ];
+        const lrOptions = ['左移', '右移', '不移動'];
+        const udOptions = ['上移', '下移', '不移動'];
+
+        function getEl(id) { return document.getElementById(id); }
+
+        function shuffle(arr) {
+            const a = [...arr];
+            for (let i = a.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [a[i], a[j]] = [a[j], a[i]];
+            }
+            return a;
+        }
+
+        function renderTabs() {
+            const tabWrap = getEl('lab-tabs');
+            tabWrap.innerHTML = '';
+            tabs.forEach(t => {
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = 'lab-tab-btn' + (t.id === currentTab ? ' active' : '');
+                btn.textContent = t.title;
+                btn.addEventListener('click', () => {
+                    currentTab = t.id;
+                    renderTabs();
+                    renderTabContent();
+                });
+                tabWrap.appendChild(btn);
+            });
+        }
+
+        function createStepNode(text) {
+            const div = document.createElement('div');
+            div.className = 'draggable-step';
+            div.draggable = true;
+            div.textContent = text;
+            div.addEventListener('dragstart', () => div.classList.add('dragging'));
+            div.addEventListener('dragend', () => div.classList.remove('dragging'));
+            return div;
+        }
+
+        function makeDroppable(container) {
+            container.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                const dragging = document.querySelector('.draggable-step.dragging');
+                if (dragging) container.appendChild(dragging);
+            });
+        }
+
+        function renderExercise(ex) {
+            const wrap = document.createElement('div');
+            wrap.className = 'exercise';
+            wrap.innerHTML = `
             <h4>${ex.title}</h4>
             <p>${ex.instruction}</p>
             <div class="drag-pool" id="pool-${ex.id}"></div>
@@ -519,113 +987,116 @@
             <div id="hintbox-${ex.id}" style="display:none;" class="hint">${ex.hint}</div>
         `;
 
-        setTimeout(() => {
-            const pool = getEl(`pool-${ex.id}`);
-            const drop = getEl(`drop-${ex.id}`);
-            makeDroppable(pool);
-            makeDroppable(drop);
+            setTimeout(() => {
+                const pool = getEl(`pool-${ex.id}`);
+                const drop = getEl(`drop-${ex.id}`);
+                makeDroppable(pool);
+                makeDroppable(drop);
 
-            const fillPool = () => {
-                pool.innerHTML = '';
-                drop.innerHTML = '';
-                shuffle(ex.steps).forEach(s => pool.appendChild(createStepNode(s)));
-                getEl(`result-${ex.id}`).innerHTML = '';
-                getEl(`hintbox-${ex.id}`).style.display = 'none';
-            };
+                const fillPool = () => {
+                    pool.innerHTML = '';
+                    drop.innerHTML = '';
+                    shuffle(ex.steps).forEach(s => pool.appendChild(createStepNode(s)));
+                    getEl(`result-${ex.id}`).innerHTML = '';
+                    getEl(`hintbox-${ex.id}`).style.display = 'none';
+                };
 
-            fillPool();
+                fillPool();
 
-            getEl(`check-${ex.id}`).addEventListener('click', () => {
-                const current = [...drop.querySelectorAll('.draggable-step')].map(n => n.textContent);
-                const ok = current.length === ex.answer.length && current.every((v, i) => v === ex.answer[i]);
-                const result = getEl(`result-${ex.id}`);
-                result.innerHTML = ok
-                    ? '<div class="result ok">✅ 正確！你已經掌握這個演算法流程。</div>'
-                    : '<div class="result fail">❌ 還差一點，請再調整順序後重試。</div>';
-            });
+                getEl(`check-${ex.id}`).addEventListener('click', () => {
+                    const current = [...drop.querySelectorAll('.draggable-step')].map(n => n.textContent);
+                    const ok = current.length === ex.answer.length && current.every((v, i) => v === ex.answer[i]);
+                    const result = getEl(`result-${ex.id}`);
+                    result.innerHTML = ok
+                        ? '<div class="result ok">✅ 正確！你已經掌握這個演算法流程。</div>'
+                        : '<div class="result fail">❌ 還差一點，請再調整順序後重試。</div>';
+                    if (ok) recordLabExercisePass(ex.id);
+                });
 
-            getEl(`reset-${ex.id}`).addEventListener('click', fillPool);
-            getEl(`hint-${ex.id}`).addEventListener('click', () => {
-                const hb = getEl(`hintbox-${ex.id}`);
-                hb.style.display = hb.style.display === 'none' ? 'block' : 'none';
-            });
-        }, 0);
+                getEl(`reset-${ex.id}`).addEventListener('click', fillPool);
+                getEl(`hint-${ex.id}`).addEventListener('click', () => {
+                    const hb = getEl(`hintbox-${ex.id}`);
+                    hb.style.display = hb.style.display === 'none' ? 'block' : 'none';
+                });
+            }, 0);
 
-        return wrap;
-    }
+            return wrap;
+        }
 
-    function renderTabContent() {
-        const area = getEl('tab-content');
-        area.innerHTML = '';
-        const pane = document.createElement('div');
-        pane.className = 'tab-pane active';
-        const exs = exercisesByTab[currentTab] || [];
-        exs.forEach(ex => pane.appendChild(renderExercise(ex)));
-        area.appendChild(pane);
-    }
+        function renderTabContent() {
+            const area = getEl('tab-content');
+            area.innerHTML = '';
+            const pane = document.createElement('div');
+            pane.className = 'tab-pane active';
+            const exs = exercisesByTab[currentTab] || [];
+            exs.forEach(ex => pane.appendChild(renderExercise(ex)));
+            area.appendChild(pane);
+        }
 
-    function renderLogicCase() {
-        const c = logicCases[currentLogicIndex % logicCases.length];
-        getEl('logic-question').textContent = `影像出現在「${c.pos}」，請先做左右判斷，再做上下判斷。`;
-        const boxLR = getEl('logic-options-lr');
-        const boxUD = getEl('logic-options-ud');
-        boxLR.innerHTML = '';
-        boxUD.innerHTML = '';
-        selectedLR = '';
-        selectedUD = '';
-        getEl('logic-result').innerHTML = '';
-        getEl('logic-rule-box').style.display = 'none';
-
-        lrOptions.forEach(opt => {
-            const b = document.createElement('button');
-            b.type = 'button';
-            b.className = 'btn preset-btn';
-            b.textContent = opt;
-            b.addEventListener('click', () => {
-                selectedLR = opt;
-                [...boxLR.querySelectorAll('button')].forEach(x => x.classList.remove('preset-btn-active'));
-                b.classList.add('preset-btn-active');
-            });
-            boxLR.appendChild(b);
-        });
-
-        udOptions.forEach(opt => {
-            const b = document.createElement('button');
-            b.type = 'button';
-            b.className = 'btn preset-btn';
-            b.textContent = opt;
-            b.addEventListener('click', () => {
-                selectedUD = opt;
-                [...boxUD.querySelectorAll('button')].forEach(x => x.classList.remove('preset-btn-active'));
-                b.classList.add('preset-btn-active');
-            });
-            boxUD.appendChild(b);
-        });
-    }
-
-    function bindLogicTrainer() {
-        getEl('logic-check').addEventListener('click', () => {
+        function renderLogicCase() {
             const c = logicCases[currentLogicIndex % logicCases.length];
-            const ok = selectedLR === c.answerLR && selectedUD === c.answerUD;
-            getEl('logic-result').innerHTML = ok
-                ? `<div class="result ok">✅ 判斷正確！左右=${c.answerLR}，上下=${c.answerUD}，合併後是「${c.final}」。</div>`
-                : `<div class="result fail">❌ 還差一步：流程要先判斷左右（你選 ${selectedLR || '未選'}），再判斷上下（你選 ${selectedUD || '未選'}）。</div>`;
-        });
-        getEl('logic-next').addEventListener('click', () => {
-            currentLogicIndex++;
-            renderLogicCase();
-        });
-        getEl('logic-show-rule').addEventListener('click', () => {
-            const rb = getEl('logic-rule-box');
-            rb.style.display = rb.style.display === 'none' ? 'block' : 'none';
-        });
-    }
+            getEl('logic-question').textContent = `影像出現在「${c.pos}」，請先做左右判斷，再做上下判斷。`;
+            const boxLR = getEl('logic-options-lr');
+            const boxUD = getEl('logic-options-ud');
+            boxLR.innerHTML = '';
+            boxUD.innerHTML = '';
+            selectedLR = '';
+            selectedUD = '';
+            getEl('logic-result').innerHTML = '';
+            getEl('logic-rule-box').style.display = 'none';
 
-    renderTabs();
-    renderTabContent();
-    bindLogicTrainer();
-    renderLogicCase();
-</script>
+            lrOptions.forEach(opt => {
+                const b = document.createElement('button');
+                b.type = 'button';
+                b.className = 'btn preset-btn';
+                b.textContent = opt;
+                b.addEventListener('click', () => {
+                    selectedLR = opt;
+                    [...boxLR.querySelectorAll('button')].forEach(x => x.classList.remove('preset-btn-active'));
+                    b.classList.add('preset-btn-active');
+                });
+                boxLR.appendChild(b);
+            });
+
+            udOptions.forEach(opt => {
+                const b = document.createElement('button');
+                b.type = 'button';
+                b.className = 'btn preset-btn';
+                b.textContent = opt;
+                b.addEventListener('click', () => {
+                    selectedUD = opt;
+                    [...boxUD.querySelectorAll('button')].forEach(x => x.classList.remove('preset-btn-active'));
+                    b.classList.add('preset-btn-active');
+                });
+                boxUD.appendChild(b);
+            });
+        }
+
+        function bindLogicTrainer() {
+            getEl('logic-check').addEventListener('click', () => {
+                const c = logicCases[currentLogicIndex % logicCases.length];
+                const ok = selectedLR === c.answerLR && selectedUD === c.answerUD;
+                getEl('logic-result').innerHTML = ok
+                    ? `<div class="result ok">✅ 判斷正確！左右=${c.answerLR}，上下=${c.answerUD}，合併後是「${c.final}」。</div>`
+                    : `<div class="result fail">❌ 還差一步：流程要先判斷左右（你選 ${selectedLR || '未選'}），再判斷上下（你選 ${selectedUD || '未選'}）。</div>`;
+            });
+            getEl('logic-next').addEventListener('click', () => {
+                currentLogicIndex++;
+                renderLogicCase();
+            });
+            getEl('logic-show-rule').addEventListener('click', () => {
+                const rb = getEl('logic-rule-box');
+                rb.style.display = rb.style.display === 'none' ? 'block' : 'none';
+            });
+        }
+
+        bindLabCertOverlay();
+        syncLabCertUi();
+        renderTabs();
+        renderTabContent();
+        bindLogicTrainer();
+        renderLogicCase();
+    </script>
 </body>
-</html>
 
+</html>

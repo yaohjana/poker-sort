@@ -14,7 +14,7 @@ let currentLang = 'zh-TW';
 
 const i18n = {
     'zh-TW': {
-        'app.title': '撲克牌排序學院',
+        'app.title': '排序演算法實驗室',
         'app.subtitle': '原地排序 · 演算法思維 · 互動教學桌',
         'lang.label': '語言',
         'controls.sortLabel': '排序方式：',
@@ -43,9 +43,24 @@ const i18n = {
         'actions.hint': '💡 顯示提示',
         'actions.reset': '🔄 重置本局',
         'actions.resetDesc': '恢復此次發牌狀態，可重複練習同一組牌',
+        'overlay.close': '關閉面板',
         'status.resetDone': '已恢復此次發牌狀態，可重複練習！',
         'settings.title': '教學說明與小知識',
         'settings.subtitle': '需要時再打開，讓牌桌保持乾淨。',
+        'nav.ariaSite': '網站導覽',
+        'nav.groupFlow': '教學流程',
+        'nav.groupExtraAria': '教師手冊與教案',
+        'nav.flowLab': '認識演算法',
+        'nav.flowGame': '排序演算法實驗室',
+        'nav.flowExam': '學習評量',
+        'nav.flowConcepts': '演算法中的結構',
+        'nav.flowConceptsQuiz': '結構小測驗',
+        'nav.game': '遊戲',
+        'nav.guideCenter': '教師手冊',
+        'nav.exam': '分階段測驗',
+        'nav.lesson': '教案',
+        'nav.lab': '演算法生活實驗室',
+        'nav.concepts': '演算法中的結構',
         'tabs.guide': '操作說明',
         'tabs.algorithm': '小知識',
         'tabs.sortRef': '排序法對照',
@@ -148,7 +163,7 @@ const i18n = {
         'hint.observe': '觀察第 {index} 張的「{card}」，它現在不在正確位置，試著把它換到更接近正確位置。'
     },
     'zh-CN': {
-        'app.title': '扑克牌排序学院',
+        'app.title': '排序算法实验室',
         'app.subtitle': '原地排序 · 算法思维 · 互动教学桌',
         'lang.label': '语言',
         'controls.sortLabel': '排序方式：',
@@ -177,9 +192,24 @@ const i18n = {
         'actions.hint': '💡 显示提示',
         'actions.reset': '🔄 重置本局',
         'actions.resetDesc': '恢复此次发牌状态，可重复练习同一组牌',
+        'overlay.close': '关闭面板',
         'status.resetDone': '已恢复此次发牌状态，可重复练习！',
         'settings.title': '教学说明与小知识',
         'settings.subtitle': '需要时再打开，让牌桌保持干净。',
+        'nav.ariaSite': '网站导航',
+        'nav.groupFlow': '教学流程',
+        'nav.groupExtraAria': '教师手册与教案',
+        'nav.flowLab': '认识算法',
+        'nav.flowGame': '排序算法实验室',
+        'nav.flowExam': '学习评量',
+        'nav.flowConcepts': '算法中的结构',
+        'nav.flowConceptsQuiz': '结构小测验',
+        'nav.game': '游戏',
+        'nav.guideCenter': '教师手册',
+        'nav.exam': '分阶段测验',
+        'nav.lesson': '教案',
+        'nav.lab': '算法生活实验室',
+        'nav.concepts': '算法中的结构',
         'tabs.guide': '操作说明',
         'tabs.algorithm': '小知识',
         'tabs.sortRef': '排序法对照',
@@ -282,7 +312,7 @@ const i18n = {
         'hint.observe': '观察第 {index} 张的「{card}」，它现在不在正确位置，试着把它换到更接近正确位置。'
     },
     'en': {
-        'app.title': 'Card Sorting Academy',
+        'app.title': 'Sorting Algorithm Lab',
         'app.subtitle': 'In-place sorting · Algorithmic thinking · Interactive table',
         'lang.label': 'Language',
         'controls.sortLabel': 'Sort by:',
@@ -311,9 +341,24 @@ const i18n = {
         'actions.hint': '💡 Show hint',
         'actions.reset': '🔄 Reset round',
         'actions.resetDesc': 'Restore this deal so you can practice the same cards again',
+        'overlay.close': 'Close panel',
         'status.resetDone': 'Round restored. Practice the same cards again!',
         'settings.title': 'Guide & Algorithm notes',
         'settings.subtitle': 'Open when needed to keep the table clean.',
+        'nav.ariaSite': 'Site navigation',
+        'nav.groupFlow': 'Lesson flow',
+        'nav.groupExtraAria': 'Teacher handbook & lesson plan',
+        'nav.flowLab': 'Know algorithms',
+        'nav.flowGame': 'Sorting algorithm lab',
+        'nav.flowExam': 'Learning assessment',
+        'nav.flowConcepts': 'Structure in algorithms',
+        'nav.flowConceptsQuiz': 'Structure quiz',
+        'nav.game': 'Game',
+        'nav.guideCenter': "Teacher's handbook",
+        'nav.exam': 'Quiz',
+        'nav.lesson': 'Lesson plan',
+        'nav.lab': 'Algorithm lab',
+        'nav.concepts': 'Structure in algorithms',
         'tabs.guide': 'Guide',
         'tabs.algorithm': 'Algorithms',
         'tabs.sortRef': 'Sort methods',
@@ -416,7 +461,7 @@ const i18n = {
         'hint.observe': 'Look at card “{card}” in position {index}; it is not correct yet, try moving it closer to its target spot.'
     },
     'ja': {
-        'app.title': 'トランプソートアカデミー',
+        'app.title': 'ソートアルゴリズム・ラボ',
         'app.subtitle': 'インプレースソート · アルゴリズム思考 · インタラクティブ卓',
         'lang.label': '言語',
         'controls.sortLabel': '並べ替え基準：',
@@ -445,9 +490,24 @@ const i18n = {
         'actions.hint': '💡 ヒントを表示',
         'actions.reset': '🔄 この局をリセット',
         'actions.resetDesc': '今回配った状態に戻し、同じカードで繰り返し練習',
+        'overlay.close': 'パネルを閉じる',
         'status.resetDone': '配り直しの状態に戻しました。同じ並びで練習できます。',
         'settings.title': '遊び方とアルゴリズムメモ',
         'settings.subtitle': '必要なときだけ開いて、テーブルをすっきり保ちます。',
+        'nav.ariaSite': 'サイト内の移動',
+        'nav.groupFlow': '授業の流れ',
+        'nav.groupExtraAria': '教師用ハンドブックと教案',
+        'nav.flowLab': 'アルゴリズムを知る',
+        'nav.flowGame': '並べ替えアルゴリズムラボ',
+        'nav.flowExam': '学習評価',
+        'nav.flowConcepts': 'アルゴリズムの構造',
+        'nav.flowConceptsQuiz': '構造ミニテスト',
+        'nav.game': 'ゲーム',
+        'nav.guideCenter': '教師用ハンドブック',
+        'nav.exam': '段階テスト',
+        'nav.lesson': '教案',
+        'nav.lab': 'アルゴリズムラボ',
+        'nav.concepts': 'アルゴリズムの構造',
         'tabs.guide': '遊び方',
         'tabs.algorithm': 'アルゴリズム',
         'tabs.sortRef': '並べ替え法対照',
@@ -578,6 +638,17 @@ function applyTranslations() {
     }
     // 重置本局按鈕的 title 說明
     if (elements.resetBtn) elements.resetBtn.title = dict['actions.resetDesc'] || i18n['zh-TW']['actions.resetDesc'] || '';
+    if (elements.overlayBackdrop) {
+        elements.overlayBackdrop.setAttribute('aria-label', dict['overlay.close'] || i18n['zh-TW']['overlay.close'] || '');
+    }
+    const siteNav = document.getElementById('site-nav');
+    if (siteNav) {
+        siteNav.setAttribute('aria-label', dict['nav.ariaSite'] || i18n['zh-TW']['nav.ariaSite'] || '');
+    }
+    const siteNavExtraGroup = document.getElementById('site-nav-extra-group');
+    if (siteNavExtraGroup) {
+        siteNavExtraGroup.setAttribute('aria-label', dict['nav.groupExtraAria'] || i18n['zh-TW']['nav.groupExtraAria'] || '');
+    }
     // 切換語言後，依目前遊戲狀態用新語言重設狀態列與小提示
     refreshStatusForCurrentLang();
     if (gameState.isGameActive && gameState.cards.length > 0) renderCards();
@@ -676,6 +747,7 @@ let gameState = {
     currentSortMethod: 'number',
     cardCount: 6,
     isGameActive: false,
+    animateNextDeal: false, // 重新發牌時為 true，下一輪 render 的牌有入場動畫
     comparisons: 0,      // 比較次數
     swaps: 0,            // 交換次數（額外空間時表示「移動」次數）
     allowSameRankAnySuit: true, // 是否允許同數字不同花色視為正確
@@ -708,7 +780,6 @@ const elements = {
     checkBtn: document.getElementById('check-btn'),
     hintBtn: document.getElementById('hint-btn'),
     resetBtn: document.getElementById('reset-btn'),
-    algorithmDesc: document.getElementById('algorithm-desc'),
     comparisonsDisplay: document.getElementById('comparisons'),
     swapsDisplay: document.getElementById('swaps'),
     progressDisplay: document.getElementById('progress'),
@@ -716,20 +787,29 @@ const elements = {
     closeHint: document.getElementById('close-hint'),
     showCorrectToggle: document.getElementById('show-correct-toggle'),
     allowSameRankToggle: document.getElementById('allow-same-rank-toggle'),
-    algorithmMode: document.getElementById('algorithm-mode'),
-    algorithmSteps: document.getElementById('algorithm-steps'),
     settingsToggle: document.getElementById('settings-toggle'),
     settingsCard: document.getElementById('settings-card'),
     settingsClose: document.getElementById('settings-close'),
     uniqueRankToggle: document.getElementById('unique-rank-toggle'),
-    settingsTabs: document.getElementById('settings-tabs'),
-    infoToggle: document.getElementById('info-toggle'),
-    infoCard: document.getElementById('info-card'),
-    infoClose: document.getElementById('info-close'),
-    infoTabs: document.getElementById('info-tabs'),
     langSelect: document.getElementById('lang-select'),
-    langButton: document.getElementById('lang-button')
+    langButton: document.getElementById('lang-button'),
+    overlayBackdrop: document.getElementById('overlay-backdrop'),
+    progressFill: document.getElementById('progress-fill'),
+    progressTrack: document.getElementById('progress-track')
 };
+
+function syncOverlay() {
+    if (!elements.overlayBackdrop) return;
+    const open = elements.settingsCard && elements.settingsCard.classList.contains('open');
+    elements.overlayBackdrop.classList.toggle('is-visible', open);
+    elements.overlayBackdrop.setAttribute('aria-hidden', open ? 'false' : 'true');
+}
+
+function setProgressPercent(progress) {
+    if (elements.progressDisplay) elements.progressDisplay.textContent = `${progress}%`;
+    if (elements.progressFill) elements.progressFill.style.width = `${progress}%`;
+    if (elements.progressTrack) elements.progressTrack.setAttribute('aria-valuenow', String(progress));
+}
 
 // 初始化
 function init() {
@@ -761,6 +841,12 @@ function init() {
     applyTranslations();
     updateLangButtonLabel();
     setGameActive(true);
+    const appContainer = document.querySelector('.container');
+    if (appContainer) {
+        requestAnimationFrame(() => {
+            requestAnimationFrame(() => appContainer.classList.add('app-loaded'));
+        });
+    }
     elements.closeHint.addEventListener('click', () => {
         elements.instructionHint.style.display = 'none';
     });
@@ -810,47 +896,30 @@ function bindEvents() {
     if (elements.settingsToggle && elements.settingsCard) {
         elements.settingsToggle.addEventListener('click', () => {
             elements.settingsCard.classList.toggle('open');
+            syncOverlay();
         });
     }
 
     if (elements.settingsClose && elements.settingsCard) {
         elements.settingsClose.addEventListener('click', () => {
             elements.settingsCard.classList.remove('open');
+            syncOverlay();
         });
     }
 
-    // 教學 info 卡片開關
-    if (elements.infoToggle && elements.infoCard) {
-        elements.infoToggle.addEventListener('click', () => {
-            elements.infoCard.classList.toggle('open');
-        });
-    }
-    if (elements.infoClose && elements.infoCard) {
-        elements.infoClose.addEventListener('click', () => {
-            elements.infoCard.classList.remove('open');
+    if (elements.overlayBackdrop) {
+        elements.overlayBackdrop.addEventListener('click', () => {
+            if (elements.settingsCard) elements.settingsCard.classList.remove('open');
+            syncOverlay();
         });
     }
 
-    // 說明 / 小知識 頁簽切換（info 卡片）
-    if (elements.infoTabs) {
-        const tabButtons = elements.infoTabs.querySelectorAll('.settings-tab');
-        tabButtons.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const targetId = btn.dataset.pane;
-                if (!targetId) return;
-
-                // 切換 tab 樣式
-                tabButtons.forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-
-                // 切換 pane 顯示
-                const panes = document.querySelectorAll('.settings-pane');
-                panes.forEach(pane => {
-                    pane.classList.toggle('active', pane.id === targetId);
-                });
-            });
-        });
-    }
+    document.addEventListener('keydown', (e) => {
+        if (e.key !== 'Escape') return;
+        if (!elements.settingsCard || !elements.settingsCard.classList.contains('open')) return;
+        elements.settingsCard.classList.remove('open');
+        syncOverlay();
+    });
 
     if (elements.langSelect) {
         elements.langSelect.addEventListener('change', (e) => {
@@ -859,8 +928,6 @@ function bindEvents() {
                 currentLang = value;
                 applyTranslations();
                 updateLangButtonLabel();
-                // 依新語言更新演算法說明
-                updateAlgorithmInfo(gameState.currentSortMethod || 'number');
             }
         });
     }
@@ -875,7 +942,6 @@ function bindEvents() {
             }
             applyTranslations();
             updateLangButtonLabel();
-            updateAlgorithmInfo(gameState.currentSortMethod || 'number');
         });
     }
 
@@ -1473,7 +1539,9 @@ function shuffleAndDeal() {
         gameState.currentOrder = [...gameState.cards];
     }
 
+    gameState.animateNextDeal = true;
     renderCards();
+    gameState.animateNextDeal = false;
     const dict = i18n[currentLang] || i18n['zh-TW'];
     const tmpl = dict['status.dealt'] || i18n['zh-TW']['status.dealt'];
     const msg = tmpl
@@ -1653,6 +1721,11 @@ function createCardElement(card, index, zone, noClick) {
     `;
 
     if (!noClick) cardEl.addEventListener('click', () => onCardClick(zone, index));
+
+    if (!noClick && gameState.animateNextDeal) {
+        cardEl.style.setProperty('--deal-i', String(index));
+        cardEl.classList.add('card-deal-in');
+    }
 
     return cardEl;
 }
@@ -1920,14 +1993,14 @@ function updateProgress() {
     const total = gameState.cardCount;
     if (gameState.spaceMode === 'quicksort') {
         if (gameState.quickUnpartitioned.length > 0 || !gameState.quickPivot) {
-            elements.progressDisplay.textContent = '0%';
+            setProgressPercent(0);
             return;
         }
         const pivot = gameState.quickPivot;
         let ok = true;
         for (const c of gameState.quickLeft) { if (compareCards(c, pivot) >= 0) { ok = false; break; } }
         if (ok) for (const c of gameState.quickRight) { if (compareCards(c, pivot) <= 0) { ok = false; break; } }
-        elements.progressDisplay.textContent = ok ? '100%' : '0%';
+        setProgressPercent(ok ? 100 : 0);
         return;
     }
     const expectedOrder = getExpectedOrder(gameState.currentSortMethod, gameState.cards);
@@ -1942,7 +2015,7 @@ function updateProgress() {
         }
     }
     const progress = total ? Math.round((correctCount / total) * 100) : 0;
-    elements.progressDisplay.textContent = `${progress}%`;
+    setProgressPercent(progress);
 }
 
 // 依照目前排序與正解，標出已完成位置
@@ -2015,8 +2088,18 @@ function cardsMatchAtPosition(currentCard, expectedCard) {
 
 // 更新統計顯示
 function updateStats() {
-    elements.comparisonsDisplay.textContent = gameState.comparisons;
-    elements.swapsDisplay.textContent = gameState.swaps;
+    if (elements.comparisonsDisplay) {
+        elements.comparisonsDisplay.classList.remove('stat-tick');
+        void elements.comparisonsDisplay.offsetWidth;
+        elements.comparisonsDisplay.classList.add('stat-tick');
+        elements.comparisonsDisplay.textContent = gameState.comparisons;
+    }
+    if (elements.swapsDisplay) {
+        elements.swapsDisplay.classList.remove('stat-tick');
+        void elements.swapsDisplay.offsetWidth;
+        elements.swapsDisplay.classList.add('stat-tick');
+        elements.swapsDisplay.textContent = gameState.swaps;
+    }
     updateProgress();
 }
 
@@ -2229,8 +2312,12 @@ gameState.quickRight = [];
 
 // 更新狀態訊息
 function setStatus(message, type = 'info') {
+    if (!elements.status) return;
     elements.status.textContent = message;
     elements.status.className = `status ${type}`;
+    elements.status.classList.remove('status-pulse');
+    void elements.status.offsetWidth;
+    elements.status.classList.add('status-pulse');
 }
 
 // 取得排序方法名稱
@@ -2249,79 +2336,9 @@ function getSortMethodName() {
     return dict[labelKey] || i18n['zh-TW'][labelKey] || '';
 }
 
-// 更新演算法資訊
+// 演算法長篇說明已移至 guide.html；保留呼叫點（init、排序目標變更）
 function updateAlgorithmInfo(method) {
-    const descMap = {
-        'none': '提示：演算法=輸入 → 步驟 → 輸出。先把規則想清楚，再用可照做的步驟完成任務。',
-        'number': '演算法=輸入 → 步驟 → 輸出。本遊戲：輸入是牌的排列；步驟是依規則做「比較」與「交換/插入」；輸出是把牌排成遞增（A→K）。',
-        'number-asc': '演算法=輸入 → 步驟 → 輸出。本遊戲：輸入是牌的排列；步驟是依規則比較並移動；輸出是遞增排列。',
-        'number-desc': '演算法=輸入 → 步驟 → 輸出。本遊戲：輸入是牌的排列；步驟是依規則比較並移動；輸出是遞減排列。',
-        'suit-symbol': '演算法=輸入 → 步驟 → 輸出。本遊戲：輸入是牌的排列；步驟是依花色符號順序做比較與移動；輸出是依指定花色順序排好。',
-        'suit-color': '演算法=輸入 → 步驟 → 輸出。本遊戲：輸入是牌的排列；步驟是依花色顏色分組比較與移動；輸出是依指定顏色順序排好。'
-    };
-
-    const modeMap = {
-        'none': '提示：先從少量牌開始，感受「比較 → 交換」的節奏。',
-        'number': '建議練習模式：氣泡排序思維 —— 一直檢查相鄰兩張是否要交換。',
-        'number-asc': '建議練習模式：選擇排序 —— 每回合幫「目前最小」找到正確位置。',
-        'number-desc': '建議練習模式：選擇排序（反向）—— 每回合把「目前最大」換到最前面。',
-        'suit-symbol': '思考：如果每種花色被指定一個數字（權重），排序就跟數字排序一樣了。',
-        'suit-color': '思考：先按顏色分組，再按數字排序，這就是「兩階段排序」。'
-    };
-
-    const stepsMap = {
-        'none': [
-            '在上方選擇一種排序目標（例如：數字大小）。',
-            '觀察目前牌的排列，想像「理想順序」應該長什麼樣子。',
-            '點擊一張牌，再點擊另一張牌，完成一次交換。',
-            '重複比較與交換，直到你覺得已經排好為止，再按「檢查答案」。'
-        ],
-        'number': [
-            '從最左邊開始，依序看「一對相鄰的兩張牌」。',
-            '如果左邊比右邊大，就交換它們的位置。',
-            '走到最右邊時，最大的一張會被「氣泡」到最後面。',
-            '重複上述步驟，多走幾輪，直到全部都排好。'
-        ],
-        'number-asc': [
-            '從全部牌中找出目前最小的數字。',
-            '把它換到最左邊的位置。',
-            '接著在剩下的牌中，找出最小的數字，換到第二格。',
-            '持續重複，直到所有位置都被正確的數字填滿。'
-        ],
-        'number-desc': [
-            '從全部牌中找出目前最大的數字。',
-            '把它換到最左邊的位置。',
-            '在剩下的牌中繼續找最大值，依序往右排。',
-            '完成後，整排牌會從大到小排列。'
-        ],
-        'suit-symbol': [
-            '先記住花色順序：♠ > ♥ > ♦ > ♣（黑桃最大、梅花最小）。',
-            '可以把每張牌換算成一個整數權重來想像。',
-            '比較兩張牌時，就只是比較它們的權重大小。',
-            '用跟數字排序一樣的方式完成整體排序。'
-        ],
-        'suit-color': [
-            '先把所有「黑色」牌（♠,♣）集中到左邊。',
-            '再把所有「紅色」牌（♥,♦）集中到右邊。',
-            '如果想更進階，可以在每一組內再按照數字排序。'
-        ]
-    };
-
-    elements.algorithmDesc.textContent = descMap[method] || descMap['none'];
-
-    if (elements.algorithmMode) {
-        elements.algorithmMode.textContent = modeMap[method] || modeMap['none'];
-    }
-
-    if (elements.algorithmSteps) {
-        const steps = stepsMap[method] || stepsMap['none'];
-        elements.algorithmSteps.innerHTML = '';
-        steps.forEach(text => {
-            const li = document.createElement('li');
-            li.textContent = text;
-            elements.algorithmSteps.appendChild(li);
-        });
-    }
+    void method;
 }
 
 function showAlgorithmInfo(type) {

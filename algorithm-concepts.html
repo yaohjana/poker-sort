@@ -1,12 +1,23 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>演算法結構：循序、迴圈、邏輯判斷</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Noto+Sans+TC:wght@400;500;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <script src="subpage-ui.js" defer></script>
     <style>
-        .con-wrap { max-width: 960px; margin: 0 auto; }
+        .con-wrap {
+            max-width: 960px;
+            margin: 0 auto;
+        }
+
         .con-card {
             background: rgba(2, 6, 23, 0.58);
             border: 1px solid rgba(148, 163, 184, 0.35);
@@ -14,10 +25,29 @@
             padding: 18px;
             margin-bottom: 14px;
         }
-        .con-card h2 { margin: 0 0 10px; color: #fbbf24; font-size: 1.2rem; }
-        .con-card h3 { margin: 14px 0 8px; color: #fcd34d; font-size: 1.05rem; }
-        .con-card p, .con-card li { color: #e5e7eb; line-height: 1.7; }
-        .con-card ul { margin: 8px 0 0 1.2em; }
+
+        .con-card h2 {
+            margin: 0 0 10px;
+            color: #fbbf24;
+            font-size: 1.2rem;
+        }
+
+        .con-card h3 {
+            margin: 14px 0 8px;
+            color: #fcd34d;
+            font-size: 1.05rem;
+        }
+
+        .con-card p,
+        .con-card li {
+            color: #e5e7eb;
+            line-height: 1.7;
+        }
+
+        .con-card ul {
+            margin: 8px 0 0 1.2em;
+        }
+
         .tag {
             display: inline-block;
             margin-right: 6px;
@@ -27,21 +57,51 @@
             font-size: 0.82rem;
             font-weight: 700;
         }
-        .tag-seq { background: rgba(34, 197, 94, 0.2); border: 1px solid rgba(34, 197, 94, 0.55); color: #bbf7d0; }
-        .tag-loop { background: rgba(59, 130, 246, 0.2); border: 1px solid rgba(59, 130, 246, 0.55); color: #bfdbfe; }
-        .tag-if { background: rgba(168, 85, 247, 0.2); border: 1px solid rgba(168, 85, 247, 0.55); color: #e9d5ff; }
-        .flow-block {
-            margin-top: 10px;
-            padding: 12px;
-            border-radius: 12px;
-            border: 1px dashed rgba(148, 163, 184, 0.45);
-            background: rgba(15, 23, 42, 0.5);
-            font-family: ui-monospace, 'Cascadia Mono', monospace;
-            font-size: 0.88rem;
-            color: #cbd5e1;
-            line-height: 1.55;
-            white-space: pre-wrap;
+
+        .tag-seq {
+            background: rgba(34, 197, 94, 0.2);
+            border: 1px solid rgba(34, 197, 94, 0.55);
+            color: #bbf7d0;
         }
+
+        .tag-loop {
+            background: rgba(59, 130, 246, 0.2);
+            border: 1px solid rgba(59, 130, 246, 0.55);
+            color: #bfdbfe;
+        }
+
+        .tag-if {
+            background: rgba(168, 85, 247, 0.2);
+            border: 1px solid rgba(168, 85, 247, 0.55);
+            color: #e9d5ff;
+        }
+
+        /* 流程示意圖 */
+        .concept-figure {
+            margin: 12px 0 6px;
+        }
+
+        .concept-figure-img {
+            display: block;
+            width: 100%;
+            max-width: 720px;
+            height: auto;
+            margin: 0 auto;
+            border-radius: 12px;
+            border: 1px solid rgba(148, 163, 184, 0.4);
+            background: rgba(15, 23, 42, 0.55);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
+        }
+
+        .concept-figure-cap {
+            margin: 8px auto 0;
+            max-width: 720px;
+            font-size: 0.84rem;
+            color: #94a3b8;
+            line-height: 1.5;
+            text-align: center;
+        }
+
         .example-box {
             margin-top: 10px;
             padding: 10px 12px;
@@ -49,168 +109,219 @@
             border: 1px solid rgba(250, 204, 21, 0.25);
             background: rgba(250, 204, 21, 0.06);
         }
-        .example-box strong { color: #fde68a; }
+
+        .example-box strong {
+            color: #fde68a;
+        }
+
         .summary-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 10px;
             margin-top: 12px;
         }
+
         @media (max-width: 768px) {
-            .summary-grid { grid-template-columns: 1fr; }
+            .summary-grid {
+                grid-template-columns: 1fr;
+            }
         }
+
         .summary-cell {
             border: 1px solid rgba(148, 163, 184, 0.35);
             border-radius: 12px;
             padding: 12px;
             background: rgba(2, 6, 23, 0.45);
         }
-        .summary-cell h4 { margin: 0 0 6px; color: #f8fafc; font-size: 0.95rem; }
+
+        .summary-cell h4 {
+            margin: 0 0 6px;
+            color: #f8fafc;
+            font-size: 0.95rem;
+        }
     </style>
 </head>
+
 <body>
-<div class="page-frame">
-    <div class="table-glow"></div>
-    <div class="container con-wrap">
-        <div class="con-card">
-            <h2>📐 演算法中的結構：循序、迴圈、邏輯判斷</h2>
-            <p>許多演算法都可以拆成三種基本結構的組合：<strong>循序</strong>（照順序做）、<strong>迴圈</strong>（重複做直到條件成立）、<strong>邏輯判斷</strong>（依條件走不同路）。本頁用生活例子與排序遊戲對照，方便獨立上一堂課。</p>
-            <p style="margin-top:10px;">
-                <a class="btn preset-btn" href="index.html" style="text-decoration:none;">回到遊戲</a>
-                <a class="btn preset-btn" href="algorithm-lab.html" style="text-decoration:none;">生活實驗室</a>
-                <a class="btn preset-btn" href="exam.html" style="text-decoration:none;">分階段測驗</a>
-                <a class="btn preset-btn" href="lesson.html" style="text-decoration:none;">教案頁</a>
-            </p>
-        </div>
-
-        <div class="summary-grid">
-            <div class="summary-cell">
-                <h4><span class="tag tag-seq">循序</span></h4>
-                <p style="margin:0; font-size:0.92rem;">步驟照<strong>固定順序</strong>一個接一個執行，不能跳著做。</p>
+    <nav class="site-nav" aria-label="網站導覽">
+        <div class="site-nav-inner">
+            <div class="site-nav-group" role="group" aria-labelledby="site-nav-flow-label">
+                <div id="site-nav-flow-label" class="site-nav-group-label">教學流程</div>
+                <div class="site-nav-group-links">
+                    <a href="algorithm-lab.html" class="site-nav-link site-nav-flow-link"><span class="site-nav-step"
+                            aria-hidden="true">1</span>認識演算法</a>
+                    <a href="index.html" class="site-nav-link site-nav-flow-link"><span class="site-nav-step"
+                            aria-hidden="true">2</span>排序演算法實驗室</a>
+                    <a href="exam.html" class="site-nav-link site-nav-flow-link"><span class="site-nav-step"
+                            aria-hidden="true">3</span>學習評量</a>
+                    <a href="algorithm-concepts.html" class="site-nav-link site-nav-flow-link site-nav-link-current"
+                        aria-current="page"><span class="site-nav-step" aria-hidden="true">4</span>演算法中的結構</a>
+                    <a href="algorithm-concepts-quiz.html" class="site-nav-link site-nav-flow-link"><span class="site-nav-step"
+                            aria-hidden="true">5</span>結構小測驗</a>
+                </div>
             </div>
-            <div class="summary-cell">
-                <h4><span class="tag tag-loop">迴圈</span></h4>
-                <p style="margin:0; font-size:0.92rem;">同一組步驟<strong>重複執行</strong>，直到滿足「停止條件」才離開。</p>
-            </div>
-            <div class="summary-cell">
-                <h4><span class="tag tag-if">邏輯判斷</span></h4>
-                <p style="margin:0; font-size:0.92rem;">依<strong>條件真假</strong>決定下一步走哪一條路（分支）。</p>
+            <div class="site-nav-group site-nav-group--extra" role="group" aria-label="教師手冊與教案">
+                <div class="site-nav-group-links">
+                    <a href="guide.html" class="site-nav-link site-nav-extra-link">教師手冊</a>
+                    <a href="lesson.html" class="site-nav-link site-nav-extra-link">教案</a>
+                </div>
             </div>
         </div>
-
-        <!-- 循序 -->
-        <div class="con-card">
-            <h2><span class="tag tag-seq">1</span> 循序（Sequence）</h2>
-            <p>演算法像食譜：先 A、再 B、再 C。順序錯了，結果可能就錯。</p>
-
-            <h3>生活例子：早上準備上學</h3>
-            <div class="flow-block">步驟1：起床
-步驟2：刷牙洗臉
-步驟3：換制服
-步驟4：吃早餐
-步驟5：出門</div>
-            <div class="example-box">
-                <strong>重點：</strong>這些步驟有先後關係；通常不會「先出門再刷牙」。
+    </nav>
+    <div class="page-frame">
+        <div class="table-glow"></div>
+        <div class="container con-wrap">
+            <div class="con-card">
+                <h2>📐 演算法中的結構：循序、迴圈、邏輯判斷</h2>
+                <p>許多演算法都可以拆成三種基本結構的組合：<strong>循序</strong>（照順序做）、<strong>迴圈</strong>（重複做直到條件成立）、<strong>邏輯判斷</strong>（依條件走不同路）。本頁以生活例子、排序遊戲與<strong style="color:#fde68a;">流程示意圖</strong>對照，方便獨立上一堂課。</p>
             </div>
 
-            <h3>對應本遊戲：排序的一小段操作</h3>
-            <div class="flow-block">步驟1：選定要比較的兩張牌（或要插入的牌）
-步驟2：依規則比較大小
-步驟3：交換位置或點選插入格</div>
-            <div class="example-box">
-                <strong>重點：</strong>每一輪裡，「先比較、再決定要不要動」也是循序結構。
-            </div>
-        </div>
-
-        <!-- 迴圈 -->
-        <div class="con-card">
-            <h2><span class="tag tag-loop">2</span> 迴圈（Loop / 重複）</h2>
-            <p>當同一件事要做「很多次」，但<strong>不知道要幾次才夠</strong>時，就用迴圈：重複執行一段步驟，直到<strong>停止條件</strong>成立。</p>
-
-            <h3>生活例子：洗碗洗到乾淨為止</h3>
-            <div class="flow-block">重複 {
-  沖水、搓洗
-  檢查：還有油漬嗎？
-}
-直到「沒有油漬」→ 擦乾收好</div>
-            <div class="example-box">
-                <strong>停止條件：</strong>碗已經乾淨。若沒有停止條，可能會一直洗下去（無窮迴圈）。
+            <div class="summary-grid">
+                <div class="summary-cell">
+                    <h4><span class="tag tag-seq">循序</span></h4>
+                    <p style="margin:0; font-size:0.92rem;">步驟照<strong>固定順序</strong>一個接一個執行，不能跳著做。</p>
+                </div>
+                <div class="summary-cell">
+                    <h4><span class="tag tag-loop">迴圈</span></h4>
+                    <p style="margin:0; font-size:0.92rem;">同一組步驟<strong>重複執行</strong>，直到滿足「停止條件」才離開。</p>
+                </div>
+                <div class="summary-cell">
+                    <h4><span class="tag tag-if">邏輯判斷</span></h4>
+                    <p style="margin:0; font-size:0.92rem;">依<strong>條件真假</strong>決定下一步走哪一條路（分支）。</p>
+                </div>
             </div>
 
-            <h3>生活例子：操場慢跑 3 圈</h3>
-            <div class="flow-block">圈數 = 0
-重複 {
-  跑完一圈
-  圈數 = 圈數 + 1
-}
-直到 圈數 = 3 → 結束</div>
-            <div class="example-box">
-                <strong>重點：</strong>這種是「數清楚要跑幾次」的迴圈，停止條件是圈數達到 3。
+            <!-- 循序 -->
+            <div class="con-card">
+                <h2><span class="tag tag-seq">1</span> 循序（Sequence）</h2>
+                <p>演算法像食譜：先 A、再 B、再 C。順序錯了，結果可能就錯。</p>
+
+                <h3>生活例子：早上準備上學</h3>
+                <figure class="concept-figure">
+                    <img class="concept-figure-img" src="assets/concepts/concept-seq-school.jpg"
+                        alt="流程圖：循序結構—步驟一起床、二刷牙洗臉、三換制服、四吃早餐、五出門，由上而下箭頭連接"
+                        width="800" height="500" loading="lazy" decoding="async">
+                    <figcaption class="concept-figure-cap">循序：五個步驟固定先後，通常不會顛倒順序。</figcaption>
+                </figure>
+                <div class="example-box">
+                    <strong>重點：</strong>這些步驟有先後關係；通常不會「先出門再刷牙」。
+                </div>
+
+                <h3>對應本遊戲：排序的一小段操作</h3>
+                <figure class="concept-figure">
+                    <img class="concept-figure-img" src="assets/concepts/concept-seq-sort-step.jpg"
+                        alt="流程圖：步驟一選定要比較的兩張牌或要插入的牌、步驟二依規則比較大小、步驟三交換位置或點選插入格"
+                        width="800" height="450" loading="lazy" decoding="async">
+                    <figcaption class="concept-figure-cap">每一輪裡「先比較、再動牌」也是循序。</figcaption>
+                </figure>
+                <div class="example-box">
+                    <strong>重點：</strong>每一輪裡，「先比較、再決定要不要動」也是循序結構。
+                </div>
             </div>
 
-            <h3>對應本遊戲：排到全部正確</h3>
-            <div class="flow-block">重複 {
-  比較牌、交換或插入
-  （必要時按「檢查答案」看是否已排好）
-}
-直到「全部符合目標順序」→ 完成</div>
-            <div class="example-box">
-                <strong>重點：</strong>氣泡排序「一輪一輪掃過去」、選擇排序「一輪找一個放到定位」，本質上都含有<strong>迴圈 + 內層循序或判斷</strong>。
+            <!-- 迴圈 -->
+            <div class="con-card">
+                <h2><span class="tag tag-loop">2</span> 迴圈（Loop / 重複）</h2>
+                <p>當同一件事要做「很多次」，但<strong>不知道要幾次才夠</strong>時，就用迴圈：重複執行一段步驟，直到<strong>停止條件</strong>成立。</p>
+
+                <h3>生活例子：洗碗洗到乾淨為止</h3>
+                <figure class="concept-figure">
+                    <img class="concept-figure-img" src="assets/concepts/concept-loop-dishes.jpg"
+                        alt="示意圖：迴圈—重複沖水搓洗與檢查是否還有油漬，直到沒有油漬後擦乾收好，箭頭回到重複起點表示迴圈"
+                        width="800" height="500" loading="lazy" decoding="async">
+                    <figcaption class="concept-figure-cap">停止條件：碗已乾淨；若缺少停止條件可能變成無窮迴圈。</figcaption>
+                </figure>
+                <div class="example-box">
+                    <strong>停止條件：</strong>碗已經乾淨。若沒有停止條，可能會一直洗下去（無窮迴圈）。
+                </div>
+
+                <h3>生活例子：操場慢跑 3 圈</h3>
+                <figure class="concept-figure">
+                    <img class="concept-figure-img" src="assets/concepts/concept-loop-three-laps.jpg"
+                        alt="示意圖：計次迴圈—圈數從零開始，每跑完一圈加一，直到圈數等於三結束，圖中以跑道與計數器呈現"
+                        width="800" height="500" loading="lazy" decoding="async">
+                    <figcaption class="concept-figure-cap">計次迴圈：停止條件是圈數達到約定的次數。</figcaption>
+                </figure>
+                <div class="example-box">
+                    <strong>重點：</strong>這種是「數清楚要跑幾次」的迴圈，停止條件是圈數達到 3。
+                </div>
+
+                <h3>對應本遊戲：排到全部正確</h3>
+                <figure class="concept-figure">
+                    <img class="concept-figure-img" src="assets/concepts/concept-loop-until-sorted.jpg"
+                        alt="示意圖：迴圈—重複比較牌與交換或插入，必要時檢查答案，直到全部符合目標順序才完成"
+                        width="800" height="500" loading="lazy" decoding="async">
+                    <figcaption class="concept-figure-cap">氣泡、選擇、插入等排序都含有「重複多輪直到排好」的迴圈精神。</figcaption>
+                </figure>
+                <div class="example-box">
+                    <strong>重點：</strong>氣泡排序「一輪一輪掃過去」、選擇排序「一輪找一個放到定位」，本質上都含有<strong>迴圈 + 內層循序或判斷</strong>。
+                </div>
             </div>
-        </div>
 
-        <!-- 邏輯判斷 -->
-        <div class="con-card">
-            <h2><span class="tag tag-if">3</span> 邏輯判斷（Selection / 條件分支）</h2>
-            <p>流程走到某一步時，要<strong>看條件</strong>決定走 A 路還是 B 路。常寫成「如果……否則……」（if / else）。</p>
+            <!-- 邏輯判斷 -->
+            <div class="con-card">
+                <h2><span class="tag tag-if">3</span> 邏輯判斷（Selection / 條件分支）</h2>
+                <p>流程走到某一步時，要<strong>看條件</strong>決定走 A 路還是 B 路。常寫成「如果……否則……」（if / else）。</p>
 
-            <h3>生活例子：要不要帶傘</h3>
-            <div class="flow-block">如果 降雨機率 &gt; 50%
-  則 帶傘出門
-否則
-  不帶傘出門</div>
-            <div class="example-box">
-                <strong>重點：</strong>判斷不是額外附加的，而是<strong>流程裡的一個節點</strong>；不同的條件會讓後續步驟不同。
+                <h3>生活例子：要不要帶傘</h3>
+                <figure class="concept-figure">
+                    <img class="concept-figure-img" src="assets/concepts/concept-if-umbrella.jpg"
+                        alt="流程圖：菱形判斷降雨機率是否大於百分之五十，是則帶傘出門，否則不帶傘出門"
+                        width="800" height="480" loading="lazy" decoding="async">
+                    <figcaption class="concept-figure-cap">邏輯判斷：條件不同，後續步驟就不同。</figcaption>
+                </figure>
+                <div class="example-box">
+                    <strong>重點：</strong>判斷不是額外附加的，而是<strong>流程裡的一個節點</strong>；不同的條件會讓後續步驟不同。
+                </div>
+
+                <h3>生活例子：顯微鏡—影像偏一邊時怎麼移玻片</h3>
+                <figure class="concept-figure">
+                    <img class="concept-figure-img" src="assets/concepts/concept-if-microscope.jpg"
+                        alt="示意圖：顯微鏡視野中影像偏左或偏右時，玻片應往左或往右微調的分支流程，可與上下方向另做第二層判斷"
+                        width="800" height="500" loading="lazy" decoding="async">
+                    <figcaption class="concept-figure-cap">大問題可拆成「左右」「上下」等較小判斷再合併。</figcaption>
+                </figure>
+                <div class="example-box">
+                    <strong>重點：</strong>先把「大問題」拆成「左右」「上下」兩個小判斷，再合併決策。可到 <a href="algorithm-lab.html"
+                        style="color:#93c5fd;">演算法生活實驗室</a> 做互動練習。
+                </div>
+
+                <h3>對應本遊戲：比較後要不要交換</h3>
+                <figure class="concept-figure">
+                    <img class="concept-figure-img" src="assets/concepts/concept-if-swap-cards.jpg"
+                        alt="流程圖：判斷兩張牌順序是否錯誤，錯則交換，否則不交換並看下一組"
+                        width="800" height="480" loading="lazy" decoding="async">
+                    <figcaption class="concept-figure-cap">插入排序也會依條件決定插入位置，同樣是分支。</figcaption>
+                </figure>
+                <div class="example-box">
+                    <strong>重點：</strong>插入排序也會有判斷：「key 應該插在這格的左邊還是右邊？」都是流程中的分支。
+                </div>
             </div>
 
-            <h3>生活例子：顯微鏡—影像偏一邊時怎麼移玻片</h3>
-            <div class="flow-block">如果 影像在右邊 → 玻片往右移
-如果 影像在左邊 → 玻片往左移
-（上下同理，可再拆成第二個判斷）</div>
-            <div class="example-box">
-                <strong>重點：</strong>先把「大問題」拆成「左右」「上下」兩個小判斷，再合併決策。可到 <a href="algorithm-lab.html" style="color:#93c5fd;">演算法生活實驗室</a> 做互動練習。
+            <!-- 組合 -->
+            <div class="con-card">
+                <h2>🔗 三種結構常一起出現</h2>
+                <p>真實的演算法多半是：<strong>循序</strong>裡面包<strong>迴圈</strong>，迴圈裡面又有<strong>判斷</strong>。例如：</p>
+                <figure class="concept-figure">
+                    <img class="concept-figure-img" src="assets/concepts/concept-combined-flow.jpg"
+                        alt="整合流程圖：外層重複每一輪排序，內含循序取出兩張牌、判斷順序對否決定是否交換、再判斷是否已全部排好以決定離開迴圈或繼續，最後輸出排好的牌"
+                        width="880" height="620" loading="lazy" decoding="async">
+                    <figcaption class="concept-figure-cap">可搭配手繪流程圖練習：長方形＝步驟、菱形＝判斷、回到上一層的箭頭＝迴圈。</figcaption>
+                </figure>
+                <p style="margin-top:12px; color:#94a3b8; font-size:0.92rem;">
+                    教學建議：可先讓學生用生活例子畫流程圖（長方形＝步驟、菱形＝判斷、箭頭往回＝迴圈），再對照遊戲中的操作。
+                </p>
             </div>
 
-            <h3>對應本遊戲：比較後要不要交換</h3>
-            <div class="flow-block">如果 左邊的牌 應該排在 右邊的牌 後面（順序錯了）
-  則 交換兩張牌
-否則
-  不交換，看下一組</div>
-            <div class="example-box">
-                <strong>重點：</strong>插入排序也會有判斷：「key 應該插在這格的左邊還是右邊？」都是流程中的分支。
+            <div class="con-card">
+                <h2>✅ 本章小測驗</h2>
+                <p style="margin:0;">讀完循序、迴圈與邏輯判斷後，可用 10 題選擇題快速檢核概念是否清楚。</p>
+                <p style="margin:12px 0 0;">
+                    <a href="algorithm-concepts-quiz.html" style="display:inline-block; padding:10px 18px; border-radius:12px; font-weight:700; color:#0f172a; background:linear-gradient(180deg,#fde68a,#fbbf24); text-decoration:none; border:1px solid rgba(251,191,36,0.6);">前往結構小測驗（10 題）</a>
+                </p>
             </div>
-        </div>
-
-        <!-- 組合 -->
-        <div class="con-card">
-            <h2>🔗 三種結構常一起出現</h2>
-            <p>真實的演算法多半是：<strong>循序</strong>裡面包<strong>迴圈</strong>，迴圈裡面又有<strong>判斷</strong>。例如：</p>
-            <div class="flow-block">開始
-重複（每一輪排序）{
-  循序：取出要比較的兩張牌
-  判斷：順序對不對？
-    對 → 不交換
-    錯 → 交換
-  判斷：已經全部排好了嗎？
-    是 → 離開迴圈
-    否 → 繼續下一輪
-}
-輸出：排好的牌</div>
-            <p style="margin-top:12px; color:#94a3b8; font-size:0.92rem;">
-                教學建議：可先讓學生用生活例子畫流程圖（長方形＝步驟、菱形＝判斷、箭頭往回＝迴圈），再對照遊戲中的操作。
-            </p>
         </div>
     </div>
-</div>
 </body>
+
 </html>

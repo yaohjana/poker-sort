@@ -4,7 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>撲克牌排序學院 - 自我測驗</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <script src="subpage-ui.js" defer></script>
     <style>
         .exam-header {
             display: flex;
@@ -74,7 +78,6 @@
             height: 100%;
             width: 0%;
             background: linear-gradient(90deg, rgba(34, 197, 94, 0.95), rgba(250, 204, 21, 0.95));
-            transition: width 0.25s ease;
         }
 
         .stage-tabs {
@@ -293,6 +296,142 @@
             margin-bottom: 6px;
         }
 
+        .exam-cert-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 100;
+            background: rgba(2, 6, 23, 0.82);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+        }
+
+        .exam-cert-overlay[hidden] {
+            display: none !important;
+        }
+
+        .exam-cert-dialog {
+            width: min(460px, 100%);
+            max-height: min(92vh, 680px);
+            overflow: auto;
+            background: linear-gradient(165deg, rgba(20, 25, 40, 0.98), rgba(2, 6, 23, 0.98));
+            border: 1px solid rgba(56, 189, 248, 0.4);
+            border-radius: 18px;
+            padding: 18px 18px 16px;
+            box-shadow: 0 28px 80px rgba(0, 0, 0, 0.65);
+        }
+
+        .exam-cert-dialog h3 {
+            margin: 0 0 8px;
+            color: #7dd3fc;
+            font-size: 1.12rem;
+        }
+
+        .exam-cert-lead {
+            color: #cbd5e1;
+            font-size: 0.9rem;
+            line-height: 1.55;
+            margin: 0 0 12px;
+        }
+
+        .exam-cert-field label {
+            display: block;
+            color: #94a3b8;
+            font-size: 0.86rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .exam-cert-name-input {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 10px 12px;
+            border-radius: 10px;
+            border: 1px solid rgba(148, 163, 184, 0.5);
+            background: rgba(2, 6, 23, 0.65);
+            color: #f8fafc;
+            font-size: 1rem;
+        }
+
+        .exam-cert-actions-top {
+            margin: 8px 0 12px;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .exam-cert-preview {
+            padding: 16px 14px;
+            border-radius: 14px;
+            border: 2px solid rgba(56, 189, 248, 0.45);
+            background: radial-gradient(circle at 50% 0%, rgba(56, 189, 248, 0.1), rgba(2, 6, 23, 0.92));
+            text-align: center;
+        }
+
+        .exam-cert-ptitle {
+            font-family: 'Playfair Display', 'Times New Roman', serif;
+            color: #fef3c7;
+            font-size: 1.2rem;
+            letter-spacing: 0.06em;
+            margin: 0 0 4px;
+        }
+
+        .exam-cert-sub {
+            color: #38bdf8;
+            font-weight: 800;
+            font-size: 0.78rem;
+            letter-spacing: 0.14em;
+            margin-bottom: 10px;
+        }
+
+        .exam-cert-pname {
+            color: #e2e8f0;
+            font-size: 1.08rem;
+            font-weight: 800;
+            margin: 0 0 12px;
+        }
+
+        .exam-cert-scores {
+            text-align: left;
+            color: #cbd5e1;
+            font-size: 0.9rem;
+            line-height: 1.65;
+            margin: 0 auto 10px;
+            max-width: 280px;
+        }
+
+        .exam-cert-total {
+            color: #fde68a;
+            font-weight: 800;
+            font-size: 1rem;
+            margin: 0 0 6px;
+        }
+
+        .exam-cert-date {
+            color: #94a3b8;
+            font-size: 0.86rem;
+            margin: 0;
+        }
+
+        .exam-cert-padlet {
+            margin-top: 14px;
+            padding: 10px 12px;
+            border-radius: 12px;
+            background: rgba(30, 64, 175, 0.22);
+            border: 1px solid rgba(96, 165, 250, 0.45);
+            color: #bfdbfe;
+            font-size: 0.88rem;
+            line-height: 1.6;
+        }
+
+        .exam-cert-actions-bottom {
+            margin-top: 14px;
+            display: flex;
+            justify-content: flex-end;
+        }
+
         .footer-note {
             margin: 20px 0 6px;
             color: #9ca3af;
@@ -302,16 +441,36 @@
     </style>
 </head>
 <body>
+<nav class="site-nav" aria-label="網站導覽">
+    <div class="site-nav-inner">
+        <div class="site-nav-group" role="group" aria-labelledby="site-nav-flow-label">
+            <div id="site-nav-flow-label" class="site-nav-group-label">教學流程</div>
+            <div class="site-nav-group-links">
+                <a href="algorithm-lab.html" class="site-nav-link site-nav-flow-link"><span class="site-nav-step" aria-hidden="true">1</span>認識演算法</a>
+                <a href="index.html" class="site-nav-link site-nav-flow-link"><span class="site-nav-step" aria-hidden="true">2</span>排序演算法實驗室</a>
+                <a href="exam.html" class="site-nav-link site-nav-flow-link site-nav-link-current" aria-current="page"><span class="site-nav-step" aria-hidden="true">3</span>學習評量</a>
+                <a href="algorithm-concepts.html" class="site-nav-link site-nav-flow-link"><span class="site-nav-step" aria-hidden="true">4</span>演算法中的結構</a>
+                <a href="algorithm-concepts-quiz.html" class="site-nav-link site-nav-flow-link"><span class="site-nav-step" aria-hidden="true">5</span>結構小測驗</a>
+            </div>
+        </div>
+        <div class="site-nav-group site-nav-group--extra" role="group" aria-label="教師手冊與教案">
+            <div class="site-nav-group-links">
+                <a href="guide.html" class="site-nav-link site-nav-extra-link">教師手冊</a>
+                <a href="lesson.html" class="site-nav-link site-nav-extra-link">教案</a>
+            </div>
+        </div>
+    </div>
+</nav>
 <div class="page-frame">
     <div class="table-glow"></div>
     <div class="container">
         <div class="exam-header">
             <div class="exam-title">
                 <h1>自我測驗：選擇排序 & 插入排序</h1>
-                <p>做題後按「檢查此題」。答對會記錄進度；可以反覆練習直到滿分 28/28。</p>
+                <p>做題後按「檢查此題」。答對會記錄進度；可反覆練習直到滿分。「初探」「基礎」以觀念與選擇為主，協助不同程度學生銜接遊戲操作。</p>
             </div>
             <div class="exam-actions">
-                <a class="btn preset-btn" href="index.html" style="text-decoration:none;">回到遊戲</a>
+                <button type="button" class="btn primary" id="exam-cert-open-btn">開啟評量證明（截圖／Padlet）</button>
                 <button id="reset-progress-btn" class="btn danger" type="button">重置進度</button>
             </div>
         </div>
@@ -331,8 +490,36 @@
         <div id="exam-grid" class="exam-grid"></div>
 
         <div class="footer-note">
-            小提醒：這份測驗主要練習「選擇排序（找極值放尾端）」與「插入排序（找到插入格）」的思考。
-            若答錯，別急著一直猜：先看提示，再做一次。
+            小提醒：這份測驗主要練習「選擇排序（找極值放定位）」與「插入排序（找到插入格）」的思考。
+            前兩階段題型較友善；若答錯，先看提示再重試。完成一部分即可用「評量證明」截圖上傳 Padlet，教師可依進度給予鼓勵。
+        </div>
+    </div>
+</div>
+
+<div id="exam-cert-overlay" class="exam-cert-overlay" hidden aria-hidden="true">
+    <div class="exam-cert-dialog" role="dialog" aria-modal="true" aria-labelledby="exam-cert-title">
+        <h3 id="exam-cert-title">📋 分階段測驗 · 評量證明</h3>
+        <p class="exam-cert-lead">請輸入姓名（或座號），確認下方分數與日期後<strong>截圖</strong>，再依教師指示上傳至課程 Padlet。</p>
+        <div class="exam-cert-field">
+            <label for="exam-cert-name">姓名／座號</label>
+            <input type="text" id="exam-cert-name" class="exam-cert-name-input" maxlength="40" placeholder="顯示在證明上" autocomplete="name">
+        </div>
+        <div class="exam-cert-actions-top">
+            <button type="button" class="btn preset-btn" id="exam-cert-apply-name">更新證明</button>
+        </div>
+        <div class="exam-cert-preview" id="exam-cert-preview-block">
+            <div class="exam-cert-ptitle">撲克牌排序學院</div>
+            <div class="exam-cert-sub">分階段測驗 · 學習紀錄</div>
+            <div class="exam-cert-pname" id="exam-cert-display-name">（請輸入姓名）</div>
+            <div class="exam-cert-scores" id="exam-cert-stage-lines"></div>
+            <p class="exam-cert-total" id="exam-cert-total-line"></p>
+            <p class="exam-cert-date" id="exam-cert-date-line"></p>
+        </div>
+        <div class="exam-cert-padlet">
+            <strong>Padlet：</strong>請向教師索取看板連結；新增貼文並上傳本截圖，必要時註明「測驗進度截圖」與日期。
+        </div>
+        <div class="exam-cert-actions-bottom">
+            <button type="button" class="btn primary" id="exam-cert-close-btn">關閉</button>
         </div>
     </div>
 </div>
@@ -341,10 +528,10 @@
     const STORAGE_KEY = 'pokerSortExamProgress_v1';
     const stageOrder = ['初探', '基礎', '應用', '挑戰'];
     const stageDescMap = {
-        '初探': '先掌握演算法最基本概念：輸入、步驟、輸出與可停止。',
-        '基礎': '建立排序基本功：會判斷選擇排序與插入排序每一步該做什麼。',
-        '應用': '把規則用在題目中：加入推理與部分實作，練習正確性檢查。',
-        '挑戰': '完整流程與綜合判斷：寫出步驟、驗證不變量、整合概念。'
+        '初探': '以觀念題為主，熟悉輸入／步驟／輸出與兩種排序「在做什麼」。（題型已調整為較易上手）',
+        '基礎': '鞏固每輪判斷：仍以選擇題為主，陣列結果改為選項作答，方便銜接遊戲操作。',
+        '應用': '把規則用在題目中：加入推理與陣列／多行步驟，練習正確性檢查。',
+        '挑戰': '完整流程與綜合判斷：步驟書寫、不變量與進階觀念，適合複習與加深。'
     };
 
     const questions = [
@@ -441,11 +628,17 @@
         {
             id: 7,
             difficulty: '容易',
-            type: 'arrayInput',
-            prompt: '實作題：使用選擇排序（遞增，原地做法、不使用額外陣列；只透過「交換兩個位置」），對陣列 [5, 2, 4, 1, 3] 做完「第 1 輪」後，陣列會變成？（填整個陣列）',
-            expectedArray: [1, 2, 4, 5, 3],
-            hint: '第 1 輪先找整個未排序區的最小值（1），然後用交換把它放到第 1 個位置（索引 0）。',
-            learn: '選擇排序第 1 輪（原地交換）：找 min=1，交換到第 1 個位置。'
+            type: 'mcq',
+            prompt: '使用選擇排序（遞增，原地、只透過交換兩個位置），對陣列 [5, 2, 4, 1, 3] 做完「第 1 輪」後，陣列會變成哪一個？',
+            choices: [
+                { id: 'a', text: '[1, 2, 4, 5, 3]' },
+                { id: 'b', text: '[2, 5, 4, 1, 3]' },
+                { id: 'c', text: '[5, 2, 4, 1, 3]（完全沒變）' },
+                { id: 'd', text: '[1, 5, 2, 4, 3]' }
+            ],
+            correct: 'a',
+            hint: '第 1 輪先找整個未排序區的最小值（1），再用交換把它放到第 1 個位置。',
+            learn: '選擇排序第 1 輪（原地交換）：找最小值 1，與開頭位置交換。'
         },
         {
             id: 8,
@@ -495,11 +688,17 @@
         {
             id: 11,
             difficulty: '簡單',
-            type: 'arrayInput',
-            prompt: '實作題：使用插入排序（遞增），對陣列 [3, 1, 2] 做到「第 1 次插入」（key=1 插入完後）結果是？',
-            expectedArray: [1, 3, 2],
-            hint: '已排序區開始只有 [3]，key=1 要插到 3 的左邊。',
-            learn: '插入排序：key=1 插入到已排序區的最前面。'
+            type: 'mcq',
+            prompt: '使用插入排序（遞增），對陣列 [3, 1, 2] 做完「第 1 次插入」（把 key=1 插入完成後），陣列會變成哪一個？',
+            choices: [
+                { id: 'a', text: '[1, 3, 2]' },
+                { id: 'b', text: '[3, 1, 2]（完全沒變）' },
+                { id: 'c', text: '[1, 2, 3]' },
+                { id: 'd', text: '[3, 2, 1]' }
+            ],
+            correct: 'a',
+            hint: '已排序區開始只有 [3]，key=1 比 3 小，要插到 3 的左邊。',
+            learn: '插入排序：key=1 插入到已排序區的最前面，得到 [1, 3, 2]。'
         },
         {
             id: 12,
@@ -534,11 +733,17 @@
         {
             id: 14,
             difficulty: '簡單',
-            type: 'arrayInput',
-            prompt: '實作題：使用插入排序（遞增）對陣列 [4, 1, 3, 2] 做完「前兩輪插入」（i=1 與 i=2）後的結果是？',
-            expectedArray: [1, 3, 4, 2],
-            hint: '先把 1 插到前面得到 [1, 4, 3, 2]，再把 3 插到 1 和 4 之間。',
-            learn: '插入排序：維持已排序區有序；每輪插入 key 到正確位置。'
+            type: 'mcq',
+            prompt: '使用插入排序（遞增）對陣列 [4, 1, 3, 2] 做完「前兩輪插入」（先處理 1，再處理 3）後，陣列會變成哪一個？',
+            choices: [
+                { id: 'a', text: '[1, 3, 4, 2]' },
+                { id: 'b', text: '[1, 4, 3, 2]' },
+                { id: 'c', text: '[1, 2, 3, 4]' },
+                { id: 'd', text: '[4, 1, 3, 2]（完全沒變）' }
+            ],
+            correct: 'a',
+            hint: '第一輪把 1 插到最前 → [1, 4, 3, 2]；第二輪 key=3 插在 1 與 4 之間。',
+            learn: '插入排序：每輪把 key 插到已排序區正確位置；兩輪後為 [1, 3, 4, 2]。'
         },
         {
             id: 15,
@@ -1133,6 +1338,80 @@
         saveProgress();
         renderAll();
     }
+
+    const EXAM_CERT_NAME_KEY = 'pokerSortExamCertName_v1';
+
+    function refreshExamCertPreview() {
+        const nameInput = $('exam-cert-name');
+        let name = (nameInput && nameInput.value.trim()) || '';
+        if (!name) {
+            try { name = localStorage.getItem(EXAM_CERT_NAME_KEY) || ''; } catch { /* ignore */ }
+        }
+        const displayName = $('exam-cert-display-name');
+        if (displayName) displayName.textContent = name ? name : '（請輸入姓名）';
+
+        const linesEl = $('exam-cert-stage-lines');
+        const totalEl = $('exam-cert-total-line');
+        const dateEl = $('exam-cert-date-line');
+        if (linesEl) {
+            linesEl.innerHTML = stageOrder.map(stage => {
+                const { stageCorrect, total } = getStageStats(stage);
+                return `<div>${stage}：${stageCorrect} / ${total} 題答對</div>`;
+            }).join('');
+        }
+        if (totalEl) {
+            const c = getOverallScore();
+            totalEl.textContent = `總計已答對：${c} / ${questions.length} 題`;
+        }
+        if (dateEl) {
+            dateEl.textContent = '產生時間：' + new Date().toLocaleString('zh-TW', { dateStyle: 'medium', timeStyle: 'short' });
+        }
+    }
+
+    function openExamCertOverlay() {
+        const ov = $('exam-cert-overlay');
+        if (!ov) return;
+        try {
+            const saved = localStorage.getItem(EXAM_CERT_NAME_KEY) || '';
+            const input = $('exam-cert-name');
+            if (input && !input.value.trim() && saved) input.value = saved;
+        } catch { /* ignore */ }
+        refreshExamCertPreview();
+        ov.hidden = false;
+        ov.setAttribute('aria-hidden', 'false');
+    }
+
+    function closeExamCertOverlay() {
+        const ov = $('exam-cert-overlay');
+        if (!ov) return;
+        ov.hidden = true;
+        ov.setAttribute('aria-hidden', 'true');
+    }
+
+    function bindExamCertOverlay() {
+        const ov = $('exam-cert-overlay');
+        const openBtn = $('exam-cert-open-btn');
+        const closeBtn = $('exam-cert-close-btn');
+        const applyBtn = $('exam-cert-apply-name');
+        const input = $('exam-cert-name');
+
+        if (openBtn) openBtn.addEventListener('click', () => openExamCertOverlay());
+        if (closeBtn) closeBtn.addEventListener('click', () => closeExamCertOverlay());
+        if (ov) ov.addEventListener('click', (e) => { if (e.target === ov) closeExamCertOverlay(); });
+        if (applyBtn) applyBtn.addEventListener('click', () => {
+            const v = input ? input.value.trim() : '';
+            if (v) {
+                try { localStorage.setItem(EXAM_CERT_NAME_KEY, v); } catch { /* ignore */ }
+            }
+            refreshExamCertPreview();
+        });
+        if (input) input.addEventListener('input', () => refreshExamCertPreview());
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && ov && !ov.hidden) closeExamCertOverlay();
+        });
+    }
+
+    bindExamCertOverlay();
 
     $('reset-progress-btn').addEventListener('click', resetProgress);
 

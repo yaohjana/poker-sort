@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>演算法中的結構｜本章小測驗</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Noto+Sans+TC:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="subpage-ui.js" defer></script>
+    <style>
+        .con-wrap {
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        .con-card {
+            background: rgba(2, 6, 23, 0.58);
+            border: 1px solid rgba(148, 163, 184, 0.35);
+            border-radius: 16px;
+            padding: 18px;
+            margin-bottom: 14px;
+        }
+
+        .con-card h1 {
+            margin: 0 0 8px;
+            color: #fbbf24;
+            font-size: 1.35rem;
+        }
+
+        .con-card p {
+            margin: 0;
+            color: #e5e7eb;
+            line-height: 1.65;
+        }
+
+        .quiz-intro {
+            font-size: 0.95rem;
+            color: #94a3b8;
+            margin-top: 8px !important;
+        }
+
+        .quiz-q {
+            border: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .quiz-q legend {
+            font-weight: 700;
+            color: #f8fafc;
+            font-size: 1rem;
+            padding: 0;
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+
+        .quiz-q label {
+            display: block;
+            margin: 6px 0;
+            padding: 8px 10px;
+            border-radius: 10px;
+            border: 1px solid rgba(148, 163, 184, 0.25);
+            background: rgba(15, 23, 42, 0.35);
+            color: #e5e7eb;
+            cursor: pointer;
+            line-height: 1.45;
+        }
+
+        .quiz-q label:hover {
+            border-color: rgba(251, 191, 36, 0.45);
+        }
+
+        .quiz-q input {
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+
+        .quiz-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+            margin-top: 6px;
+        }
+
+        .quiz-btn {
+            font-family: inherit;
+            font-weight: 700;
+            padding: 10px 20px;
+            border-radius: 12px;
+            border: 1px solid rgba(251, 191, 36, 0.55);
+            background: linear-gradient(180deg, rgba(251, 191, 36, 0.25), rgba(245, 158, 11, 0.15));
+            color: #fef3c7;
+            cursor: pointer;
+        }
+
+        .quiz-btn:hover {
+            background: linear-gradient(180deg, rgba(251, 191, 36, 0.4), rgba(245, 158, 11, 0.25));
+        }
+
+        .quiz-btn--ghost {
+            border-color: rgba(148, 163, 184, 0.45);
+            background: rgba(15, 23, 42, 0.5);
+            color: #cbd5e1;
+        }
+
+        .quiz-score {
+            font-size: 1.05rem;
+            color: #fde68a;
+            font-weight: 700;
+        }
+
+        .quiz-result {
+            display: none;
+            margin-top: 10px;
+            padding: 10px 12px;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            line-height: 1.55;
+        }
+
+        .quiz-result--show {
+            display: block;
+        }
+
+        .quiz-result--ok {
+            border: 1px solid rgba(34, 197, 94, 0.45);
+            background: rgba(34, 197, 94, 0.12);
+            color: #bbf7d0;
+        }
+
+        .quiz-result--bad {
+            border: 1px solid rgba(248, 113, 113, 0.45);
+            background: rgba(248, 113, 113, 0.1);
+            color: #fecaca;
+        }
+
+        .back-link {
+            margin-top: 12px;
+            font-size: 0.92rem;
+        }
+
+        .back-link a {
+            color: #93c5fd;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="site-nav" aria-label="網站導覽">
+        <div class="site-nav-inner">
+            <div class="site-nav-group" role="group" aria-labelledby="site-nav-flow-label">
+                <div id="site-nav-flow-label" class="site-nav-group-label">教學流程</div>
+                <div class="site-nav-group-links">
+                    <a href="algorithm-lab.html" class="site-nav-link site-nav-flow-link"><span class="site-nav-step"
+                            aria-hidden="true">1</span>認識演算法</a>
+                    <a href="index.html" class="site-nav-link site-nav-flow-link"><span class="site-nav-step"
+                            aria-hidden="true">2</span>排序演算法實驗室</a>
+                    <a href="exam.html" class="site-nav-link site-nav-flow-link"><span class="site-nav-step"
+                            aria-hidden="true">3</span>學習評量</a>
+                    <a href="algorithm-concepts.html" class="site-nav-link site-nav-flow-link"><span class="site-nav-step"
+                            aria-hidden="true">4</span>演算法中的結構</a>
+                    <a href="algorithm-concepts-quiz.html" class="site-nav-link site-nav-flow-link site-nav-link-current"
+                        aria-current="page"><span class="site-nav-step" aria-hidden="true">5</span>結構小測驗</a>
+                </div>
+            </div>
+            <div class="site-nav-group site-nav-group--extra" role="group" aria-label="教師手冊與教案">
+                <div class="site-nav-group-links">
+                    <a href="guide.html" class="site-nav-link site-nav-extra-link">教師手冊</a>
+                    <a href="lesson.html" class="site-nav-link site-nav-extra-link">教案</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="page-frame">
+        <div class="table-glow"></div>
+        <div class="container con-wrap">
+            <div class="con-card">
+                <h1>📝 演算法中的結構｜本章小測驗</h1>
+                <p>共 10 題選擇題，範圍對應教材中的<strong style="color:#fde68a;">循序、迴圈、邏輯判斷</strong>與流程圖、排序遊戲的對照。</p>
+                <p class="quiz-intro">交卷後會顯示得分與每題簡短解析。可隨時按「重填」再練一次。</p>
+                <p class="back-link"><a href="algorithm-concepts.html">← 回到「演算法中的結構」教材</a></p>
+            </div>
+
+            <form id="concepts-quiz-form" novalidate>
+                <fieldset class="con-card quiz-q" data-correct="c"
+                    data-explain="循序是步驟依固定先後執行；依條件分支屬於判斷，重複直到條件成立屬於迴圈。">
+                    <legend>1. 下列何者最符合「循序（Sequence）」結構的描述？</legend>
+                    <label><input type="radio" name="q1" value="a"> A. 依條件選擇不同路徑</label>
+                    <label><input type="radio" name="q1" value="b"> B. 同一組步驟重複執行直到停止條件成立</label>
+                    <label><input type="radio" name="q1" value="c"> C. 步驟照固定順序一個接一個執行</label>
+                    <label><input type="radio" name="q1" value="d"> D. 可隨意跳過中間步驟</label>
+                    <div class="quiz-result" role="status" aria-live="polite"></div>
+                </fieldset>
+
+                <fieldset class="con-card quiz-q" data-correct="b"
+                    data-explain="停止條件錯誤時，迴圈可能永遠無法離開，形成無窮迴圈。">
+                    <legend>2. 迴圈的「停止條件」若設計錯誤，最可能發生什麼情況？</legend>
+                    <label><input type="radio" name="q2" value="a"> A. 演算法一定會變快</label>
+                    <label><input type="radio" name="q2" value="b"> B. 可能陷入無窮迴圈，無法正常結束</label>
+                    <label><input type="radio" name="q2" value="c"> C. 只能使用循序，不能使用判斷</label>
+                    <label><input type="radio" name="q2" value="d"> D. 流程圖不能畫菱形</label>
+                    <div class="quiz-result" role="status" aria-live="polite"></div>
+                </fieldset>
+
+                <fieldset class="con-card quiz-q" data-correct="c"
+                    data-explain="教材對照：長方形常表示步驟，菱形表示條件判斷。">
+                    <legend>3. 在常見的流程圖符號中，菱形（◇）通常代表什麼？</legend>
+                    <label><input type="radio" name="q3" value="a"> A. 程式的開始或結束</label>
+                    <label><input type="radio" name="q3" value="b"> B. 純粹的輸入或輸出</label>
+                    <label><input type="radio" name="q3" value="c"> C. 條件判斷（要分岔前的檢查）</label>
+                    <label><input type="radio" name="q3" value="d"> D. 註解說明</label>
+                    <div class="quiz-result" role="status" aria-live="polite"></div>
+                </fieldset>
+
+                <fieldset class="con-card quiz-q" data-correct="b"
+                    data-explain="一輪輪掃過、多輪直到排好，是「重複執行」的迴圈精神。">
+                    <legend>4. 氣泡排序「一輪一輪掃過牌列」主要對應哪一種結構？</legend>
+                    <label><input type="radio" name="q4" value="a"> A. 只有循序，沒有重複</label>
+                    <label><input type="radio" name="q4" value="b"> B. 迴圈（重複多輪直到達成目標）</label>
+                    <label><input type="radio" name="q4" value="c"> C. 只有邏輯判斷，沒有重複</label>
+                    <label><input type="radio" name="q4" value="d"> D. 與結構無關</label>
+                    <div class="quiz-result" role="status" aria-live="polite"></div>
+                </fieldset>
+
+                <fieldset class="con-card quiz-q" data-correct="c" data-explain="if / else 依條件走不同分支，屬於邏輯判斷。">
+                    <legend>5. 在程式或偽碼中，「如果……否則……」（if / else）屬於哪一種結構？</legend>
+                    <label><input type="radio" name="q5" value="a"> A. 循序</label>
+                    <label><input type="radio" name="q5" value="b"> B. 迴圈</label>
+                    <label><input type="radio" name="q5" value="c"> C. 邏輯判斷（條件分支）</label>
+                    <label><input type="radio" name="q5" value="d"> D. 編譯器的設定</label>
+                    <div class="quiz-result" role="status" aria-live="polite"></div>
+                </fieldset>
+
+                <fieldset class="con-card quiz-q" data-correct="c"
+                    data-explain="先比較、再決定要不要交換，是依條件分支，對應教材中的「比較後要不要交換」。">
+                    <legend>6. 「比較兩張牌，只有順序錯誤時才交換」最貼近哪一種結構？</legend>
+                    <label><input type="radio" name="q6" value="a"> A. 循序（必定交換）</label>
+                    <label><input type="radio" name="q6" value="b"> B. 迴圈（只重複不交換）</label>
+                    <label><input type="radio" name="q6" value="c"> C. 邏輯判斷（依條件決定是否交換）</label>
+                    <label><input type="radio" name="q6" value="d"> D. 以上皆非</label>
+                    <div class="quiz-result" role="status" aria-live="polite"></div>
+                </fieldset>
+
+                <fieldset class="con-card quiz-q" data-correct="b"
+                    data-explain="教材提到：真實演算法常是循序裡有迴圈，迴圈裡又有判斷。">
+                    <legend>7. 「外層迴圈裡面包含循序步驟與條件判斷」在真實演算法中？</legend>
+                    <label><input type="radio" name="q7" value="a"> A. 幾乎不會出現</label>
+                    <label><input type="radio" name="q7" value="b"> B. 非常常見</label>
+                    <label><input type="radio" name="q7" value="c"> C. 只適用於氣泡排序</label>
+                    <label><input type="radio" name="q7" value="d"> D. 違反演算法定義</label>
+                    <div class="quiz-result" role="status" aria-live="polite"></div>
+                </fieldset>
+
+                <fieldset class="con-card quiz-q" data-correct="b"
+                    data-explain="計次迴圈常依固定次數；條件式迴圈則看「是否滿足停止條件」才結束，兩者思考方式不同。">
+                    <legend>8. 「計次迴圈」與「依條件結束的迴圈」的主要差異是什麼？</legend>
+                    <label><input type="radio" name="q8" value="a"> A. 兩者完全相同，只是名稱不同</label>
+                    <label><input type="radio" name="q8" value="b"> B. 計次常與固定重複次數有關；條件式則看是否滿足停止條件</label>
+                    <label><input type="radio" name="q8" value="c"> C. 只有計次迴圈能用於排序</label>
+                    <label><input type="radio" name="q8" value="d"> D. 條件式迴圈不能搭配判斷</label>
+                    <div class="quiz-result" role="status" aria-live="polite"></div>
+                </fieldset>
+
+                <fieldset class="con-card quiz-q" data-correct="c"
+                    data-explain="依天氣決定是否執行某步是「分支」，不是循序的特性。">
+                    <legend>9. 下列何者「不是」循序結構的特性？</legend>
+                    <label><input type="radio" name="q9" value="a"> A. 步驟之間有先後順序</label>
+                    <label><input type="radio" name="q9" value="b"> B. 通常依序完成，不任意打亂中間順序</label>
+                    <label><input type="radio" name="q9" value="c"> C. 依當天是否下雨決定要不要執行某一步</label>
+                    <label><input type="radio" name="q9" value="d"> D. 像食譜先 A 再 B 再 C 的執行方式</label>
+                    <div class="quiz-result" role="status" aria-live="polite"></div>
+                </fieldset>
+
+                <fieldset class="con-card quiz-q" data-correct="b"
+                    data-explain="箭頭回到較早的節點，表示重複執行同一段流程，即迴圈。">
+                    <legend>10. 流程圖中，箭頭從後面的步驟「回到較早的步驟」通常表示什麼？</legend>
+                    <label><input type="radio" name="q10" value="a"> A. 循序已經結束</label>
+                    <label><input type="radio" name="q10" value="b"> B. 迴圈（再執行一次或繼續下一輪）</label>
+                    <label><input type="radio" name="q10" value="c"> C. 一定要畫錯了</label>
+                    <label><input type="radio" name="q10" value="d"> D. 代表註解</label>
+                    <div class="quiz-result" role="status" aria-live="polite"></div>
+                </fieldset>
+
+                <div class="con-card">
+                    <div class="quiz-actions">
+                        <button type="button" class="quiz-btn" id="concepts-quiz-submit">交卷對答案</button>
+                        <button type="reset" class="quiz-btn quiz-btn--ghost" id="concepts-quiz-reset">重填</button>
+                        <span class="quiz-score" id="concepts-quiz-score" hidden></span>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+        (function () {
+            var form = document.getElementById('concepts-quiz-form');
+            var submitBtn = document.getElementById('concepts-quiz-submit');
+            var scoreEl = document.getElementById('concepts-quiz-score');
+            var fieldsets = form.querySelectorAll('.quiz-q');
+
+            function grade() {
+                var correct = 0;
+                var total = fieldsets.length;
+                fieldsets.forEach(function (fs) {
+                    var ans = fs.dataset.correct;
+                    var picked = fs.querySelector('input[type="radio"]:checked');
+                    var box = fs.querySelector('.quiz-result');
+                    box.classList.add('quiz-result--show');
+                    if (!picked) {
+                        box.classList.remove('quiz-result--ok');
+                        box.classList.add('quiz-result--bad');
+                        box.textContent = '未作答。解析：' + (fs.dataset.explain || '');
+                        return;
+                    }
+                    if (picked.value === ans) {
+                        correct++;
+                        box.classList.remove('quiz-result--bad');
+                        box.classList.add('quiz-result--ok');
+                        box.textContent = '答對了。';
+                    } else {
+                        box.classList.remove('quiz-result--ok');
+                        box.classList.add('quiz-result--bad');
+                        box.textContent = '答錯。解析：' + (fs.dataset.explain || '');
+                    }
+                });
+                scoreEl.hidden = false;
+                scoreEl.textContent = '得分：' + correct + ' / ' + total;
+            }
+
+            function clearFeedback() {
+                fieldsets.forEach(function (fs) {
+                    var box = fs.querySelector('.quiz-result');
+                    box.classList.remove('quiz-result--show', 'quiz-result--ok', 'quiz-result--bad');
+                    box.textContent = '';
+                });
+                scoreEl.hidden = true;
+                scoreEl.textContent = '';
+            }
+
+            submitBtn.addEventListener('click', grade);
+            form.addEventListener('reset', function () {
+                setTimeout(clearFeedback, 0);
+            });
+        })();
+    </script>
+</body>
+
+</html>
