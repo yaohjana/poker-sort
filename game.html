@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>排序演算法實驗室 - 遊戲</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Noto+Sans+TC:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <button type="button" class="overlay-backdrop" id="overlay-backdrop" aria-hidden="true" tabindex="-1"></button>
+    <nav class="site-nav" id="site-nav" aria-label="網站導覽">
+        <div class="site-nav-inner">
+            <div class="site-nav-group" role="group" aria-labelledby="site-nav-flow-label">
+                <div id="site-nav-flow-label" class="site-nav-group-label" data-i18n-key="nav.groupFlow">教學流程</div>
+                <div class="site-nav-group-links">
+                    <a href="algorithm-lab.html" class="site-nav-link site-nav-flow-link"><span class="site-nav-step" aria-hidden="true">1</span><span data-i18n-key="nav.flowLab">認識演算法</span></a>
+                    <a href="game.html" class="site-nav-link site-nav-flow-link site-nav-link-current" aria-current="page"><span class="site-nav-step" aria-hidden="true">2</span><span data-i18n-key="nav.flowGame">排序演算法實驗室</span></a>
+                    <a href="exam.html" class="site-nav-link site-nav-flow-link"><span class="site-nav-step" aria-hidden="true">3</span><span data-i18n-key="nav.flowExam">學習評量</span></a>
+                    <a href="algorithm-concepts.html" class="site-nav-link site-nav-flow-link"><span class="site-nav-step" aria-hidden="true">4</span><span data-i18n-key="nav.flowConcepts">演算法中的結構</span></a>
+                    <a href="algorithm-concepts-quiz.html" class="site-nav-link site-nav-flow-link"><span class="site-nav-step" aria-hidden="true">5</span><span data-i18n-key="nav.flowConceptsQuiz">結構小測驗</span></a>
+                </div>
+            </div>
+            <div class="site-nav-group site-nav-group--extra" role="group" id="site-nav-extra-group" aria-label="教師手冊與教案">
+                <div class="site-nav-group-links">
+                    <a href="guide.html" class="site-nav-link site-nav-extra-link"><span data-i18n-key="nav.guideCenter">教師手冊</span></a>
+                    <a href="lesson.html" class="site-nav-link site-nav-extra-link"><span data-i18n-key="nav.lesson">教案</span></a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="page-frame">
+        <div class="table-glow"></div>
+        <div class="container">
+            <header>
+                <div class="logo-lockup">
+                    <div class="logo-badge">
+                        <span class="logo-icon">♠</span>
+                    </div>
+                    <div class="logo-texts">
+                        <h1 data-i18n-key="app.title">排序演算法實驗室</h1>
+                        <p class="subtitle" data-i18n-key="app.subtitle">原地排序 · 演算法思維 · 互動教學桌</p>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <button id="lang-button" class="lang-button" type="button">TW</button>
+                    <button id="settings-toggle" class="settings-toggle" aria-label="教學與設定">
+                        ⚙
+                    </button>
+                    <select id="lang-select" class="lang-select-hidden">
+                        <option value="zh-TW">繁體中文</option>
+                        <option value="zh-CN">简体中文</option>
+                        <option value="en">English</option>
+                        <option value="ja">日本語</option>
+                    </select>
+                </div>
+            </header>
+
+            <div class="controls">
+                <div class="control-group control-group-preset">
+                    <button type="button" class="btn preset-btn" data-preset="selection" data-i18n-key="preset.selection">選擇排序</button>
+                    <button type="button" class="btn preset-btn" data-preset="insertion" data-i18n-key="preset.insertion">插入排序</button>
+                    <button type="button" class="btn preset-btn" data-preset="bubble" data-i18n-key="preset.bubble">氣泡排序</button>
+                    <button type="button" class="btn preset-btn" data-preset="quick" data-i18n-key="preset.quick">快速排序</button>
+                    <button id="shuffle-btn" class="btn primary" data-i18n-key="controls.shuffle">🔀 重新發牌</button>
+                </div>
+            </div>
+
+            <div class="stats-bar">
+                <div class="stat-item">
+                    <span class="stat-label" data-i18n-key="stats.comparisons">比較次數：</span>
+                    <span class="stat-value" id="comparisons">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label" data-i18n-key="stats.swaps">交換次數：</span>
+                    <span class="stat-value" id="swaps">0</span>
+                </div>
+                <div class="stat-item stat-item-progress">
+                    <div class="stat-progress-head">
+                        <span class="stat-label" id="progress-label" data-i18n-key="stats.progress">完成度：</span>
+                        <span class="stat-value" id="progress">0%</span>
+                    </div>
+                    <div class="stats-progress-track" id="progress-track" role="progressbar" aria-valuemin="0"
+                        aria-valuemax="100" aria-valuenow="0" aria-labelledby="progress-label progress">
+                        <div class="stats-progress-fill" id="progress-fill"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-area workspace-panel">
+                <div class="instruction-hint" id="instruction-hint">
+                    <p data-i18n-key="banner.hint">🎯 <strong>操作方式：</strong>點擊選擇一張卡片，再點擊另一張進行交換</p>
+                    <button class="close-hint" id="close-hint">✕</button>
+                </div>
+
+                <!-- 原地排序：單一牌區 -->
+                <div class="card-area-wrapper card-area-inplace" id="card-area-inplace">
+                    <div class="card-area" id="card-area">
+                        <p class="instruction" data-i18n-key="banner.instruction">請選擇排序方式後，點擊「重新發牌」開始遊戲</p>
+                    </div>
+                </div>
+
+                <!-- 額外空間：上方未排序、下方已排序 -->
+                <div class="card-zones-extraspace" id="card-zones-extraspace" aria-hidden="true">
+                    <div class="zone-block">
+                        <div class="zone-label zone-unsorted-label" data-i18n-key="zone.unsorted">未排序</div>
+                        <div class="card-area card-area-unsorted" id="card-area-unsorted"></div>
+                    </div>
+                    <div class="zone-block">
+                        <div class="zone-label zone-sorted-label" data-i18n-key="zone.sorted">已排序</div>
+                        <div class="card-area card-area-sorted" id="card-area-sorted"></div>
+                    </div>
+                </div>
+
+                <!-- 快速排序：未分區 → 選 pivot → 分區為 ＜ pivot | pivot | ＞ pivot -->
+                <div class="card-zones-quickspace" id="card-zones-quickspace" aria-hidden="true">
+                    <div class="quicksort-partition-history" id="quicksort-partition-history" aria-label="已完成的分區"></div>
+                    <div class="quicksort-single-view" id="quicksort-single-view">
+                        <div class="zone-block">
+                            <div class="zone-label zone-quick-unpartitioned" data-i18n-key="zone.quickUnpartitioned">未分區（點一張當 pivot）</div>
+                            <div class="card-area card-area-quick-unpartitioned" id="card-area-quick-unpartitioned"></div>
+                        </div>
+                        <div class="quicksort-partition-row-wrap">
+                            <div class="quicksort-partition-baseline-label" data-i18n-key="quick.pivotBaseline">以 pivot 為基準：左小右大</div>
+                            <div class="quicksort-partition-row">
+                                <div class="zone-block zone-block-quick zone-block-quick-left">
+                                    <div class="zone-label zone-quick-left" data-i18n-key="zone.quickLeft">＜ pivot</div>
+                                    <div class="card-area card-area-quick-left" id="card-area-quick-left"></div>
+                                </div>
+                                <div class="zone-block zone-block-pivot">
+                                    <div class="zone-label zone-quick-pivot" data-i18n-key="zone.quickPivot">pivot</div>
+                                    <div class="card-area card-area-quick-pivot" id="card-area-quick-pivot"></div>
+                                </div>
+                                <div class="zone-block zone-block-quick zone-block-quick-right">
+                                    <div class="zone-label zone-quick-right" data-i18n-key="zone.quickRight">＞ pivot</div>
+                                    <div class="card-area card-area-quick-right" id="card-area-quick-right"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="quicksort-recurse-actions" id="quicksort-recurse-buttons" aria-live="polite"></div>
+                    </div>
+                    <div class="quicksort-split-container" id="quicksort-split-container" aria-label="左半部與右半部同時追蹤" style="display: none;"></div>
+                </div>
+            </div>
+
+            <div class="feedback">
+                <div class="status" id="status" role="status" aria-live="polite" aria-atomic="true"></div>
+                <div class="hint" id="hint"></div>
+            </div>
+
+            <div class="actions action-bar">
+                <button id="check-btn" class="btn success" disabled data-i18n-key="actions.check">✅ 檢查答案</button>
+                <button id="hint-btn" class="btn warning" disabled data-i18n-key="actions.hint">💡 顯示提示</button>
+                <button id="reset-btn" class="btn danger" disabled data-i18n-key="actions.reset">🔄 重置遊戲</button>
+            </div>
+        </div>
+
+            <div class="settings-card" id="settings-card">
+                <div class="settings-card-header">
+                    <div>
+                        <h2 class="settings-title" data-i18n-key="advanced.title">進階設定</h2>
+                        <p class="settings-subtitle" data-i18n-key="settings.subtitle">需要時再打開，讓牌桌保持乾淨。</p>
+                    </div>
+                    <button class="settings-close" id="settings-close" aria-label="關閉教學卡片">✕</button>
+                </div>
+                <div class="settings-card-body">
+                    <div class="settings-section">
+                        <h3 class="settings-section-title" data-i18n-key="advanced.title">進階設定</h3>
+                        <div class="control-group">
+                            <label for="sort-method" data-i18n-key="controls.sortLabel">排序方式：</label>
+                            <select id="sort-method">
+                                <option value="none" data-i18n-key="controls.sortNone">❓ 請選擇排序目標</option>
+                                <option value="number" selected data-i18n-key="controls.sortNumber">🔢 依數字大小 (A→K)</option>
+                                <option value="suit-symbol" data-i18n-key="controls.sortSuitSymbol">🃄 依花色符號 (♠♥♣♦)</option>
+                                <option value="suit-color" data-i18n-key="controls.sortSuitColor">🎨 依花色顏色 (黑→紅)</option>
+                                <option value="number-asc" data-i18n-key="controls.sortNumberAsc">📈 數字遞增 (2→A)</option>
+                                <option value="number-desc" data-i18n-key="controls.sortNumberDesc">📉 數字遞減 (K→2)</option>
+                            </select>
+                        </div>
+                        <div class="control-group">
+                            <label for="card-count" data-i18n-key="advanced.cardCount">牌數：</label>
+                            <input type="range" id="card-count" min="5" max="13" value="6">
+                            <span id="card-count-display">6 張</span>
+                        </div>
+                        <div class="control-group">
+                            <label for="unique-rank-toggle" data-i18n-key="advanced.uniqueRanks">不重複數字：</label>
+                            <input type="checkbox" id="unique-rank-toggle" checked>
+                            <span data-i18n-key="advanced.uniqueRanksDesc">啟用時，每一局不會出現同數字不同花色（最多 13 張），適合初學者。</span>
+                        </div>
+                        <div class="control-group">
+                            <label for="show-correct-toggle" data-i18n-key="advanced.showCorrect">完成提示：</label>
+                            <input type="checkbox" id="show-correct-toggle" checked>
+                            <span data-i18n-key="advanced.showCorrectDesc">在已排對的位置顯示紅色勾勾</span>
+                        </div>
+                        <div class="control-group">
+                            <label for="allow-same-rank-toggle" data-i18n-key="advanced.considerSuit">花色是否要看：</label>
+                            <input type="checkbox" id="allow-same-rank-toggle" checked>
+                            <span data-i18n-key="advanced.considerSuitDesc">勾選時，同數字不同花色也算正確（適合初學，只看數字）</span>
+                        </div>
+                        <div class="control-group">
+                            <label for="space-mode" data-i18n-key="advanced.spaceMode">排序空間模式：</label>
+                            <select id="space-mode">
+                                <option value="inplace" selected data-i18n-key="advanced.spaceInplace">原地排序（單一區域）</option>
+                                <option value="extraspace" data-i18n-key="advanced.spaceExtraspace">額外空間（上未排序／下已排序）</option>
+                            </select>
+                            <span data-i18n-key="advanced.spaceModeDesc">額外空間時，從上方選牌移到下方完成排序，適合練習選擇排序、插入排序等。</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

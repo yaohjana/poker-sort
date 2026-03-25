@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>演算法生活實驗室 - 互動課程</title>
+    <title>演算法生活實驗室 - 練習整合</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -37,62 +37,16 @@
             line-height: 1.65;
         }
 
-        .pill-row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-top: 8px;
-        }
-
-        .pill {
-            border-radius: 999px;
-            padding: 6px 10px;
-            font-size: 0.86rem;
-            font-weight: 700;
-            color: #dbeafe;
-            background: rgba(30, 64, 175, 0.24);
-            border: 1px solid rgba(96, 165, 250, 0.5);
-        }
-
-        .example-grid {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(260px, 1fr));
-            gap: 10px;
-        }
-
-        .example {
-            border: 1px solid rgba(148, 163, 184, 0.3);
-            border-radius: 12px;
-            background: rgba(2, 6, 23, 0.45);
-            padding: 12px;
-        }
-
-        .example h3 {
-            color: #f8fafc;
-            margin: 0 0 8px;
-            font-size: 1rem;
-        }
-
-        .flow-row {
+        .lab-drag-head {
             display: flex;
             flex-wrap: wrap;
             align-items: center;
-            gap: 6px;
+            gap: 10px;
+            margin-bottom: 10px;
         }
 
-        .flow-node {
-            color: #d1fae5;
-            border: 1px solid rgba(16, 185, 129, 0.45);
-            background: rgba(16, 185, 129, 0.14);
-            border-radius: 10px;
-            padding: 4px 8px;
-            font-size: 0.82rem;
-            font-weight: 600;
-        }
-
-        .flow-arrow {
-            color: #94a3b8;
-            font-weight: 900;
+        #lab-cert-banner {
+            margin: 0 0 10px;
         }
 
         .lab-tabs {
@@ -279,32 +233,6 @@
             display: block;
         }
 
-        @media (max-width: 768px) {
-            .example-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .logic-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .lab-drag-head {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 10px;
-        }
-
-        .lab-drag-head h2 {
-            margin: 0;
-        }
-
-        #lab-cert-banner {
-            margin: 0 0 10px;
-        }
-
         .lab-cert-overlay {
             position: fixed;
             inset: 0;
@@ -412,34 +340,17 @@
             gap: 8px;
             justify-content: flex-end;
         }
-
-        /* 生活範例插圖（assets/lab-life/，支援 jpg／png） */
-        .life-flow-media {
-            position: relative;
-            border-radius: 10px;
-            overflow: hidden;
-            margin: 0 0 10px;
-            border: 1px solid rgba(148, 163, 184, 0.35);
-            background: rgba(15, 23, 42, 0.65);
-        }
-
-        .life-flow-img {
-            display: block;
-            width: 100%;
-            height: auto;
-            aspect-ratio: 16 / 10;
-            object-fit: cover;
-        }
     </style>
 </head>
 
 <body>
+    <button type="button" class="overlay-backdrop" id="overlay-backdrop" aria-hidden="true" tabindex="-1"></button>
     <nav class="site-nav" aria-label="網站導覽">
         <div class="site-nav-inner">
             <div class="site-nav-group" role="group" aria-labelledby="site-nav-flow-label">
                 <div id="site-nav-flow-label" class="site-nav-group-label">教學流程</div>
                 <div class="site-nav-group-links">
-                    <a href="algorithm-lab.html" class="site-nav-link site-nav-flow-link site-nav-link-current"
+                    <a href="algorithm-lab-exercises.html" class="site-nav-link site-nav-flow-link site-nav-link-current"
                         aria-current="page"><span class="site-nav-step" aria-hidden="true">1</span>認識演算法</a>
                     <a href="game.html" class="site-nav-link site-nav-flow-link"><span class="site-nav-step"
                             aria-hidden="true">2</span>排序演算法實驗室</a>
@@ -459,183 +370,26 @@
             </div>
         </div>
     </nav>
+
     <div class="page-frame">
         <div class="table-glow"></div>
         <div class="container lab-wrap">
             <div class="lab-card">
-                <h2>🧠 演算法生活實驗室</h2>
-                <p>請先閱讀<a href="#life-examples" style="color:#fde68a; font-weight:700;">認識演算法的生活範例</a>，再把它想成「一條可執行的流程」。接著進入<strong>教學流程：必做練習整合</strong>（三關拖曳配對 + 顯微鏡定位），用操作把理解變得更穩。關鍵字：</p>
-                <div class="pill-row">
-                    <span class="pill">輸入 Input</span>
-                    <span class="pill">步驟 Process</span>
-                    <span class="pill">輸出 Output</span>
-                    <span class="pill">可重現</span>
-                    <span class="pill">可停止</span>
-                </div>
+                <h2>🧩 認識演算法練習整合：三關拖曳 + 顯微鏡操作</h2>
+                <p>把「輸入 → 步驟 → 輸出」變成可練習的流程。完成三關拖曳配對後，記得依教師指示截圖與上傳。</p>
             </div>
-
-            <section class="algo-spotlight" aria-label="認識演算法">
-                <h2>🌟 認識演算法</h2>
-                <p class="algo-spotlight-intro">
-                    演算法就是：把一個問題，拆成「可照做」的步驟。<br>
-                    最基本結構是 <strong>輸入 → 步驟 → 輸出</strong>，而且要有停止條件。
-                </p>
-
-                <div class="algo-pill-row">
-                    <span class="algo-pill">輸入 Input：現在有哪些資料</span>
-                    <span class="algo-pill">步驟 Process：每一步怎麼做</span>
-                    <span class="algo-pill">輸出 Output：最後得到什麼</span>
-                </div>
-
-                <h3 class="life-examples-heading" id="life-examples">認識演算法的生活範例</h3>
-                <p class="life-examples-lead">先從你每天會遇到的事想「先做什麼、再做什麼」；下面每一張卡片都是一條簡單流程，最後一則對應本單元的撲克牌排序。</p>
-
-                <div class="life-flow-grid">
-                    <article class="life-flow-card">
-                        <div class="life-flow-media">
-                            <img class="life-flow-img" src="assets/lab-life/algo-life-01-umbrella.jpg"
-                                alt="漫畫：學生看手機天氣預報，依降雨機率決定是否帶傘出門的流程示意"
-                                width="640" height="400" loading="lazy" decoding="async">
-                        </div>
-                        <h3>☔ 生活例 1：出門要不要帶傘</h3>
-                        <div class="flow-row">
-                            <span class="flow-node">查看天氣預報</span><span class="flow-arrow">→</span>
-                            <span class="flow-node">判斷降雨機率</span><span class="flow-arrow">→</span>
-                            <span class="flow-node">高於 50% 帶傘</span><span class="flow-arrow">→</span>
-                            <span class="flow-node">完成出門準備</span>
-                        </div>
-                    </article>
-
-                    <article class="life-flow-card">
-                        <div class="life-flow-media">
-                            <img class="life-flow-img" src="assets/lab-life/algo-life-02-bento.png"
-                                alt="插圖：便當店看菜單、選餐、付錢取餐的步驟流程"
-                                width="640" height="400" loading="lazy" decoding="async">
-                        </div>
-                        <h3>🍱 生活例 2：便當店點餐流程</h3>
-                        <div class="flow-row">
-                            <span class="flow-node">看菜單</span><span class="flow-arrow">→</span>
-                            <span class="flow-node">選主菜與配菜</span><span class="flow-arrow">→</span>
-                            <span class="flow-node">確認金額</span><span class="flow-arrow">→</span>
-                            <span class="flow-node">付款取餐</span>
-                        </div>
-                    </article>
-
-                    <article class="life-flow-card">
-                        <div class="life-flow-media">
-                            <img class="life-flow-img" src="assets/lab-life/algo-life-03-library.png"
-                                alt="插圖：圖書館查書、找書架、掃描借書的步驟流程"
-                                width="640" height="400" loading="lazy" decoding="async">
-                        </div>
-                        <h3>📚 生活例 3：圖書館借書</h3>
-                        <div class="flow-row">
-                            <span class="flow-node">查詢書籍</span><span class="flow-arrow">→</span>
-                            <span class="flow-node">找到書架位置</span><span class="flow-arrow">→</span>
-                            <span class="flow-node">借書機掃描</span><span class="flow-arrow">→</span>
-                            <span class="flow-node">完成借閱</span>
-                        </div>
-                    </article>
-
-                    <article class="life-flow-card">
-                        <div class="life-flow-media">
-                            <img class="life-flow-img" src="assets/lab-life/algo-life-04-cards.png"
-                                alt="插圖：將亂序撲克牌透過比較與交換排成有序牌列，對應排序演算法"
-                                width="640" height="400" loading="lazy" decoding="async">
-                        </div>
-                        <h3>🃏 本遊戲對應：牌的排序演算法</h3>
-                        <div class="flow-row">
-                            <span class="flow-node">輸入：一排亂序牌</span><span class="flow-arrow">→</span>
-                            <span class="flow-node">比較大小</span><span class="flow-arrow">→</span>
-                            <span class="flow-node">交換或插入</span><span class="flow-arrow">→</span>
-                            <span class="flow-node">輸出：有序牌列</span>
-                        </div>
-                    </article>
-                </div>
-            </section>
 
             <div class="lab-card">
-                <h2>🌍 生活中的演算法範例</h2>
-                <div class="example-grid">
-                    <article class="example">
-                        <h3>☔ 出門帶傘</h3>
-                        <div class="flow-row">
-                            <span class="flow-node">輸入：天氣預報</span><span class="flow-arrow">→</span>
-                            <span class="flow-node">判斷降雨機率</span><span class="flow-arrow">→</span>
-                            <span class="flow-node">&gt;50% 帶傘</span><span class="flow-arrow">→</span>
-                            <span class="flow-node">輸出：完成出門準備</span>
-                        </div>
-                    </article>
-                    <article class="example">
-                        <h3>🍱 點餐流程</h3>
-                        <div class="flow-row">
-                            <span class="flow-node">輸入：菜單</span><span class="flow-arrow">→</span>
-                            <span class="flow-node">選主餐/配菜</span><span class="flow-arrow">→</span>
-                            <span class="flow-node">確認金額</span><span class="flow-arrow">→</span>
-                            <span class="flow-node">輸出：完成點餐</span>
-                        </div>
-                    </article>
-                    <article class="example">
-                        <h3>🚌 公車轉乘</h3>
-                        <div class="flow-row">
-                            <span class="flow-node">輸入：目的地</span><span class="flow-arrow">→</span>
-                            <span class="flow-node">查詢路線</span><span class="flow-arrow">→</span>
-                            <span class="flow-node">比較時間/班次</span><span class="flow-arrow">→</span>
-                            <span class="flow-node">輸出：最佳路線</span>
-                        </div>
-                    </article>
-                    <article class="example">
-                        <h3>🔬 生物實驗：顯微鏡觀察微生物</h3>
-                        <div class="flow-row">
-                            <span class="flow-node">輸入：樣本與載玻片</span><span class="flow-arrow">→</span>
-                            <span class="flow-node">低倍鏡對焦</span><span class="flow-arrow">→</span>
-                            <span class="flow-node">高倍鏡微調</span><span class="flow-arrow">→</span>
-                            <span class="flow-node">輸出：觀察與記錄結果</span>
-                        </div>
-                    </article>
-                    <article class="example">
-                        <h3>🍕 家政課：製作披薩</h3>
-                        <div class="flow-row">
-                            <span class="flow-node">輸入：食材與烤箱</span><span class="flow-arrow">→</span>
-                            <span class="flow-node">備料與鋪料</span><span class="flow-arrow">→</span>
-                            <span class="flow-node">設定溫度與烘烤</span><span class="flow-arrow">→</span>
-                            <span class="flow-node">輸出：完成披薩</span>
-                        </div>
-                    </article>
-                    <article class="example">
-                        <h3>🃏 撲克牌排序（本遊戲）</h3>
-                        <div class="flow-row">
-                            <span class="flow-node">輸入：亂序牌列</span><span class="flow-arrow">→</span>
-                            <span class="flow-node">比較大小</span><span class="flow-arrow">→</span>
-                            <span class="flow-node">交換/插入</span><span class="flow-arrow">→</span>
-                            <span class="flow-node">輸出：有序牌列</span>
-                        </div>
-                    </article>
-                </div>
-            </div>
-
-            <div class="lab-card" style="border-color: rgba(250, 204, 21, 0.65); box-shadow: 0 18px 60px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.05);">
-                <h2 style="margin:0 0 10px; color:#fcd34d; font-family:'Playfair Display', 'Times New Roman', serif; letter-spacing:0.08em;">
-                    🧷 教學流程：必做練習整合（拖曳配對 + 顯微鏡定位）
-                </h2>
-                <p>學生最有興趣的部分就在這裡。完成三關後，記得回到此頁上傳通關證明（或直接依教師指示截圖練習頁）。</p>
-                <div class="exercise-actions" style="margin-top:12px;">
-                    <a class="btn primary" href="algorithm-lab-exercises.html">現在就開始練習</a>
-                </div>
-            </div>
-
-            <div class="lab-card" style="display:none;">
                 <div class="lab-drag-head">
                     <h2>🎮 拖曳配對練習（可重做）</h2>
-                    <button type="button" class="btn success" id="lab-cert-open-btn"
-                        style="display:none;">開啟通關證明（截圖／Padlet）</button>
+                    <button type="button" class="btn success" id="lab-cert-open-btn" style="display:none;">開啟通關證明（截圖／Padlet）</button>
                 </div>
-                <p id="lab-cert-banner" class="hint" style="display:none;">你已通過三關全部拖曳題（共 9
-                    題）。請使用上方按鈕開啟證明、輸入姓名後截圖，上傳至教師指定的 Padlet。</p>
+                <p id="lab-cert-banner" class="hint" style="display:none;">你已通過三關全部拖曳題（共 9 題）。請使用上方按鈕開啟證明、輸入姓名後截圖，上傳至教師指定的 Padlet。</p>
                 <div id="lab-tabs" class="lab-tabs"></div>
                 <div id="tab-content"></div>
             </div>
 
-            <div class="lab-card" style="display:none;">
+            <div class="lab-card">
                 <h2>🔍 邏輯判斷演算法：顯微鏡定位</h2>
                 <p>重點：<strong>判斷（if / else）也是演算法流程的一部分</strong>。大問題（把影像移回中央）先拆成小問題，再用條件判斷決定流程方向。</p>
                 <div class="logic-grid">
@@ -678,7 +432,9 @@
                         <button class="btn warning" id="logic-next" type="button">下一題</button>
                         <button class="btn preset-btn" id="logic-show-rule" type="button">顯示判斷規則</button>
                     </div>
+
                     <div id="logic-result"></div>
+
                     <div id="logic-rule-box" class="hint" style="display:none;">
                         先用 if/else 完成左右，再用 if/else 完成上下；最後合併方向。<br>
                         例：影像在右上方 →（左右=右）+（上下=上）→ 玻片往右上方移動。
@@ -688,7 +444,7 @@
         </div>
     </div>
 
-    <div id="lab-cert-overlay" class="lab-cert-overlay" hidden aria-hidden="true" style="display:none !important;">
+    <div id="lab-cert-overlay" class="lab-cert-overlay" hidden aria-hidden="true">
         <div class="lab-cert-dialog" role="dialog" aria-modal="true" aria-labelledby="lab-cert-title">
             <h3 id="lab-cert-title">🎉 通關證明</h3>
             <p style="color:#cbd5e1; margin:0 0 12px; font-size:0.92rem; line-height:1.55;">
@@ -706,8 +462,7 @@
                 <div style="color:#fbbf24; font-weight:800; letter-spacing:0.12em; font-size:0.82rem;">演算法生活實驗室 · 拖曳配對通關
                 </div>
                 <div class="cert-name" id="lab-cert-display-name">（請輸入姓名）</div>
-                <p class="cert-meta" id="lab-cert-display-meta">已完成：第一關、第二關、第三關（共 9 題）<br><span
-                        id="lab-cert-display-date"></span></p>
+                <p class="cert-meta" id="lab-cert-display-meta">已完成：第一關、第二關、第三關（共 9 題）<br><span id="lab-cert-display-date"></span></p>
             </div>
             <div class="lab-cert-padlet">
                 <strong>上傳 Padlet 小提醒：</strong>向教師索取看板連結 → 新增一則貼文 → 上傳截圖（或拖曳圖片）→ 可簡短寫一句學習心得。
@@ -931,6 +686,7 @@
             { pos: '正上方', answerLR: '不移動', answerUD: '上移', final: '上方' },
             { pos: '正右方', answerLR: '右移', answerUD: '不移動', final: '右方' }
         ];
+
         const lrOptions = ['左移', '右移', '不移動'];
         const udOptions = ['上移', '下移', '不移動'];
 
@@ -1110,3 +866,4 @@
 </body>
 
 </html>
+
