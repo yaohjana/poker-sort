@@ -37,9 +37,10 @@ dist/
 build/
 *.local
 
-# 課綱 PDF（改連國教院正式網址，本機備份勿提交）
+# 課綱 PDF（改連國教院正式網址，本機備份勿提交）、課本pdf
 reference/十二年國民基本教育課程綱要國民中學暨普通型高級中等學校-科技領域.pdf
-
+reference/
+*.pdf
 # 日誌與暫存
 *.log
 .cache/

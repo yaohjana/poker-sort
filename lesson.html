@@ -95,6 +95,25 @@
             line-height: 1.65;
         }
 
+        .lesson-hl {
+            display: inline;
+            padding: 2px 10px;
+            border-radius: 999px;
+            background: rgba(250, 204, 21, 0.22);
+            border: 1px solid rgba(250, 204, 21, 0.55);
+            box-shadow:
+                inset 0 0 0 1px rgba(15, 23, 42, 0.35),
+                0 10px 24px rgba(250, 204, 21, 0.12);
+            color: #fff7ed;
+            font-weight: 800;
+            letter-spacing: 0.02em;
+            text-shadow:
+                0 1px 0 rgba(2, 6, 23, 0.65),
+                0 0 18px rgba(250, 204, 21, 0.22);
+            box-decoration-break: clone;
+            -webkit-box-decoration-break: clone;
+        }
+
         @media (max-width: 640px) {
 
             .lesson-overview-table th,
@@ -330,7 +349,6 @@
             display: block;
             width: 100%;
             height: auto;
-            vertical-align: middle;
         }
 
         .lesson-mindmap-caption {
@@ -439,32 +457,43 @@
         <div class="container lesson-wrap">
             <div class="lesson-card">
                 <h2>📘 教案頁：教學方法與設計理念</h2>
-                <p>本頁供教師備課使用，對應實際授課順序、數位資源與評量設計；學生端請依課堂指示操作 <a href="algorithm-lab.html"
-                        style="color:#93c5fd;">演算法生活實驗室</a>、<a href="index.html" style="color:#93c5fd;">排序遊戲</a>、<a
-                        href="exam.html" style="color:#93c5fd;">分階段測驗</a>。若學校另排<strong>結構專章</strong>，可搭配 <a
-                        href="algorithm-concepts.html" style="color:#93c5fd;">演算法中的結構</a>與 <a
-                        href="algorithm-concepts-quiz.html" style="color:#93c5fd;">結構小測驗（10 題）</a>。</p>
-                <div class="lesson-badges">
-                    <span class="lesson-badge">遊戲融入</span>
-                    <span class="lesson-badge">演算法素養</span>
-                    <span class="lesson-badge">先實驗室後遊戲</span>
-                    <span class="lesson-badge">Padlet 歷程證明</span>
-                </div>
+                <table class="lesson-overview-table">
+                    <tbody>
+                        <tr>
+                            <th scope="row">課程目標</th>
+                            <td>讓學生了解演算法的重要性，並認識兩個入門排序演算法：選擇排序與插入排序。</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">主要教學策略</th>
+                            <td>以「操作先行、概念對照、回饋校正」為核心：先讓學生做得到，再把做法對應到概念，最後透過回饋修正理解。</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">第一節重點</th>
+                            <td>在「演算法生活實驗室」建立輸入—步驟—輸出之直覺；透過拖曳通關把流程觀念看見並可被檢核，協助學生將抽象想法變成可操作行動。</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">第二節重點</th>
+                            <td>遷移到「排序遊戲」：教師示範選擇排序與插入排序基本操作；學生依指定排序法完成任務，同時練習說出「我為什麼要做這一步」與「這一步想達到什麼」。搭配分階段測驗與評量證明回饋理解，並可將通關/測驗截圖上傳
+                                <span class="lesson-hl">Padlet</span>，強化形成性評量的紀錄性。
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">備用課程（選用）</th>
+                            <td>若學生程度好、進度快或有剩餘時間，可選用「備用課程：演算法中的結構」。在累積比較、重複與檢查經驗後，進一步理解循序、迴圈與邏輯判斷的對應，並完成「結構小測驗（10
+                                題）」（選用）。</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
 
             <div class="lesson-card">
                 <h2>（一）基本概述</h2>
-                <p style="margin-top:0; color:#9ca3af;">以下欄位供課程計畫、公開授課或校內備查時快速對照。教學模組設計架構請參考下方圖片；若需可縮放文字、可列印之網頁版，可另開
-                    <a href="module-architecture.html" style="color:#93c5fd;">教學模組設計架構圖（HTML）</a>。
-                </p>
                 <figure class="lesson-mindmap-figure">
                     <h3>教學模組設計架構圖</h3>
                     <div class="lesson-mindmap-frame">
                         <img class="lesson-mindmap-img" src="lesson_mindmap.jpg"
                             alt="教學模組設計架構圖：核心主題連結暖身實驗室、拖曳通關、主遊戲、分階段測驗與延伸學習等模組之流程示意。" loading="lazy" decoding="async">
                     </div>
-                    <figcaption class="lesson-mindmap-caption">圖檔：<code
-                            style="color:#cbd5e1;">lesson_mindmap.jpg</code>（與教案同目錄）。公開授課或 PDF 匯出時可一併附上此圖。</figcaption>
                 </figure>
                 <table class="lesson-overview-table">
                     <tbody>
@@ -486,7 +515,13 @@
                         </tr>
                         <tr>
                             <th scope="row">教學時數</th>
-                            <td>核心安排<strong>共 2 節、約 90 分鐘</strong>（實驗室與遊戲／測驗）；另可增列<strong>第 3 節約 45 分鐘</strong>，專題處理「循序、迴圈、邏輯判斷」與流程圖對照，並以網頁<strong>結構小測驗</strong>檢核概念（詳見（五）第三節課）。鐘點不足時，第 3 節活動可拆為回家自學或併入資訊課其他單元。</td>
+                            <td>核心安排<strong>共 2 節、約 90 分鐘</strong>（實驗室與遊戲／測驗）；若學生程度好、進度快，可選用<strong>備用課程約 45
+                                    分鐘</strong>，實施「循序、迴圈、邏輯判斷」課程。
+                                <div
+                                    style="margin-top:8px; padding:10px 12px; border:2px solid #fbbf24; background:rgba(185, 28, 28, 0.12); border-radius:12px; color:#fecaca; font-weight:800;">
+                                    注意事項：本教案內容較多，請務必依學生程度取捨教材，不必全部使用。
+                                </div>
+                            </td>
                         </tr>
                         <tr>
                             <th scope="row">數位工具／平臺</th>
@@ -507,11 +542,6 @@
 
             <div class="lesson-card">
                 <h2>（二）與課程綱要的對應</h2>
-                <p style="margin-top:0; color:#9ca3af;">
-                    以下將本模組對照《十二年國民基本教育課程綱要》國民中學暨普通型高級中等學校<strong>科技領域</strong>之核心素養、學習表現與學習內容。條目編號與敘述請以教育部公布之正式文本為準；校內可另備
-                    <a href="https://www.naer.edu.tw/upload/1/16/doc/816/%E5%8D%81%E4%BA%8C%E5%B9%B4%E5%9C%8B%E6%B0%91%E5%9F%BA%E6%9C%AC%E6%95%99%E8%82%B2%E8%AA%B2%E7%A8%8B%E7%B6%B1%E8%A6%81%E5%9C%8B%E6%B0%91%E4%B8%AD%E5%AD%B8%E6%9A%A8%E6%99%AE%E9%80%9A%E5%9E%8B%E9%AB%98%E7%B4%9A%E4%B8%AD%E7%AD%89%E5%AD%B8%E6%A0%A1-%E7%A7%91%E6%8A%80%E9%A0%98%E5%9F%9F.pdf"
-                        style="color:#93c5fd;">科技領域課程綱要（PDF）</a>對照。
-                </p>
                 <div class="lesson-curriculum-wrap">
                     <table class="lesson-curriculum-table">
                         <thead>
@@ -537,8 +567,12 @@
                                     <p><span class="curriculum-code">科-J-A3</span> 利用科技資源，擬定與執行科技專題活動。</p>
                                 </td>
                                 <td>
-                                    <p>兩節核心課以「認識演算法→排序遊戲實作→學習評量」為主軸；若增列第三節，則銜接「演算法中的結構」教材與本章小測驗，使「結構化思考」具獨立深化時間。全程可搭配 Padlet
-                                        蒐集通關／評量／結構測驗截圖與心得，具備小型專題之規劃、執行與成果紀錄內涵。</p>
+                                    <p><span
+                                            class="lesson-hl">兩節核心課以「認識演算法→排序遊戲實作→學習評量」為主軸</span>；若選用備用課程，則銜接「演算法中的結構」教材與本章小測驗，使<span
+                                            class="lesson-hl">「結構化思考」獲得獨立深化時間</span>。全程可搭配
+                                        <span class="lesson-hl">Padlet</span>
+                                        <span class="lesson-hl">蒐集通關／評量／結構測驗截圖與心得</span>，具備小型專題之規劃、執行與成果紀錄內涵。
+                                    </p>
                                 </td>
                             </tr>
                             <tr>
@@ -547,7 +581,8 @@
                                     <p><span class="curriculum-code">運 t-IV-1</span> 能使用程式設計實現運算思維的問題解決方法。</p>
                                 </td>
                                 <td>
-                                    <p>本模組以互動操作具現「分解、規律化、檢查」等運算思維歷程，作為銜接程式設計的前置經驗。若校本課程於後續單元安排以程式實作排序或類似流程，可直接呼應本條「以程式實現問題解決」之要求。
+                                    <p>本模組以互動操作具現<span
+                                            class="lesson-hl">「分解、規律化、檢查」</span>等運算思維歷程，作為銜接程式設計的前置經驗。若校本課程於後續單元安排以程式實作排序或類似流程，可直接呼應本條「以程式實現問題解決」之要求。
                                     </p>
                                 </td>
                             </tr>
@@ -556,7 +591,8 @@
                                     <p><span class="curriculum-code">運 a-IV-3</span> 能樂於探索新興的資訊科技。</p>
                                 </td>
                                 <td>
-                                    <p>平臺採瀏覽器即開即用、即時回饋與多頁式學習動線，鼓勵學生主動嘗試介面操作與題組，在遊戲化情境中建立探索資訊科技的正向經驗。</p>
+                                    <p>平臺採瀏覽器即開即用、即時回饋與多頁式學習動線，<span
+                                            class="lesson-hl">鼓勵學生主動嘗試介面操作與題組</span>，在遊戲化情境中建立探索資訊科技的正向經驗。</p>
                                 </td>
                             </tr>
                             <tr>
@@ -565,7 +601,8 @@
                                     <p><span class="curriculum-code">資 P-IV-2</span> 結構化程式設計。</p>
                                 </td>
                                 <td>
-                                    <p>透過「演算法中的結構」延伸材料與遊戲中「每一輪重複同類步驟、依條件決定下一步」的操作，對應循序、迴圈與判斷等結構化思考；可搭配口語或圖示流程，為日後語法層次之結構化程式設計打底。
+                                    <p>透過「演算法中的結構」延伸材料與遊戲中「每一輪重複同類步驟、依條件決定下一步」的操作，<span
+                                            class="lesson-hl">對應循序、迴圈與判斷等結構化思考</span>；可搭配口語或圖示流程，為日後語法層次之結構化程式設計打底。
                                     </p>
                                 </td>
                             </tr>
@@ -574,7 +611,9 @@
                                     <p><span class="curriculum-code">資 A-IV-3</span> 基本演算法的介紹。</p>
                                 </td>
                                 <td>
-                                    <p>主遊戲與分階段測驗聚焦<strong>選擇排序</strong>與<strong>插入排序</strong>之概念與步驟差異，呼應國中「基本演算法的介紹」；若校本於後續單元安排程式實作，可列為延伸，以銜接程式設計實作面向。
+                                    <p>主遊戲與分階段測驗聚焦<span class="lesson-hl"><strong>選擇排序</strong></span>與<span
+                                            class="lesson-hl"><strong>插入排序</strong></span>之概念與步驟差異，<span
+                                            class="lesson-hl">呼應國中「基本演算法的介紹」</span>；若校本於後續單元安排程式實作，可列為延伸，以銜接程式設計實作面向。
                                     </p>
                                 </td>
                             </tr>
@@ -588,9 +627,7 @@
                 <p style="margin-top:0; color:#9ca3af;">
                     橫軸為<strong>學習內容</strong>、縱軸為<strong>學習表現</strong>；格內為本模組「排序演算法教學」之學習目標。學習內容編號依科技領域<strong>第四學習階段（國中）</strong>資訊科技：程式設計類之<strong>資
                         P-IV-2</strong>、演算法類之<strong>資 A-IV-3</strong>（見課綱資訊科技學習內容表）。學習表現採<strong>運 t-IV-1、運
-                        a-IV-3</strong>，條目全文請以
-                    <a href="https://www.naer.edu.tw/upload/1/16/doc/816/%E5%8D%81%E4%BA%8C%E5%B9%B4%E5%9C%8B%E6%B0%91%E5%9F%BA%E6%9C%AC%E6%95%99%E8%82%B2%E8%AA%B2%E7%A8%8B%E7%B6%B1%E8%A6%81%E5%9C%8B%E6%B0%91%E4%B8%AD%E5%AD%B8%E6%9A%A8%E6%99%AE%E9%80%9A%E5%9E%8B%E9%AB%98%E7%B4%9A%E4%B8%AD%E7%AD%89%E5%AD%B8%E6%A0%A1-%E7%A7%91%E6%8A%80%E9%A0%98%E5%9F%9F.pdf"
-                        style="color:#93c5fd;">科技領域課程綱要（PDF）</a>為準。若對照範本使用高級中等學校階段之 V 編碼，請於校內文件自行置換為對應階段條目。
+                        a-IV-3</strong>
                 </p>
                 <div class="lesson-bidirect-wrap">
                     <table class="lesson-bidirect-table">
@@ -654,11 +691,6 @@
 
             <div class="lesson-card">
                 <h2>（四）評量方式</h2>
-                <p style="margin-top:0; color:#9ca3af;">
-                    以下依「以學習表現作為評量標準」與「對應之學習內容類別」交叉列出<strong>具體評量方式</strong>，格式對照常見課程計畫範本。編號採<strong>第四學習階段（國中）IV</strong>，與（二）（三）一致；條目全文請以
-                    <a href="https://www.naer.edu.tw/upload/1/16/doc/816/%E5%8D%81%E4%BA%8C%E5%B9%B4%E5%9C%8B%E6%B0%91%E5%9F%BA%E6%9C%AC%E6%95%99%E8%82%B2%E8%AA%B2%E7%A8%8B%E7%B6%B1%E8%A6%81%E5%9C%8B%E6%B0%91%E4%B8%AD%E5%AD%B8%E6%9A%A8%E6%99%AE%E9%80%9A%E5%9E%8B%E9%AB%98%E7%B4%9A%E4%B8%AD%E7%AD%89%E5%AD%B8%E6%A0%A1-%E7%A7%91%E6%8A%80%E9%A0%98%E5%9F%9F.pdf"
-                        style="color:#93c5fd;">科技領域課程綱要（PDF）</a>為準。本模組以<strong>操作式平臺＋測驗＋學習歷程</strong>為主；若貴校於同一主題後續安排程式實作單元，可將下列「具體評量方式」替換或增列為習作繳交、上機測驗等。
-                </p>
                 <div class="lesson-assess-wrap">
                     <table class="lesson-assess-table">
                         <thead>
@@ -674,8 +706,8 @@
                                 <td>1</td>
                                 <td><span class="assess-code">運 t-IV-1</span> 能使用程式設計實現運算思維的問題解決方法。</td>
                                 <td><span class="assess-code">資 P-IV-2</span> 結構化程式設計。</td>
-                                <td>學生於演算法生活實驗室完成<strong>拖曳流程／邏輯配對通關</strong>，並上傳通關截圖至
-                                    Padlet（或繳交學習單）；選修可再請學生以口頭或簡圖說明「輸入→步驟→輸出」與<strong>循序、判斷、重複</strong>如何出現在排序流程中。若校本併行教授程式，可增列：撰寫一小段結構化程式（或虛擬碼）解決簡易排序相關子問題。
+                                <td>學生於演算法生活實驗室完成<strong>拖曳流程／邏輯配對通關</strong>，並<span class="lesson-hl">上傳通關截圖至
+                                        Padlet</span>（或繳交學習單）；選修可再請學生以口頭或簡圖說明「輸入→步驟→輸出」與<strong>循序、判斷、重複</strong>如何出現在排序流程中。若校本併行教授程式，可增列：撰寫一小段結構化程式（或虛擬碼）解決簡易排序相關子問題。
                                 </td>
                             </tr>
                             <tr>
@@ -689,21 +721,27 @@
                                 <td>3</td>
                                 <td><span class="assess-code">運 a-IV-3</span> 能樂於探索新興的資訊科技。</td>
                                 <td><span class="assess-code">資 P-IV-2</span> 結構化程式設計。</td>
-                                <td>學生針對<strong>互動網頁學習平臺、即時回饋、學習歷程上傳（Padlet）</strong>等型態，完成簡短查詢或心得（例如 3～5
-                                    句）：說明一項自己覺得「像本課一樣把步驟想清楚」的數位學習經驗，或一種新工具如何幫助自己理解流程。可併入 Padlet 同一看板之文字貼文。</td>
+                                <td>學生針對<strong>互動網頁學習平臺、即時回饋、學習歷程上傳（<span
+                                            class="lesson-hl">Padlet</span>）</strong>等型態，完成簡短查詢或心得（例如 3～5
+                                    句）：說明一項自己覺得「像本課一樣把步驟想清楚」的數位學習經驗，或一種新工具如何幫助自己理解流程。可併入<span class="lesson-hl">Padlet
+                                        同一看板</span>之文字貼文。</td>
                             </tr>
                             <tr>
                                 <td>4</td>
                                 <td><span class="assess-code">運 a-IV-3</span> 能樂於探索新興的資訊科技。</td>
                                 <td><span class="assess-code">資 A-IV-3</span> 基本演算法的介紹。</td>
-                                <td>學生舉例<strong>生活或資訊應用</strong>中與「排序、比較、搜尋」相關的情境（如榜單、資料整理），並說明與課堂兩種排序概念的聯想；或於 Padlet
+                                <td>學生舉例<strong>生活或資訊應用</strong>中與「排序、比較、搜尋」相關的情境（如榜單、資料整理），並說明與課堂兩種排序概念的聯想；或於 <span
+                                        class="lesson-hl">Padlet</span>
                                     附上一則<strong>遊戲／測驗操作心得</strong>，描述自己嘗試了哪些策略、遇到何種困難與如何修正。教師可依態度、參與度與論述合理性給予形成性回饋。</td>
                             </tr>
                             <tr>
                                 <td>5</td>
                                 <td><span class="assess-code">運 t-IV-1</span> 能使用程式設計實現運算思維的問題解決方法。</td>
                                 <td><span class="assess-code">資 P-IV-2</span> 結構化程式設計。</td>
-                                <td>於<strong>第三節課或延伸自學</strong>時，學生閱讀 <a href="algorithm-concepts.html" style="color:#93c5fd;">演算法中的結構</a> 後，完成 <a href="algorithm-concepts-quiz.html" style="color:#93c5fd;">結構小測驗</a>（十題選擇，頁面可顯示解析）；可截圖得分與解析畫面、或繳交學習單記錄錯題與修正想法。建議於 Padlet 另闢「結構小測驗」欄位與前兩節歷程並列（選用）。</td>
+                                <td>於<strong>備用課程或延伸自學</strong>時，學生閱讀 <a href="algorithm-concepts.html"
+                                        style="color:#93c5fd;">演算法中的結構</a> 後，完成 <a href="algorithm-concepts-quiz.html"
+                                        style="color:#93c5fd;">結構小測驗</a>（十題選擇，頁面可顯示解析）；可截圖得分與解析畫面、或繳交學習單記錄錯題與修正想法。建議於
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -713,11 +751,11 @@
             <div class="lesson-card">
                 <h2>（五）教學活動</h2>
                 <p style="margin-top:0; color:#9ca3af;">以下先列<strong>兩節核心課、合計約 90 分鐘</strong>（每節以約 45
-                    分鐘規劃），再列<strong>第三節課（約 45 分鐘）</strong>，對應「演算法中的結構」與結構小測驗；若貴校僅能排兩節，可將第三節活動改為回家自學或併入資訊課延伸時段。鐘點、下課或設備若與本校不同，請自行微調。資源連結：<a href="algorithm-lab.html"
-                        style="color:#93c5fd;">演算法生活實驗室</a>、<a href="index.html" style="color:#93c5fd;">主遊戲</a>、<a
-                        href="exam.html" style="color:#93c5fd;">分階段測驗</a>、<a href="algorithm-concepts.html"
-                        style="color:#93c5fd;">演算法中的結構</a>、<a href="algorithm-concepts-quiz.html"
-                        style="color:#93c5fd;">結構小測驗</a>。</p>
+                    分鐘規劃）。若學生程度好、進度快，可選用<strong>備用課程（約 45 分鐘）</strong>，對應「演算法中的結構」與結構小測驗；鐘點、下課或設備若與本校不同，請自行微調。資源連結：<a
+                        href="algorithm-lab.html" style="color:#93c5fd;">演算法生活實驗室</a>、<a href="index.html"
+                        style="color:#93c5fd;">主遊戲</a>、<a href="exam.html" style="color:#93c5fd;">分階段測驗</a>、<a
+                        href="algorithm-concepts.html" style="color:#93c5fd;">演算法中的結構</a>、<a
+                        href="algorithm-concepts-quiz.html" style="color:#93c5fd;">結構小測驗</a>。</p>
 
                 <h3 class="lesson-activity-period">第一節課</h3>
                 <div class="lesson-activity-wrap">
@@ -737,7 +775,7 @@
                                 <td>說明本模組將透過實驗室與遊戲認識「演算法」與兩種排序；提醒數位禮儀與專心操作。</td>
                                 <td class="activity-time-cell">約 5 分鐘</td>
                                 <td>課堂參與、口頭回應。</td>
-                                <td>可對照架構圖或學習目標一段話；確認學生能開啟瀏覽器與教師公布之 Padlet 連結。</td>
+                                <td>可對照架構圖或學習目標一段話；確認學生能開啟瀏覽器與教師公布之 <span class="lesson-hl">Padlet 連結</span>。</td>
                             </tr>
                             <tr>
                                 <th scope="row">演算法概念暖身</th>
@@ -749,15 +787,15 @@
                             <tr>
                                 <th scope="row">演算法生活實驗室與拖曳通關</th>
                                 <td>進入 <a href="algorithm-lab.html"
-                                        style="color:#93c5fd;">algorithm-lab.html</a>：教師簡短示範介面後，學生完成<strong>三關</strong>拖曳排序／配對；通關後於頁面填寫姓名並顯示<strong>通關證明</strong>。
+                                        style="color:#93c5fd;">演算法生活實驗室</a>：教師簡短示範介面後，學生完成<strong>三關</strong>拖曳排序／配對；通關後於頁面填寫姓名並顯示<strong>通關證明</strong>。
                                 </td>
                                 <td class="activity-time-cell">約 22 分鐘</td>
-                                <td>實作檢核（是否通關）、<strong>通關截圖</strong>（上傳 Padlet 或繳交）。</td>
+                                <td>實作檢核（是否通關）、<strong>通關截圖</strong>（<span class="lesson-hl">上傳 Padlet</span> 或繳交）。</td>
                                 <td>巡堂協助卡關學生；提醒先讀題再拖曳。網路不穩時可預載分頁或依校內規範準備備援方案。</td>
                             </tr>
                             <tr>
-                                <th scope="row">學習歷程紀錄（Padlet）</th>
-                                <td>說明看板欄位與檔名習慣；學生上傳通關截圖，可選填一句心得。</td>
+                                <th scope="row">學習歷程紀錄（<span class="lesson-hl">Padlet</span>）</th>
+                                <td>說明看板欄位與檔名習慣；學生<span class="lesson-hl">上傳通關截圖</span>，可選填一句心得。</td>
                                 <td class="activity-time-cell">約 7 分鐘</td>
                                 <td>是否完成指定欄位上傳、形成性檢視。</td>
                                 <td>依校規決定是否使用座號／暱稱；公開看板注意個資與同儕互動規範。</td>
@@ -813,24 +851,27 @@
                             <tr>
                                 <th scope="row">分階段測驗</th>
                                 <td>進入 <a href="exam.html"
-                                        style="color:#93c5fd;">exam.html</a>，完成至少「初探」「基礎」階段；時間允許再進「應用」「挑戰」。未完成部分可訂為回家或補課延續。
+                                        style="color:#93c5fd;">學習評量（分階段測驗）</a>，完成至少「初探」「基礎」階段；時間允許再進「應用」「挑戰」。未完成部分可訂為回家或補課延續。
                                 </td>
                                 <td class="activity-time-cell">約 14 分鐘</td>
                                 <td>測驗答題紀錄、階段通過與否；對應（四）評量方式列 2。</td>
                                 <td>前兩階段以觀念與選擇為主，可降低焦慮；後兩階段量力而為。可約定是否開放提示或重答次數。</td>
                             </tr>
                             <tr>
-                                <th scope="row">評量證明與 Padlet</th>
-                                <td>學生開啟測驗頁「評量證明」、填寫姓名後<strong>截圖</strong>，上傳至 Padlet 指定欄位；可請簡短心得（3～5 句）。</td>
+                                <th scope="row">評量證明與 <span class="lesson-hl">Padlet</span></th>
+                                <td>學生開啟測驗頁「評量證明」、填寫姓名後<strong>截圖</strong>，<span class="lesson-hl">上傳至 Padlet
+                                        指定欄位</span>；可請簡短心得（3～5 句）。</td>
                                 <td class="activity-time-cell">約 5 分鐘</td>
                                 <td><strong>測驗證明截圖</strong>、文字心得（形成性）。</td>
                                 <td>與第一節通關截圖分欄存放，方便批改與歷程檢索。</td>
                             </tr>
                             <tr>
                                 <th scope="row">總結與選修延伸</th>
-                                <td>教師歸納兩種排序差異與「能說出每一步理由」的重要性。若<strong>未另排第三節</strong>，可於此帶讀或瀏覽 <a href="algorithm-concepts.html"
-                                        style="color:#93c5fd;">演算法中的結構</a>開頭與摘要，並請回家完成 <a href="algorithm-concepts-quiz.html"
-                                        style="color:#93c5fd;">結構小測驗</a>；若<strong>已規劃第三節</strong>，本段改為預告下節將用整節深化循序／迴圈／判斷與流程圖。</td>
+                                <td>教師歸納兩種排序差異與「能說出每一步理由」的重要性。若<strong>未安排備用課程</strong>，可於此帶讀或瀏覽 <a
+                                        href="algorithm-concepts.html" style="color:#93c5fd;">演算法中的結構</a>開頭與摘要，並請回家完成 <a
+                                        href="algorithm-concepts-quiz.html"
+                                        style="color:#93c5fd;">結構小測驗</a>；若<strong>已規劃備用課程</strong>，本段改為預告備用課程將用約一節深化循序／迴圈／判斷與流程圖。
+                                </td>
                                 <td class="activity-time-cell">約 3 分鐘</td>
                                 <td>口頭檢核、課後延伸或下節預告。</td>
                                 <td>鐘點不足時，結構教材與小測驗一律改為回家自學；本列時間可併入測驗列調整。</td>
@@ -839,8 +880,9 @@
                     </table>
                 </div>
 
-                <h3 class="lesson-activity-period">第三節課（演算法結構與本章小測驗）</h3>
-                <p style="margin:0 0 10px; color:#9ca3af; font-size:0.9rem;">建議排在完成主遊戲與分階段測驗之後，學生已具「每一輪比較、交換／插入、檢查」的具體經驗，較易對照教材中的循序、迴圈與邏輯判斷。本節以 <a href="algorithm-concepts.html" style="color:#93c5fd;">algorithm-concepts.html</a> 為主教材、<a href="algorithm-concepts-quiz.html" style="color:#93c5fd;">algorithm-concepts-quiz.html</a> 為形成性評量。</p>
+                <h3 class="lesson-activity-period">備用課程（選用）：演算法結構與本章小測驗</h3>
+                <p style="margin:0 0 10px; color:#9ca3af; font-size:0.9rem;">若學生程度好、進度快，可在完成主遊戲與分階段測驗後選用約 45
+                    分鐘；讓學生看懂循序、迴圈與邏輯判斷如何在流程圖中呈現，並完成「結構小測驗」（十題選擇，選用）。</p>
                 <div class="lesson-activity-wrap">
                     <table class="lesson-activity-table">
                         <thead>
@@ -854,39 +896,34 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <th scope="row">複習與經驗連結</th>
-                                <td>快速回顧主遊戲與測驗中的「重複多輪」「依條件決定是否交換」「步驟先後」；板書或口頭帶出<strong>循序、迴圈、邏輯判斷</strong>三詞，說明本節要把它們講清楚並對照流程圖。</td>
-                                <td class="activity-time-cell">約 5 分鐘</td>
-                                <td>口頭詢問、舉例連結遊戲畫面。</td>
-                                <td>避免一開始就背定義；先請 1～2 人用白話描述「上一節同一動作做了很多次」的經驗。</td>
+                                <th scope="row">教材閱讀與結構對照</th>
+                                <td>開啟 <a href="algorithm-concepts.html"
+                                        style="color:#93c5fd;">演算法中的結構</a>：帶讀或自主閱讀<strong>循序、迴圈、邏輯判斷</strong>三區，對照「長方形＝步驟、菱形＝判斷、箭頭往回＝迴圈」與整合圖，並用遊戲一輪操作幫學生連回實例。
+                                </td>
+                                <td class="activity-time-cell">約 25 分鐘</td>
+                                <td>觀察閱讀進度、隨堂口頭抽問。</td>
+                                <td>可二至三人一組輪流指圖說明，確保每個人都能說出「為什麼這一步要這樣」。</td>
                             </tr>
                             <tr>
-                                <th scope="row">演算法中的結構（教材）</th>
-                                <td>開啟 <a href="algorithm-concepts.html" style="color:#93c5fd;">演算法中的結構</a>：可依序帶讀或讓學生自主閱讀<strong>循序、迴圈、邏輯判斷</strong>三區，對照生活例圖與撲克牌／排序流程圖；重點放在「長方形＝步驟、菱形＝判斷、箭頭往回＝迴圈」與「三種結構常一起出現」整合圖。</td>
-                                <td class="activity-time-cell">約 22 分鐘</td>
-                                <td>觀察閱讀進度、隨堂抽問關鍵句。</td>
-                                <td>可二至三人一組，輪流指圖說明一個生活例或遊戲步驟對應哪一種結構；投影時注意圖片解析度。</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">結構小測驗</th>
-                                <td>進入 <a href="algorithm-concepts-quiz.html" style="color:#93c5fd;">結構小測驗</a>，完成十題選擇後按「交卷對答案」；鼓勵閱讀每題解析，必要時「重填」再測一次。</td>
+                                <th scope="row">結構小測驗（選用）</th>
+                                <td>進入 <a href="algorithm-concepts-quiz.html"
+                                        style="color:#93c5fd;">結構小測驗</a>，完成十題選擇後按「交卷對答案」；鼓勵閱讀解析，必要時「重填」再測一次。</td>
                                 <td class="activity-time-cell">約 12 分鐘</td>
-                                <td>測驗得分與作答／解析閱讀（形成性）；對應（四）評量方式列 5。</td>
-                                <td>網路不穩可先載入頁面再離線討論、課後補交截圖；不宜作為高壓總結性評量，以概念澄清為主。</td>
+                                <td>作答結果與解析閱讀（形成性）；對應（四）評量方式列 5。</td>
+                                <td>網路不穩可先載入頁面再離線討論、課後補交截圖；不宜作為高壓總結性評量。</td>
                             </tr>
                             <tr>
                                 <th scope="row">歸納與銜接</th>
-                                <td>教師整理：真實演算法多為循序中有迴圈、迴圈內有判斷；請學生用一句話對照「氣泡／選擇／插入」與本節三結構。可預告若校本將進入文字程式，本節詞彙將與 if、迴圈語法呼應。</td>
-                                <td class="activity-time-cell">約 6 分鐘</td>
-                                <td>口頭檢核、學習單或 Padlet 一句心得（選用）。</td>
-                                <td>可請學生截圖小測驗得分區上傳 Padlet「結構小測驗」欄，與前兩節歷程並列。</td>
+                                <td>教師整理：循序中有迴圈、迴圈內有判斷。請學生用一句話說明，哪些遊戲動作能對應到每一種結構。</td>
+                                <td class="activity-time-cell">約 8 分鐘</td>
+                                <td>口頭檢核、學習單或 <span class="lesson-hl">Padlet 一句心得</span>（選用）。</td>
+                                <td>可請學生截圖小測驗得分區<span class="lesson-hl">上傳 Padlet「結構小測驗」欄</span>，與前兩節歷程並列。</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-                <p style="margin:14px 0 0; color:#9ca3af; font-size:0.88rem; line-height:1.6;">兩節核心課合計約 90 分鐘，第三節約 45 分鐘，加總約 135 分鐘，均為參考值；實際以貴校節次長度為準。<strong>建議教學順序（七步驟）</strong>與設計理念、測驗四階段、評量與 Padlet、課綱實施補充等，已整併於
-                    <a href="guide.html#prep-seven-steps" style="color:#93c5fd;">教師手冊 · 七步驟</a>及
-                    <a href="guide.html#handbook-prep" style="color:#93c5fd;">備課專區</a>，請備課與授課時查閱。
+                <p style="margin:14px 0 0; color:#9ca3af; font-size:0.88rem; line-height:1.6;">兩節核心課合計約 90 分鐘；選用備用課程另約
+                    45 分鐘，加總約 135 分鐘。
                 </p>
             </div>
 
@@ -896,7 +933,8 @@
                 <p>兩節核心課以「演算法生活實驗室 → 主遊戲 →
                     分階段測驗」為軸時，一般可預期：第一節多數學生能建立「輸入、步驟、輸出」的語彙並完成拖曳通關；第二節透過撲克牌操作選擇排序與插入排序後，再以測驗檢核觀念。若每節約 45
                     分鐘而實驗室與遊戲段時間偏緊，實務上常見作法是優先保留「通關＋至少一種排序的完整示範」，測驗「應用」「挑戰」階段則改為回家或下一課延續。</p>
-                <p>若學校增列<strong>第三節</strong>專講結構與流程圖，多數班級能在一節內讀完教材並完成十題小測驗；常見瓶頸在於流程圖符號與「箭頭往回＝迴圈」需多舉遊戲中的具體步驟對照。鐘點不足而改為回家自學時，宜明確交代要完成小測驗並保留截圖或簡短心得，以免延伸流於形式。</p>
+                <p>若學校選用<strong>備用課程</strong>專講結構與流程圖，多數班級能在約一節內讀完教材並完成十題小測驗；常見瓶頸在於流程圖符號與「箭頭往回＝迴圈」需多舉遊戲中的具體步驟對照。鐘點不足而改為回家自學時，宜明確交代要完成小測驗並保留截圖或簡短心得，以免延伸流於形式。
+                </p>
 
                 <h3 style="color:#fcd34d; margin:18px 0 8px; font-size:1.05rem;">二、學生學習成效觀察</h3>
                 <ul style="margin:0; padding-left:1.25em; line-height:1.65;">
@@ -910,7 +948,9 @@
                 </ul>
 
                 <h3 style="color:#fcd34d; margin:18px 0 8px; font-size:1.05rem;">三、教材與數位工具</h3>
-                <p>網頁模組可減少安裝成本，實施時須預留網路與瀏覽器相容的檢查時間；Padlet 利於留存截圖與歷程，課前宜測試上傳權限與欄位命名（含第三節可選之「結構小測驗」欄）。公開看板時，個資與同儕互動規範應與校內規定一致。</p>
+                <p>網頁模組可減少安裝成本，實施時須預留網路與瀏覽器相容的檢查時間；<span class="lesson-hl">Padlet</span>
+                    <span class="lesson-hl">利於留存截圖與歷程</span>，課前宜測試上傳權限與欄位命名（含備用課程可選之「結構小測驗」欄）。公開看板時，個資與同儕互動規範應與校內規定一致。
+                </p>
 
             </div>
         </div>
