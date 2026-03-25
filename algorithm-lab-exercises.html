@@ -340,6 +340,99 @@
             gap: 8px;
             justify-content: flex-end;
         }
+
+        .logic-microscope-shell {
+            position: relative;
+            margin-top: 10px;
+        }
+
+        .logic-microscope-inner {
+            transition: opacity 0.25s ease;
+        }
+
+        .logic-microscope-inner.is-locked {
+            opacity: 0.35;
+            pointer-events: none;
+            user-select: none;
+        }
+
+        .logic-microscope-lock {
+            position: absolute;
+            inset: 0;
+            z-index: 3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            border-radius: 14px;
+            background: rgba(2, 6, 23, 0.78);
+            border: 1px dashed rgba(250, 204, 21, 0.55);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            text-align: center;
+        }
+
+        .logic-microscope-lock[hidden] {
+            display: none !important;
+        }
+
+        .logic-microscope-lock p {
+            margin: 0;
+            max-width: 420px;
+            color: #fde68a;
+            font-weight: 700;
+            line-height: 1.65;
+        }
+
+        .logic-microscope-lock .lock-sub {
+            margin-top: 10px;
+            color: #cbd5e1;
+            font-weight: 600;
+            font-size: 0.92rem;
+        }
+
+        .logic-type-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 12px 0 10px;
+        }
+
+        .logic-type-tab {
+            border: 1px solid rgba(148, 163, 184, 0.45);
+            background: rgba(2, 6, 23, 0.4);
+            color: #cbd5e1;
+            border-radius: 999px;
+            padding: 7px 14px;
+            font-weight: 700;
+            font-size: 0.88rem;
+            cursor: pointer;
+        }
+
+        .logic-type-tab.active {
+            border-color: rgba(96, 165, 250, 0.85);
+            color: #bfdbfe;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.22), rgba(30, 64, 175, 0.28));
+        }
+
+        .logic-type-note {
+            margin: 0 0 8px;
+            color: #94a3b8;
+            font-size: 0.88rem;
+            line-height: 1.55;
+        }
+
+        .visually-hidden {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
     </style>
 </head>
 
@@ -375,8 +468,8 @@
         <div class="table-glow"></div>
         <div class="container lab-wrap">
             <div class="lab-card">
-                <h2>🧩 認識演算法練習整合：三關拖曳 + 顯微鏡操作</h2>
-                <p>把「輸入 → 步驟 → 輸出」變成可練習的流程。完成三關拖曳配對後，記得依教師指示截圖與上傳。</p>
+                <h2>🧩 認識演算法練習整合：三關拖曳 + 第四關顯微鏡定位</h2>
+                <p>把「輸入 → 步驟 → 輸出」變成可練習的流程。先完成<strong>前三關</strong>拖曳配對（共 9 題）全數通關後，才會解鎖<strong>第四關：顯微鏡定位</strong>（複式與解剖顯微鏡兩種判斷挑戰）。通關證明仍以上方「三關拖曳」為準；截圖與上傳請依教師指示。</p>
             </div>
 
             <div class="lab-card">
@@ -390,54 +483,53 @@
             </div>
 
             <div class="lab-card">
-                <h2>🔍 邏輯判斷演算法：顯微鏡定位</h2>
-                <p>重點：<strong>判斷（if / else）也是演算法流程的一部分</strong>。大問題（把影像移回中央）先拆成小問題，再用條件判斷決定流程方向。</p>
-                <div class="logic-grid">
-                    <div class="logic-box">
-                        <h3>Step 1：左右判斷</h3>
-                        <div class="logic-rule">影像在右邊 → 玻片往右移</div>
-                        <div class="logic-rule">影像在左邊 → 玻片往左移</div>
-                        <div class="logic-rule">影像在中線 → 左右不移動</div>
+                <h2>🔬 第四關：邏輯判斷演算法 · 顯微鏡定位</h2>
+                <p>重點：<strong>判斷（if / else）也是演算法流程的一部分</strong>。大問題（把影像移回中央）先拆成小問題，再用條件判斷決定流程方向。<strong>複式顯微鏡</strong>與<strong>解剖顯微鏡</strong>的成像特性不同，推移玻片的規則也不同——請先選對挑戰類型再作答。</p>
+
+                <div class="logic-microscope-shell">
+                    <div id="logic-microscope-lock" class="logic-microscope-lock">
+                        <div>
+                            <p>🔒 第四關尚未解鎖</p>
+                            <p class="lock-sub">請先完成上方<strong>前三關</strong>拖曳配對（第一關～第三關，共 9 題）並全數通關後，即可挑戰顯微鏡定位。</p>
+                        </div>
                     </div>
-                    <div class="logic-box">
-                        <h3>Step 2：上下判斷</h3>
-                        <div class="logic-rule">影像在上方 → 玻片往上移</div>
-                        <div class="logic-rule">影像在下方 → 玻片往下移</div>
-                        <div class="logic-rule">影像在中線 → 上下不移動</div>
-                    </div>
-                </div>
+                    <div id="logic-microscope-inner" class="logic-microscope-inner is-locked" aria-hidden="true">
 
-                <div class="branch-flow">
-                    <div class="branch-line"><span class="branch-key">開始</span>：影像位置（輸入）</div>
-                    <div class="branch-line">if 影像在右邊 then 玻片往右；else if 在左邊 then 玻片往左；else 不移動</div>
-                    <div class="branch-line">if 影像在上方 then 玻片往上；else if 在下方 then 玻片往下；else 不移動</div>
-                    <div class="branch-line"><span class="branch-key">輸出</span>：合併後的移動方向（例如右上方）</div>
-                </div>
+                        <p id="logic-unlock-live" class="visually-hidden" aria-live="polite"></p>
 
-                <div class="logic-trainer">
-                    <h3 style="margin:0; color:#f8fafc;">互動演練（判斷分支決策）</h3>
-                    <p id="logic-question" style="margin:6px 0 0;">影像出現在「右上方」，請先做左右判斷，再做上下判斷。</p>
+                        <div class="logic-type-tabs" role="tablist" aria-label="顯微鏡類型">
+                            <button type="button" class="logic-type-tab active" id="logic-tab-compound" role="tab" aria-selected="true" data-type="compound">複式顯微鏡</button>
+                            <button type="button" class="logic-type-tab" id="logic-tab-stereo" role="tab" aria-selected="false" data-type="stereo">解剖顯微鏡</button>
+                        </div>
+                        <p id="logic-type-desc" class="logic-type-note"></p>
 
-                    <div class="axis-block">
-                        <span class="axis-label">A. 左右判斷（if / else）</span>
-                        <div id="logic-options-lr" class="logic-options"></div>
-                    </div>
-                    <div class="axis-block">
-                        <span class="axis-label">B. 上下判斷（if / else）</span>
-                        <div id="logic-options-ud" class="logic-options"></div>
-                    </div>
+                        <div id="logic-rules-grid" class="logic-grid"></div>
 
-                    <div class="exercise-actions">
-                        <button class="btn success" id="logic-check" type="button">檢查</button>
-                        <button class="btn warning" id="logic-next" type="button">下一題</button>
-                        <button class="btn preset-btn" id="logic-show-rule" type="button">顯示判斷規則</button>
-                    </div>
+                        <div id="logic-branch-flow" class="branch-flow"></div>
 
-                    <div id="logic-result"></div>
+                        <div class="logic-trainer">
+                            <h3 style="margin:0; color:#f8fafc;">互動演練（判斷分支決策）</h3>
+                            <p id="logic-question" style="margin:6px 0 0;">影像出現在「右上方」，請先做左右判斷，再做上下判斷。</p>
 
-                    <div id="logic-rule-box" class="hint" style="display:none;">
-                        先用 if/else 完成左右，再用 if/else 完成上下；最後合併方向。<br>
-                        例：影像在右上方 →（左右=右）+（上下=上）→ 玻片往右上方移動。
+                            <div class="axis-block">
+                                <span class="axis-label">A. 左右判斷（if / else）</span>
+                                <div id="logic-options-lr" class="logic-options"></div>
+                            </div>
+                            <div class="axis-block">
+                                <span class="axis-label">B. 上下判斷（if / else）</span>
+                                <div id="logic-options-ud" class="logic-options"></div>
+                            </div>
+
+                            <div class="exercise-actions">
+                                <button class="btn success" id="logic-check" type="button" disabled>檢查</button>
+                                <button class="btn warning" id="logic-next" type="button" disabled>下一題</button>
+                                <button class="btn preset-btn" id="logic-show-rule" type="button" disabled>顯示判斷規則</button>
+                            </div>
+
+                            <div id="logic-result"></div>
+
+                            <div id="logic-rule-box" class="hint" style="display:none;"></div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -519,6 +611,7 @@
             const banner = getEl('lab-cert-banner');
             if (btn) btn.style.display = done ? 'inline-flex' : 'none';
             if (banner) banner.style.display = done ? 'block' : 'none';
+            syncMicroscopeLock();
         }
 
         function setLabCertDate() {
@@ -677,6 +770,9 @@
         let currentLogicIndex = 0;
         let selectedLR = '';
         let selectedUD = '';
+        let currentMicroscopeType = 'compound';
+        let logicMicroscopeWasUnlockedLast = labPassesAll(getAllDragExerciseIds());
+        let logicMicroscopeLockFirstSync = true;
 
         const logicCases = [
             { pos: '右上方', answerLR: '右移', answerUD: '上移', final: '右上方' },
@@ -690,7 +786,139 @@
         const lrOptions = ['左移', '右移', '不移動'];
         const udOptions = ['上移', '下移', '不移動'];
 
+        const MICROSCOPE_TYPE_LABEL = { compound: '複式顯微鏡', stereo: '解剖顯微鏡' };
+
+        function mirrorSlideMove(move) {
+            const map = { '左移': '右移', '右移': '左移', '上移': '下移', '下移': '上移', '不移動': '不移動' };
+            return map[move] || move;
+        }
+
+        function expectedAnswersForCase(c, type) {
+            if (type === 'stereo') {
+                return {
+                    answerLR: mirrorSlideMove(c.answerLR),
+                    answerUD: mirrorSlideMove(c.answerUD)
+                };
+            }
+            return { answerLR: c.answerLR, answerUD: c.answerUD };
+        }
+
         function getEl(id) { return document.getElementById(id); }
+
+        function isMicroscopeSectionUnlocked() {
+            return labPassesAll(getAllDragExerciseIds());
+        }
+
+        function syncMicroscopeLock() {
+            const prevUnlocked = logicMicroscopeWasUnlockedLast;
+            const unlocked = isMicroscopeSectionUnlocked();
+            const lock = getEl('logic-microscope-lock');
+            const inner = getEl('logic-microscope-inner');
+            const check = getEl('logic-check');
+            const next = getEl('logic-next');
+            const showRule = getEl('logic-show-rule');
+            const typeTabs = document.querySelectorAll('.logic-type-tab');
+
+            if (lock) lock.hidden = unlocked;
+            if (inner) {
+                inner.classList.toggle('is-locked', !unlocked);
+                inner.setAttribute('aria-hidden', unlocked ? 'false' : 'true');
+            }
+            [check, next, showRule].forEach(el => { if (el) el.disabled = !unlocked; });
+            typeTabs.forEach(b => { if (b) b.disabled = !unlocked; });
+
+            if (!logicMicroscopeLockFirstSync && unlocked && !prevUnlocked) {
+                const live = getEl('logic-unlock-live');
+                if (live) {
+                    live.textContent = '';
+                    requestAnimationFrame(() => {
+                        live.textContent = '第四關顯微鏡定位已解鎖。可選擇複式顯微鏡或解剖顯微鏡開始挑戰。';
+                    });
+                }
+            }
+            if (logicMicroscopeLockFirstSync) logicMicroscopeLockFirstSync = false;
+            logicMicroscopeWasUnlockedLast = unlocked;
+            if (unlocked && !prevUnlocked) renderLogicCase();
+        }
+
+        function renderMicroscopeRulesAndFlow() {
+            const grid = getEl('logic-rules-grid');
+            const flow = getEl('logic-branch-flow');
+            const desc = getEl('logic-type-desc');
+            if (!grid || !flow || !desc) return;
+
+            if (currentMicroscopeType === 'compound') {
+                desc.textContent = '複式顯微鏡：視野中的像與實物左右相反、上下相反。本關採用下列對照規則練習 if／else 判斷（與本單元教材圖一致）。';
+                grid.innerHTML = `
+                    <div class="logic-box">
+                        <h3>Step 1：左右判斷</h3>
+                        <div class="logic-rule">影像在右邊 → 玻片往右移</div>
+                        <div class="logic-rule">影像在左邊 → 玻片往左移</div>
+                        <div class="logic-rule">影像在中線 → 左右不移動</div>
+                    </div>
+                    <div class="logic-box">
+                        <h3>Step 2：上下判斷</h3>
+                        <div class="logic-rule">影像在上方 → 玻片往上移</div>
+                        <div class="logic-rule">影像在下方 → 玻片往下移</div>
+                        <div class="logic-rule">影像在中線 → 上下不移動</div>
+                    </div>`;
+                flow.innerHTML = `
+                    <div class="branch-line"><span class="branch-key">開始</span>：影像位置（輸入）— ${MICROSCOPE_TYPE_LABEL.compound}</div>
+                    <div class="branch-line">if 影像在右邊 then 玻片往右；else if 在左邊 then 玻片往左；else 左右不移動</div>
+                    <div class="branch-line">if 影像在上方 then 玻片往上；else if 在下方 then 玻片往下；else 上下不移動</div>
+                    <div class="branch-line"><span class="branch-key">輸出</span>：合併兩次判斷後的玻片推移（例如右上方）</div>`;
+            } else {
+                desc.textContent = '解剖顯微鏡（實體顯微鏡）：成像是正立的，物像與實物同側。要把物像移回中央時，玻片推移方向與「複式顯微鏡規則」相反——請依下方規則作答。';
+                grid.innerHTML = `
+                    <div class="logic-box">
+                        <h3>Step 1：左右判斷</h3>
+                        <div class="logic-rule">影像在右邊 → 玻片往左移</div>
+                        <div class="logic-rule">影像在左邊 → 玻片往右移</div>
+                        <div class="logic-rule">影像在中線 → 左右不移動</div>
+                    </div>
+                    <div class="logic-box">
+                        <h3>Step 2：上下判斷</h3>
+                        <div class="logic-rule">影像在上方 → 玻片往下移</div>
+                        <div class="logic-rule">影像在下方 → 玻片往上移</div>
+                        <div class="logic-rule">影像在中線 → 上下不移動</div>
+                    </div>`;
+                flow.innerHTML = `
+                    <div class="branch-line"><span class="branch-key">開始</span>：影像位置（輸入）— ${MICROSCOPE_TYPE_LABEL.stereo}</div>
+                    <div class="branch-line">if 影像在右邊 then 玻片往左；else if 在左邊 then 玻片往右；else 左右不移動</div>
+                    <div class="branch-line">if 影像在上方 then 玻片往下；else if 在下方 then 玻片往上；else 上下不移動</div>
+                    <div class="branch-line"><span class="branch-key">輸出</span>：合併兩次判斷後的玻片推移</div>`;
+            }
+
+            updateLogicRuleBoxContent();
+        }
+
+        function updateLogicRuleBoxContent() {
+            const rb = getEl('logic-rule-box');
+            if (!rb) return;
+            if (currentMicroscopeType === 'compound') {
+                rb.innerHTML = '先用 if/else 完成左右，再用 if/else 完成上下；最後合併方向。<br>例（複式）：影像在右上方 →（左右=右移）+（上下=上移）→ 玻片往右上方移動。';
+            } else {
+                rb.innerHTML = '先用 if/else 完成左右，再用 if/else 完成上下；最後合併方向。<br>例（解剖顯微鏡）：影像在右上方 →（左右=左移）+（上下=下移）→ 與複式顯微鏡的推移相反。';
+            }
+        }
+
+        function bindMicroscopeTypeTabs() {
+            document.querySelectorAll('.logic-type-tab').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    if (!isMicroscopeSectionUnlocked()) return;
+                    const t = btn.getAttribute('data-type');
+                    if (t !== 'compound' && t !== 'stereo') return;
+                    currentMicroscopeType = t;
+                    document.querySelectorAll('.logic-type-tab').forEach(b => {
+                        const on = b.getAttribute('data-type') === currentMicroscopeType;
+                        b.classList.toggle('active', on);
+                        b.setAttribute('aria-selected', on ? 'true' : 'false');
+                    });
+                    renderMicroscopeRulesAndFlow();
+                    renderLogicCase();
+                });
+            });
+        }
 
         function shuffle(arr) {
             const a = [...arr];
@@ -801,22 +1029,30 @@
 
         function renderLogicCase() {
             const c = logicCases[currentLogicIndex % logicCases.length];
-            getEl('logic-question').textContent = `影像出現在「${c.pos}」，請先做左右判斷，再做上下判斷。`;
+            const exp = expectedAnswersForCase(c, currentMicroscopeType);
+            const typeName = MICROSCOPE_TYPE_LABEL[currentMicroscopeType];
+            const q = getEl('logic-question');
+            if (q) q.textContent = `【${typeName}】影像出現在「${c.pos}」，請先做左右判斷，再做上下判斷。`;
             const boxLR = getEl('logic-options-lr');
             const boxUD = getEl('logic-options-ud');
+            if (!boxLR || !boxUD) return;
             boxLR.innerHTML = '';
             boxUD.innerHTML = '';
             selectedLR = '';
             selectedUD = '';
-            getEl('logic-result').innerHTML = '';
-            getEl('logic-rule-box').style.display = 'none';
+            const res = getEl('logic-result');
+            if (res) res.innerHTML = '';
+            const rb = getEl('logic-rule-box');
+            if (rb) rb.style.display = 'none';
 
             lrOptions.forEach(opt => {
                 const b = document.createElement('button');
                 b.type = 'button';
                 b.className = 'btn preset-btn';
                 b.textContent = opt;
+                b.disabled = !isMicroscopeSectionUnlocked();
                 b.addEventListener('click', () => {
+                    if (!isMicroscopeSectionUnlocked()) return;
                     selectedLR = opt;
                     [...boxLR.querySelectorAll('button')].forEach(x => x.classList.remove('preset-btn-active'));
                     b.classList.add('preset-btn-active');
@@ -829,7 +1065,9 @@
                 b.type = 'button';
                 b.className = 'btn preset-btn';
                 b.textContent = opt;
+                b.disabled = !isMicroscopeSectionUnlocked();
                 b.addEventListener('click', () => {
+                    if (!isMicroscopeSectionUnlocked()) return;
                     selectedUD = opt;
                     [...boxUD.querySelectorAll('button')].forEach(x => x.classList.remove('preset-btn-active'));
                     b.classList.add('preset-btn-active');
@@ -840,23 +1078,30 @@
 
         function bindLogicTrainer() {
             getEl('logic-check').addEventListener('click', () => {
+                if (!isMicroscopeSectionUnlocked()) return;
                 const c = logicCases[currentLogicIndex % logicCases.length];
-                const ok = selectedLR === c.answerLR && selectedUD === c.answerUD;
+                const exp = expectedAnswersForCase(c, currentMicroscopeType);
+                const ok = selectedLR === exp.answerLR && selectedUD === exp.answerUD;
+                const typeName = MICROSCOPE_TYPE_LABEL[currentMicroscopeType];
                 getEl('logic-result').innerHTML = ok
-                    ? `<div class="result ok">✅ 判斷正確！左右=${c.answerLR}，上下=${c.answerUD}，合併後是「${c.final}」。</div>`
-                    : `<div class="result fail">❌ 還差一步：流程要先判斷左右（你選 ${selectedLR || '未選'}），再判斷上下（你選 ${selectedUD || '未選'}）。</div>`;
+                    ? `<div class="result ok">✅ 判斷正確！（${typeName}）左右=${exp.answerLR}，上下=${exp.answerUD}，合併後對應「${c.final}」方向。</div>`
+                    : `<div class="result fail">❌ 還差一步：請依「${typeName}」規則先判斷左右（你選 ${selectedLR || '未選'}），再判斷上下（你選 ${selectedUD || '未選'}）。可點「顯示判斷規則」對照。</div>`;
             });
             getEl('logic-next').addEventListener('click', () => {
+                if (!isMicroscopeSectionUnlocked()) return;
                 currentLogicIndex++;
                 renderLogicCase();
             });
             getEl('logic-show-rule').addEventListener('click', () => {
-                const rb = getEl('logic-rule-box');
-                rb.style.display = rb.style.display === 'none' ? 'block' : 'none';
+                if (!isMicroscopeSectionUnlocked()) return;
+                const ruleEl = getEl('logic-rule-box');
+                ruleEl.style.display = ruleEl.style.display === 'none' ? 'block' : 'none';
             });
         }
 
         bindLabCertOverlay();
+        renderMicroscopeRulesAndFlow();
+        bindMicroscopeTypeTabs();
         syncLabCertUi();
         renderTabs();
         renderTabContent();

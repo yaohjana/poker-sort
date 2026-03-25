@@ -114,6 +114,123 @@
             -webkit-box-decoration-break: clone;
         }
 
+        .reflection-version-bar {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 10px 14px;
+            margin: 12px 0 18px;
+            padding: 10px 12px;
+            border-radius: 12px;
+            background: rgba(15, 23, 42, 0.65);
+            border: 1px solid rgba(148, 163, 184, 0.28);
+        }
+
+        .reflection-version-label {
+            color: #cbd5e1;
+            font-size: 0.9rem;
+        }
+
+        .reflection-version-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .reflection-version-tab {
+            cursor: pointer;
+            border: 1px solid rgba(96, 165, 250, 0.45);
+            background: rgba(30, 58, 138, 0.35);
+            color: #cbd5e1;
+            font-weight: 700;
+            font-size: 0.86rem;
+            padding: 8px 14px;
+            border-radius: 999px;
+            font-family: inherit;
+        }
+
+        .reflection-version-tab:hover {
+            background: rgba(37, 99, 235, 0.4);
+            color: #e0f2fe;
+        }
+
+        .reflection-version-tab:focus-visible {
+            outline: 2px solid #93c5fd;
+            outline-offset: 2px;
+        }
+
+        .reflection-version-tab.is-active {
+            border-color: rgba(250, 204, 21, 0.65);
+            background: rgba(234, 179, 8, 0.28);
+            color: #fffbeb;
+            box-shadow: 0 0 16px rgba(250, 204, 21, 0.22);
+        }
+
+        .reflection-original-list {
+            margin: 0;
+            padding-left: 1.35em;
+            line-height: 1.7;
+        }
+
+        .reflection-original-list li {
+            margin-bottom: 14px;
+        }
+
+        .reflection-original-list li:last-child {
+            margin-bottom: 0;
+        }
+
+        .reflection-quote {
+            display: inline;
+            padding: 3px 12px;
+            margin: 0 2px;
+            border-radius: 999px;
+            background: linear-gradient(135deg,
+                    rgba(234, 179, 8, 0.5),
+                    rgba(245, 158, 11, 0.55),
+                    rgba(250, 204, 21, 0.42));
+            border: 1px solid rgba(253, 224, 71, 0.85);
+            color: #fffbeb;
+            font-weight: 800;
+            letter-spacing: 0.02em;
+            box-shadow:
+                0 0 14px rgba(250, 204, 21, 0.55),
+                0 0 28px rgba(234, 179, 8, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.35);
+            text-shadow:
+                0 0 18px rgba(250, 204, 21, 0.55),
+                0 1px 0 rgba(15, 23, 42, 0.5);
+            box-decoration-break: clone;
+            -webkit-box-decoration-break: clone;
+            animation: reflection-quote-glow 3.2s ease-in-out infinite;
+        }
+
+        @keyframes reflection-quote-glow {
+
+            0%,
+            100% {
+                box-shadow:
+                    0 0 12px rgba(250, 204, 21, 0.45),
+                    0 0 24px rgba(234, 179, 8, 0.28),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            }
+
+            50% {
+                box-shadow:
+                    0 0 22px rgba(250, 204, 21, 0.85),
+                    0 0 42px rgba(245, 158, 11, 0.5),
+                    0 0 56px rgba(234, 179, 8, 0.25),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.45);
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .reflection-quote {
+                animation: none;
+            }
+        }
+
         @media (max-width: 640px) {
 
             .lesson-overview-table th,
@@ -456,7 +573,7 @@
         <div class="table-glow"></div>
         <div class="container lesson-wrap">
             <div class="lesson-card">
-                <h2>📘 教案頁：教學方法與設計理念</h2>
+                <h2>📘 教案：教學方法與設計理念</h2>
                 <table class="lesson-overview-table">
                     <tbody>
                         <tr>
@@ -499,7 +616,7 @@
                     <tbody>
                         <tr>
                             <th scope="row">教學模組名稱</th>
-                            <td>新時代之排序演算法教學嘗試</td>
+                            <td>AI時代之排序演算法教學新嘗試</td>
                         </tr>
                         <tr>
                             <th scope="row">主題科目</th>
@@ -787,11 +904,13 @@
                             <tr>
                                 <th scope="row">演算法生活實驗室與拖曳通關</th>
                                 <td>進入 <a href="algorithm-lab-exercises.html"
-                                        style="color:#93c5fd;">練習整合頁</a>：教師簡短示範介面後，學生完成<strong>三關</strong>拖曳排序／配對；通關後於頁面填寫姓名並顯示<strong>通關證明</strong>。
+                                        style="color:#93c5fd;">練習整合頁</a>：教師簡短示範介面後，學生完成<strong>前三關</strong>拖曳排序／配對（共 9
+                                    題）；全數通關後解鎖<strong>第四關：顯微鏡定位</strong>（含<strong>複式顯微鏡</strong>與<strong>解剖顯微鏡</strong>兩種邏輯判斷挑戰）。通關證明仍以前三關拖曳為準，於頁面填寫姓名並顯示<strong>通關證明</strong>。
                                 </td>
                                 <td class="activity-time-cell">約 22 分鐘</td>
-                                <td>實作檢核（是否通關）、<strong>通關截圖</strong>（<span class="lesson-hl">上傳 Padlet</span> 或繳交）。</td>
-                                <td>巡堂協助卡關學生；提醒先讀題再拖曳。網路不穩時可預載分頁或依校內規範準備備援方案。</td>
+                                <td>實作檢核（前三關是否通關）、選做第四關操作檢核；<strong>通關截圖</strong>（<span class="lesson-hl">上傳
+                                        Padlet</span> 或繳交）。</td>
+                                <td>巡堂協助卡關學生；提醒先讀題再拖曳。第四關須先過前三關；網路不穩時可預載分頁或依校內規範準備備援方案。</td>
                             </tr>
                             <tr>
                                 <th scope="row">學習歷程紀錄（<span class="lesson-hl">Padlet</span>）</th>
@@ -802,7 +921,8 @@
                             </tr>
                             <tr>
                                 <th scope="row">第一節小結與下節預告</th>
-                                <td>整理「步驟化」經驗並收束成本/效能思維；預告下節將以撲克牌遊戲操作<strong>選擇排序與插入排序</strong>，並用<strong>氣泡排序</strong>做短時比較理解。</td>
+                                <td>整理「步驟化」經驗並收束成本/效能思維；預告下節將以撲克牌遊戲操作<strong>選擇排序與插入排序</strong>，並用<strong>氣泡排序</strong>做短時比較理解。
+                                </td>
                                 <td class="activity-time-cell">約 3 分鐘</td>
                                 <td>口頭檢核重點理解。</td>
                                 <td>可請 1～2 位學生用自己的話複述「今天完成了一件什麼任務」。</td>
@@ -850,7 +970,8 @@
                             </tr>
                             <tr>
                                 <th scope="row">泡沫排序短時體驗（比較理解）</th>
-                                <td>教師引導學生切換到<strong>氣泡排序</strong>（相鄰比較／交換），完成一次簡短觀察；再請學生口頭說出與選擇/插入排序相比：每一回合主要做什麼不同，以及為什麼它可能較不適合資料量較大。</td>
+                                <td>教師引導學生切換到<strong>氣泡排序</strong>（相鄰比較／交換），完成一次簡短觀察；再請學生口頭說出與選擇/插入排序相比：每一回合主要做什麼不同，以及為什麼它可能較不適合資料量較大。
+                                </td>
                                 <td class="activity-time-cell">約 5 分鐘</td>
                                 <td>形成性口頭回饋；對應分階段測驗新增之泡沫排序與資料量比較題。</td>
                                 <td>時間緊可只做 1 回合/1 次檢查；不追求通關與完整排序。</td>
@@ -874,8 +995,8 @@
                             </tr>
                             <tr>
                                 <th scope="row">總結與選修延伸</th>
-                                <td>教師歸納選擇排序/插入排序的差異與「能說出每一步理由」的重要性，並補充：當資料量變大時，泡沫排序的成本/效能通常較不理想。若<strong>未安排備用課程</strong>，可於此帶讀或瀏覽 <a
-                                        href="algorithm-concepts.html" style="color:#93c5fd;">演算法中的結構</a>開頭與摘要，並請回家完成 <a
+                                <td>教師歸納選擇排序/插入排序的差異與「能說出每一步理由」的重要性，並補充：當資料量變大時，泡沫排序的成本/效能通常較不理想。若<strong>未安排備用課程</strong>，可於此帶讀或瀏覽
+                                    <a href="algorithm-concepts.html" style="color:#93c5fd;">演算法中的結構</a>開頭與摘要，並請回家完成 <a
                                         href="algorithm-concepts-quiz.html"
                                         style="color:#93c5fd;">結構小測驗</a>；若<strong>已規劃備用課程</strong>，本段改為預告備用課程將用約一節深化循序／迴圈／判斷與流程圖。
                                 </td>
@@ -936,32 +1057,114 @@
 
             <div class="lesson-card">
                 <h2>（六）實施心得與省思</h2>
-                <h3 style="color:#fcd34d; margin:18px 0 8px; font-size:1.05rem;">一、整體實施概況</h3>
-                <p>兩節核心課以「演算法生活實驗室 → 主遊戲 →
-                    分階段測驗」為軸時，一般可預期：第一節多數學生能建立「輸入、步驟、輸出」的語彙並完成拖曳通關；第二節透過撲克牌操作選擇排序與插入排序後，再以測驗檢核觀念。若每節約 45
-                    分鐘而實驗室與遊戲段時間偏緊，實務上常見作法是優先保留「通關＋至少一種排序的完整示範」，測驗「應用」「挑戰」階段則改為回家或下一課延續。</p>
-                <p>若學校選用<strong>備用課程</strong>專講結構與流程圖，多數班級能在約一節內讀完教材並完成十題小測驗；常見瓶頸在於流程圖符號與「箭頭往回＝迴圈」需多舉遊戲中的具體步驟對照。鐘點不足而改為回家自學時，宜明確交代要完成小測驗並保留截圖或簡短心得，以免延伸流於形式。
-                </p>
+                <div class="reflection-version-bar">
+                    <span class="reflection-version-label" id="reflectionVersionLabel">目前顯示：原版（教師手寫紀錄）</span>
+                    <div class="reflection-version-tabs" role="group" aria-label="實施心得版本">
+                        <button type="button" class="reflection-version-tab is-active" data-reflection-mode="original"
+                            aria-pressed="true">原版</button>
+                        <button type="button" class="reflection-version-tab" data-reflection-mode="summary"
+                            aria-pressed="false">AI 摘要版</button>
+                        <button type="button" class="reflection-version-tab" data-reflection-mode="organized"
+                            aria-pressed="false">AI 整理版</button>
+                    </div>
+                </div>
+                <div id="reflectionOriginal" class="reflection-version-panel">
+                    <ol class="reflection-original-list">
+                        <li>演算法對國中二年級的學生來說，不是非常讓學生感興趣，透過<span
+                                class="reflection-quote">演算法生活實驗室</span>，可以引起學生的興趣，並且在練習過程中可以進行邏輯思考。</li>
+                        <li>上到排序演算法，有時候很難說服學生，用心瞭解這兩種簡單的排序演算法，學生往往不知道自己學這個有什麼意義。在使用程式演練過程中，部分學生能夠吸收兩種演算法的差異與重點，算是<span
+                                class="reflection-quote">難能可貴</span>。雖然也是有學生不以為意，不依照老師的規則來操作，完成之後系統雖然沒有提示錯誤，但是可以知道學生沒有學會，變成<span
+                                class="reflection-quote">無效的學習</span>。所以操作的時候<span
+                                class="reflection-quote">學生有沒有達成有效學習，非常重要</span>。</li>
+                        <li>使用 AI 輔助教師產生測驗題目時，可以發現人工智慧產生的題目內容，對學生來說還是太難，雖然標示為簡單，但是學生不一定能理解。對國中生來說，這一段的學習目標要在調整簡單一些，<span
+                                class="reflection-quote">需要降低標準</span>。</li>
+                        <li>結構演算法應該是相對比較簡單有趣的單元，若有時間能夠操作一次應該<span class="reflection-quote">對學生的運算思維會有幫助</span>。</li>
+                        <li>使用 AI Agent
+                            輔助生成教具、教學軟體、測驗，讓老師的工作更有挑戰性，因為教師的工作不是只有把課本內容教完而已。會去思考，如何教才能提高學生的參與力，怎麼呈現才能讓學生更容易理解。因此，<span
+                                class="reflection-quote">教師變成課程的指揮官、而不是課本的代理人</span>。</li>
+                    </ol>
+                </div>
+                <div id="reflectionAiSummary" class="reflection-version-panel" hidden>
+                    <h3 style="color:#fcd34d; margin:18px 0 8px; font-size:1.05rem;">一、引起興趣與邏輯思考</h3>
+                    <p>國二對演算法較難有興趣，透過演算法生活實驗室引發興趣並練邏輯。</p>
 
-                <h3 style="color:#fcd34d; margin:18px 0 8px; font-size:1.05rem;">二、學生學習成效觀察</h3>
-                <ul style="margin:0; padding-left:1.25em; line-height:1.65;">
-                    <li style="margin-bottom:8px;">
-                        <strong>較常出現的亮點：</strong>具體操作有助理解「每一輪在做什麼」；口頭請學生說明理由且能連結畫面者，在測驗「初探／基礎」通常較穩。
-                    </li>
-                    <li style="margin-bottom:8px;">
-                        <strong>較常遇到的困難：</strong>部分學生易混淆兩種排序的步驟差異，或過度依賴提示與重試；示範時對照兩種流程、安排同桌互說一輪，多能減輕混淆。
-                    </li>
-                    <li><strong>差異化方向：</strong>進度較快者可並練兩種排序並比較步數；較慢者先單一排序法搭配測驗前兩階段，較符合多數班級的負荷。</li>
-                </ul>
+                    <h3 style="color:#fcd34d; margin:18px 0 8px; font-size:1.05rem;">二、排序演算法與有效學習</h3>
+                    <p>說服學生理解意義不易；部分人能掌握差異，也有人亂操作卻仍通關，形成無效學習，強調有效學習的重要。</p>
 
-                <h3 style="color:#fcd34d; margin:18px 0 8px; font-size:1.05rem;">三、教材與數位工具</h3>
-                <p>網頁模組可減少安裝成本，實施時須預留網路與瀏覽器相容的檢查時間；<span class="lesson-hl">Padlet</span>
-                    <span class="lesson-hl">利於留存截圖與歷程</span>，課前宜測試上傳權限與欄位命名（含備用課程可選之「結構小測驗」欄）。公開看板時，個資與同儕互動規範應與校內規定一致。
-                </p>
+                    <h3 style="color:#fcd34d; margin:18px 0 8px; font-size:1.05rem;">三、AI 輔助命題與難度調整</h3>
+                    <p>AI 題目仍偏難，國中目標要再簡化、降低標準。</p>
 
+                    <h3 style="color:#fcd34d; margin:18px 0 8px; font-size:1.05rem;">四、結構演算法單元</h3>
+                    <p>相對簡單有趣，有時間操作一次對運算思維有幫助。</p>
+
+                    <h3 style="color:#fcd34d; margin:18px 0 8px; font-size:1.05rem;">五、教師角色與 AI Agent</h3>
+                    <p>教具／軟體／測驗由 AI 輔助後，教師更需思考參與與呈現，角色是課程指揮官而非課本代理人。</p>
+                </div>
+                <div id="reflectionAiOrganized" class="reflection-version-panel" hidden>
+                    <h3 style="color:#fcd34d; margin:18px 0 8px; font-size:1.05rem;">一、引起興趣與邏輯思考</h3>
+                    <p>演算法對國中二年級的學生來說，往往不是非常能引起興趣的主題；透過<span
+                            class="reflection-quote">演算法生活實驗室</span>，較能吸引學生投入，並在練習過程中促進邏輯思考。</p>
+
+                    <h3 style="color:#fcd34d; margin:18px 0 8px; font-size:1.05rem;">二、排序演算法與有效學習</h3>
+                    <p>上到排序演算法時，有時很難說服學生用心理解這兩種簡單的排序演算法，學生往往不清楚學習的意義何在。在程式演練過程中，部分學生能夠吸收兩種演算法的差異與重點，算是<span
+                            class="reflection-quote">難能可貴</span>。另一方面，也有學生不以為意、不依照老師的規則操作；完成後系統雖未提示錯誤，卻可看出學生並未真正學會，形成<span
+                            class="reflection-quote">無效的學習</span>。因此，操作時學生是否達成<span
+                            class="reflection-quote">有效學習，至關重要</span>。</p>
+
+                    <h3 style="color:#fcd34d; margin:18px 0 8px; font-size:1.05rem;">三、AI 輔助命題與難度調整</h3>
+                    <p>使用 AI 輔助教師產生測驗題目時，可發現人工智慧產生的內容對學生而言仍偏難，即使標示為「簡單」，學生也不一定理解。對國中生而言，此段學習目標宜再調整得簡單一些，<span
+                            class="reflection-quote">需要降低標準</span>。</p>
+
+                    <h3 style="color:#fcd34d; margin:18px 0 8px; font-size:1.05rem;">四、結構演算法單元</h3>
+                    <p>結構演算法應是相對簡單且較有趣的單元；若有時間能讓學生操作一次，<span class="reflection-quote">對其運算思維應有幫助</span>。</p>
+
+                    <h3 style="color:#fcd34d; margin:18px 0 8px; font-size:1.05rem;">五、教師角色與 AI Agent</h3>
+                    <p>使用 AI Agent 輔助生成教具、教學軟體與測驗，使教師工作更具挑戰性——教學不只是把課本內容教完。會進一步思考：如何教才能提高學生參與、怎麼呈現才能讓學生更容易理解。因此，<span
+                            class="reflection-quote">教師成為課程的指揮官、而不是課本的代理人</span>。</p>
+                </div>
             </div>
         </div>
     </div>
+    <script>
+        (function () {
+            var panels = {
+                original: document.getElementById('reflectionOriginal'),
+                summary: document.getElementById('reflectionAiSummary'),
+                organized: document.getElementById('reflectionAiOrganized')
+            };
+            var tabs = document.querySelectorAll('[data-reflection-mode]');
+            var label = document.getElementById('reflectionVersionLabel');
+            if (!panels.original || !panels.summary || !panels.organized || !tabs.length) return;
+
+            var labels = {
+                original: '目前顯示：原版（教師手寫紀錄）',
+                summary: '目前顯示：AI 摘要版（精簡提要）',
+                organized: '目前顯示：AI 整理版（心得條列潤飾）'
+            };
+
+            function setMode(mode) {
+                panels.original.hidden = mode !== 'original';
+                panels.summary.hidden = mode !== 'summary';
+                panels.organized.hidden = mode !== 'organized';
+                if (label) label.textContent = labels[mode] || '';
+                tabs.forEach(function (tab) {
+                    var m = tab.getAttribute('data-reflection-mode');
+                    var on = m === mode;
+                    tab.classList.toggle('is-active', on);
+                    tab.setAttribute('aria-pressed', on ? 'true' : 'false');
+                });
+            }
+
+            tabs.forEach(function (tab) {
+                tab.addEventListener('click', function () {
+                    var mode = tab.getAttribute('data-reflection-mode');
+                    if (mode) setMode(mode);
+                });
+            });
+
+            setMode('original');
+        })();
+    </script>
 </body>
 
 </html>
